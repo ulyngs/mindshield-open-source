@@ -24,6 +24,45 @@ document.addEventListener('DOMContentLoaded', function() {
             delay(1500).then(() => saveButton.innerHTML = "Save settings");
     });
     
+    var platformsWeTarget = [ "youtube", "facebook", "google", "instagram", "linkedin" ];
+    platformsWeTarget.forEach(function(platform) {
+        var currentCheckbox = document.querySelector('.dropdown.' + platform + ' input');
+        var currentDropdownButton = document.querySelector('.dropdown.' + platform + ' button');
+        
+        currentCheckbox.addEventListener("change", function() {
+            if(!currentCheckbox.checked){
+                document.querySelector(".dropdown." + platform + " button").disabled = true;
+                
+                // turn on all distracting elements
+                elementsThatCanBeHidden.filter(elem => elem.indexOf(platform) !== -1).forEach(function(some_element){
+                    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                        chrome.tabs.sendMessage(tabs[0].id, { method: "change", element: some_element, status: true });
+                      });
+                });
+                
+                // save state of the toggle
+                chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                    chrome.tabs.sendMessage(tabs[0].id, { method: "switchOff", domain: platform });
+                  });
+            } else {
+                document.querySelector(".dropdown." + platform + " button").disabled = false;
+                
+                // turn off all distracting elements
+                elementsThatCanBeHidden.filter(elem => elem.indexOf(platform) !== -1).forEach(function(some_element){
+                    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                        chrome.tabs.sendMessage(tabs[0].id, { method: "change", element: some_element, status: false });
+                      });
+                });
+                
+                // save state of the toggle
+                chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                    chrome.tabs.sendMessage(tabs[0].id, { method: "switchOn", domain: platform });
+                  });
+      
+            }
+      });
+    });
+    
     // Get references to all of the dropdown buttons
     var dropdownButtons = document.querySelectorAll('.dropdown button');
 
@@ -59,6 +98,27 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
 
+    
+    // set switches according to current status
+    function setSwitch(domain_to_check, id_of_switch){
+        var currentSwitch = document.getElementById(id_of_switch);
+        
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            
+            chrome.tabs.sendMessage(tabs[0].id, { method: "checkSwitch", domain: domain_to_check }, function(response){
+                
+                if(response.text === "on"){
+                    currentSwitch.checked = true;
+                } else {
+                    currentSwitch.checked = false;
+                }
+            });
+        });
+    };
+    
+    platformsWeTarget.forEach(function (platform) {
+        setSwitch(platform, platform + "Switch");
+    });
     
     // set checkboxes according to current status
     function setPopupToggle(element_to_check, id_of_toggle){

@@ -27,12 +27,7 @@ body {
 }
 
 
-@media (prefers-color-scheme: dark) {
-    /* Dark Mode styles go here. */
-    .colored-font {
-        color: lightgray;
-    }
-}
+
 
 /******* HIDE IRRELEVANT TOGGLES *******/
 /* iPhone */
@@ -189,4 +184,12 @@ input:checked + .slider:before {
 
 .toggle-wrapper {
     text-align: left;
+}
+
+
+@media (prefers-color-scheme: dark) {
+    /* Dark Mode styles go here. */
+    .colored-font {
+        color: lightgray;
+    }
 }

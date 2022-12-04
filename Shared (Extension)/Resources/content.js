@@ -89,6 +89,14 @@
     
             checkStyleStatus(currentStyle, eval(request.element + 'CssOn'));
         };
+        
+        if(request.method === "checkSwitch"){
+            if (localStorage.getItem(request.domain) === "off"){
+                sendResponse({text: "off"});
+            } else {
+                sendResponse({text: "on"});
+            };
+        };
 
         if(request.method == "getSavedState"){
             var response = {};
