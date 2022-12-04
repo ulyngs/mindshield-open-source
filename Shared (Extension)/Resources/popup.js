@@ -13,10 +13,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
             chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
                 chrome.tabs.sendMessage(tabs[0].id, { method: "saveState",
-                    ytRecVidsState: document.getElementById('ytRecVidsToggle').checked,
-                    ytShortsState: document.getElementById('ytShortsToggle').checked,
-                    ytRelatedState: document.getElementById('ytRelatedToggle').checked,
-                    ytCommentsState: document.getElementById('ytCommentsToggle').checked
+                    ytRecVids: document.getElementById('ytRecVidsToggle').checked,
+                    ytShorts: document.getElementById('ytShortsToggle').checked,
+                    ytRelated: document.getElementById('ytRelatedToggle').checked,
+                    ytComments: document.getElementById('ytCommentsToggle').checked
                 } );
             });
             

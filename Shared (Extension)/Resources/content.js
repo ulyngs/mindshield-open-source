@@ -98,7 +98,7 @@
         // save state if the popup asks for it
         if (message.method === "saveState"){
             elementsThatCanBeHidden.forEach(function (item) {
-                localStorage.setItem(item, eval('message.' + item + 'State'));
+                localStorage.setItem(item, eval('message.' + item));
             });
         };
     });
