@@ -3,26 +3,25 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     var platformsWeTarget = [ "youtube", "facebook", "google", "instagram", "linkedin" ];
-    var elementsThatCanBeHidden = [ "ytRecVids", "ytShorts", "ytRelated", "ytComments", "instaMutedStoriesState", "instaExploreState" ];
+    const elementsThatCanBeHidden = [ "ytRecVids", "ytShorts", "ytRelated", "ytComments", "fbFeed", "fbStories", "fbChat", "instaMutedStories", "instaExplore" ];
     var saveButton = document.getElementById("saveButton");
     
     saveButton.addEventListener('click', function() {
             function delay(time) {
               return new Promise(resolve => setTimeout(resolve, time));
             }
-        
+
             chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                chrome.tabs.sendMessage(tabs[0].id, { method: "saveState",
-                    ytRecVids: document.getElementById('ytRecVidsToggle').checked,
-                    ytShorts: document.getElementById('ytShortsToggle').checked,
-                    ytRelated: document.getElementById('ytRelatedToggle').checked,
-                    ytComments: document.getElementById('ytCommentsToggle').checked
-                } );
+                // message the content script with the state of the checkboxes
+                var myMessage = { method: "saveState"};
+                elementsThatCanBeHidden.forEach(function(element) {
+                    myMessage[element] = document.getElementById(element + "Toggle").checked;
+                });
+                chrome.tabs.sendMessage(tabs[0].id, myMessage );
             });
             
             saveButton.innerHTML = "......";
             delay(250).then(() => saveButton.innerHTML = "Saved!");
-        
             delay(1500).then(() => saveButton.innerHTML = "Save settings");
     });
     

@@ -9,6 +9,8 @@
     }
     window.hasRun = true;
     
+    const elementsThatCanBeHidden = [ "ytRecVids", "ytShorts", "ytRelated", "ytComments", "fbFeed", "fbStories", "fbChat", "instaMutedStories", "instaExplore" ];
+    
     // YouTube CSS
     const ytRecVidsCssOn = 'ytd-browse[page-subtype="home"] { visibility: visible; } div[tab-identifier="FEwhat_to_watch"]  { visibility: visible; }';
     const ytRecVidsCssOff = 'ytd-browse[page-subtype="home"] { visibility: hidden; } div[tab-identifier="FEwhat_to_watch"]  { visibility: hidden; }';
@@ -22,15 +24,22 @@
     const ytCommentsCssOn = '#comments { visibility: visible; }';
     const ytCommentsCssOff = '#comments { visibility: hidden; }';
     
+    // Facebook CSS
+    const fbFeedCssOn = '#ssrb_feed_start + div { visibility: visible; } #m_news_feed_stream, #screen-root div[data-screen-id="65549"] > div[data-mcomponent="MContainer"] > div.m.displayed:nth-child(n+6) { display: block; }'
+    const fbFeedCssOff = '#ssrb_feed_start + div { visibility: hidden; } #m_news_feed_stream, #screen-root div[data-screen-id="65549"] > div[data-mcomponent="MContainer"] > div.m.displayed:nth-child(n+6) { display: none; }'
+    
+    const fbChatCssOn = 'div[role="complementary"] div[data-visualcompletion="ignore-dynamic"] > div.x1n2onr6 { visibility: visible; }'
+    const fbChatCssOff = 'div[role="complementary"] div[data-visualcompletion="ignore-dynamic"] > div.x1n2onr6 { visibility: hidden; }'
+    
+    const fbStoriesCssOn = '.x78zum5.x1q0g3np.xl56j7k.x1yztbdb.x1y1aw1k { display: block; }'
+    const fbStoriesCssOff = '.x78zum5.x1q0g3np.xl56j7k.x1yztbdb.x1y1aw1k { display: none; }'
+    
     // Instagram CSS
     const instaMutedStoriesCssOn = 'main[role="main"] div[role="menu"] button[aria-label~="Story"].xbyyjgo { display: flex; }'
-    const instaMutedStoriesCssOff = 'main[role="main"] div[role="menu"] button[aria-label~="Story"].xbyyjgo { display: flex; }'
+    const instaMutedStoriesCssOff = 'main[role="main"] div[role="menu"] button[aria-label~="Story"].xbyyjgo { display: none; }'
     
     const instaExploreCssOn = 'a[href="/explore/"] { display: inline; }'
     const instaExploreCssOff = 'a[href="/explore/"] { display: none; }'
-    
-    // generate the style elements
-    const elementsThatCanBeHidden = [ "ytRecVids", "ytShorts", "ytRelated", "ytComments", "instaMutedStories", "instaExplore" ];
     
     // function to create style element with the specified CSS content
     function createStyleElement(some_style_id, some_css){
