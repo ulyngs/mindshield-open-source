@@ -30,7 +30,7 @@
     const instaExploreCssOff = 'a[href="/explore/"] { display: none; }'
     
     // generate the style elements
-    var elementsThatCanBeHidden = [ "ytRecVids", "ytShorts", "ytRelated", "ytComments", "instaMutedStories", "instaExplore" ];
+    const elementsThatCanBeHidden = [ "ytRecVids", "ytShorts", "ytRelated", "ytComments", "instaMutedStories", "instaExplore" ];
     
     // function to create style element with the specified CSS content
     function createStyleElement(some_style_id, some_css){
@@ -68,19 +68,13 @@
     
             checkStyleStatus(currentStyle, eval(request.element + 'CssOn'));
         };
-        
-        function sendResponseWithElements(elementsThatCanBeHidden) {
-          var response = {};
-          elementsThatCanBeHidden.forEach(function(element) {
-            response[element] = localStorage.getItem(element);
-          });
-          sendResponse(response);
-        }
-        
-        var elementsThatCanBeHidden = [ "ytRecVids", "ytShorts", "ytRelated", "ytComments", "instaMutedStories", "instaExplore" ];
 
         if(request.method == "getSavedState"){
-            sendResponseWithElements(elementsThatCanBeHidden);
+            var response = {};
+            elementsThatCanBeHidden.forEach(function(element) {
+              response[element] = localStorage.getItem(element);
+            });
+            sendResponse(response);
         };
     });
     
