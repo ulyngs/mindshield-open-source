@@ -61,11 +61,20 @@ a:visited {
 
 /* for hoverable dropdown */
 .dropbtn {
-  background-color: #04AA6D;
-  color: white;
+  background-color: white;
+  color: black;
   padding: 5px;
-  font-size: 1em;
+  font-size: 0.9em;
   border: none;
+}
+
+#saveButton {
+    background-color: #008CBA;
+    color: white;
+    padding: 5px;
+    font-size: 0.9em;
+    border: none;
+    margin-bottom: 10px;
 }
 
 .dropdown {
@@ -89,7 +98,7 @@ a:visited {
 
 .dropdown-content .a-toggle:hover {background-color: #ddd;}
 
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
+.dropdown:hover .dropbtn {background-color: #008CBA; color: white}
 
 .colored-font {
     color: darkgray;
