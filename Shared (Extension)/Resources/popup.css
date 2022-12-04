@@ -67,6 +67,19 @@ a:visited {
   font-size: 0.9em;
   border: none;
 }
+#saveButton:hover,
+.dropdown .dropbtn:hover {
+    background-color: #008CBA;
+    color: white
+}
+.dropbtn:disabled {
+  background-color: #ccc;
+  color: #888;
+}
+.dropbtn:disabled:hover {
+  background-color: #ccc;
+  color: #888;
+}
 
 #saveButton {
     background-color: lightgray;
@@ -100,11 +113,7 @@ a:visited {
 
 .dropdown-content .a-toggle:hover {background-color: #ddd;}
 
-#saveButton:hover,
-.dropdown:hover .dropbtn {
-    background-color: #008CBA;
-    color: white
-}
+
 
 .colored-font {
     color: darkgray;

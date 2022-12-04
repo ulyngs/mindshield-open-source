@@ -20,9 +20,6 @@ a[aria-label="Gaming"] { display: none; }
 /* hide sponsored content */
 a[aria-label="Advertiser"] { display: none; }
 
-/* hide chat */
-div[role="complementary"] div[data-visualcompletion="ignore-dynamic"] > div.x1n2onr6 { visibility: hidden; }
-
 
 /**************
 ** LINKEDIN **

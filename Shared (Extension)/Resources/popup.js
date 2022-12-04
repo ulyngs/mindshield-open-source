@@ -25,6 +25,22 @@ document.addEventListener('DOMContentLoaded', function() {
             delay(1500).then(() => saveButton.innerHTML = "Save settings");
     });
     
+    var platformsWeTarget = [ "youtube", "facebook", "google", "instagram", "linkedin" ];
+    
+    
+    
+    platformsWeTarget.forEach(function(platform) {
+      var currentCheckbox = document.querySelector('.dropdown.' + platform + ' input');
+      var currentDropdownButton = document.querySelector('.dropdown.' + platform + ' button');
+        
+        currentCheckbox.addEventListener("change", function() {
+            if(!currentCheckbox.checked){
+                document.querySelector(".dropdown." + platform + " button").disabled = true;
+            } else {
+                document.querySelector(".dropdown." + platform + " button").disabled = false;
+            }
+      });
+    });
     
     // Get references to all of the dropdown buttons
     var dropdownButtons = document.querySelectorAll('.dropdown button');
