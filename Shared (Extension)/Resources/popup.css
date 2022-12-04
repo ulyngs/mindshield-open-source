@@ -3,7 +3,7 @@
 }
 
 body {
-    width: 200px;
+    width: 215px;
     padding: 10px;
 
     font-family: system-ui;
@@ -93,7 +93,9 @@ a:visited {
   background-color: #f1f1f1;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
-  padding: 10px;
+  padding: 8px 8px 3px 8px;
+  width: 140px;
+  font-size: 0.95em;
 }
 
 .dropdown-content .a-toggle:hover {background-color: #ddd;}
