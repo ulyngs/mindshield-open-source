@@ -1,0 +1,96 @@
+:root {
+    color-scheme: light dark;
+}
+
+body {
+    width: 200px;
+    padding: 10px;
+
+    font-family: system-ui;
+    text-align: center;
+}
+
+.smaller-font {
+    font-size: 0.85em;
+}
+
+.a-toggle {
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.tooltip-content {
+  display: none;
+}
+.comments-toggle-wrapper:hover + .tooltip-content {
+  display: block;
+}
+
+
+@media (prefers-color-scheme: dark) {
+    /* Dark Mode styles go here. */
+    .colored-font {
+        color: lightgray;
+    }
+}
+
+/******* HIDE IRRELEVANT TOGGLES *******/
+/* iPhone */
+@media only screen and (max-device-width: 768px) {
+    .platform-ipad-mac {
+        display: none;
+    }
+}
+
+
+@media only screen and (min-device-width: 768px) {
+    .platform-iphone {
+        display: none;
+    }
+}
+
+a:visited {
+    color: blue;
+}
+
+.github-link {
+    clear: both;
+    padding-top: 10px;
+}
+
+
+/* for hoverable dropdown */
+.dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 5px;
+  font-size: 1em;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: block;
+  float: left;
+}
+
+.dropdown.youtube .dropdown-content,
+.dropdown.instagram .dropdown-content,
+.dropdown.facebook .dropdown-content,
+.dropdown.linkedin .dropdown-content,
+.dropdown.google .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  padding: 10px;
+}
+
+.dropdown-content .a-toggle:hover {background-color: #ddd;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+.colored-font {
+    color: darkgray;
+}

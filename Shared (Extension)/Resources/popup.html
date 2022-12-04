@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="popup.css">
+    <script type="module" src="popup.js"></script>
+</head>
+<body>
+    <div class="saveButton"><button id="saveButton" onclick='myFunction()'>Save settings</button></div>
+    <div class="dropdown youtube">
+      <button class="dropbtn"><img src="images/down-arrow.svg" height="10" width="10"/> YouTube</button>
+      <div class="dropdown-content">
+          <div class="a-toggle">
+              <input type="checkbox" id="ytRecVidsToggle" name="ytRecVidsToggle">
+              <label for="ytRecVidsToggle">Recommended videos <span class="colored-font">(home page)</span></label>
+          </div>
+          <div class="a-toggle">
+              <input type="checkbox" id="ytShortsToggle" name="ytShortsToggle">
+              <label for="ytShortsToggle">Shorts <span class="colored-font">(home page)</span></label>
+          </div>
+          <div class="a-toggle">
+              <input type="checkbox" id="ytRelatedToggle" name="ytRelatedToggle">
+              <label for="ytRelatedToggle">Related/Up next videos <span class="colored-font">(when watching)</span></label>
+          </div>
+          <div class="a-toggle platform-ipad-mac comments-toggle-wrapper">
+              <input class="platform-ipad-mac" type="checkbox" id="ytCommentsToggle" name="ytCommentsToggle">
+              <label class="platform-ipad-mac" for="ytCommentsToggle">Comments</label>
+          </div>
+      </div>
+    </div>
+    <div class="dropdown facebook">
+      <button class="dropbtn"><img src="images/down-arrow.svg" height="10" width="10"/> Facebook</button>
+      <div class="dropdown-content">
+          <div class="a-toggle">
+              <input type="checkbox" id="fbNewsfeedToggle" name="fbNewsfeedToggle">
+              <label for="fbNewsfeedToggle">Newsfeed</label>
+          </div>
+          <div class="a-toggle">
+              <input type="checkbox" id="fbChatToggle" name="fbChatToggle">
+              <label for="fbChatToggle">Chat</label>
+          </div>
+          <div class="a-toggle">
+              <input type="checkbox" id="fbStoriesToggle" name="fbStoriesToggle">
+              <label for="fbStoriesToggle">Stories / Reels</label>
+          </div>
+      </div>
+    </div>
+    
+    <div class="dropdown google">
+      <button class="dropbtn"><img src="images/down-arrow.svg" height="10" width="10"/> Google Search</button>
+      <div class="dropdown-content">
+          <div class="a-toggle">
+              <input type="checkbox" id="googleAdsToggle" name="googleAdsToggle">
+              <label for="googleAdsToggle">Show ads</label>
+          </div>
+      </div>
+    </div>
+    
+    <div class="dropdown instagram">
+      <button class="dropbtn"><img src="images/down-arrow.svg" height="10" width="10"/> Instagram</button>
+      <div class="dropdown-content">
+          <div class="a-toggle">
+              <input type="checkbox" id="instaMutedStoriesToggle" name="instaMutedStoriesToggle">
+              <label for="instaMutedStoriesToggle">Muted stories</label>
+          </div>
+          <div class="a-toggle">
+              <input type="checkbox" id="instaExploreToggle" name="instaExploreToggle">
+              <label for="instaExploreToggle">Explore</label>
+          </div>
+      </div>
+    </div>
+    
+    <div class="dropdown linkedin">
+      <button class="dropbtn"><img src="images/down-arrow.svg" height="10" width="10"/> LinkedIn</button>
+      <div class="dropdown-content">
+          <div class="a-toggle">
+              <input type="checkbox" id="inFeedToggle" name="inFeedToggle">
+              <label for="inFeedToggle">Feed</label>
+          </div>
+      </div>
+    </div>
+    
+    <div class="github-link">
+        <p class="smaller-font">To flag bugs or suggest improvements, visit the extension's <a href="https://github.com/ulyngs/open-source-no-distractions-for-youtube" target="_blank">GitHub repository</a>.</p>
+    </div>
+</body>
+</html>

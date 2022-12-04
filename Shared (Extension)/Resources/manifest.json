@@ -1,0 +1,34 @@
+{
+    "manifest_version": 2,
+    "default_locale": "en",
+
+    "name": "Digital Self-Control",
+    "description": "Take control of your online experience",
+    "version": "1.0",
+
+    "icons": {
+        "48": "images/new-icon48.png",
+        "96": "images/new-icon96.png",
+        "128": "images/new-icon128.png",
+        "256": "images/new-icon256.png",
+        "512": "images/new-icon512.png"
+    },
+
+    "content_scripts": [{
+        "css": [ "style.css" ],
+        "js": [ "content.js" ],
+        "matches": [ "*://www.youtube.com/*", "*://m.youtube.com/*", "*://www.instagram.com/*", "*://www.linkedin.com/*" ]
+    }],
+
+    "browser_action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "images/new-toolbar-icon-16.png",
+            "19": "images/new-toolbar-icon-19.png",
+            "32": "images/new-toolbar-icon-32.png",
+            "38": "images/new-toolbar-icon-38.png"
+        }
+    },
+
+    "permissions": [ "storage", "tabs" ]
+}

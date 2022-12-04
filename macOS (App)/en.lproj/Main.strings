@@ -1,0 +1,36 @@
+
+/* Class = "NSMenuItem"; title = "\"No Distractions\" for YouTube"; ObjectID = "1Xt-HY-uBw"; */
+"1Xt-HY-uBw.title" = "\"No Distractions\" for YouTube";
+
+/* Class = "NSMenuItem"; title = "Quit \"No Distractions\" for YouTube"; ObjectID = "4sb-4s-VLi"; */
+"4sb-4s-VLi.title" = "Quit \"No Distractions\" for YouTube";
+
+/* Class = "NSMenuItem"; title = "About \"No Distractions\" for YouTube"; ObjectID = "5kV-Vb-QxS"; */
+"5kV-Vb-QxS.title" = "About \"No Distractions\" for YouTube";
+
+/* Class = "NSMenu"; title = "Main Menu"; ObjectID = "AYu-sK-qS6"; */
+"AYu-sK-qS6.title" = "Main Menu";
+
+/* Class = "NSMenu"; title = "Help"; ObjectID = "F2S-fz-NVQ"; */
+"F2S-fz-NVQ.title" = "Help";
+
+/* Class = "NSMenuItem"; title = "Hide distractions on YouTube Help"; ObjectID = "FKE-Sm-Kum"; */
+"FKE-Sm-Kum.title" = "Hide distractions on YouTube Help";
+
+/* Class = "NSWindow"; title = "Hide distractions on YouTube"; ObjectID = "IQv-IB-iLA"; */
+"IQv-IB-iLA.title" = "Hide distractions on YouTube";
+
+/* Class = "NSMenuItem"; title = "Show All"; ObjectID = "Kd2-mp-pUS"; */
+"Kd2-mp-pUS.title" = "Show All";
+
+/* Class = "NSMenuItem"; title = "Hide \"No Distractions\" for YouTube"; ObjectID = "Olw-nP-bQN"; */
+"Olw-nP-bQN.title" = "Hide \"No Distractions\" for YouTube";
+
+/* Class = "NSMenuItem"; title = "Hide Others"; ObjectID = "Vdr-fp-XzO"; */
+"Vdr-fp-XzO.title" = "Hide Others";
+
+/* Class = "NSMenu"; title = "\"No Distractions\" for YouTube"; ObjectID = "uQy-DD-JDr"; */
+"uQy-DD-JDr.title" = "\"No Distractions\" for YouTube";
+
+/* Class = "NSMenuItem"; title = "Help"; ObjectID = "wpr-3q-Mcd"; */
+"wpr-3q-Mcd.title" = "Help";

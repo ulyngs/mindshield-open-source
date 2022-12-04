@@ -1,0 +1,998 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D72A796527904DBF00FF7E23 /* iphone_manage_extensions.png in Resources */ = {isa = PBXBuildFile; fileRef = D72A796427904DBF00FF7E23 /* iphone_manage_extensions.png */; };
+		D72A796727904EC800FF7E23 /* iphone_allow_access.png in Resources */ = {isa = PBXBuildFile; fileRef = D72A796627904EC800FF7E23 /* iphone_allow_access.png */; };
+		D72A7969279054C100FF7E23 /* ipad_manage_extensions.png in Resources */ = {isa = PBXBuildFile; fileRef = D72A7968279054C100FF7E23 /* ipad_manage_extensions.png */; };
+		D72A796B279054C500FF7E23 /* ipad_allow_access.png in Resources */ = {isa = PBXBuildFile; fileRef = D72A796A279054C500FF7E23 /* ipad_allow_access.png */; };
+		D7607A1D276792B100FB0E82 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D76921C92756452E00EB4CEA /* Main.storyboard */; };
+		D76921B72756452E00EB4CEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76921B62756452E00EB4CEA /* AppDelegate.swift */; };
+		D76921B92756452E00EB4CEA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76921B82756452E00EB4CEA /* SceneDelegate.swift */; };
+		D76921BC2756452E00EB4CEA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D76921BA2756452E00EB4CEA /* LaunchScreen.storyboard */; };
+		D76921BF2756452E00EB4CEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D76921BD2756452E00EB4CEA /* Main.storyboard */; };
+		D76921C82756452E00EB4CEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76921C72756452E00EB4CEA /* AppDelegate.swift */; };
+		D76921D22756452E00EB4CEA /* Digital Self-Control Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D76921D12756452E00EB4CEA /* Digital Self-Control Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D76921DC2756452E00EB4CEA /* Digital Self-Control Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D76921DB2756452E00EB4CEA /* Digital Self-Control Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D76921E22756452E00EB4CEA /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = D769219D2756452C00EB4CEA /* Main.html */; };
+		D76921E32756452E00EB4CEA /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = D769219D2756452C00EB4CEA /* Main.html */; };
+		D76921E62756452E00EB4CEA /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = D76921A02756452C00EB4CEA /* Style.css */; };
+		D76921E72756452E00EB4CEA /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = D76921A02756452C00EB4CEA /* Style.css */; };
+		D76921E82756452E00EB4CEA /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = D76921A12756452C00EB4CEA /* Script.js */; };
+		D76921E92756452E00EB4CEA /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = D76921A12756452C00EB4CEA /* Script.js */; };
+		D76921EA2756452E00EB4CEA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76921A22756452C00EB4CEA /* ViewController.swift */; };
+		D76921EB2756452E00EB4CEA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76921A22756452C00EB4CEA /* ViewController.swift */; };
+		D76921EC2756452E00EB4CEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D76921A32756452E00EB4CEA /* Assets.xcassets */; };
+		D76921ED2756452E00EB4CEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D76921A32756452E00EB4CEA /* Assets.xcassets */; };
+		D76921EE2756452E00EB4CEA /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76921A52756452E00EB4CEA /* SafariWebExtensionHandler.swift */; };
+		D76921EF2756452E00EB4CEA /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76921A52756452E00EB4CEA /* SafariWebExtensionHandler.swift */; };
+		D76921F02756452E00EB4CEA /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = D76921A72756452E00EB4CEA /* _locales */; };
+		D76921F12756452E00EB4CEA /* _locales in Resources */ = {isa = PBXBuildFile; fileRef = D76921A72756452E00EB4CEA /* _locales */; };
+		D76921F22756452E00EB4CEA /* images in Resources */ = {isa = PBXBuildFile; fileRef = D76921A82756452E00EB4CEA /* images */; };
+		D76921F32756452E00EB4CEA /* images in Resources */ = {isa = PBXBuildFile; fileRef = D76921A82756452E00EB4CEA /* images */; };
+		D76921F42756452E00EB4CEA /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = D76921A92756452E00EB4CEA /* manifest.json */; };
+		D76921F52756452E00EB4CEA /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = D76921A92756452E00EB4CEA /* manifest.json */; };
+		D76921F82756452E00EB4CEA /* content.js in Resources */ = {isa = PBXBuildFile; fileRef = D76921AB2756452E00EB4CEA /* content.js */; };
+		D76921F92756452E00EB4CEA /* content.js in Resources */ = {isa = PBXBuildFile; fileRef = D76921AB2756452E00EB4CEA /* content.js */; };
+		D76921FA2756452E00EB4CEA /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = D76921AC2756452E00EB4CEA /* popup.html */; };
+		D76921FB2756452E00EB4CEA /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = D76921AC2756452E00EB4CEA /* popup.html */; };
+		D76921FC2756452E00EB4CEA /* popup.css in Resources */ = {isa = PBXBuildFile; fileRef = D76921AD2756452E00EB4CEA /* popup.css */; };
+		D76921FD2756452E00EB4CEA /* popup.css in Resources */ = {isa = PBXBuildFile; fileRef = D76921AD2756452E00EB4CEA /* popup.css */; };
+		D76921FE2756452E00EB4CEA /* popup.js in Resources */ = {isa = PBXBuildFile; fileRef = D76921AE2756452E00EB4CEA /* popup.js */; };
+		D76921FF2756452E00EB4CEA /* popup.js in Resources */ = {isa = PBXBuildFile; fileRef = D76921AE2756452E00EB4CEA /* popup.js */; };
+		D7692211275645D800EB4CEA /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D7692210275645D800EB4CEA /* Icon.png */; };
+		D7692212275645D800EB4CEA /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D7692210275645D800EB4CEA /* Icon.png */; };
+		D769221727564D8F00EB4CEA /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = D769221627564D8F00EB4CEA /* style.css */; };
+		D769221827564D8F00EB4CEA /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = D769221627564D8F00EB4CEA /* style.css */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D76921D32756452E00EB4CEA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D76921972756452C00EB4CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D76921D02756452E00EB4CEA;
+			remoteInfo = "Hide distractions on YouTube Extension (iOS)";
+		};
+		D76921DD2756452E00EB4CEA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D76921972756452C00EB4CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D76921DA2756452E00EB4CEA;
+			remoteInfo = "Hide distractions on YouTube Extension (macOS)";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D76922052756452E00EB4CEA /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				D76921D22756452E00EB4CEA /* Digital Self-Control Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D769220C2756452E00EB4CEA /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				D76921DC2756452E00EB4CEA /* Digital Self-Control Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		D72A796427904DBF00FF7E23 /* iphone_manage_extensions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphone_manage_extensions.png; sourceTree = "<group>"; };
+		D72A796627904EC800FF7E23 /* iphone_allow_access.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphone_allow_access.png; sourceTree = "<group>"; };
+		D72A7968279054C100FF7E23 /* ipad_manage_extensions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ipad_manage_extensions.png; sourceTree = "<group>"; };
+		D72A796A279054C500FF7E23 /* ipad_allow_access.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ipad_allow_access.png; sourceTree = "<group>"; };
+		D769219E2756452C00EB4CEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = ../Base.lproj/Main.html; sourceTree = "<group>"; };
+		D76921A02756452C00EB4CEA /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
+		D76921A12756452C00EB4CEA /* Script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Script.js; sourceTree = "<group>"; };
+		D76921A22756452C00EB4CEA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D76921A32756452E00EB4CEA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D76921A52756452E00EB4CEA /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
+		D76921A72756452E00EB4CEA /* _locales */ = {isa = PBXFileReference; lastKnownFileType = folder; path = _locales; sourceTree = "<group>"; };
+		D76921A82756452E00EB4CEA /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
+		D76921A92756452E00EB4CEA /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = manifest.json; sourceTree = "<group>"; };
+		D76921AB2756452E00EB4CEA /* content.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = content.js; sourceTree = "<group>"; };
+		D76921AC2756452E00EB4CEA /* popup.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = popup.html; sourceTree = "<group>"; };
+		D76921AD2756452E00EB4CEA /* popup.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = popup.css; sourceTree = "<group>"; };
+		D76921AE2756452E00EB4CEA /* popup.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = popup.js; sourceTree = "<group>"; };
+		D76921B32756452E00EB4CEA /* Digital Self-Control.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Digital Self-Control.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D76921B62756452E00EB4CEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D76921B82756452E00EB4CEA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		D76921BB2756452E00EB4CEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D76921BE2756452E00EB4CEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D76921C02756452E00EB4CEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D76921C52756452E00EB4CEA /* Digital Self-Control.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Digital Self-Control.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D76921C72756452E00EB4CEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D76921CA2756452E00EB4CEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D76921CC2756452E00EB4CEA /* No Distractions for YouTube.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "No Distractions for YouTube.entitlements"; sourceTree = "<group>"; };
+		D76921D12756452E00EB4CEA /* Digital Self-Control Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Digital Self-Control Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D76921D62756452E00EB4CEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D76921DB2756452E00EB4CEA /* Digital Self-Control Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Digital Self-Control Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D76921E02756452E00EB4CEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D76921E12756452E00EB4CEA /* No Distractions for YouTube.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "No Distractions for YouTube.entitlements"; sourceTree = "<group>"; };
+		D7692210275645D800EB4CEA /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		D769221627564D8F00EB4CEA /* style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D76921B02756452E00EB4CEA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D76921C22756452E00EB4CEA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D76921CE2756452E00EB4CEA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D76921D82756452E00EB4CEA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D76921962756452C00EB4CEA = {
+			isa = PBXGroup;
+			children = (
+				D769219B2756452C00EB4CEA /* Shared (App) */,
+				D76921A42756452E00EB4CEA /* Shared (Extension) */,
+				D76921B52756452E00EB4CEA /* iOS (App) */,
+				D76921C62756452E00EB4CEA /* macOS (App) */,
+				D76921D52756452E00EB4CEA /* iOS (Extension) */,
+				D76921DF2756452E00EB4CEA /* macOS (Extension) */,
+				D76921B42756452E00EB4CEA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D769219B2756452C00EB4CEA /* Shared (App) */ = {
+			isa = PBXGroup;
+			children = (
+				D76921A22756452C00EB4CEA /* ViewController.swift */,
+				D76921A32756452E00EB4CEA /* Assets.xcassets */,
+				D769219C2756452C00EB4CEA /* Resources */,
+			);
+			path = "Shared (App)";
+			sourceTree = "<group>";
+		};
+		D769219C2756452C00EB4CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D769219D2756452C00EB4CEA /* Main.html */,
+				D7692210275645D800EB4CEA /* Icon.png */,
+				D76921A02756452C00EB4CEA /* Style.css */,
+				D76921A12756452C00EB4CEA /* Script.js */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D76921A42756452E00EB4CEA /* Shared (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				D76921A52756452E00EB4CEA /* SafariWebExtensionHandler.swift */,
+				D76921A62756452E00EB4CEA /* Resources */,
+			);
+			path = "Shared (Extension)";
+			sourceTree = "<group>";
+		};
+		D76921A62756452E00EB4CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D76921A72756452E00EB4CEA /* _locales */,
+				D76921A82756452E00EB4CEA /* images */,
+				D76921A92756452E00EB4CEA /* manifest.json */,
+				D76921AB2756452E00EB4CEA /* content.js */,
+				D769221627564D8F00EB4CEA /* style.css */,
+				D76921AC2756452E00EB4CEA /* popup.html */,
+				D76921AD2756452E00EB4CEA /* popup.css */,
+				D76921AE2756452E00EB4CEA /* popup.js */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D76921B42756452E00EB4CEA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D76921B32756452E00EB4CEA /* Digital Self-Control.app */,
+				D76921C52756452E00EB4CEA /* Digital Self-Control.app */,
+				D76921D12756452E00EB4CEA /* Digital Self-Control Extension.appex */,
+				D76921DB2756452E00EB4CEA /* Digital Self-Control Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D76921B52756452E00EB4CEA /* iOS (App) */ = {
+			isa = PBXGroup;
+			children = (
+				D72A796427904DBF00FF7E23 /* iphone_manage_extensions.png */,
+				D72A796627904EC800FF7E23 /* iphone_allow_access.png */,
+				D72A7968279054C100FF7E23 /* ipad_manage_extensions.png */,
+				D72A796A279054C500FF7E23 /* ipad_allow_access.png */,
+				D76921B62756452E00EB4CEA /* AppDelegate.swift */,
+				D76921B82756452E00EB4CEA /* SceneDelegate.swift */,
+				D76921BA2756452E00EB4CEA /* LaunchScreen.storyboard */,
+				D76921BD2756452E00EB4CEA /* Main.storyboard */,
+				D76921C02756452E00EB4CEA /* Info.plist */,
+			);
+			path = "iOS (App)";
+			sourceTree = "<group>";
+		};
+		D76921C62756452E00EB4CEA /* macOS (App) */ = {
+			isa = PBXGroup;
+			children = (
+				D76921C72756452E00EB4CEA /* AppDelegate.swift */,
+				D76921C92756452E00EB4CEA /* Main.storyboard */,
+				D76921CC2756452E00EB4CEA /* No Distractions for YouTube.entitlements */,
+			);
+			path = "macOS (App)";
+			sourceTree = "<group>";
+		};
+		D76921D52756452E00EB4CEA /* iOS (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				D76921D62756452E00EB4CEA /* Info.plist */,
+			);
+			path = "iOS (Extension)";
+			sourceTree = "<group>";
+		};
+		D76921DF2756452E00EB4CEA /* macOS (Extension) */ = {
+			isa = PBXGroup;
+			children = (
+				D76921E02756452E00EB4CEA /* Info.plist */,
+				D76921E12756452E00EB4CEA /* No Distractions for YouTube.entitlements */,
+			);
+			path = "macOS (Extension)";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D76921B22756452E00EB4CEA /* Digital Self-Control (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D76922062756452E00EB4CEA /* Build configuration list for PBXNativeTarget "Digital Self-Control (iOS)" */;
+			buildPhases = (
+				D76921AF2756452E00EB4CEA /* Sources */,
+				D76921B02756452E00EB4CEA /* Frameworks */,
+				D76921B12756452E00EB4CEA /* Resources */,
+				D76922052756452E00EB4CEA /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D76921D42756452E00EB4CEA /* PBXTargetDependency */,
+			);
+			name = "Digital Self-Control (iOS)";
+			productName = "Hide distractions on YouTube (iOS)";
+			productReference = D76921B32756452E00EB4CEA /* Digital Self-Control.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D76921C42756452E00EB4CEA /* Digital Self-Control (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D769220D2756452E00EB4CEA /* Build configuration list for PBXNativeTarget "Digital Self-Control (macOS)" */;
+			buildPhases = (
+				D76921C12756452E00EB4CEA /* Sources */,
+				D76921C22756452E00EB4CEA /* Frameworks */,
+				D76921C32756452E00EB4CEA /* Resources */,
+				D769220C2756452E00EB4CEA /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D76921DE2756452E00EB4CEA /* PBXTargetDependency */,
+			);
+			name = "Digital Self-Control (macOS)";
+			productName = "Hide distractions on YouTube (macOS)";
+			productReference = D76921C52756452E00EB4CEA /* Digital Self-Control.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D76921D02756452E00EB4CEA /* Digital Self-Control Extension (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D76922022756452E00EB4CEA /* Build configuration list for PBXNativeTarget "Digital Self-Control Extension (iOS)" */;
+			buildPhases = (
+				D76921CD2756452E00EB4CEA /* Sources */,
+				D76921CE2756452E00EB4CEA /* Frameworks */,
+				D76921CF2756452E00EB4CEA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Digital Self-Control Extension (iOS)";
+			productName = "Hide distractions on YouTube Extension (iOS)";
+			productReference = D76921D12756452E00EB4CEA /* Digital Self-Control Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		D76921DA2756452E00EB4CEA /* Digital Self-Control Extension (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D76922092756452E00EB4CEA /* Build configuration list for PBXNativeTarget "Digital Self-Control Extension (macOS)" */;
+			buildPhases = (
+				D76921D72756452E00EB4CEA /* Sources */,
+				D76921D82756452E00EB4CEA /* Frameworks */,
+				D76921D92756452E00EB4CEA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Digital Self-Control Extension (macOS)";
+			productName = "Hide distractions on YouTube Extension (macOS)";
+			productReference = D76921DB2756452E00EB4CEA /* Digital Self-Control Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D76921972756452C00EB4CEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1310;
+				LastUpgradeCheck = 1400;
+				TargetAttributes = {
+					D76921B22756452E00EB4CEA = {
+						CreatedOnToolsVersion = 13.1;
+					};
+					D76921C42756452E00EB4CEA = {
+						CreatedOnToolsVersion = 13.1;
+					};
+					D76921D02756452E00EB4CEA = {
+						CreatedOnToolsVersion = 13.1;
+					};
+					D76921DA2756452E00EB4CEA = {
+						CreatedOnToolsVersion = 13.1;
+					};
+				};
+			};
+			buildConfigurationList = D769219A2756452C00EB4CEA /* Build configuration list for PBXProject "Digital Self-Control" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D76921962756452C00EB4CEA;
+			productRefGroup = D76921B42756452E00EB4CEA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D76921B22756452E00EB4CEA /* Digital Self-Control (iOS) */,
+				D76921C42756452E00EB4CEA /* Digital Self-Control (macOS) */,
+				D76921D02756452E00EB4CEA /* Digital Self-Control Extension (iOS) */,
+				D76921DA2756452E00EB4CEA /* Digital Self-Control Extension (macOS) */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D76921B12756452E00EB4CEA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D72A796B279054C500FF7E23 /* ipad_allow_access.png in Resources */,
+				D72A796527904DBF00FF7E23 /* iphone_manage_extensions.png in Resources */,
+				D72A7969279054C100FF7E23 /* ipad_manage_extensions.png in Resources */,
+				D76921BC2756452E00EB4CEA /* LaunchScreen.storyboard in Resources */,
+				D76921E22756452E00EB4CEA /* Main.html in Resources */,
+				D76921E82756452E00EB4CEA /* Script.js in Resources */,
+				D76921EC2756452E00EB4CEA /* Assets.xcassets in Resources */,
+				D76921BF2756452E00EB4CEA /* Main.storyboard in Resources */,
+				D7692211275645D800EB4CEA /* Icon.png in Resources */,
+				D76921E62756452E00EB4CEA /* Style.css in Resources */,
+				D72A796727904EC800FF7E23 /* iphone_allow_access.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D76921C32756452E00EB4CEA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D7692212275645D800EB4CEA /* Icon.png in Resources */,
+				D76921E72756452E00EB4CEA /* Style.css in Resources */,
+				D76921E92756452E00EB4CEA /* Script.js in Resources */,
+				D7607A1D276792B100FB0E82 /* Main.storyboard in Resources */,
+				D76921ED2756452E00EB4CEA /* Assets.xcassets in Resources */,
+				D76921E32756452E00EB4CEA /* Main.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D76921CF2756452E00EB4CEA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D76921FC2756452E00EB4CEA /* popup.css in Resources */,
+				D76921FA2756452E00EB4CEA /* popup.html in Resources */,
+				D76921F22756452E00EB4CEA /* images in Resources */,
+				D76921F42756452E00EB4CEA /* manifest.json in Resources */,
+				D769221727564D8F00EB4CEA /* style.css in Resources */,
+				D76921F02756452E00EB4CEA /* _locales in Resources */,
+				D76921F82756452E00EB4CEA /* content.js in Resources */,
+				D76921FE2756452E00EB4CEA /* popup.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D76921D92756452E00EB4CEA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D76921FD2756452E00EB4CEA /* popup.css in Resources */,
+				D76921FB2756452E00EB4CEA /* popup.html in Resources */,
+				D76921F32756452E00EB4CEA /* images in Resources */,
+				D76921F52756452E00EB4CEA /* manifest.json in Resources */,
+				D769221827564D8F00EB4CEA /* style.css in Resources */,
+				D76921F12756452E00EB4CEA /* _locales in Resources */,
+				D76921F92756452E00EB4CEA /* content.js in Resources */,
+				D76921FF2756452E00EB4CEA /* popup.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D76921AF2756452E00EB4CEA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D76921EA2756452E00EB4CEA /* ViewController.swift in Sources */,
+				D76921B72756452E00EB4CEA /* AppDelegate.swift in Sources */,
+				D76921B92756452E00EB4CEA /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D76921C12756452E00EB4CEA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D76921EB2756452E00EB4CEA /* ViewController.swift in Sources */,
+				D76921C82756452E00EB4CEA /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D76921CD2756452E00EB4CEA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D76921EE2756452E00EB4CEA /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D76921D72756452E00EB4CEA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D76921EF2756452E00EB4CEA /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D76921D42756452E00EB4CEA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D76921D02756452E00EB4CEA /* Digital Self-Control Extension (iOS) */;
+			targetProxy = D76921D32756452E00EB4CEA /* PBXContainerItemProxy */;
+		};
+		D76921DE2756452E00EB4CEA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D76921DA2756452E00EB4CEA /* Digital Self-Control Extension (macOS) */;
+			targetProxy = D76921DD2756452E00EB4CEA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D769219D2756452C00EB4CEA /* Main.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D769219E2756452C00EB4CEA /* Base */,
+			);
+			name = Main.html;
+			sourceTree = "<group>";
+		};
+		D76921BA2756452E00EB4CEA /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D76921BB2756452E00EB4CEA /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		D76921BD2756452E00EB4CEA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D76921BE2756452E00EB4CEA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D76921C92756452E00EB4CEA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D76921CA2756452E00EB4CEA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D76922002756452E00EB4CEA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D76922012756452E00EB4CEA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		D76922032756452E00EB4CEA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7YEYWQKK25;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "\"No Distractions\" for YouTube";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.yt-minimiser.yt-minimiser";
+				PRODUCT_NAME = "Digital Self-Control Extension";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D76922042756452E00EB4CEA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7YEYWQKK25;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "\"No Distractions\" for YouTube";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.yt-minimiser.yt-minimiser";
+				PRODUCT_NAME = "Digital Self-Control Extension";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D76922072756452E00EB4CEA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7YEYWQKK25;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Digital Self-Control";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.yt-minimiser";
+				PRODUCT_NAME = "Digital Self-Control";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D76922082756452E00EB4CEA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7YEYWQKK25;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "iOS (App)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Digital Self-Control";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.yt-minimiser";
+				PRODUCT_NAME = "Digital Self-Control";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D769220A2756452E00EB4CEA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/No Distractions for YouTube.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 7YEYWQKK25;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "\"No Distractions\" for YouTube Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.yt-minimiser.yt-minimiser";
+				PRODUCT_NAME = "Digital Self-Control Extension";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		D769220B2756452E00EB4CEA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/No Distractions for YouTube.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 7YEYWQKK25;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "\"No Distractions\" for YouTube Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.yt-minimiser.yt-minimiser";
+				PRODUCT_NAME = "Digital Self-Control Extension";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		D769220E2756452E00EB4CEA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "macOS (App)/No Distractions for YouTube.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 7YEYWQKK25;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Digital Self-Control";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.yt-minimiser";
+				PRODUCT_NAME = "Digital Self-Control";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		D769220F2756452E00EB4CEA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "macOS (App)/No Distractions for YouTube.entitlements";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 7YEYWQKK25;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Digital Self-Control";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.yt-minimiser";
+				PRODUCT_NAME = "Digital Self-Control";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D769219A2756452C00EB4CEA /* Build configuration list for PBXProject "Digital Self-Control" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D76922002756452E00EB4CEA /* Debug */,
+				D76922012756452E00EB4CEA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D76922022756452E00EB4CEA /* Build configuration list for PBXNativeTarget "Digital Self-Control Extension (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D76922032756452E00EB4CEA /* Debug */,
+				D76922042756452E00EB4CEA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D76922062756452E00EB4CEA /* Build configuration list for PBXNativeTarget "Digital Self-Control (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D76922072756452E00EB4CEA /* Debug */,
+				D76922082756452E00EB4CEA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D76922092756452E00EB4CEA /* Build configuration list for PBXNativeTarget "Digital Self-Control Extension (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D769220A2756452E00EB4CEA /* Debug */,
+				D769220B2756452E00EB4CEA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D769220D2756452E00EB4CEA /* Build configuration list for PBXNativeTarget "Digital Self-Control (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D769220E2756452E00EB4CEA /* Debug */,
+				D769220F2756452E00EB4CEA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D76921972756452C00EB4CEA /* Project object */;
+}
