@@ -56,6 +56,20 @@ a[href="/explore/"] {
     display: none;
 }
 
+
+/******************
+** GOOGLE SEARCH **
+******************/
+
+#tads,
+#tads .CnP9N.U3A9Ac.irmCpc {
+    background-color: #F2E6C3 !important;
+}
+
+#tads {
+    display: none;
+}
+
 /************
 ** YOUTUBE **
 ************/

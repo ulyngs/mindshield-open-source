@@ -3,7 +3,7 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     var platformsWeTarget = [ "youtube", "facebook", "google", "instagram", "linkedin" ];
-    const elementsThatCanBeHidden = [ "ytRecVids", "ytShorts", "ytRelated", "ytComments", "fbFeed", "fbStories", "fbChat", "inFeed", "inNews", "instaMutedStories", "instaExplore" ];
+    const elementsThatCanBeHidden = [ "ytRecVids", "ytShorts", "ytRelated", "ytComments", "fbFeed", "fbStories", "fbChat", "inFeed", "inNews", "instaMutedStories", "instaExplore", "googleAds" ];
     var saveButton = document.getElementById("saveButton");
     
     saveButton.addEventListener('click', function() {

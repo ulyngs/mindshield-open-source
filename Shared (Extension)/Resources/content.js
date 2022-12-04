@@ -9,7 +9,7 @@
     }
     window.hasRun = true;
     
-    const elementsThatCanBeHidden = [ "ytRecVids", "ytShorts", "ytRelated", "ytComments", "fbFeed", "fbStories", "fbChat", "inFeed", "inNews", "instaMutedStories", "instaExplore" ];
+    const elementsThatCanBeHidden = [ "ytRecVids", "ytShorts", "ytRelated", "ytComments", "fbFeed", "fbStories", "fbChat", "inFeed", "inNews", "instaMutedStories", "instaExplore", "googleAds" ];
     
     // YouTube CSS
     const ytRecVidsCssOn = 'ytd-browse[page-subtype="home"] { visibility: visible; } div[tab-identifier="FEwhat_to_watch"]  { visibility: visible; }';
@@ -47,6 +47,10 @@
     
     const inNewsCssOn = 'aside[aria-label="LinkedIn News"] .news-module, aside[aria-label="LinkedIn News"] .mb2 { display: block; }'
     const inNewsCssOff = 'aside[aria-label="LinkedIn News"] .news-module, aside[aria-label="LinkedIn News"] .mb2 { display: none; }'
+    
+    // Google search CSS
+    const googleAdsCssOn = '#tads {display: block;}'
+    const googleAdsCssOff = '#tads {display: none;}'
     
     
     // function to create style element with the specified CSS content
