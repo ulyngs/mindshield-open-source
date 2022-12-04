@@ -103,3 +103,7 @@ a:visited {
 .colored-font {
     color: darkgray;
 }
+
+.shown {
+  display: block !important;
+}

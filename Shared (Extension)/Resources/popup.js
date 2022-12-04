@@ -26,23 +26,25 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     
-    // let the dropdown buttons hide and show the toggles
-    function attachDropdownToggleListener(className) {
-      let dropdownBtn = document.querySelector(`.dropdown.${className} .dropbtn`);
-      let dropdownContent = document.querySelector(`.dropdown.${className} .dropdown-content`);
-      
-      dropdownBtn.addEventListener('click', () => {
-        if (dropdownContent.style.display === "none") {
-          dropdownContent.style.display = "block";
-        } else {
-          dropdownContent.style.display = "none";
-        }
-      });
-    };
-    
-    platformsWeTarget.forEach(function (item) {
-        attachDropdownToggleListener(item);
+    // Get references to all of the dropdown buttons
+    var dropdownButtons = document.querySelectorAll('.dropdown button');
+
+    // Add click event listeners to the buttons
+    dropdownButtons.forEach(function(button) {
+      button.addEventListener('click', dropdownButtonClicked);
     });
+
+    function dropdownButtonClicked(event) {
+      // Handle the click event for the clicked button
+      var clickedButton = event.currentTarget;
+
+      // Get the dropdown content for the clicked button
+      var dropdownContent = clickedButton.nextElementSibling;
+
+      // Toggle the "hidden" class on the dropdown content
+      dropdownContent.classList.toggle('shown');
+    }
+
     
     // set checkboxes according to current status
     function setPopupToggle(element_to_check, id_of_toggle){
