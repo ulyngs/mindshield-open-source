@@ -40,9 +40,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Get the dropdown content for the clicked button
       var dropdownContent = clickedButton.nextElementSibling;
+        
+      // Select the dropdown content element with the "shown" class
+      var shownDropdown = document.querySelector('.dropdown-content.shown');
+    
+      // Check if the dropdown content element with the "shown" class is the same as the dropdown content for the clicked button. If it is, then toggle the class off
+      if (shownDropdown === dropdownContent) {
+          dropdownContent.classList.toggle('shown');
+      } else {
+          // Select all of the dropdown content elements with the "shown" class
+          var shownDropdowns = document.querySelectorAll('.dropdown-content.shown');
+            
+          // Loop through the shown dropdown content elements and remove the 'shown' class from tehm
+          shownDropdowns.forEach(function(dropdown) {
+            dropdown.classList.remove('shown');
+          });
 
-      // Toggle the "hidden" class on the dropdown content
-      dropdownContent.classList.toggle('shown');
+          // Toggle the "shown" class on the dropdown content
+          dropdownContent.classList.toggle('shown');
+      }
     }
 
     
