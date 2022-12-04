@@ -25,6 +25,26 @@ div[role="complementary"] div[data-visualcompletion="ignore-dynamic"] > div.x1n2
 
 
 /**************
+** LINKEDIN **
+**************/
+
+/* feed */
+#ember33, .scaffold-finite-scroll.scaffold-finite-scroll--infinite  {
+    display: none;
+}
+
+/* news */
+aside[aria-label="LinkedIn News"] .news-module,
+aside[aria-label="LinkedIn News"] .mb2 {
+    display: none;
+}
+
+/* ads */
+section.ad-banner-container {
+    display: none;
+}
+
+/**************
 ** INSTAGRAM **
 **************/
 

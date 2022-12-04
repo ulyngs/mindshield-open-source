@@ -9,7 +9,7 @@
     }
     window.hasRun = true;
     
-    const elementsThatCanBeHidden = [ "ytRecVids", "ytShorts", "ytRelated", "ytComments", "fbFeed", "fbStories", "fbChat", "instaMutedStories", "instaExplore" ];
+    const elementsThatCanBeHidden = [ "ytRecVids", "ytShorts", "ytRelated", "ytComments", "fbFeed", "fbStories", "fbChat", "inFeed", "inNews", "instaMutedStories", "instaExplore" ];
     
     // YouTube CSS
     const ytRecVidsCssOn = 'ytd-browse[page-subtype="home"] { visibility: visible; } div[tab-identifier="FEwhat_to_watch"]  { visibility: visible; }';
@@ -40,6 +40,14 @@
     
     const instaExploreCssOn = 'a[href="/explore/"] { display: inline; }'
     const instaExploreCssOff = 'a[href="/explore/"] { display: none; }'
+    
+    // LinkedIn CSS
+    const inFeedCssOn = '#ember33, .scaffold-finite-scroll.scaffold-finite-scroll--infinite  {display: block;}'
+    const inFeedCssOff = '#ember33, .scaffold-finite-scroll.scaffold-finite-scroll--infinite  {display: none;}'
+    
+    const inNewsCssOn = 'aside[aria-label="LinkedIn News"] .news-module, aside[aria-label="LinkedIn News"] .mb2 { display: block; }'
+    const inNewsCssOff = 'aside[aria-label="LinkedIn News"] .news-module, aside[aria-label="LinkedIn News"] .mb2 { display: none; }'
+    
     
     // function to create style element with the specified CSS content
     function createStyleElement(some_style_id, some_css){
