@@ -2,8 +2,7 @@
 // https://developer.chrome.com/docs/extensions/mv3/messaging/
 
 document.addEventListener('DOMContentLoaded', function() {
-    var platformsWeTarget = [ "youtube", "facebook", "google", "instagram", "linkedin" ];
-    const elementsThatCanBeHidden = [ "ytRecVids", "ytShorts", "ytRelated", "ytComments", "fbFeed", "fbStories", "fbChat", "inFeed", "inNews", "instaMutedStories", "instaExplore", "googleAds" ];
+    const elementsThatCanBeHidden = [ "youtubeRecVids", "youtubeShorts", "youtubeRelated", "youtubeComments", "facebookFeed", "facebookStories", "facebookChat", "linkedinFeed", "linkedinNews", "instagramMutedStories", "instagramExplore", "googleAds" ];
     var saveButton = document.getElementById("saveButton");
     
     saveButton.addEventListener('click', function() {
@@ -23,23 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
             saveButton.innerHTML = "......";
             delay(250).then(() => saveButton.innerHTML = "Saved!");
             delay(1500).then(() => saveButton.innerHTML = "Save settings");
-    });
-    
-    var platformsWeTarget = [ "youtube", "facebook", "google", "instagram", "linkedin" ];
-    
-    
-    
-    platformsWeTarget.forEach(function(platform) {
-      var currentCheckbox = document.querySelector('.dropdown.' + platform + ' input');
-      var currentDropdownButton = document.querySelector('.dropdown.' + platform + ' button');
-        
-        currentCheckbox.addEventListener("change", function() {
-            if(!currentCheckbox.checked){
-                document.querySelector(".dropdown." + platform + " button").disabled = true;
-            } else {
-                document.querySelector(".dropdown." + platform + " button").disabled = false;
-            }
-      });
     });
     
     // Get references to all of the dropdown buttons
