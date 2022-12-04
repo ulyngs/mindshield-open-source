@@ -113,6 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     currentSwitch.checked = true;
                 } else {
                     currentSwitch.checked = false;
+                    document.querySelector(".dropdown." + domain_to_check + " button").disabled = true;
                 }
             });
         });
