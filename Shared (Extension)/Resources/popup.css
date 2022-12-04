@@ -192,4 +192,16 @@ input:checked + .slider:before {
     .colored-font {
         color: lightgray;
     }
+    
+    .dropdown.youtube .dropdown-content,
+    .dropdown.instagram .dropdown-content,
+    .dropdown.facebook .dropdown-content,
+    .dropdown.linkedin .dropdown-content,
+    .dropdown.google .dropdown-content {
+      background-color: black;
+    }
+    
+    .dropdown-content .a-toggle:hover {
+        background-color: #292929;
+    }
 }
