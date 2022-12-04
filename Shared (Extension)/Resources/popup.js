@@ -13,15 +13,17 @@ document.addEventListener('DOMContentLoaded', function() {
         
             chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
                 chrome.tabs.sendMessage(tabs[0].id, { method: "saveState",
-                    recVidsState: document.getElementById('ytRecVidsToggle').checked,
-                    shortsState: document.getElementById('ytShortsToggle').checked,
-                    relatedState: document.getElementById('ytRelatedToggle').checked,
-                    commentsState: document.getElementById('ytCommentsToggle').checked
+                    ytRecVidsState: document.getElementById('ytRecVidsToggle').checked,
+                    ytShortsState: document.getElementById('ytShortsToggle').checked,
+                    ytRelatedState: document.getElementById('ytRelatedToggle').checked,
+                    ytCommentsState: document.getElementById('ytCommentsToggle').checked
                 } );
             });
             
             saveButton.innerHTML = "......";
             delay(250).then(() => saveButton.innerHTML = "Saved!");
+        
+            delay(1500).then(() => saveButton.innerHTML = "Save settings");
     });
     
     

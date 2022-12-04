@@ -81,17 +81,6 @@
 
         if(request.method == "getSavedState"){
             sendResponseWithElements(elementsThatCanBeHidden);
-            
-            /*
-            sendResponse({ytRecVids: localStorage.getItem("ytRecVids"),
-                          ytShorts: localStorage.getItem("ytShorts"),
-                          ytRelated: localStorage.getItem("ytRelated"),
-                          ytComments: localStorage.getItem("ytComments"),
-                          instaMutedStories: localStorage.getItem("instaMutedStories"),
-                          instaExplore: localStorage.getItem("instaExplore")
-            });
-             */
-            
         };
     });
     
