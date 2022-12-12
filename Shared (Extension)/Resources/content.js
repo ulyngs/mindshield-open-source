@@ -65,6 +65,38 @@
     };
     
     // loop over the elements and create the style
+    var platformsWeTarget = [ "youtube", "facebook", "google", "instagram", "linkedin" ];
+    
+    platformsWeTarget.forEach(function (platform) {
+        var filteredElements = elementsThatCanBeHidden.filter(element =>
+          element.includes(platform)
+        );
+        
+        var key = platform + "Status";
+        
+        browser.storage.sync.get(key, function(result) {
+            console.log("saved status for " + platform + " is " + result[key]);
+            
+          if (result[key] == true || result[key] == undefined) {
+              console.log("creating CssOff");
+              console.log(filteredElements);
+              
+              filteredElements.forEach(function (item) {
+                  var styleName = item + "Style";
+                  createStyleElement(styleName, eval(item + "CssOff"));
+              });
+          } else {
+              console.log("creating CssOn");
+              console.log(filteredElements);
+              filteredElements.forEach(function (item) {
+                  var styleName = item + "Style";
+                  createStyleElement(styleName, eval(item + "CssOn"));
+              });
+          }
+        });
+    });
+    
+    /*
     elementsThatCanBeHidden.forEach(function (item) {
         var styleName = item + "Style";
         if (localStorage.getItem(item) === "true" || localStorage.getItem("youtube") === "off"){
@@ -72,7 +104,7 @@
         } else {
             createStyleElement(styleName, eval(item + "CssOff"));
         };
-    });
+    });*/
     
     // let the popup ask for the current status of the elements and of the saved state
     chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {

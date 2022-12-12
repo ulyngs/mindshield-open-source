@@ -666,7 +666,7 @@
 				DEVELOPMENT_TEAM = 7YEYWQKK25;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "\"No Distractions\" for YouTube";
+				INFOPLIST_KEY_CFBundleDisplayName = "Digital Self-Control";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -679,7 +679,7 @@
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.yt-minimiser.yt-minimiser";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.digital-self-control";
 				PRODUCT_NAME = "Digital Self-Control Extension";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -697,7 +697,7 @@
 				DEVELOPMENT_TEAM = 7YEYWQKK25;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "\"No Distractions\" for YouTube";
+				INFOPLIST_KEY_CFBundleDisplayName = "Digital Self-Control";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -710,7 +710,7 @@
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.yt-minimiser.yt-minimiser";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.digital-self-control";
 				PRODUCT_NAME = "Digital Self-Control Extension";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -751,7 +751,7 @@
 					"-framework",
 					WebKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.yt-minimiser";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.digital-self-control";
 				PRODUCT_NAME = "Digital Self-Control";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -790,7 +790,7 @@
 					"-framework",
 					WebKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.yt-minimiser";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.digital-self-control";
 				PRODUCT_NAME = "Digital Self-Control";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -825,7 +825,7 @@
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.yt-minimiser.yt-minimiser";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.digital-self-control";
 				PRODUCT_NAME = "Digital Self-Control Extension";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -859,7 +859,7 @@
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.yt-minimiser.yt-minimiser";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.digital-self-control";
 				PRODUCT_NAME = "Digital Self-Control Extension";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -898,7 +898,7 @@
 					"-framework",
 					WebKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.yt-minimiser";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.digital-self-control";
 				PRODUCT_NAME = "Digital Self-Control";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -936,7 +936,7 @@
 					"-framework",
 					WebKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.yt-minimiser";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.digital-self-control";
 				PRODUCT_NAME = "Digital Self-Control";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
