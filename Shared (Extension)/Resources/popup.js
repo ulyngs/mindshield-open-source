@@ -148,12 +148,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
     
-    var saveButton = document.getElementById("saveButton");
-        
-        saveButton.addEventListener('click', function() {
-            function delay(time) {
-                return new Promise(resolve => setTimeout(resolve, time));
-            }
+    function delay(time) {
+        return new Promise(resolve => setTimeout(resolve, time));
+    }
+    
+    
+    var saveButtons = document.querySelectorAll('.saveButton');
+    for (let i = 0; i < saveButtons.length; i++) {
+
+        saveButtons[i].addEventListener('click', (e) => {
+            
             chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
                 // message the content script with the state of the checkboxes
                 var myMessage = { method: "saveState"};
@@ -162,12 +166,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 chrome.tabs.sendMessage(tabs[0].id, myMessage );
             });
-            
-            saveButton.innerHTML = "......";
-            delay(250).then(() => saveButton.innerHTML = "Saved!");
-            delay(1500).then(() => saveButton.innerHTML = "Save settings");
-        });
-    
+        
+            e.target.setAttribute("value", "......");
+            delay(250).then(() => e.target.setAttribute("value", "Saved!"));
+            delay(1500).then(() => e.target.setAttribute("value", "Save settings"));
+      })
+    }
     
     // assign functions to the checkboxes
     function assignCheckBoxFunction(element_to_change, id_of_toggle){
