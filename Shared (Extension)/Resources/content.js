@@ -83,7 +83,11 @@
               
               filteredElements.forEach(function (item) {
                   var styleName = item + "Style";
-                  createStyleElement(styleName, eval(item + "CssOff"));
+                  if (localStorage.getItem(item) == "true" || localStorage.getItem(item) == undefined){
+                      createStyleElement(styleName, eval(item + "CssOn"));
+                  } else {
+                      createStyleElement(styleName, eval(item + "CssOff"));
+                  };
               });
           } else {
               console.log("creating CssOn");
@@ -95,16 +99,6 @@
           }
         });
     });
-    
-    /*
-    elementsThatCanBeHidden.forEach(function (item) {
-        var styleName = item + "Style";
-        if (localStorage.getItem(item) === "true" || localStorage.getItem("youtube") === "off"){
-            createStyleElement(styleName, eval(item + "CssOn"));
-        } else {
-            createStyleElement(styleName, eval(item + "CssOff"));
-        };
-    });*/
     
     // let the popup ask for the current status of the elements and of the saved state
     chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
@@ -163,13 +157,6 @@
             });
         };
         
-        if (message.method === "switchOff"){
-            localStorage.setItem(message.domain, "off");
-        };
-        
-        if (message.method === "switchOn"){
-            localStorage.setItem(message.domain, "on")
-        };
     });
    
 })();

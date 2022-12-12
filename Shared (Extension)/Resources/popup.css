@@ -65,7 +65,7 @@ a {
   font-size: 0.9em;
   border: none;
 }
-#saveButton:hover,
+
 .dropdown .dropbtn:hover {
     background-color: #008CBA;
     color: white
@@ -77,16 +77,6 @@ a {
 .dropbtn:disabled:hover {
   background-color: #ccc;
   color: #888;
-}
-
-#saveButton {
-    background-color: lightgray;
-    color: black;
-    padding: 5px;
-    font-size: 0.9em;
-    border: none;
-    margin-bottom: 0px;
-    margin-top: 30px;
 }
 
 .dropdown {

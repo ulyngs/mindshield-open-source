@@ -2,9 +2,6 @@
 // https://developer.chrome.com/docs/extensions/mv3/messaging/
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Store some data in the global storage area
-    //browser.storage.sync.set({ "youtubeNew": "out standing" });
-    
     const elementsThatCanBeHidden = [ "youtubeRecVids", "youtubeShorts", "youtubeRelated", "youtubeComments", "facebookFeed", "facebookStories", "facebookChat", "linkedinFeed", "linkedinNews", "instagramMutedStories", "instagramExplore", "googleAds" ];
     
     var platformsWeTarget = [ "youtube", "facebook", "google", "instagram", "linkedin" ];
@@ -150,6 +147,27 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     };
+    
+    var saveButton = document.getElementById("saveButton");
+        
+        saveButton.addEventListener('click', function() {
+            function delay(time) {
+                return new Promise(resolve => setTimeout(resolve, time));
+            }
+            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                // message the content script with the state of the checkboxes
+                var myMessage = { method: "saveState"};
+                elementsThatCanBeHidden.forEach(function(element) {
+                    myMessage[element] = document.getElementById(element + "Toggle").checked;
+                });
+                chrome.tabs.sendMessage(tabs[0].id, myMessage );
+            });
+            
+            saveButton.innerHTML = "......";
+            delay(250).then(() => saveButton.innerHTML = "Saved!");
+            delay(1500).then(() => saveButton.innerHTML = "Save settings");
+        });
+    
     
     // assign functions to the checkboxes
     function assignCheckBoxFunction(element_to_change, id_of_toggle){
