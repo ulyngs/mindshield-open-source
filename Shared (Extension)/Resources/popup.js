@@ -22,11 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     document.getElementById(some_element + "Toggle").checked = false;
                 });
-                
-                
-                // Save the state of the toggle
-                console.log(platform);
 
+                // Save the state of the toggle
                 // Define the key that will be used to save and retrieve the toggle status
                 var key = platform + "Status";
 
@@ -51,8 +48,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 
                 // Save the state of the toggle
-                console.log(platform);
-
                 // Define the key that will be used to save and retrieve the toggle status
                 var key = platform + "Status";
 
