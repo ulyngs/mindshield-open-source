@@ -2,9 +2,8 @@
 // https://developer.chrome.com/docs/extensions/mv3/messaging/
 
 document.addEventListener('DOMContentLoaded', function() {
-    const elementsThatCanBeHidden = [ "youtubeRecVids", "youtubeShorts", "youtubeRelated", "youtubeComments", "facebookFeed", "facebookStories", "facebookChat", "linkedinFeed", "linkedinNews", "instagramMutedStories", "instagramExplore", "googleAds" ];
-    
-    var platformsWeTarget = [ "youtube", "facebook", "google", "instagram", "linkedin" ];
+    const platformsWeTarget = [ "youtube", "facebook", "google", "instagram", "linkedin" ];
+    const elementsThatCanBeHidden = [ "youtubeRecVids", "youtubeShorts", "youtubeRelated", "youtubeComments", "facebookFeed", "facebookStories", "facebookChat", "linkedinFeed", "linkedinNews", "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramSuggestions", "googleAds" ];
     
     platformsWeTarget.forEach(function(platform) {
         var currentSwitch = document.querySelector('.dropdown.' + platform + ' input');
