@@ -9,7 +9,8 @@
     }
     window.hasRun = true;
     
-    const elementsThatCanBeHidden = [ "youtubeRecVids", "youtubeShorts", "youtubeRelated", "youtubeComments", "facebookFeed", "facebookStories", "facebookChat", "inFeed", "inNews", "instagramMutedStories", "instagramExplore", "googleAds" ];
+    const platformsWeTarget = [ "youtube", "facebook", "google", "instagram", "linkedin" ];
+    const elementsThatCanBeHidden = [ "youtubeRecVids", "youtubeShorts", "youtubeRelated", "youtubeComments", "facebookFeed", "facebookStories", "facebookChat", "linkedinFeed", "linkedinNews", "instagramMutedStories", "instagramExplore", "googleAds" ];
     
     // YouTube CSS
     const youtubeRecVidsCssOn = 'ytd-browse[page-subtype="home"] { visibility: visible; } div[tab-identifier="FEwhat_to_watch"]  { visibility: visible; }';
@@ -42,11 +43,11 @@
     const instagramExploreCssOff = 'a[href="/explore/"] { display: none; }'
     
     // LinkedIn CSS
-    const inFeedCssOn = '#ember33, .scaffold-finite-scroll.scaffold-finite-scroll--infinite  {display: block;}'
-    const inFeedCssOff = '#ember33, .scaffold-finite-scroll.scaffold-finite-scroll--infinite  {display: none;}'
+    const linkedinFeedCssOn = '#ember33, .scaffold-finite-scroll.scaffold-finite-scroll--infinite  {display: block;}'
+    const linkedinFeedCssOff = '#ember33, .scaffold-finite-scroll.scaffold-finite-scroll--infinite  {display: none;}'
     
-    const inNewsCssOn = 'aside[aria-label="LinkedIn News"] .news-module, aside[aria-label="LinkedIn News"] .mb2 { display: block; }'
-    const inNewsCssOff = 'aside[aria-label="LinkedIn News"] .news-module, aside[aria-label="LinkedIn News"] .mb2 { display: none; }'
+    const linkedinNewsCssOn = 'aside[aria-label="LinkedIn News"] .news-module, aside[aria-label="LinkedIn News"] .mb2 { display: block; }'
+    const linkedinNewsCssOff = 'aside[aria-label="LinkedIn News"] .news-module, aside[aria-label="LinkedIn News"] .mb2 { display: none; }'
     
     // Google search CSS
     const googleAdsCssOn = '#tads {display: block;}'
@@ -65,8 +66,6 @@
     };
     
     // loop over the elements and create the style
-    var platformsWeTarget = [ "youtube", "facebook", "google", "instagram", "linkedin" ];
-    
     platformsWeTarget.forEach(function (platform) {
         var filteredElements = elementsThatCanBeHidden.filter(element =>
           element.includes(platform)
