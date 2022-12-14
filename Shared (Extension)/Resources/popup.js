@@ -27,14 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 var key = platform + "Status";
 
                 // Save the toggle status to the storage area using the key
-                browser.storage.sync.set({ [key]: currentSwitch.checked }, function(){
-                    // Get the stored status for the toggle using the key
-                    browser.storage.sync.get(key, function(result) {
-                      // Output the stored status to the console
-                      console.log("Stored status for " + platform + " is now " + result[key]);
-                    });
-                });
-                console.log("Saved state -- just turned on");
+                browser.storage.sync.set({ [key]: currentSwitch.checked });
                 
             } else {
                 document.querySelector(".dropdown." + platform + " button").disabled = true;
@@ -51,17 +44,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 var key = platform + "Status";
 
                 // Save the toggle status to the storage area using the key
-                browser.storage.sync.set({ [key]: currentSwitch.checked }, function(){
-                    // Get the stored status for the toggle using the key
-                    browser.storage.sync.get(key, function(result) {
-                      // Output the stored status to the console
-                      console.log("Stored status for " + platform + " is now " + result[key]);
-                    });
-                });
-                console.log("Saved state -- just turned off");
+                browser.storage.sync.set({ [key]: currentSwitch.checked });
             }
-            
-            
       });
     });
     
@@ -108,9 +92,6 @@ document.addEventListener('DOMContentLoaded', function() {
         var key = platform_to_check + "Status";
         
         browser.storage.sync.get(key, function(result) {
-          // Check the value of the key in an if statement
-            console.log("saved status for " + platform_to_check + " is " + result[key]);
-            
           if (result[key] == true || result[key] == undefined) {
               currentSwitch.checked = true;
           } else {
@@ -132,7 +113,6 @@ document.addEventListener('DOMContentLoaded', function() {
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
             
             chrome.tabs.sendMessage(tabs[0].id, { method: "check", element: element_to_check }, function(response){
-                console.log(response.text);
                 // if the checkbox is for a page that's different from the one we're on, set to its saved state
                 if (response.text === "not on active tab") {
                     elementsThatCanBeHidden.forEach(function (element) {
@@ -161,8 +141,6 @@ document.addEventListener('DOMContentLoaded', function() {
     for (let i = 0; i < saveButtons.length; i++) {
 
         saveButtons[i].addEventListener('click', (e) => {
-            
-            console.log("saving to global storage");
             // save the state of the checkboxes to local storage
             elementsThatCanBeHidden.forEach(function (element) {
                 var key = element + "Status";
