@@ -171,4 +171,16 @@ document.addEventListener('DOMContentLoaded', function() {
         assignCheckBoxFunction(item, item + "Toggle");
     });
     
+    // open the one we're currently on
+    chrome.tabs.query({active: true, currentWindow: true}, function(tab){
+        platformsWeTarget.forEach(function(platform) {
+            var currentHost = new URL(tab[0].url);
+            
+            if (currentHost.origin.includes(platform)){
+                document.querySelector('.dropdown.' + platform + ' button').click();
+            }
+        });
+    });
+    
+    
 }, false);
