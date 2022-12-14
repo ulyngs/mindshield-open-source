@@ -132,8 +132,18 @@ document.addEventListener('DOMContentLoaded', function() {
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
             
             chrome.tabs.sendMessage(tabs[0].id, { method: "check", element: element_to_check }, function(response){
-                
-                if(response.text === "visible"){
+                console.log(response.text);
+                // if the checkbox is for a page that's different from the one we're on, then set the checkbox to its saved state
+                if (response.text === "not on active tab") {
+                    elementsThatCanBeHidden.forEach(function (element) {
+                        var key = element_to_check + "Status";
+                        
+                        browser.storage.sync.get(key, function(result) {
+                            currentToggle.checked = result[key];
+                        });
+                    });
+                    // otherwise set it to what's currently visible on the page
+                } else if (response.text === "visible"){
                     currentToggle.checked = true;
                 } else {
                     currentToggle.checked = false;
@@ -152,6 +162,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
         saveButtons[i].addEventListener('click', (e) => {
             
+            console.log("saving to global storage");
+            // save the state of the checkboxes to local storage
+            elementsThatCanBeHidden.forEach(function (element) {
+                var key = element + "Status";
+                
+                browser.storage.sync.set({ [key]: document.getElementById(element + "Toggle").checked });
+            });
+            
+            /*
             chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
                 // message the content script with the state of the checkboxes
                 var myMessage = { method: "saveState"};
@@ -160,6 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 chrome.tabs.sendMessage(tabs[0].id, myMessage );
             });
+             */
         
             e.target.setAttribute("value", "......");
             delay(250).then(() => e.target.setAttribute("value", "Saved!"));

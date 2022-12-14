@@ -91,11 +91,15 @@
                   
                   filteredElements.forEach(function (item) {
                       var styleName = item + "Style";
-                      if (localStorage.getItem(item) == "true" || localStorage.getItem(item) == undefined){
-                          createStyleElement(styleName, eval(item + "CssOn"));
-                      } else {
-                          createStyleElement(styleName, eval(item + "CssOff"));
-                      };
+                      var key = item + "Status";
+                      
+                      browser.storage.sync.get(key, function(result) {
+                          if (result[key] == true || result[key] == undefined){
+                              createStyleElement(styleName, eval(item + "CssOn"));
+                          } else {
+                              createStyleElement(styleName, eval(item + "CssOff"));
+                          };
+                      });
                   });
               } else {
                   //console.log("creating CssOn");
@@ -112,7 +116,9 @@
     // let the popup ask for the current status of the elements and of the saved state
     chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         function checkStyleStatus(currentStyle, some_css_for_shown){
-            if (currentStyle.innerHTML === some_css_for_shown) {
+            if (currentStyle == undefined){
+                sendResponse({text: "not on active tab"});
+            } else if (currentStyle.innerHTML === some_css_for_shown) {
                 sendResponse({text: "visible"});
             } else {
                 sendResponse({text: "hidden"});
