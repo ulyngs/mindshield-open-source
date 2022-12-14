@@ -10,7 +10,7 @@
     window.hasRun = true;
     
     const platformsWeTarget = [ "youtube", "facebook", "google", "instagram", "linkedin" ];
-    const elementsThatCanBeHidden = [ "youtubeRecVids", "youtubeShorts", "youtubeRelated", "youtubeComments", "facebookFeed", "facebookStories", "facebookChat", "linkedinFeed", "linkedinNews", "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramSuggestions", "googleAds" ];
+    const elementsThatCanBeHidden = [ "youtubeRecVids", "youtubeShorts", "youtubeSubscriptions", "youtubeExplore", "youtubeMore", "youtubeRelated", "youtubeComments", "facebookFeed", "facebookStories", "facebookChat", "linkedinFeed", "linkedinNews", "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramSuggestions", "googleAds" ];
     
     // YouTube CSS
     const youtubeRecVidsCssOn = 'ytd-browse[page-subtype="home"] { visibility: visible; } div[tab-identifier="FEwhat_to_watch"]  { visibility: visible; }';
@@ -18,6 +18,15 @@
     
     const youtubeShortsCssOn =  '#endpoint.yt-simple-endpoint.ytd-guide-entry-renderer[title="Shorts"],ytd-mini-guide-entry-renderer [aria-label="Shorts"] { display: block; }  ytm-pivot-bar-renderer[role="tablist"]ytm-pivot-bar-item-renderer:nth-child(2){ visibility: visible; }'
     const youtubeShortsCssOff =  '#endpoint.yt-simple-endpoint.ytd-guide-entry-renderer[title="Shorts"],ytd-mini-guide-entry-renderer [aria-label="Shorts"] { display: none; }  ytm-pivot-bar-renderer[role="tablist"]ytm-pivot-bar-item-renderer:nth-child(2){ visibility: hidden; }';
+    
+    const youtubeSubscriptionsCssOn = '#endpoint.yt-simple-endpoint.ytd-guide-entry-renderer[title="Subscriptions"], ytd-mini-guide-entry-renderer[aria-label="Subscriptions"], #sections ytd-guide-section-renderer:nth-child(2) { display: block; } ytm-pivot-bar-renderer[role="tablist"] ytm-pivot-bar-item-renderer:nth-child(3){ display: flex; }';
+    const youtubeSubscriptionsCssOff = '#endpoint.yt-simple-endpoint.ytd-guide-entry-renderer[title="Subscriptions"], ytd-mini-guide-entry-renderer[aria-label="Subscriptions"], #sections ytd-guide-section-renderer:nth-child(2) { display: none; } ytm-pivot-bar-renderer[role="tablist"] ytm-pivot-bar-item-renderer:nth-child(3){ display: none; }';
+    
+    const youtubeExploreCssOn = '#sections ytd-guide-section-renderer:nth-child(3) { display: block; }';
+    const youtubeExploreCssOff = '#sections ytd-guide-section-renderer:nth-child(3) { display: none; }';
+    
+    const youtubeMoreCssOn = '#sections ytd-guide-section-renderer:nth-child(4) { display: block; }';
+    const youtubeMoreCssOff = '#sections ytd-guide-section-renderer:nth-child(4) { display: none; }';
     
     const youtubeRelatedCssOn = '#related { visibility: visible; display: block; }  ytm-item-section-renderer[section-identifier="related-items"] {visibility: visible; }';
     const youtubeRelatedCssOff = '#related { visibility: hidden; display: none; }  ytm-item-section-renderer[section-identifier="related-items"] {visibility: hidden; }';

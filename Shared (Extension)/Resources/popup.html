@@ -14,21 +14,40 @@
           </label>
           <button class="dropbtn"><img src="images/down-arrow.svg" height="10" width="10"/> YouTube</button>
           <div class="dropdown-content">
-              <div class="a-toggle">
-                  <input type="checkbox" id="youtubeRecVidsToggle" name="youtubeRecVidsToggle">
-                  <label for="youtubeRecVidsToggle">Recommended videos <span class="colored-font">(home page)</span></label>
+              <div class="toggle-group">
+                <h2>Home page</h2>
+                <div class="a-toggle">
+                    <input type="checkbox" id="youtubeRecVidsToggle" name="youtubeRecVidsToggle">
+                    <label for="youtubeRecVidsToggle">Recommended videos</label>
+                </div>
+                <div class="a-toggle">
+                    <input type="checkbox" id="youtubeShortsToggle" name="youtubeShortsToggle">
+                    <label for="youtubeShortsToggle">Shorts</label>
+                </div>
+                <div class="a-toggle">
+                    <input type="checkbox" id="youtubeSubscriptionsToggle" name="youtubeSubscriptionsToggle">
+                    <label for="youtubeSubscriptionsToggle">Subscriptions</label>
+                </div>
+                <div class="a-toggle">
+                    <input class="platform-ipad-mac" type="checkbox" id="youtubeExploreToggle" name="youtubeExploreToggle">
+                    <label class="platform-ipad-mac" for="youtubeExploreToggle">Explore</label>
+                </div>
+                <div class="a-toggle">
+                    <input class="platform-ipad-mac" type="checkbox" id="youtubeMoreToggle" name="youtubeMoreToggle">
+                    <label  class="platform-ipad-mac" for="youtubeMoreToggle">More from YouTube</label>
+                </div>
               </div>
-              <div class="a-toggle">
-                  <input type="checkbox" id="youtubeShortsToggle" name="youtubeShortsToggle">
-                  <label for="youtubeShortsToggle">Shorts <span class="colored-font">(home page)</span></label>
-              </div>
-              <div class="a-toggle">
-                  <input type="checkbox" id="youtubeRelatedToggle" name="youtubeRelatedToggle">
-                  <label for="youtubeRelatedToggle">Related/Up next videos <span class="colored-font">(when watching)</span></label>
-              </div>
-              <div class="a-toggle">
-                  <input class="platform-ipad-mac" type="checkbox" id="youtubeCommentsToggle" name="youtubeCommentsToggle">
-                  <label class="platform-ipad-mac" for="youtubeCommentsToggle">Comments</label>
+              <div class="toggle-group">
+                  <h2>When watching</h2>
+                  <div class="a-toggle">
+                      <input type="checkbox" id="youtubeRelatedToggle" name="youtubeRelatedToggle">
+                      <label for="youtubeRelatedToggle">Related/Up next videos</label>
+                  </div>
+                  <div class="a-toggle">
+                      <input type="checkbox" id="youtubeCommentsToggle" name="youtubeCommentsToggle">
+                      <label for="youtubeCommentsToggle">Comments</label>
+                  </div>
+                  <div class="smaller-font platform-ipad-mac tooltip-content"></div>
               </div>
               <div class="a-toggle">
                   <input type="button" class="saveButton" value="Save settings">

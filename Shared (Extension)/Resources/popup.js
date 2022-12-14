@@ -3,7 +3,7 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     const platformsWeTarget = [ "youtube", "facebook", "google", "instagram", "linkedin" ];
-    const elementsThatCanBeHidden = [ "youtubeRecVids", "youtubeShorts", "youtubeRelated", "youtubeComments", "facebookFeed", "facebookStories", "facebookChat", "linkedinFeed", "linkedinNews", "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramSuggestions", "googleAds" ];
+    const elementsThatCanBeHidden = [ "youtubeRecVids", "youtubeShorts", "youtubeSubscriptions", "youtubeExplore", "youtubeMore", "youtubeRelated", "youtubeComments", "facebookFeed", "facebookStories", "facebookChat", "linkedinFeed", "linkedinNews", "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramSuggestions", "googleAds" ];
     
     platformsWeTarget.forEach(function(platform) {
         var currentSwitch = document.querySelector('.dropdown.' + platform + ' input');
