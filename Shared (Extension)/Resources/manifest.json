@@ -2,8 +2,8 @@
     "manifest_version": 2,
     "default_locale": "en",
 
-    "name": "Digital Self-Control",
-    "description": "Take control of your online experience",
+    "name": "MindShield",
+    "description": "Take control of your attention online",
     "version": "1.0",
 
     "icons": {

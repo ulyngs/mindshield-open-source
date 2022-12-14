@@ -17,8 +17,8 @@
 		D76921BC2756452E00EB4CEA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D76921BA2756452E00EB4CEA /* LaunchScreen.storyboard */; };
 		D76921BF2756452E00EB4CEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D76921BD2756452E00EB4CEA /* Main.storyboard */; };
 		D76921C82756452E00EB4CEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76921C72756452E00EB4CEA /* AppDelegate.swift */; };
-		D76921D22756452E00EB4CEA /* Digital Self-Control Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D76921D12756452E00EB4CEA /* Digital Self-Control Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		D76921DC2756452E00EB4CEA /* Digital Self-Control Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D76921DB2756452E00EB4CEA /* Digital Self-Control Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D76921D22756452E00EB4CEA /* MindShield Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D76921D12756452E00EB4CEA /* MindShield Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D76921DC2756452E00EB4CEA /* MindShield Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D76921DB2756452E00EB4CEA /* MindShield Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D76921E22756452E00EB4CEA /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = D769219D2756452C00EB4CEA /* Main.html */; };
 		D76921E32756452E00EB4CEA /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = D769219D2756452C00EB4CEA /* Main.html */; };
 		D76921E62756452E00EB4CEA /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = D76921A02756452C00EB4CEA /* Style.css */; };
@@ -75,7 +75,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				D76921D22756452E00EB4CEA /* Digital Self-Control Extension.appex in Embed Foundation Extensions */,
+				D76921D22756452E00EB4CEA /* MindShield Extension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -86,7 +86,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				D76921DC2756452E00EB4CEA /* Digital Self-Control Extension.appex in Embed Foundation Extensions */,
+				D76921DC2756452E00EB4CEA /* MindShield Extension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -111,19 +111,19 @@
 		D76921AC2756452E00EB4CEA /* popup.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = popup.html; sourceTree = "<group>"; };
 		D76921AD2756452E00EB4CEA /* popup.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = popup.css; sourceTree = "<group>"; };
 		D76921AE2756452E00EB4CEA /* popup.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = popup.js; sourceTree = "<group>"; };
-		D76921B32756452E00EB4CEA /* Digital Self-Control.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Digital Self-Control.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D76921B32756452E00EB4CEA /* MindShield.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindShield.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D76921B62756452E00EB4CEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D76921B82756452E00EB4CEA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D76921BB2756452E00EB4CEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D76921BE2756452E00EB4CEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D76921C02756452E00EB4CEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D76921C52756452E00EB4CEA /* Digital Self-Control.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Digital Self-Control.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D76921C52756452E00EB4CEA /* MindShield.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindShield.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D76921C72756452E00EB4CEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D76921CA2756452E00EB4CEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D76921CC2756452E00EB4CEA /* No Distractions for YouTube.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "No Distractions for YouTube.entitlements"; sourceTree = "<group>"; };
-		D76921D12756452E00EB4CEA /* Digital Self-Control Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Digital Self-Control Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D76921D12756452E00EB4CEA /* MindShield Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "MindShield Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D76921D62756452E00EB4CEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D76921DB2756452E00EB4CEA /* Digital Self-Control Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Digital Self-Control Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D76921DB2756452E00EB4CEA /* MindShield Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "MindShield Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D76921E02756452E00EB4CEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D76921E12756452E00EB4CEA /* No Distractions for YouTube.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "No Distractions for YouTube.entitlements"; sourceTree = "<group>"; };
 		D7692210275645D800EB4CEA /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
@@ -223,10 +223,10 @@
 		D76921B42756452E00EB4CEA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D76921B32756452E00EB4CEA /* Digital Self-Control.app */,
-				D76921C52756452E00EB4CEA /* Digital Self-Control.app */,
-				D76921D12756452E00EB4CEA /* Digital Self-Control Extension.appex */,
-				D76921DB2756452E00EB4CEA /* Digital Self-Control Extension.appex */,
+				D76921B32756452E00EB4CEA /* MindShield.app */,
+				D76921C52756452E00EB4CEA /* MindShield.app */,
+				D76921D12756452E00EB4CEA /* MindShield Extension.appex */,
+				D76921DB2756452E00EB4CEA /* MindShield Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -277,9 +277,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D76921B22756452E00EB4CEA /* Digital Self-Control (iOS) */ = {
+		D76921B22756452E00EB4CEA /* MindShield (iOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D76922062756452E00EB4CEA /* Build configuration list for PBXNativeTarget "Digital Self-Control (iOS)" */;
+			buildConfigurationList = D76922062756452E00EB4CEA /* Build configuration list for PBXNativeTarget "MindShield (iOS)" */;
 			buildPhases = (
 				D76921AF2756452E00EB4CEA /* Sources */,
 				D76921B02756452E00EB4CEA /* Frameworks */,
@@ -291,14 +291,14 @@
 			dependencies = (
 				D76921D42756452E00EB4CEA /* PBXTargetDependency */,
 			);
-			name = "Digital Self-Control (iOS)";
+			name = "MindShield (iOS)";
 			productName = "Hide distractions on YouTube (iOS)";
-			productReference = D76921B32756452E00EB4CEA /* Digital Self-Control.app */;
+			productReference = D76921B32756452E00EB4CEA /* MindShield.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D76921C42756452E00EB4CEA /* Digital Self-Control (macOS) */ = {
+		D76921C42756452E00EB4CEA /* MindShield (macOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D769220D2756452E00EB4CEA /* Build configuration list for PBXNativeTarget "Digital Self-Control (macOS)" */;
+			buildConfigurationList = D769220D2756452E00EB4CEA /* Build configuration list for PBXNativeTarget "MindShield (macOS)" */;
 			buildPhases = (
 				D76921C12756452E00EB4CEA /* Sources */,
 				D76921C22756452E00EB4CEA /* Frameworks */,
@@ -310,14 +310,14 @@
 			dependencies = (
 				D76921DE2756452E00EB4CEA /* PBXTargetDependency */,
 			);
-			name = "Digital Self-Control (macOS)";
+			name = "MindShield (macOS)";
 			productName = "Hide distractions on YouTube (macOS)";
-			productReference = D76921C52756452E00EB4CEA /* Digital Self-Control.app */;
+			productReference = D76921C52756452E00EB4CEA /* MindShield.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D76921D02756452E00EB4CEA /* Digital Self-Control Extension (iOS) */ = {
+		D76921D02756452E00EB4CEA /* MindShield Extension (iOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D76922022756452E00EB4CEA /* Build configuration list for PBXNativeTarget "Digital Self-Control Extension (iOS)" */;
+			buildConfigurationList = D76922022756452E00EB4CEA /* Build configuration list for PBXNativeTarget "MindShield Extension (iOS)" */;
 			buildPhases = (
 				D76921CD2756452E00EB4CEA /* Sources */,
 				D76921CE2756452E00EB4CEA /* Frameworks */,
@@ -327,14 +327,14 @@
 			);
 			dependencies = (
 			);
-			name = "Digital Self-Control Extension (iOS)";
+			name = "MindShield Extension (iOS)";
 			productName = "Hide distractions on YouTube Extension (iOS)";
-			productReference = D76921D12756452E00EB4CEA /* Digital Self-Control Extension.appex */;
+			productReference = D76921D12756452E00EB4CEA /* MindShield Extension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		D76921DA2756452E00EB4CEA /* Digital Self-Control Extension (macOS) */ = {
+		D76921DA2756452E00EB4CEA /* MindShield Extension (macOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D76922092756452E00EB4CEA /* Build configuration list for PBXNativeTarget "Digital Self-Control Extension (macOS)" */;
+			buildConfigurationList = D76922092756452E00EB4CEA /* Build configuration list for PBXNativeTarget "MindShield Extension (macOS)" */;
 			buildPhases = (
 				D76921D72756452E00EB4CEA /* Sources */,
 				D76921D82756452E00EB4CEA /* Frameworks */,
@@ -344,9 +344,9 @@
 			);
 			dependencies = (
 			);
-			name = "Digital Self-Control Extension (macOS)";
+			name = "MindShield Extension (macOS)";
 			productName = "Hide distractions on YouTube Extension (macOS)";
-			productReference = D76921DB2756452E00EB4CEA /* Digital Self-Control Extension.appex */;
+			productReference = D76921DB2756452E00EB4CEA /* MindShield Extension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -373,7 +373,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D769219A2756452C00EB4CEA /* Build configuration list for PBXProject "Digital Self-Control" */;
+			buildConfigurationList = D769219A2756452C00EB4CEA /* Build configuration list for PBXProject "MindShield" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -386,10 +386,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D76921B22756452E00EB4CEA /* Digital Self-Control (iOS) */,
-				D76921C42756452E00EB4CEA /* Digital Self-Control (macOS) */,
-				D76921D02756452E00EB4CEA /* Digital Self-Control Extension (iOS) */,
-				D76921DA2756452E00EB4CEA /* Digital Self-Control Extension (macOS) */,
+				D76921B22756452E00EB4CEA /* MindShield (iOS) */,
+				D76921C42756452E00EB4CEA /* MindShield (macOS) */,
+				D76921D02756452E00EB4CEA /* MindShield Extension (iOS) */,
+				D76921DA2756452E00EB4CEA /* MindShield Extension (macOS) */,
 			);
 		};
 /* End PBXProject section */
@@ -499,12 +499,12 @@
 /* Begin PBXTargetDependency section */
 		D76921D42756452E00EB4CEA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D76921D02756452E00EB4CEA /* Digital Self-Control Extension (iOS) */;
+			target = D76921D02756452E00EB4CEA /* MindShield Extension (iOS) */;
 			targetProxy = D76921D32756452E00EB4CEA /* PBXContainerItemProxy */;
 		};
 		D76921DE2756452E00EB4CEA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D76921DA2756452E00EB4CEA /* Digital Self-Control Extension (macOS) */;
+			target = D76921DA2756452E00EB4CEA /* MindShield Extension (macOS) */;
 			targetProxy = D76921DD2756452E00EB4CEA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -679,8 +679,8 @@
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.digital-self-control";
-				PRODUCT_NAME = "Digital Self-Control Extension";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.mind-shield.mind-shield";
+				PRODUCT_NAME = "MindShield Extension";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -710,8 +710,8 @@
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.digital-self-control";
-				PRODUCT_NAME = "Digital Self-Control Extension";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.mind-shield.mind-shield";
+				PRODUCT_NAME = "MindShield Extension";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -751,8 +751,8 @@
 					"-framework",
 					WebKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.digital-self-control";
-				PRODUCT_NAME = "Digital Self-Control";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.mind-shield";
+				PRODUCT_NAME = MindShield;
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -790,8 +790,8 @@
 					"-framework",
 					WebKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.digital-self-control";
-				PRODUCT_NAME = "Digital Self-Control";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.mind-shield";
+				PRODUCT_NAME = MindShield;
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -825,8 +825,8 @@
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.digital-self-control";
-				PRODUCT_NAME = "Digital Self-Control Extension";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.mind-shield.mind-shield";
+				PRODUCT_NAME = "MindShield Extension";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -859,8 +859,8 @@
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.digital-self-control";
-				PRODUCT_NAME = "Digital Self-Control Extension";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.mind-shield.mind-shield";
+				PRODUCT_NAME = "MindShield Extension";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -898,8 +898,8 @@
 					"-framework",
 					WebKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.digital-self-control";
-				PRODUCT_NAME = "Digital Self-Control";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.mind-shield";
+				PRODUCT_NAME = MindShield;
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -936,8 +936,8 @@
 					"-framework",
 					WebKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.digital-self-control";
-				PRODUCT_NAME = "Digital Self-Control";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.mind-shield";
+				PRODUCT_NAME = MindShield;
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -947,7 +947,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D769219A2756452C00EB4CEA /* Build configuration list for PBXProject "Digital Self-Control" */ = {
+		D769219A2756452C00EB4CEA /* Build configuration list for PBXProject "MindShield" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D76922002756452E00EB4CEA /* Debug */,
@@ -956,7 +956,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D76922022756452E00EB4CEA /* Build configuration list for PBXNativeTarget "Digital Self-Control Extension (iOS)" */ = {
+		D76922022756452E00EB4CEA /* Build configuration list for PBXNativeTarget "MindShield Extension (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D76922032756452E00EB4CEA /* Debug */,
@@ -965,7 +965,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D76922062756452E00EB4CEA /* Build configuration list for PBXNativeTarget "Digital Self-Control (iOS)" */ = {
+		D76922062756452E00EB4CEA /* Build configuration list for PBXNativeTarget "MindShield (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D76922072756452E00EB4CEA /* Debug */,
@@ -974,7 +974,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D76922092756452E00EB4CEA /* Build configuration list for PBXNativeTarget "Digital Self-Control Extension (macOS)" */ = {
+		D76922092756452E00EB4CEA /* Build configuration list for PBXNativeTarget "MindShield Extension (macOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D769220A2756452E00EB4CEA /* Debug */,
@@ -983,7 +983,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D769220D2756452E00EB4CEA /* Build configuration list for PBXNativeTarget "Digital Self-Control (macOS)" */ = {
+		D769220D2756452E00EB4CEA /* Build configuration list for PBXNativeTarget "MindShield (macOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D769220E2756452E00EB4CEA /* Debug */,
