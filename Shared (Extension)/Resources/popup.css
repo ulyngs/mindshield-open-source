@@ -103,7 +103,7 @@ a {
   background-color: #f1f1f1;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
-  padding: 8px 8px 3px 8px;
+  padding: 12px 10px 5px 14px;
   width: 140px;
   font-size: 0.95em;
   border-radius: 3px;
@@ -211,5 +211,5 @@ input:checked + .slider:before {
 }
 
 .overlay {
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.7);
 }
