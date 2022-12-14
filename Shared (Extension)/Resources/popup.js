@@ -169,17 +169,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 browser.storage.sync.set({ [key]: document.getElementById(element + "Toggle").checked });
             });
-            
-            /*
-            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                // message the content script with the state of the checkboxes
-                var myMessage = { method: "saveState"};
-                elementsThatCanBeHidden.forEach(function(element) {
-                    myMessage[element] = document.getElementById(element + "Toggle").checked;
-                });
-                chrome.tabs.sendMessage(tabs[0].id, myMessage );
-            });
-             */
         
             e.target.setAttribute("value", "......");
             delay(250).then(() => e.target.setAttribute("value", "Saved!"));

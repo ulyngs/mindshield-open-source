@@ -130,22 +130,6 @@
     
             checkStyleStatus(currentStyle, eval(request.element + 'CssOn'));
         };
-        
-        if(request.method === "checkSwitch"){
-            if (localStorage.getItem(request.domain) === "off"){
-                sendResponse({text: "off"});
-            } else {
-                sendResponse({text: "on"});
-            };
-        };
-
-        if(request.method == "getSavedState"){
-            var response = {};
-            elementsThatCanBeHidden.forEach(function(element) {
-              response[element] = localStorage.getItem(element);
-            });
-            sendResponse(response);
-        };
     });
     
     // let the content script toggle elements when the popup asks for it
@@ -164,14 +148,5 @@
         if(message.method === "change"){
             toggleHiding(message.element + 'Style', eval(message.element + 'CssOn'), eval(message.element + 'CssOff'),  message.status);
         };
-    
-        // save state if the popup asks for it
-        if (message.method === "saveState"){
-            elementsThatCanBeHidden.forEach(function (item) {
-                localStorage.setItem(item, eval('message.' + item));
-            });
-        };
-        
     });
-   
 })();
