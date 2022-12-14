@@ -126,14 +126,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     
     // set checkboxes according to current status
-    function setPopupToggle(element_to_check, id_of_toggle){
+    function setCheckboxState(element_to_check, id_of_toggle){
         var currentToggle = document.getElementById(id_of_toggle);
         
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
             
             chrome.tabs.sendMessage(tabs[0].id, { method: "check", element: element_to_check }, function(response){
                 console.log(response.text);
-                // if the checkbox is for a page that's different from the one we're on, then set the checkbox to its saved state
+                // if the checkbox is for a page that's different from the one we're on, set to its saved state
                 if (response.text === "not on active tab") {
                     elementsThatCanBeHidden.forEach(function (element) {
                         var key = element_to_check + "Status";
@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     
     elementsThatCanBeHidden.forEach(function (item) {
-        setPopupToggle(item, item + "Toggle");
+        setCheckboxState(item, item + "Toggle");
         assignCheckBoxFunction(item, item + "Toggle");
     });
     
