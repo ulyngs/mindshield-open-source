@@ -62,7 +62,6 @@
     const googleAdsCssOn = '#tads {display: block;}'
     const googleAdsCssOff = '#tads {display: none;}'
     
-    
     // function to create style element with the specified CSS content
     function createStyleElement(some_style_id, some_css){
         if(!document.getElementById(some_style_id)){
@@ -76,36 +75,38 @@
     
     // loop over the elements and create the style
     platformsWeTarget.forEach(function (platform) {
-        var filteredElements = elementsThatCanBeHidden.filter(element =>
-          element.includes(platform)
-        );
-        
-        var key = platform + "Status";
-        
-        browser.storage.sync.get(key, function(result) {
-            console.log("saved status for " + platform + " is " + result[key]);
+        if (window.location.hostname.includes(platform)){
+            var filteredElements = elementsThatCanBeHidden.filter(element =>
+              element.includes(platform)
+            );
             
-          if (result[key] == true || result[key] == undefined) {
-              console.log("creating CssOff");
-              console.log(filteredElements);
-              
-              filteredElements.forEach(function (item) {
-                  var styleName = item + "Style";
-                  if (localStorage.getItem(item) == "true" || localStorage.getItem(item) == undefined){
+            var key = platform + "Status";
+            
+            browser.storage.sync.get(key, function(result) {
+                //console.log("saved status for " + platform + " is " + result[key]);
+                
+              if (result[key] == true || result[key] == undefined) {
+                  //console.log("creating CssOff");
+                  //console.log(filteredElements);
+                  
+                  filteredElements.forEach(function (item) {
+                      var styleName = item + "Style";
+                      if (localStorage.getItem(item) == "true" || localStorage.getItem(item) == undefined){
+                          createStyleElement(styleName, eval(item + "CssOn"));
+                      } else {
+                          createStyleElement(styleName, eval(item + "CssOff"));
+                      };
+                  });
+              } else {
+                  //console.log("creating CssOn");
+                  //console.log(filteredElements);
+                  filteredElements.forEach(function (item) {
+                      var styleName = item + "Style";
                       createStyleElement(styleName, eval(item + "CssOn"));
-                  } else {
-                      createStyleElement(styleName, eval(item + "CssOff"));
-                  };
-              });
-          } else {
-              console.log("creating CssOn");
-              console.log(filteredElements);
-              filteredElements.forEach(function (item) {
-                  var styleName = item + "Style";
-                  createStyleElement(styleName, eval(item + "CssOn"));
-              });
-          }
-        });
+                  });
+              }
+            });
+        };
     });
     
     // let the popup ask for the current status of the elements and of the saved state
