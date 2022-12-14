@@ -3,15 +3,15 @@
     "default_locale": "en",
 
     "name": "MindShield",
-    "description": "Take control of your attention online",
+    "description": "Take control of your attention on the internet.",
     "version": "1.0",
 
     "icons": {
-        "48": "images/new-icon48.png",
-        "96": "images/new-icon96.png",
-        "128": "images/new-icon128.png",
-        "256": "images/new-icon256.png",
-        "512": "images/new-icon512.png"
+        "48": "images/icon-app-48.png",
+        "96": "images/icon-app-96.png",
+        "128": "images/icon-app-128.png",
+        "256": "images/icon-app-256.png",
+        "512": "images/icon-app-512.png"
     },
 
     "content_scripts": [{
