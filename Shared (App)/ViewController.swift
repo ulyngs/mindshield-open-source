@@ -16,7 +16,7 @@ import SafariServices
 typealias PlatformViewController = NSViewController
 #endif
 
-let extensionBundleIdentifier = "com.ulriklyngs.yt-minimiser.yt-minimiser"
+let extensionBundleIdentifier = "com.ulriklyngs.mind-shield.mind-shield"
 
 class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMessageHandler {
 
