@@ -51,10 +51,10 @@
     "browser_action": {
         "default_popup": "popup.html",
         "default_icon": {
-            "16": "images/new-toolbar-icon-16.png",
-            "19": "images/new-toolbar-icon-19.png",
-            "32": "images/new-toolbar-icon-32.png",
-            "38": "images/new-toolbar-icon-38.png"
+            "16": "images/icon-app-toolbar-16.png",
+            "19": "images/icon-app-toolbar-19.png",
+            "32": "images/icon-app-toolbar-32.png",
+            "38": "images/icon-app-toolbar-38.png"
         }
     },
 
