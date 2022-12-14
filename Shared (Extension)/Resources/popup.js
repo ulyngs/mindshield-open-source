@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // Check if the dropdown content element with the "shown" class is the same as the dropdown content for the clicked button. If it is, then toggle the class off
       if (shownDropdown === dropdownContent) {
           dropdownContent.classList.toggle('shown');
+          document.querySelector('body').classList.remove('overlay');
       } else {
           // Select all of the dropdown content elements with the "shown" class
           var shownDropdowns = document.querySelectorAll('.dropdown-content.shown');
@@ -78,9 +79,12 @@ document.addEventListener('DOMContentLoaded', function() {
           shownDropdowns.forEach(function(dropdown) {
             dropdown.classList.remove('shown');
           });
+          
+          document.querySelectorAll('.dropdown-content.shown')
 
           // Toggle the "shown" class on the dropdown content
           dropdownContent.classList.toggle('shown');
+          document.querySelector('body').classList.add('overlay');
       }
     }
 
@@ -178,6 +182,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (currentHost.origin.includes(platform)){
                 document.querySelector('.dropdown.' + platform + ' button').click();
+                // make the body dark
+                document.querySelector('body').classList.add('overlay');
             }
         });
     });

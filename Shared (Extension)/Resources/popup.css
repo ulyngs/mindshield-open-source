@@ -106,6 +106,7 @@ a {
   padding: 8px 8px 3px 8px;
   width: 140px;
   font-size: 0.95em;
+  border-radius: 3px;
 }
 
 .dropdown-content .a-toggle:hover {background-color: #ddd;}
@@ -207,4 +208,8 @@ input:checked + .slider:before {
     .dropdown-content .a-toggle:hover {
         background-color: #292929;
     }
+}
+
+.overlay {
+    background-color: rgba(0,0,0,0.5);
 }
