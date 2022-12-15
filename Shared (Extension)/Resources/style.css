@@ -112,8 +112,8 @@ ytd-mini-guide-entry-renderer[aria-label="Shorts"] {
 }
 
 /* mobile version */
-ytm-pivot-bar-renderer[role="tablist"] ytm-pivot-bar-item-renderer:nth-child(2){
-    visibility: hidden;
+ytm-pivot-bar-renderer[role="tablist"] ytm-pivot-bar-item-renderer:has(.pivot-shorts){
+    display: none;
 }
 
 /***** hide related videos when you watch a video *****/
