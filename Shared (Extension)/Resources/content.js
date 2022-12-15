@@ -88,8 +88,8 @@
     const linkedinFeedCssOn = '#ember33, .scaffold-finite-scroll.scaffold-finite-scroll--infinite, #feed-container {display: block;}';
     const linkedinFeedCssOff = '#ember33, .scaffold-finite-scroll.scaffold-finite-scroll--infinite, #feed-container {display: none;}';
     
-    const linkedinNotificationsCssOn = '#nav-notifications-small-badge { display: block; }'
-    const linkedinNotificationsCssOff = '#nav-notifications-small-badge { display: none; }'
+    const linkedinNotificationsCssOn = 'span.notification-badge--show, #nav-notifications-small-badge { display: block !important; }'
+    const linkedinNotificationsCssOff = 'span.notification-badge--show, #nav-notifications-small-badge { display: none !important; }'
     
     const linkedinNewsCssOn = 'aside[aria-label="LinkedIn News"] .news-module, aside[aria-label="LinkedIn News"] .mb2 { display: block; }';
     const linkedinNewsCssOff = 'aside[aria-label="LinkedIn News"] .news-module, aside[aria-label="LinkedIn News"] .mb2 { display: none; }';
