@@ -69,11 +69,11 @@
     const twitterTimelineCssOff = 'div[aria-label="Timeline: Your Home Timeline"] { display: none; }';
     
     // Instagram CSS
-    const instagramFeedCssOn = 'main[role="main"] div._aam1._aam2._aam5 div._ab8w._ab94._ab99._ab9f._ab9m._ab9p._abc0._abcm { visibility: visible; }';
-    const instagramFeedCssOff = 'main[role="main"] div._aam1._aam2._aam5 div._ab8w._ab94._ab99._ab9f._ab9m._ab9p._abc0._abcm { visibility: hidden; }';
+    const instagramFeedCssOn = 'main[role="main"] div._aam1._aam2._aam5 div._ab8w._ab94._ab99._ab9f._ab9m._ab9p._abcm { visibility: visible; } main[role="main"] div._ab8w._ab94._ab99._ab9f._ab9m._ab9p._abcm { display: flex; }';
+    const instagramFeedCssOff = 'main[role="main"] div._aam1._aam2._aam5 div._ab8w._ab94._ab99._ab9f._ab9m._ab9p._abc0._abcm { visibility: hidden; } main[role="main"] div._ab8w._ab94._ab99._ab9f._ab9m._ab9p._abcm { display: none; }';
     
-    const instagramStoriesCssOn = 'main[role="main"] div._aac4._aac5._aac6 { display: block; }';
-    const instagramStoriesCssOff = 'main[role="main"] div._aac4._aac5._aac6 { display: none; }';
+    const instagramStoriesCssOn = 'main[role="main"] div._aac4._aac5._aac6 { display: block; } main ._aauo[role="menu"] {display: flex;}';
+    const instagramStoriesCssOff = 'main[role="main"] div._aac4._aac5._aac6 { display: none; } main ._aauo[role="menu"] {display: none;}';
     
     const instagramMutedStoriesCssOn = 'main[role="main"] div[role="menu"] button[aria-label~="Story"].xbyyjgo { display: flex; }';
     const instagramMutedStoriesCssOff = 'main[role="main"] div[role="menu"] button[aria-label~="Story"].xbyyjgo { display: none; }';

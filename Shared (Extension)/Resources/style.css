@@ -74,14 +74,8 @@ div:has(> aside[aria-label="Who to follow"]) {
 ** INSTAGRAM **
 **************/
 
-/* stories */
-main[role="main"] div._aac4._aac5._aac6 { display: none; }
-
 /* muted stories */
 main[role="main"] div[role="menu"] button[aria-label~="Story"].xbyyjgo { display: none; }
-
-/* feed */
-main[role="main"] div._aam1._aam2._aam5 div._ab8w._ab94._ab99._ab9f._ab9m._ab9p._abc0._abcm { visibility: hidden; }
 
 /* suggestions */
 div._aak6._aak9 div._aak3 { display: none; }
