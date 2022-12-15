@@ -9,8 +9,8 @@
     }
     window.hasRun = true;
     
-    const platformsWeTarget = [ "youtube", "facebook", "google", "instagram", "linkedin" ];
-    const elementsThatCanBeHidden = [ "youtubeRecVids", "youtubeShorts", "youtubeSubscriptions", "youtubeExplore", "youtubeMore", "youtubeRelated", "youtubeComments", "facebookFeed", "facebookStories", "facebookChat", "linkedinFeed", "linkedinNews", "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramSuggestions", "googleAds" ];
+    const platformsWeTarget = [ "youtube", "facebook", "twitter", "instagram", "linkedin", "google" ];
+    const elementsThatCanBeHidden = [ "youtubeRecVids", "youtubeShorts", "youtubeSubscriptions", "youtubeExplore", "youtubeMore", "youtubeRelated", "youtubeComments",  "twitterExplore", "twitterTrends", "twitterFollow", "twitterTimeline", "facebookFeed", "facebookStories", "facebookChat", "linkedinFeed", "linkedinNews", "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramSuggestions", "googleAds" ];
     
     // YouTube CSS
     const youtubeRecVidsCssOn = 'ytd-browse[page-subtype="home"] { visibility: visible; } div[tab-identifier="FEwhat_to_watch"]  { visibility: visible; }';
@@ -43,6 +43,19 @@
     
     const facebookStoriesCssOn = '.x78zum5.x1q0g3np.xl56j7k.x1yztbdb.x1y1aw1k { display: block; }'
     const facebookStoriesCssOff = '.x78zum5.x1q0g3np.xl56j7k.x1yztbdb.x1y1aw1k { display: none; }'
+    
+    // Twitter CSS
+    const twitterExploreCssOn = 'nav[role="navigation"] a[href="/explore"] { display: flex; }';
+    const twitterExploreCssOff = 'nav[role="navigation"] a[href="/explore"] { display: none; }';
+    
+    const twitterTrendsCssOn = 'div.css-1dbjc4n.r-x572qd.r-1d6w8o1.r-1867qdf.r-1phboty.r-rs99b7.r-1ifxtd0.r-1udh08x:has(div[aria-label="Timeline: Trending now"]) { display: flex; }';
+    const twitterTrendsCssOff = 'div.css-1dbjc4n.r-x572qd.r-1d6w8o1.r-1867qdf.r-1phboty.r-rs99b7.r-1ifxtd0.r-1udh08x:has(div[aria-label="Timeline: Trending now"]) { display: none; }';
+    
+    const twitterFollowCssOn = 'div:has(> aside[aria-label="Who to follow"]) { display: flex; }';
+    const twitterFollowCssOff = 'div:has(> aside[aria-label="Who to follow"]) { display: none; }';
+    
+    const twitterTimelineCssOn = 'div[aria-label="Timeline: Your Home Timeline"] { display: flex; }';
+    const twitterTimelineCssOff = 'div[aria-label="Timeline: Your Home Timeline"] { display: none; }';
     
     // Instagram CSS
     const instagramFeedCssOn = 'main[role="main"] div._aam1._aam2._aam5 div._ab8w._ab94._ab99._ab9f._ab9m._ab9p._abc0._abcm { visibility: visible; }';

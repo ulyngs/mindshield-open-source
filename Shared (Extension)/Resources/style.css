@@ -41,6 +41,19 @@ section.ad-banner-container {
     display: none;
 }
 
+/************
+** TWITTER **
+************/
+/* trends */
+div.css-1dbjc4n.r-x572qd.r-1d6w8o1.r-1867qdf.r-1phboty.r-rs99b7.r-1ifxtd0.r-1udh08x:has(div[aria-label="Timeline: Trending now"]) {
+    display: none;
+}
+
+/* Who to follow */
+div:has(> aside[aria-label="Who to follow"]) {
+    display: none;
+}
+
 /**************
 ** INSTAGRAM **
 **************/

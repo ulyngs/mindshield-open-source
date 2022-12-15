@@ -93,11 +93,7 @@ a {
   clear: both;
 }
 
-.dropdown.youtube .dropdown-content,
-.dropdown.instagram .dropdown-content,
-.dropdown.facebook .dropdown-content,
-.dropdown.linkedin .dropdown-content,
-.dropdown.google .dropdown-content {
+.dropdown .dropdown-content {
   display: none;
   position: absolute;
   background-color: #f1f1f1;
@@ -109,9 +105,9 @@ a {
   border-radius: 3px;
 }
 
-.dropdown-content .a-toggle:hover {background-color: #ddd;}
-
-
+.dropdown-content .a-toggle:hover {
+    background-color: #ddd;
+}
 
 .colored-font {
     color: darkgray;
