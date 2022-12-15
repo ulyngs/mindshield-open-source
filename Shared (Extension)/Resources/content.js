@@ -10,7 +10,7 @@
     window.hasRun = true;
     
     const platformsWeTarget = [ "youtube", "facebook", "twitter", "instagram", "linkedin", "google" ];
-    const elementsThatCanBeHidden = [ "youtubeRecVids", "youtubeShorts", "youtubeSubscriptions", "youtubeExplore", "youtubeMore", "youtubeRelated", "youtubeComments",  "twitterExplore", "twitterTrends", "twitterFollow", "twitterTimeline", "facebookFeed", "facebookStories", "facebookChat", "linkedinFeed", "linkedinNews", "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramSuggestions", "googleAds" ];
+    const elementsThatCanBeHidden = [ "youtubeRecVids", "youtubeShorts", "youtubeSubscriptions", "youtubeExplore", "youtubeMore", "youtubeRelated", "youtubeComments", "twitterExplore", "twitterNotifications", "twitterTrends", "twitterFollow", "twitterTimeline", "facebookFeed", "facebookStories", "facebookChat", "linkedinFeed", "linkedinNews", "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramSuggestions", "googleAds" ];
     
     // YouTube CSS
     const youtubeRecVidsCssOn = 'ytd-browse[page-subtype="home"] { visibility: visible; } div[tab-identifier="FEwhat_to_watch"]  { visibility: visible; }';
@@ -47,6 +47,9 @@
     // Twitter CSS
     const twitterExploreCssOn = 'nav[role="navigation"] a[href="/explore"] { display: flex; }';
     const twitterExploreCssOff = 'nav[role="navigation"] a[href="/explore"] { display: none; }';
+    
+    const twitterNotificationsCssOn = 'nav[role="navigation"] a[href="/notifications"] { display: flex; }';
+    const twitterNotificationsCssOff = 'nav[role="navigation"] a[href="/notifications"] { display: none; }';
     
     const twitterTrendsCssOn = 'div.css-1dbjc4n.r-x572qd.r-1d6w8o1.r-1867qdf.r-1phboty.r-rs99b7.r-1ifxtd0.r-1udh08x:has(div[aria-label="Timeline: Trending now"]) { display: flex; }';
     const twitterTrendsCssOff = 'div.css-1dbjc4n.r-x572qd.r-1d6w8o1.r-1867qdf.r-1phboty.r-rs99b7.r-1ifxtd0.r-1udh08x:has(div[aria-label="Timeline: Trending now"]) { display: none; }';
