@@ -14,7 +14,8 @@ body {
     font-size: 0.85em;
 }
 
-.a-toggle {
+.a-toggle,
+.save-toggle {
     margin-bottom: 5px;
     text-align: left;
 }
@@ -187,25 +188,33 @@ input:checked + .slider:before {
 }
 
 
+.overlay {
+    background-color: rgba(0,0,0,0.7);
+}
+
+.saveButton {
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+
 @media (prefers-color-scheme: dark) {
     /* Dark Mode styles go here. */
     .colored-font {
         color: lightgray;
     }
     
-    .dropdown.youtube .dropdown-content,
-    .dropdown.instagram .dropdown-content,
-    .dropdown.facebook .dropdown-content,
-    .dropdown.linkedin .dropdown-content,
-    .dropdown.google .dropdown-content {
+    .dropdown .dropdown-content {
       background-color: black;
     }
     
     .dropdown-content .a-toggle:hover {
         background-color: #292929;
     }
-}
-
-.overlay {
-    background-color: rgba(0,0,0,0.7);
 }
