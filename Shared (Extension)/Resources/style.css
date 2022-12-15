@@ -9,9 +9,25 @@
 /* desktop */
 .x78zum5.x1q0g3np.xl56j7k.x1yztbdb.x1y1aw1k { display: none; }
 
+/* mobile */
+#screen-root div[data-mcomponent="MContainer"] > div[data-mcomponent="MContainer"]:has(div[aria-label*="story"]) {
+    display: none;
+}
+
+
 /*** watch ***/
 /* desktop */
 a[aria-label^="Watch"] { display: none; }
+
+/* mobile */
+#screen-root div[data-mcomponent="MScreen"] div[data-mcomponent="MContainer"] div[data-mcomponent="MContainer"]:nth-child(2) div[role="button"]:nth-child(4) {
+    display: none;
+}
+
+#screen-root div[data-mcomponent="MScreen"] div[data-mcomponent="MContainer"] div[data-mcomponent="MContainer"]:nth-child(2):has(div[role="button"]:nth-child(4)) {
+    background-color: white !important;
+    border-bottom: 2px solid #dadde1;
+}
 
 /*** gaming ***/
 a[aria-label="Gaming"] { display: none; }
