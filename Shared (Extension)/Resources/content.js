@@ -59,14 +59,14 @@
     const twitterNotificationsCssOn = 'nav[role="navigation"] a[href="/notifications"] { display: flex; }';
     const twitterNotificationsCssOff = 'nav[role="navigation"] a[href="/notifications"] { display: none; }';
     
-    const twitterTrendsCssOn = 'div.css-1dbjc4n.r-x572qd.r-1d6w8o1.r-1867qdf.r-1phboty.r-rs99b7.r-1ifxtd0.r-1udh08x:has(div[aria-label="Timeline: Trending now"]) { display: flex; }';
-    const twitterTrendsCssOff = 'div.css-1dbjc4n.r-x572qd.r-1d6w8o1.r-1867qdf.r-1phboty.r-rs99b7.r-1ifxtd0.r-1udh08x:has(div[aria-label="Timeline: Trending now"]) { display: none; }';
+    const twitterTrendsCssOn = 'div.css-1dbjc4n.r-x572qd.r-1d6w8o1.r-1867qdf.r-1phboty.r-rs99b7.r-1ifxtd0.r-1udh08x:has(div[aria-label="Timeline: Trending now"]) { display: flex; } section[aria-labelledby="accessible-list-1"] {display: flex;}';
+    const twitterTrendsCssOff = 'div.css-1dbjc4n.r-x572qd.r-1d6w8o1.r-1867qdf.r-1phboty.r-rs99b7.r-1ifxtd0.r-1udh08x:has(div[aria-label="Timeline: Trending now"]) { display: none; } section[aria-labelledby="accessible-list-1"] {display: none;}';
     
-    const twitterFollowCssOn = 'div:has(> aside[aria-label="Who to follow"]) { display: flex; }';
-    const twitterFollowCssOff = 'div:has(> aside[aria-label="Who to follow"]) { display: none; }';
+    const twitterFollowCssOn = 'div:has(> aside[aria-label="Who to follow"]) { display: flex; } aside[role="complementary"] { display: flex;}';
+    const twitterFollowCssOff = 'div:has(> aside[aria-label="Who to follow"]) { display: none; } aside[role="complementary"] { display: none;}';
     
-    const twitterTimelineCssOn = 'div[aria-label="Timeline: Your Home Timeline"] { display: flex; }';
-    const twitterTimelineCssOff = 'div[aria-label="Timeline: Your Home Timeline"] { display: none; }';
+    const twitterTimelineCssOn = 'div[aria-label="Timeline: Your Home Timeline"] { display: flex; } section[aria-labelledby="accessible-list-2"] { visibility: visible; }';
+    const twitterTimelineCssOff = 'div[aria-label="Timeline: Your Home Timeline"] { display: none; } section[aria-labelledby="accessible-list-2"] { visibility: hidden; }';
     
     // Instagram CSS
     const instagramFeedCssOn = 'main[role="main"] section._aalv > div._aam1 article { visibility: visible; }';
@@ -75,8 +75,8 @@
     const instagramStoriesCssOn = 'main[role="main"] div._aac4._aac5._aac6 { display: block; } main ._aauo[role="menu"] {display: flex;}';
     const instagramStoriesCssOff = 'main[role="main"] div._aac4._aac5._aac6 { display: none; } main ._aauo[role="menu"] {display: none;}';
     
-    const instagramMutedStoriesCssOn = 'main[role="main"] div[role="menu"] button[aria-label~="Story"].xbyyjgo { display: flex; }';
-    const instagramMutedStoriesCssOff = 'main[role="main"] div[role="menu"] button[aria-label~="Story"].xbyyjgo { display: none; }';
+    const instagramMutedStoriesCssOn = 'main[role="main"] div[role="menu"] button[role="menuitem"].xbyyjgo { display: flex; }';
+    const instagramMutedStoriesCssOff = 'main[role="main"] div[role="menu"] button[role="menuitem"].xbyyjgo { display: none; } main[role="main"]';
     
     const instagramExploreCssOn = 'a[href="/explore/"] { display: inline; }';
     const instagramExploreCssOff = 'a[href="/explore/"] { display: none; }';
