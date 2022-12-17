@@ -60,30 +60,18 @@ section.ad-banner-container {
 /************
 ** TWITTER **
 ************/
-/* trends */
-div.css-1dbjc4n.r-x572qd.r-1d6w8o1.r-1867qdf.r-1phboty.r-rs99b7.r-1ifxtd0.r-1udh08x:has(div[aria-label="Timeline: Trending now"]) {
-    display: none;
-}
-
-/* Who to follow */
-div:has(> aside[aria-label="Who to follow"]) {
-    display: none;
-}
+/* hide trends by default */
+div[data-testid="sidebarColumn"] section[role="region"] {display: none; }
 
 /**************
 ** INSTAGRAM **
 **************/
 
 /* muted stories */
-main[role="main"] div[role="menu"] button[aria-label~="Story"].xbyyjgo { display: none; }
+main[role="main"] div[role="menu"] button[role="menuitem"].xbyyjgo { display: none; }
 
 /* suggestions */
 div._aak6._aak9 div._aak3 { display: none; }
-
-/* explore button */
-a[href="/explore/"] {
-    display: none;
-}
 
 
 /******************

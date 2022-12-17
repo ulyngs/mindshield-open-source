@@ -59,14 +59,14 @@
     const twitterNotificationsCssOn = 'nav[role="navigation"] a[href="/notifications"] { display: flex; }';
     const twitterNotificationsCssOff = 'nav[role="navigation"] a[href="/notifications"] { display: none; }';
     
-    const twitterTrendsCssOn = 'div.css-1dbjc4n.r-x572qd.r-1d6w8o1.r-1867qdf.r-1phboty.r-rs99b7.r-1ifxtd0.r-1udh08x:has(div[aria-label="Timeline: Trending now"]) { display: flex; } section[aria-labelledby="accessible-list-1"] {display: flex;}';
-    const twitterTrendsCssOff = 'div.css-1dbjc4n.r-x572qd.r-1d6w8o1.r-1867qdf.r-1phboty.r-rs99b7.r-1ifxtd0.r-1udh08x:has(div[aria-label="Timeline: Trending now"]) { display: none; } section[aria-labelledby="accessible-list-1"] {display: none;}';
+    const twitterTrendsCssOn = 'div[data-testid="sidebarColumn"] section[role="region"] {display: flex;}';
+    const twitterTrendsCssOff = 'div[data-testid="sidebarColumn"] section[role="region"] {display: none; }';
     
-    const twitterFollowCssOn = 'div:has(> aside[aria-label="Who to follow"]) { display: flex; } aside[role="complementary"] { display: flex;}';
-    const twitterFollowCssOff = 'div:has(> aside[aria-label="Who to follow"]) { display: none; } aside[role="complementary"] { display: none;}';
+    const twitterFollowCssOn = 'div[data-testid="sidebarColumn"] div.css-1dbjc4n.r-1bro5k0:has(aside[role="complementary"]) { display: flex;}';
+    const twitterFollowCssOff = 'div[data-testid="sidebarColumn"] div.css-1dbjc4n.r-1bro5k0:has(aside[role="complementary"]) { display: none;}';
     
-    const twitterTimelineCssOn = 'div[aria-label="Timeline: Your Home Timeline"] { display: flex; } section[aria-labelledby="accessible-list-2"] { visibility: visible; }';
-    const twitterTimelineCssOff = 'div[aria-label="Timeline: Your Home Timeline"] { display: none; } section[aria-labelledby="accessible-list-2"] { visibility: hidden; }';
+    const twitterTimelineCssOn = 'div[data-testid="primaryColumn"] section[role="region"] {visibility: visible; }';
+    const twitterTimelineCssOff = 'div[data-testid="primaryColumn"] section[role="region"] {visibility: hidden; }';
     
     // Instagram CSS
     const instagramFeedCssOn = 'main[role="main"] section._aalv > div._aam1 article { visibility: visible; }';
@@ -76,7 +76,7 @@
     const instagramStoriesCssOff = 'main[role="main"] div._aac4._aac5._aac6 { display: none; } main ._aauo[role="menu"] {display: none;}';
     
     const instagramMutedStoriesCssOn = 'main[role="main"] div[role="menu"] button[role="menuitem"].xbyyjgo { display: flex; }';
-    const instagramMutedStoriesCssOff = 'main[role="main"] div[role="menu"] button[role="menuitem"].xbyyjgo { display: none; } main[role="main"]';
+    const instagramMutedStoriesCssOff = 'main[role="main"] div[role="menu"] button[role="menuitem"].xbyyjgo { display: none; }';
     
     const instagramExploreCssOn = 'a[href="/explore/"] { display: inline; }';
     const instagramExploreCssOff = 'a[href="/explore/"] { display: none; }';
