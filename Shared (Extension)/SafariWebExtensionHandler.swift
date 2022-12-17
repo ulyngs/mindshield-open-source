@@ -2,7 +2,6 @@
 //  SafariWebExtensionHandler.swift
 //  Shared (Extension)
 //
-//  Created by ULRIK LYNGS on 30/11/2021.
 //
 
 import SafariServices
