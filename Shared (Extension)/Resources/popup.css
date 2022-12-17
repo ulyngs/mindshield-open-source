@@ -38,6 +38,12 @@ body {
 
 
 /******* HIDE IRRELEVANT TOGGLES *******/
+@media only screen and (max-device-width: 1312px) {
+    .youtube-large-only {
+        display:none
+    }
+}
+
 /* iPhone */
 @media only screen and (max-device-width: 768px) {
     .platform-ipad-mac {
