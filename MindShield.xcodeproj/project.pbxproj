@@ -120,14 +120,14 @@
 		D76921C52756452E00EB4CEA /* MindShield.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MindShield.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D76921C72756452E00EB4CEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D76921CA2756452E00EB4CEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D76921CC2756452E00EB4CEA /* No Distractions for YouTube.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "No Distractions for YouTube.entitlements"; sourceTree = "<group>"; };
 		D76921D12756452E00EB4CEA /* MindShield Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "MindShield Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D76921D62756452E00EB4CEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D76921DB2756452E00EB4CEA /* MindShield Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "MindShield Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D76921E02756452E00EB4CEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D76921E12756452E00EB4CEA /* No Distractions for YouTube.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "No Distractions for YouTube.entitlements"; sourceTree = "<group>"; };
 		D7692210275645D800EB4CEA /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		D769221627564D8F00EB4CEA /* style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
+		D78C7777294DC1A2003A6A0A /* MindShield.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = MindShield.entitlements; sourceTree = "<group>"; };
+		D78C7778294DC1B6003A6A0A /* MindShield.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MindShield.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,9 +250,9 @@
 		D76921C62756452E00EB4CEA /* macOS (App) */ = {
 			isa = PBXGroup;
 			children = (
+				D78C7778294DC1B6003A6A0A /* MindShield.entitlements */,
 				D76921C72756452E00EB4CEA /* AppDelegate.swift */,
 				D76921C92756452E00EB4CEA /* Main.storyboard */,
-				D76921CC2756452E00EB4CEA /* No Distractions for YouTube.entitlements */,
 			);
 			path = "macOS (App)";
 			sourceTree = "<group>";
@@ -268,8 +268,8 @@
 		D76921DF2756452E00EB4CEA /* macOS (Extension) */ = {
 			isa = PBXGroup;
 			children = (
+				D78C7777294DC1A2003A6A0A /* MindShield.entitlements */,
 				D76921E02756452E00EB4CEA /* Info.plist */,
-				D76921E12756452E00EB4CEA /* No Distractions for YouTube.entitlements */,
 			);
 			path = "macOS (Extension)";
 			sourceTree = "<group>";
