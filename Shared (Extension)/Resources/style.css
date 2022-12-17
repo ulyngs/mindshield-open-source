@@ -87,58 +87,18 @@ div._aak6._aak9 div._aak3 { display: none; }
 ************/
 
 /***** home page *****/
-/** hide videos **/
-/* desktop version */
-ytd-browse[page-subtype="home"] {
-    visibility: hidden;
-}
-/* mobile version */
-div[tab-identifier="FEwhat_to_watch"]{
-    visibility: hidden;
-}
+/** hide recommended videos **/
+ytd-browse[page-subtype="home"] { visibility: hidden; } div[tab-identifier="FEwhat_to_watch"] { visibility: hidden; }
 
 /** hide shorts **/
-/* desktop version */
-#endpoint.yt-simple-endpoint.ytd-guide-entry-renderer[title="Shorts"],
-ytd-mini-guide-entry-renderer[aria-label="Shorts"] {
-    display: none;
-}
-
-/* mobile version */
-ytm-pivot-bar-renderer[role="tablist"] ytm-pivot-bar-item-renderer:has(.pivot-shorts){
-    display: none;
-}
+#endpoint.yt-simple-endpoint.ytd-guide-entry-renderer[title="Shorts"], ytd-mini-guide-entry-renderer[aria-label="Shorts"] { display: none; } ytm-pivot-bar-renderer[role="tablist"] ytm-pivot-bar-item-renderer:nth-child(2){ display: none; }
 
 /***** hide related videos when you watch a video *****/
-/* desktop version */
-#related {
-    visibility: hidden;
-    display: none;
-}
-
-/* mobile version */
-ytm-item-section-renderer[section-identifier="related-items"] {
-    visibility: hidden;
-}
+#related { visibility: hidden; display: none; } #app ytm-item-section-renderer[section-identifier="related-items"] { display: none; }
 
 /***** hide comment ********/
-#comments {
-    visibility: hidden;
-}
+#comments { visibility: hidden; } #app ytm-comments-entry-point-header-renderer { display: none; }
 
-
-/* on narrow viewport, hide this element
-because the comments will otherwise jump down
-the page */
-@media screen and (max-width: 1000px) {
-    #related {
-        display: none;
-    }
-}
-
-ytd-guide-entry-renderer a[title="Trending"]{
-    display: none !important;
-}
 
 /* hide suggested videos popping up on end screen */
 .ytp-endscreen-content {
@@ -152,8 +112,6 @@ ytd-promoted-sparkles-web-renderer,
 ytd-carousel-ad-renderer {
     display: none !important;
 }
-
-
 
 /* hide the ads on a video page */
 ytm-promoted-sparkles-web-renderer, ytm-companion-ad-renderer, #player-ads {
