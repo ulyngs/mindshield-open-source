@@ -69,8 +69,8 @@
     const twitterTimelineCssOff = 'div[aria-label="Timeline: Your Home Timeline"] { display: none; }';
     
     // Instagram CSS
-    const instagramFeedCssOn = 'main[role="main"] section._aalv._aalx._aalz > div._aam1._aam2._aam5 article { visibility: visible; }';
-    const instagramFeedCssOff = 'main[role="main"] section._aalv._aalx._aalz > div._aam1._aam2._aam5 article { visibility: hidden; }';
+    const instagramFeedCssOn = 'main[role="main"] section._aalv > div._aam1 article { visibility: visible; }';
+    const instagramFeedCssOff = 'main[role="main"] section._aalv > div._aam1 article { visibility: hidden; }';
     
     const instagramStoriesCssOn = 'main[role="main"] div._aac4._aac5._aac6 { display: block; } main ._aauo[role="menu"] {display: flex;}';
     const instagramStoriesCssOff = 'main[role="main"] div._aac4._aac5._aac6 { display: none; } main ._aauo[role="menu"] {display: none;}';
