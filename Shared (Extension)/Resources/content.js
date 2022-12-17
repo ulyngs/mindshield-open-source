@@ -95,8 +95,9 @@
     const linkedinNewsCssOff = 'aside[aria-label="LinkedIn News"] .news-module, aside[aria-label="LinkedIn News"] .mb2 { display: none; }';
     
     // Google search CSS
-    const googleAdsCssOn = '#tads {display: block;}'
+    const googleAdsCssOn = '#tads {display: block;} #tads, #tads .CnP9N.U3A9Ac.irmCpc,.commercial-unit-mobile-top,.commercial-unit-mobile-top .v7hl4d,.commercial-unit-mobile-bottom .v7hl4d {background-color: #F2E6C3 !important;}'
     const googleAdsCssOff = '#tads {display: none;}'
+    const googleAdsCssSwitchOff = '#tads {display: block;}'
     
     // function to create style element with the specified CSS content
     function createStyleElement(some_style_id, some_css){
@@ -182,7 +183,11 @@
     browser.runtime.onMessage.addListener((message) => {
         // toggling hiding when popup asks
         if(message.method === "change"){
-            toggleHiding(message.element + 'Style', eval(message.element + 'CssOn'), eval(message.element + 'CssOff'),  message.status);
+            if (message.element == "googleAds" && message.changeType == "switch off"){
+                document.getElementById("googleAdsStyle").innerHTML = googleAdsCssSwitchOff;
+            } else {
+                toggleHiding(message.element + 'Style', eval(message.element + 'CssOn'), eval(message.element + 'CssOff'),  message.status);
+            }
         };
     });
 })();

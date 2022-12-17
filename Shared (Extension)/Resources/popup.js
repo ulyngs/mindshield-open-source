@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // turn on all distracting elements
                 elementsThatCanBeHidden.filter(elem => elem.indexOf(platform) !== -1).forEach(function(some_element){
                     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                        chrome.tabs.sendMessage(tabs[0].id, { method: "change", element: some_element, status: true });
+                        chrome.tabs.sendMessage(tabs[0].id, { method: "change", element: some_element, status: true, changeType: "switch off" });
                       });
                 });
                 
