@@ -19,8 +19,8 @@
     const youtubeShortsCssOn = '#endpoint.yt-simple-endpoint.ytd-guide-entry-renderer[title="Shorts"],ytd-mini-guide-entry-renderer[aria-label="Shorts"] { display: block; } ytm-pivot-bar-renderer[role="tablist"] ytm-pivot-bar-item-renderer:nth-child(2){ display: flex; }'
     const youtubeShortsCssOff = '#endpoint.yt-simple-endpoint.ytd-guide-entry-renderer[title="Shorts"],ytd-mini-guide-entry-renderer[aria-label="Shorts"] { display: none; } ytm-pivot-bar-renderer[role="tablist"] ytm-pivot-bar-item-renderer:nth-child(2){ display: none; }';
      
-     const youtubeSubscriptionsCssOn = '#endpoint.yt-simple-endpoint.ytd-guide-entry-renderer[title="Subscriptions"], ytd-mini-guide-entry-renderer[aria-label="Subscriptions"], #sections ytd-guide-section-renderer:nth-child(2) { display: block; } ytm-pivot-bar-renderer[role="tablist"] ytm-pivot-bar-item-renderer:nth-child(3){ display: flex; }';
-     const youtubeSubscriptionsCssOff = '#endpoint.yt-simple-endpoint.ytd-guide-entry-renderer[title="Subscriptions"], ytd-mini-guide-entry-renderer[aria-label="Subscriptions"], #sections ytd-guide-section-renderer:nth-child(2) { display: none; } ytm-pivot-bar-renderer[role="tablist"] ytm-pivot-bar-item-renderer:nth-child(3){ display: none; }';
+    const youtubeSubscriptionsCssOn = 'a[href="/feed/subscriptions/] { display: flex; } ytm-pivot-bar-renderer[role="tablist"] ytm-pivot-bar-item-renderer:nth-child(3) { display: flex; }';
+    const youtubeSubscriptionsCssOff = 'a[href="/feed/subscriptions"] { display: none !important; } ytm-pivot-bar-renderer[role="tablist"] ytm-pivot-bar-item-renderer:nth-child(3) { display: none; }';
      
      const youtubeExploreCssOn = '#sections ytd-guide-section-renderer:nth-child(3) { display: block; }';
      const youtubeExploreCssOff = '#sections ytd-guide-section-renderer:nth-child(3) { display: none; }';
