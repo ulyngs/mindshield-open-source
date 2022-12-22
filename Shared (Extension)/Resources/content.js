@@ -85,15 +85,15 @@
     const instagramSuggestionsCssOff = 'div._aak6._aak9 div._aak3 { display: none; }';
     
     // LinkedIn CSS
-    const linkedinFeedCssOn = '#ember33, .scaffold-finite-scroll.scaffold-finite-scroll--infinite, #feed-container {display: block;}';
-    const linkedinFeedCssOff = '#ember33, .scaffold-finite-scroll.scaffold-finite-scroll--infinite, #feed-container {display: none;}';
+    const linkedinFeedCssOn = '#ember33, #main .scaffold-finite-scroll, #feed-container {display: block;}';
+    const linkedinFeedCssOff = '#ember33, #main .scaffold-finite-scroll, #feed-container {display: none;}';
     
     const linkedinNotificationsCssOn = 'span.notification-badge--show, #nav-notifications-small-badge, #nav-people-small-badge { display: block !important; }'
     const linkedinNotificationsCssOff = 'span.notification-badge--show, #nav-notifications-small-badge, #nav-people-small-badge { display: none !important; }'
     
-    const linkedinNewsCssOn = 'aside[aria-label="LinkedIn News"] .news-module, aside[aria-label="LinkedIn News"] .mb2 { display: block; }';
-    const linkedinNewsCssOff = 'aside[aria-label="LinkedIn News"] .news-module, aside[aria-label="LinkedIn News"] .mb2 { display: none; }';
-    
+    const linkedinNewsCssOn = 'aside[aria-label="LinkedIn News"] .news-module, aside[aria-label="LinkedIn News"] .mb2, .feed-follows-module { display: block; }';
+    const linkedinNewsCssOff = 'aside[aria-label="LinkedIn News"] .news-module, aside[aria-label="LinkedIn News"] .mb2, .feed-follows-module { display: none; }';
+
     // Google search CSS
     const googleAdsCssOn = '#tads {display: block;} #tads, #tads .CnP9N.U3A9Ac.irmCpc,.commercial-unit-mobile-top,.commercial-unit-mobile-top .v7hl4d,.commercial-unit-mobile-bottom .v7hl4d {background-color: #F2E6C3 !important;}'
     const googleAdsCssOff = '#tads {display: none;}'
