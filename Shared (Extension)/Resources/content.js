@@ -91,8 +91,8 @@
     const linkedinNotificationsCssOn = 'span.notification-badge--show, #nav-notifications-small-badge, #nav-people-small-badge { display: block !important; }'
     const linkedinNotificationsCssOff = 'span.notification-badge--show, #nav-notifications-small-badge, #nav-people-small-badge { display: none !important; }'
     
-    const linkedinNewsCssOn = 'aside[aria-label="LinkedIn News"] .news-module, aside[aria-label="LinkedIn News"] .mb2, .feed-follows-module { display: block; }';
-    const linkedinNewsCssOff = 'aside[aria-label="LinkedIn News"] .news-module, aside[aria-label="LinkedIn News"] .mb2, .feed-follows-module { display: none; }';
+    const linkedinNewsCssOn = '#feed-news-module, .feed-follows-module { display: block; }';
+    const linkedinNewsCssOff = '#feed-news-module, .feed-follows-module { display: none; }';
 
     // Google search CSS
     const googleAdsCssOn = '#tads {display: block;} #tads, #tads .CnP9N.U3A9Ac.irmCpc,.commercial-unit-mobile-top,.commercial-unit-mobile-top .v7hl4d,.commercial-unit-mobile-bottom .v7hl4d {background-color: #F2E6C3 !important;}'

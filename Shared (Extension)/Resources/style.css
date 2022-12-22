@@ -41,17 +41,6 @@ a[aria-label="Advertiser"] { display: none; }
 ** LINKEDIN **
 **************/
 
-/* feed */
-#ember33, .scaffold-finite-scroll.scaffold-finite-scroll--infinite  {
-    display: none;
-}
-
-/* news */
-aside[aria-label="LinkedIn News"] .news-module,
-aside[aria-label="LinkedIn News"] .mb2 {
-    display: none;
-}
-
 /* ads */
 section.ad-banner-container {
     display: none;
