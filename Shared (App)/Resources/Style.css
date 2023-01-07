@@ -61,8 +61,21 @@ button {
     max-width: 80vw;
 }
 
+
 .app-icon {
     height: 150px;
+    margin: 0;
+    padding: 0;
+}
+
+.app-icon.platform-mac {
+    height: 100px;
+}
+
+p {
+    font-size: 1.1em;
+    margin: 0;
+    padding: 0;
 }
 
 .column {
@@ -122,4 +135,3 @@ button {
         height: 50px;
     }
 }
-
