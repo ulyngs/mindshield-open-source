@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var currentDropdownButton = document.querySelector('.dropdown.' + platform + ' button');
         
         currentSwitch.addEventListener("change", function() {
-            if(currentSwitch.checked){
+            if(!currentSwitch.checked){
                 document.querySelector(".dropdown." + platform + " button").disabled = false;
                 
                 // turn off all distracting elements
