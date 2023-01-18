@@ -110,7 +110,7 @@
         };
     };
     
-    // loop over the elements and create the style
+    // loop over the platforms. If the platform for the current URL is 'on' (or we haven't saved a status for it), create its style elements
     platformsWeTarget.forEach(function (platform) {
         if (window.location.hostname.includes(platform)){
             var filteredElements = elementsThatCanBeHidden.filter(element =>
@@ -123,27 +123,21 @@
                 //console.log("saved status for " + platform + " is " + result[key]);
                 
               if (result[key] == true || result[key] == undefined) {
-                  //console.log("creating CssOff");
-                  //console.log(filteredElements);
                   
+                  // loop over the elements and create HTML style element for each
+                  // If an element's key in storage is set to 'false', show the
+                  // element, otherwise hide it
                   filteredElements.forEach(function (item) {
                       var styleName = item + "Style";
                       var key = item + "Status";
                       
                       browser.storage.sync.get(key, function(result) {
-                          if (result[key] == true || result[key] == undefined){
+                          if (result[key] == false){
                               createStyleElement(styleName, eval(item + "CssOn"));
                           } else {
                               createStyleElement(styleName, eval(item + "CssOff"));
                           };
                       });
-                  });
-              } else {
-                  //console.log("creating CssOn");
-                  //console.log(filteredElements);
-                  filteredElements.forEach(function (item) {
-                      var styleName = item + "Style";
-                      createStyleElement(styleName, eval(item + "CssOn"));
                   });
               }
             });
