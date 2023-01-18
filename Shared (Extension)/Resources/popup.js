@@ -31,11 +31,10 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     
     // create function to make a checkbox toggle view status on and off
-    function assignCheckBoxFunction(element_to_change, id_of_toggle){
-        var currentToggle = document.getElementById(id_of_toggle);
+    function toggleViewStatus(element_to_change, id_of_toggle){
+        var currentCheckbox = document.getElementById(id_of_toggle);
         
-        // make it hide/show on mac
-        currentToggle.addEventListener('click', function() {
+        currentCheckbox.addEventListener('click', function() {
             chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
                 chrome.tabs.sendMessage(tabs[0].id, { method: "change", element: element_to_change });
               });
@@ -45,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // assign the functions to the checkboxes
     elementsThatCanBeHidden.forEach(function (item) {
         setCheckboxState(item, item + "Toggle");
-        assignCheckBoxFunction(item, item + "Toggle");
+        toggleViewStatus(item, item + "Toggle");
     });
     
     // set switches according to current status
