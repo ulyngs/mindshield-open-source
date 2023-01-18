@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
       button.addEventListener('click', dropdownButtonClicked);
     });
     
-    // open the one we're currently on
+    // open the dropdown for the website we're currently on
     chrome.tabs.query({active: true, currentWindow: true}, function(tab){
         platformsWeTarget.forEach(function(platform) {
             var currentHost = new URL(tab[0].url);
