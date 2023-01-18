@@ -86,12 +86,10 @@ document.addEventListener('DOMContentLoaded', function() {
           // Select all of the dropdown content elements with the "shown" class
           var shownDropdowns = document.querySelectorAll('.dropdown-content.shown');
             
-          // Loop through the shown dropdown content elements and remove the 'shown' class from tehm
+          // remove the 'shown' class from them
           shownDropdowns.forEach(function(dropdown) {
             dropdown.classList.remove('shown');
           });
-          
-          document.querySelectorAll('.dropdown-content.shown')
 
           // Toggle the "shown" class on the dropdown content
           dropdownContent.classList.toggle('shown');
