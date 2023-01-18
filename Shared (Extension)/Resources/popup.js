@@ -54,11 +54,11 @@ document.addEventListener('DOMContentLoaded', function() {
         var key = platform_to_check + "Status";
         
         browser.storage.sync.get(key, function(result) {
-          if (result[key] == true || result[key] == undefined) {
-              currentSwitch.checked = true;
-          } else {
+          if (result[key] == false ) {
               currentSwitch.checked = false;
               document.querySelector(".dropdown." + platform_to_check + " button").disabled = true;
+          } else {
+              currentSwitch.checked = true;
           }
         });
     };
