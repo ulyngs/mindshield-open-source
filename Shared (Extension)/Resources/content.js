@@ -171,12 +171,14 @@
             } else {
                 currentStyle.innerHTML = eval(message.element + 'CssOn')
             };
-        } else if(message.method === "turnOff"){
+        } else if(message.method === "hideAll"){
             currentStyle.innerHTML = eval(message.element + 'CssOff')
-        } else if(message.method === "turnOn"){
-            currentStyle.innerHTML = eval(message.element + 'CssOn')
+        } else if(message.method === "showAll"){
+            if (window.location.hostname.includes("google")){
+                currentStyle.innerHTML = googleAdsCssSwitchOff;
+            } else {
+                currentStyle.innerHTML = eval(message.element + 'CssOn')
+            }
         };
     });
-    
-    //if (message.element == "googleAds" && message.changeType == "switch off"){ document.getElementById("googleAdsStyle").innerHTML = googleAdsCssSwitchOff; }
 })();
