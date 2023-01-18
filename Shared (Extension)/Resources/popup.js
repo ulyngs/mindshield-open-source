@@ -69,37 +69,51 @@ document.addEventListener('DOMContentLoaded', function() {
         var currentDropdownButton = document.querySelector('.dropdown.' + platform + ' button');
         
         currentSwitch.addEventListener("change", function() {
-            if(currentSwitch.checked){
-                document.querySelector(".dropdown." + platform + " button").disabled = false;
+            if(!currentSwitch.checked){
+                //console.log("just switched off");
                 
-                // turn off all distracting elements
+                // show all distracting elements
                 elementsThatCanBeHidden.filter(elem => elem.indexOf(platform) !== -1).forEach(function(some_element){
                     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                        chrome.tabs.sendMessage(tabs[0].id, { method: "turnOff", element: some_element });
+                        chrome.tabs.sendMessage(tabs[0].id, { method: "showAll", element: some_element });
                       });
-                    
-                    document.getElementById(some_element + "Toggle").checked = true;
-                });
-
-                // Save the state of the toggle
-                var key = platform + "Status";
-                browser.storage.sync.set({ [key]: currentSwitch.checked });
-                
-            } else {
-                document.querySelector(".dropdown." + platform + " button").disabled = true;
-                
-                // turn on all distracting elements
-                elementsThatCanBeHidden.filter(elem => elem.indexOf(platform) !== -1).forEach(function(some_element){
-                    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                        chrome.tabs.sendMessage(tabs[0].id, { method: "turnOn", element: some_element });
-                      });
-                    
                     document.getElementById(some_element + "Toggle").checked = false;
                 });
                 
+                // close dropdown button and disable it
+                document.querySelector(".dropdown." + platform + " .dropdown-content").classList.remove('shown');
+                document.querySelector(".dropdown." + platform + " button").disabled = true;
+
                 // Save the state of the toggle
                 var key = platform + "Status";
-                browser.storage.sync.set({ [key]: currentSwitch.checked });
+                browser.storage.sync.set({ [key]: false });
+                
+            } else {
+                //console.log("just switched on");
+                // hide all distracting elements
+                elementsThatCanBeHidden.filter(elem => elem.indexOf(platform) !== -1).forEach(function(some_element){
+                    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                        chrome.tabs.sendMessage(tabs[0].id, { method: "hideAll", element: some_element });
+                      });
+                    document.getElementById(some_element + "Toggle").checked = true;
+                });
+                
+                // --- open dropdown button and enable it
+                // Select all of the dropdown content elements with the "shown" class
+                var shownDropdowns = document.querySelectorAll('.dropdown-content.shown');
+                  
+                // remove the 'shown' class from them
+                shownDropdowns.forEach(function(dropdown) {
+                  dropdown.classList.remove('shown');
+                });
+                
+                // open the current one and enable it
+                document.querySelector(".dropdown." + platform + " .dropdown-content").classList.add('shown');
+                document.querySelector(".dropdown." + platform + " button").disabled = false;
+                
+                // Save the state of the toggle
+                var key = platform + "Status";
+                browser.storage.sync.set({ [key]: true });
             }
       });
     });
