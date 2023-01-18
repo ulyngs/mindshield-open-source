@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
             elementsThatCanBeHidden.forEach(function (element) {
                 var key = element + "Status";
                 
-                browser.storage.sync.set({ [key]: !document.getElementById(element + "Toggle").checked });
+                browser.storage.sync.set({ [key]: document.getElementById(element + "Toggle").checked });
             });
         
             e.target.setAttribute("value", "......");
