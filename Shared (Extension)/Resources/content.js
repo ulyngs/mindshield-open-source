@@ -144,22 +144,18 @@
         };
     });
     
-    // let the popup ask for the current status of the elements and of the saved state
-    chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-        function checkStyleStatus(currentStyle, some_css_for_shown){
+    // let the popup ask for the current view status of the elements (so it can set the checkboxes accordingly)
+    chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+        if(message.method === "check"){
+            var currentStyle = document.getElementById(message.element + "Style");
+    
             if (currentStyle == undefined){
-                sendResponse({text: "not on active tab"});
-            } else if (currentStyle.innerHTML === some_css_for_shown) {
+                sendResponse({text: "style element is undefined"});
+            } else if (currentStyle.innerHTML === eval(message.element + 'CssOn')) {
                 sendResponse({text: "visible"});
             } else {
                 sendResponse({text: "hidden"});
             };
-        };
-    
-        if(request.method === "check"){
-            var currentStyle = document.getElementById(request.element + "Style");
-    
-            checkStyleStatus(currentStyle, eval(request.element + 'CssOn'));
         };
     });
     
