@@ -5,14 +5,71 @@ document.addEventListener('DOMContentLoaded', function() {
     const platformsWeTarget = [ "youtube", "facebook", "twitter", "instagram", "linkedin", "google" ];
     const elementsThatCanBeHidden = [ "youtubeRecVids", "youtubeShorts", "youtubeSubscriptions", "youtubeExplore", "youtubeMore", "youtubeRelated", "youtubeComments", "twitterExplore", "twitterNotifications", "twitterTrends", "twitterFollow", "twitterTimeline", "facebookFeed", "facebookWatch", "facebookNotifications", "facebookStories", "facebookChat", "linkedinNews", "linkedinNotifications", "linkedinFeed", "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramSuggestions", "googleAds" ];
     
-    // Get references to all of the dropdown buttons
-    var dropdownButtons = document.querySelectorAll('.dropdown button');
-
-    // Add click event listeners to the buttons
-    dropdownButtons.forEach(function(button) {
-      button.addEventListener('click', dropdownButtonClicked);
+    // create function to set a checkbox according to current view status on the page
+    function setCheckboxState(element_to_check, id_of_toggle){
+        var currentToggle = document.getElementById(id_of_toggle);
+        
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            
+            chrome.tabs.sendMessage(tabs[0].id, { method: "check", element: element_to_check }, function(response){
+                // if the checkbox is for a page that's different from the one we're on, set to its saved state
+                if (response.text === "not on active tab") {
+                    elementsThatCanBeHidden.forEach(function (element) {
+                        var key = element_to_check + "Status";
+                        
+                        browser.storage.sync.get(key, function(result) {
+                            currentToggle.checked = !result[key];
+                        });
+                    });
+                    // otherwise set it to what's currently visible on the page
+                } else if (response.text === "visible"){
+                    currentToggle.checked = false;
+                } else {
+                    currentToggle.checked = true;
+                }
+            });
+        });
+    };
+    
+    // create function to make a checkbox toggle view status on and off
+    function assignCheckBoxFunction(element_to_change, id_of_toggle){
+        var currentToggle = document.getElementById(id_of_toggle);
+        
+        // make it hide/show on mac
+        currentToggle.addEventListener('click', function() {
+            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                chrome.tabs.sendMessage(tabs[0].id, { method: "change", element: element_to_change });
+              });
+            }, false);
+    };
+    
+    // assign the functions to the checkboxes
+    elementsThatCanBeHidden.forEach(function (item) {
+        setCheckboxState(item, item + "Toggle");
+        assignCheckBoxFunction(item, item + "Toggle");
     });
-
+    
+    // set switches according to current status
+    function setSwitch(platform_to_check, id_of_switch){
+        var currentSwitch = document.getElementById(id_of_switch);
+        
+        var key = platform_to_check + "Status";
+        
+        browser.storage.sync.get(key, function(result) {
+          if (result[key] == true || result[key] == undefined) {
+              currentSwitch.checked = true;
+          } else {
+              currentSwitch.checked = false;
+              document.querySelector(".dropdown." + platform_to_check + " button").disabled = true;
+          }
+        });
+    };
+    
+    platformsWeTarget.forEach(function (platform) {
+        setSwitch(platform, platform + "Switch");
+    });
+    
+    //---- handle clicks on the dropdown buttons ----//
     function dropdownButtonClicked(event) {
       // Handle the click event for the clicked button
       var clickedButton = event.currentTarget;
@@ -43,92 +100,12 @@ document.addEventListener('DOMContentLoaded', function() {
           document.querySelector('body').classList.add('overlay');
       }
     }
+    
+    // Add click event listeners to the buttons
+    var dropdownButtons = document.querySelectorAll('.dropdown button');
 
-    
-    // set switches according to current status
-    function setSwitch(platform_to_check, id_of_switch){
-        var currentSwitch = document.getElementById(id_of_switch);
-        
-        var key = platform_to_check + "Status";
-        
-        browser.storage.sync.get(key, function(result) {
-          if (result[key] == true || result[key] == undefined) {
-              currentSwitch.checked = true;
-          } else {
-              currentSwitch.checked = false;
-              document.querySelector(".dropdown." + platform_to_check + " button").disabled = true;
-          }
-        });
-    };
-    
-    platformsWeTarget.forEach(function (platform) {
-        setSwitch(platform, platform + "Switch");
-    });
-    
-    
-    // set checkboxes according to current status
-    function setCheckboxState(element_to_check, id_of_toggle){
-        var currentToggle = document.getElementById(id_of_toggle);
-        
-        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-            
-            chrome.tabs.sendMessage(tabs[0].id, { method: "check", element: element_to_check }, function(response){
-                // if the checkbox is for a page that's different from the one we're on, set to its saved state
-                if (response.text === "not on active tab") {
-                    elementsThatCanBeHidden.forEach(function (element) {
-                        var key = element_to_check + "Status";
-                        
-                        browser.storage.sync.get(key, function(result) {
-                            currentToggle.checked = !result[key];
-                        });
-                    });
-                    // otherwise set it to what's currently visible on the page
-                } else if (response.text === "visible"){
-                    currentToggle.checked = false;
-                } else {
-                    currentToggle.checked = true;
-                }
-            });
-        });
-    };
-    
-    function delay(time) {
-        return new Promise(resolve => setTimeout(resolve, time));
-    }
-    
-    
-    var saveButtons = document.querySelectorAll('.saveButton');
-    for (let i = 0; i < saveButtons.length; i++) {
-
-        saveButtons[i].addEventListener('click', (e) => {
-            // save the state of the checkboxes to local storage
-            elementsThatCanBeHidden.forEach(function (element) {
-                var key = element + "Status";
-                
-                browser.storage.sync.set({ [key]: !document.getElementById(element + "Toggle").checked });
-            });
-        
-            e.target.setAttribute("value", "......");
-            delay(250).then(() => e.target.setAttribute("value", "Saved!"));
-            delay(1500).then(() => e.target.setAttribute("value", "Save settings"));
-      })
-    }
-    
-    // assign functions to the checkboxes
-    function assignCheckBoxFunction(element_to_change, id_of_toggle){
-        var currentToggle = document.getElementById(id_of_toggle);
-        
-        // make it hide/show on mac
-        currentToggle.addEventListener('click', function() {
-            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                chrome.tabs.sendMessage(tabs[0].id, { method: "change", element: element_to_change });
-              });
-            }, false);
-    };
-    
-    elementsThatCanBeHidden.forEach(function (item) {
-        setCheckboxState(item, item + "Toggle");
-        assignCheckBoxFunction(item, item + "Toggle");
+    dropdownButtons.forEach(function(button) {
+      button.addEventListener('click', dropdownButtonClicked);
     });
     
     // open the one we're currently on
@@ -144,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // handle what we do when a switches for an entire platform is switched off or on
+    // handle what we do when a switch for an entire platform is switched off or on
     platformsWeTarget.forEach(function(platform) {
         var currentSwitch = document.querySelector('.dropdown.' + platform + ' input');
         var currentDropdownButton = document.querySelector('.dropdown.' + platform + ' button');
@@ -189,5 +166,28 @@ document.addEventListener('DOMContentLoaded', function() {
             }
       });
     });
+    
+    //---- make the save buttons save the state of the checkboxes to local storage ----//
+    // helper function to wait for a specified time before executing, so we can give visual feedback on the button
+    function delay(time) {
+        return new Promise(resolve => setTimeout(resolve, time));
+    }
+    
+    var saveButtons = document.querySelectorAll('.saveButton');
+    for (let i = 0; i < saveButtons.length; i++) {
+
+        saveButtons[i].addEventListener('click', (e) => {
+            // save the state of the checkboxes to local storage
+            elementsThatCanBeHidden.forEach(function (element) {
+                var key = element + "Status";
+                
+                browser.storage.sync.set({ [key]: !document.getElementById(element + "Toggle").checked });
+            });
+        
+            e.target.setAttribute("value", "......");
+            delay(250).then(() => e.target.setAttribute("value", "Saved!"));
+            delay(1500).then(() => e.target.setAttribute("value", "Save settings"));
+      })
+    }
     
 }, false);
