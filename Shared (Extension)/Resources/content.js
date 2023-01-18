@@ -171,6 +171,10 @@
             } else {
                 currentStyle.innerHTML = eval(message.element + 'CssOn')
             };
+        } else if(message.method === "turnOff"){
+            currentStyle.innerHTML = eval(message.element + 'CssOff')
+        } else if(message.method === "turnOn"){
+            currentStyle.innerHTML = eval(message.element + 'CssOn')
         };
     });
     
