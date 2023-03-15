@@ -3,7 +3,16 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     const platformsWeTarget = [ "youtube", "facebook", "twitter", "instagram", "linkedin", "google" ];
-    const elementsThatCanBeHidden = [ "youtubeRecVids", "youtubeShorts", "youtubeSubscriptions", "youtubeExplore", "youtubeMore", "youtubeRelated", "youtubeComments", "twitterExplore", "twitterNotifications", "twitterTrends", "twitterFollow", "twitterTimeline", "facebookFeed", "facebookWatch", "facebookNotifications", "facebookStories", "facebookChat", "linkedinNews", "linkedinNotifications", "linkedinFeed", "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramSuggestions", "googleAds" ];
+    const elementsThatCanBeHidden = [ "youtubeRecVids",
+                                      "youtubeThumbnails",
+                                      "youtubeShorts",
+                                      "youtubeSubscriptions",
+                                      "youtubeLibrary",
+                                      "youtubeHistory",
+                                      "youtubeExplore",
+                                      "youtubeMore",
+                                      "youtubeRelated",
+                                      "youtubeComments", "twitterExplore", "twitterNotifications", "twitterTrends", "twitterFollow", "twitterTimeline", "facebookFeed", "facebookWatch", "facebookNotifications", "facebookStories", "facebookChat", "linkedinNews", "linkedinNotifications", "linkedinFeed", "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramSuggestions", "googleAds" ];
     
     // create function to set a checkbox according to current view status on the page
     function setCheckboxState(element_to_check, id_of_toggle){
@@ -66,7 +75,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // handle when then switches are turned off or on
     platformsWeTarget.forEach(function(platform) {
         var currentSwitch = document.querySelector('.dropdown.' + platform + ' input');
-        var currentDropdownButton = document.querySelector('.dropdown.' + platform + ' button');
         
         currentSwitch.addEventListener("change", function() {
             if(!currentSwitch.checked){
@@ -79,10 +87,6 @@ document.addEventListener('DOMContentLoaded', function() {
                       });
                     document.getElementById(some_element + "Toggle").checked = false;
                 });
-                
-                // close dropdown button and disable it
-                document.querySelector(".dropdown." + platform + " .dropdown-content").classList.remove('shown');
-                document.querySelector(".dropdown." + platform + " button").disabled = true;
 
                 // Save the state of the toggle
                 var key = platform + "Status";
@@ -98,19 +102,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     document.getElementById(some_element + "Toggle").checked = true;
                 });
                 
-                // --- open dropdown button and enable it
-                // Select all of the dropdown content elements with the "shown" class
-                var shownDropdowns = document.querySelectorAll('.dropdown-content.shown');
-                  
-                // remove the 'shown' class from them
-                shownDropdowns.forEach(function(dropdown) {
-                  dropdown.classList.remove('shown');
-                });
-                
-                // open the current one and enable it
-                document.querySelector(".dropdown." + platform + " .dropdown-content").classList.add('shown');
-                document.querySelector(".dropdown." + platform + " button").disabled = false;
-                
                 // Save the state of the toggle
                 var key = platform + "Status";
                 browser.storage.sync.set({ [key]: true });
@@ -122,52 +113,13 @@ document.addEventListener('DOMContentLoaded', function() {
         setSwitch(platform, platform + "Switch");
     });
     
-    //---- handle clicks on the dropdown buttons ----//
-    function dropdownButtonClicked(event) {
-      // Handle the click event for the clicked button
-      var clickedButton = event.currentTarget;
-
-      // Get the dropdown content for the clicked button
-      var dropdownContent = clickedButton.nextElementSibling;
-        
-      // Select the dropdown content element with the "shown" class
-      var shownDropdown = document.querySelector('.dropdown-content.shown');
-    
-      // Check if the dropdown content element with the "shown" class is the same as the dropdown content for the clicked button. If it is, then toggle the class off
-      if (shownDropdown === dropdownContent) {
-          dropdownContent.classList.toggle('shown');
-          document.querySelector('body').classList.remove('overlay');
-      } else {
-          // Select all of the dropdown content elements with the "shown" class
-          var shownDropdowns = document.querySelectorAll('.dropdown-content.shown');
-            
-          // remove the 'shown' class from them
-          shownDropdowns.forEach(function(dropdown) {
-            dropdown.classList.remove('shown');
-          });
-
-          // Toggle the "shown" class on the dropdown content
-          dropdownContent.classList.toggle('shown');
-          document.querySelector('body').classList.add('overlay');
-      }
-    }
-    
-    // Add click event listeners to the buttons
-    var dropdownButtons = document.querySelectorAll('.dropdown button');
-
-    dropdownButtons.forEach(function(button) {
-      button.addEventListener('click', dropdownButtonClicked);
-    });
-    
-    // open the dropdown for the website we're currently on
+    // show the options for the website we're currently on
     chrome.tabs.query({active: true, currentWindow: true}, function(tab){
         platformsWeTarget.forEach(function(platform) {
             var currentHost = new URL(tab[0].url);
             
             if (currentHost.origin.includes(platform)){
-                document.querySelector('.dropdown.' + platform + ' button').click();
-                // make the body dark
-                document.querySelector('body').classList.add('overlay');
+                document.querySelector('.dropdown.' + platform).classList.add('shown');
             }
         });
     });
@@ -194,5 +146,19 @@ document.addEventListener('DOMContentLoaded', function() {
             delay(1500).then(() => e.target.setAttribute("value", "Save settings"));
       })
     }
+    
+    const howTo = document.querySelector('#hide-previews');
+    const howToText = document.querySelector('#how-to-description');
+    const howToArrow = document.querySelector('#how-to-arrow');
+
+    howTo.addEventListener("click", function() {
+      if (howToText.style.display === "none") {
+        howToText.style.display = "block";
+        howToArrow.style.display = "inline-block";
+      } else {
+        howToText.style.display = "none";
+        howToArrow.style.display = "none";
+      }
+    });
     
 }, false);
