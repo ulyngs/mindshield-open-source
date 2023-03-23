@@ -6,14 +6,20 @@
     <script type="module" src="popup.js"></script>
 </head>
 <body>
+    <div id="delay-content" style="display: none;">
+        <p id="delay-message"></p>
+        <img src="/images/calm.svg" class="breathing"/>
+        <p class="delay-time-wrapper"><span id="delay-time"></span></p>
+    </div>
+    <div id="popup-content" style="display: none;">
         <div class="toggle-wrapper">
             <div class="dropdown youtube">
                 <p class="website-label">YouTube</p>
                 <label class="switch">
                     <input type="checkbox" id="youtubeSwitch" checked name="youtubeSwitch">
-                    <span class="slider round"></span>
+                        <span class="slider round"></span>
                 </label>
-                <div class="toggle-group">
+                <div class="toggle-group hide-checkboxes">
                     <h2>Home page</h2>
                     <div class="a-toggle platform-iphone" id="hide-previews">
                         <img src="/images/how-to.svg" id="how-to-image"/>
@@ -50,7 +56,7 @@
                             <label for="youtubeMoreToggle">More from YouTube</label>
                     </div>
                 </div>
-                <div class="toggle-group ">
+                <div class="toggle-group hide-checkboxes">
                     <h2>When watching</h2>
                     <div class="a-toggle">
                         <input type="checkbox" id="youtubeRelatedToggle" name="youtubeRelatedToggle">
@@ -61,7 +67,7 @@
                             <label for="youtubeCommentsToggle">Comments</label>
                     </div>
                 </div>
-                <div class="toggle-group ">
+                <div class="toggle-group hide-checkboxes">
                     <h2>General</h2>
                     <div class="a-toggle">
                         <input class="hide-checkbox" type="checkbox" id="youtubeThumbnailsToggle" name="youtubeThumbnailsToggle">
@@ -75,25 +81,27 @@
                     <input type="checkbox" id="facebookSwitch" checked>
                         <span class="slider round"></span>
                 </label>
-                <div class="a-toggle">
-                    <input type="checkbox" id="facebookFeedToggle" name="facebookFeedToggle">
-                        <label for="facebookFeedToggle">Newsfeed</label>
-                </div>
-                <div class="a-toggle">
-                    <input type="checkbox" id="facebookStoriesToggle" name="facebookStoriesToggle">
-                        <label for="facebookStoriesToggle">Stories / Reels</label>
-                </div>
-                <div class="a-toggle platform-ipad-mac">
-                    <input type="checkbox" id="facebookChatToggle" name="facebookChatToggle">
-                        <label for="facebookChatToggle">Chat</label>
-                </div>
-                <div class="a-toggle platform-iphone">
-                    <input type="checkbox" id="facebookWatchToggle" name="facebookWatchToggle">
-                        <label for="facebookWatchToggle">Watch</label>
-                </div>
-                <div class="a-toggle">
-                    <input type="checkbox" id="facebookNotificationsToggle" name="facebookNotificationsToggle">
-                        <label for="facebookNotificationsToggle">Notification count</label>
+                <div class="toggle-group hide-checkboxes">
+                    <div class="a-toggle">
+                        <input type="checkbox" id="facebookFeedToggle" name="facebookFeedToggle">
+                            <label for="facebookFeedToggle">Newsfeed</label>
+                    </div>
+                    <div class="a-toggle">
+                        <input type="checkbox" id="facebookStoriesToggle" name="facebookStoriesToggle">
+                            <label for="facebookStoriesToggle">Stories / Reels</label>
+                    </div>
+                    <div class="a-toggle platform-ipad-mac">
+                        <input type="checkbox" id="facebookChatToggle" name="facebookChatToggle">
+                            <label for="facebookChatToggle">Chat</label>
+                    </div>
+                    <div class="a-toggle platform-iphone">
+                        <input type="checkbox" id="facebookWatchToggle" name="facebookWatchToggle">
+                            <label for="facebookWatchToggle">Watch</label>
+                    </div>
+                    <div class="a-toggle">
+                        <input type="checkbox" id="facebookNotificationsToggle" name="facebookNotificationsToggle">
+                            <label for="facebookNotificationsToggle">Notification count</label>
+                    </div>
                 </div>
             </div>
             <div class="dropdown twitter">
@@ -102,25 +110,27 @@
                     <input type="checkbox" id="twitterSwitch" checked>
                         <span class="slider round"></span>
                 </label>
-                <div class="a-toggle platform-ipad-mac">
-                    <input type="checkbox" id="twitterExploreToggle" name="twitterExploreToggle">
-                        <label for="twitterExploreToggle">Explore</label>
-                </div>
-                <div class="a-toggle">
-                    <input type="checkbox" id="twitterNotificationsToggle" name="twitterNotificationsToggle">
-                        <label for="twitterNotificationsToggle">Notifications</label>
-                </div>
-                <div class="a-toggle platform-ipad-mac">
-                    <input type="checkbox" id="twitterTrendsToggle" name="twitterTrendsToggle">
-                        <label for="twitterTrendsToggle">Trends</label>
-                </div>
-                <div class="a-toggle platform-ipad-mac">
-                    <input type="checkbox" id="twitterFollowToggle" name="twitterFollowToggle">
-                        <label for="twitterFollowToggle">Who to follow</label>
-                </div>
-                <div class="a-toggle">
-                    <input type="checkbox" id="twitterTimelineToggle" name="twitterTimelineToggle">
-                        <label for="twitterTimelineToggle">Timeline</label>
+                <div class="toggle-group hide-checkboxes">
+                    <div class="a-toggle platform-ipad-mac">
+                        <input type="checkbox" id="twitterExploreToggle" name="twitterExploreToggle">
+                            <label for="twitterExploreToggle">Explore</label>
+                    </div>
+                    <div class="a-toggle">
+                        <input type="checkbox" id="twitterNotificationsToggle" name="twitterNotificationsToggle">
+                            <label for="twitterNotificationsToggle">Notifications</label>
+                    </div>
+                    <div class="a-toggle platform-ipad-mac">
+                        <input type="checkbox" id="twitterTrendsToggle" name="twitterTrendsToggle">
+                            <label for="twitterTrendsToggle">Trends</label>
+                    </div>
+                    <div class="a-toggle platform-ipad-mac">
+                        <input type="checkbox" id="twitterFollowToggle" name="twitterFollowToggle">
+                            <label for="twitterFollowToggle">Who to follow</label>
+                    </div>
+                    <div class="a-toggle">
+                        <input type="checkbox" id="twitterTimelineToggle" name="twitterTimelineToggle">
+                            <label for="twitterTimelineToggle">Timeline</label>
+                    </div>
                 </div>
             </div>
             
@@ -130,25 +140,27 @@
                     <input type="checkbox" id="instagramSwitch" checked>
                         <span class="slider round"></span>
                 </label>
-                <div class="a-toggle">
-                    <input type="checkbox" id="instagramFeedToggle" name="instagramFeedToggle">
-                        <label for="instagramFeedToggle">Feed</label>
-                </div>
-                <div class="a-toggle">
-                    <input type="checkbox" id="instagramStoriesToggle" name="instagramStoriesToggle">
-                        <label for="instagramStoriesToggle">Stories</label>
-                </div>
-                <div class="a-toggle">
-                    <input type="checkbox" id="instagramMutedStoriesToggle" name="instagramMutedStoriesToggle">
-                        <label for="instagramMutedStoriesToggle">Muted stories</label>
-                </div>
-                <div class="a-toggle platform-ipad-mac">
-                    <input type="checkbox" id="instagramExploreToggle" name="instagramExploreToggle">
-                        <label for="instagramExploreToggle">Explore</label>
-                </div>
-                <div class="a-toggle platform-ipad-mac">
-                    <input type="checkbox" id="instagramSuggestionsToggle" name="instagramSuggestionsToggle">
-                        <label for="instagramSuggestionsToggle">Suggestions</label>
+                <div class="toggle-group hide-checkboxes">
+                    <div class="a-toggle">
+                        <input type="checkbox" id="instagramFeedToggle" name="instagramFeedToggle">
+                            <label for="instagramFeedToggle">Feed</label>
+                    </div>
+                    <div class="a-toggle">
+                        <input type="checkbox" id="instagramStoriesToggle" name="instagramStoriesToggle">
+                            <label for="instagramStoriesToggle">Stories</label>
+                    </div>
+                    <div class="a-toggle">
+                        <input type="checkbox" id="instagramMutedStoriesToggle" name="instagramMutedStoriesToggle">
+                            <label for="instagramMutedStoriesToggle">Muted stories</label>
+                    </div>
+                    <div class="a-toggle platform-ipad-mac">
+                        <input type="checkbox" id="instagramExploreToggle" name="instagramExploreToggle">
+                            <label for="instagramExploreToggle">Explore</label>
+                    </div>
+                    <div class="a-toggle platform-ipad-mac">
+                        <input type="checkbox" id="instagramSuggestionsToggle" name="instagramSuggestionsToggle">
+                            <label for="instagramSuggestionsToggle">Suggestions</label>
+                    </div>
                 </div>
             </div>
             
@@ -158,17 +170,19 @@
                     <input type="checkbox" id="linkedinSwitch" checked>
                         <span class="slider round"></span>
                 </label>
-                <div class="a-toggle platform-ipad-mac">
-                    <input type="checkbox" id="linkedinNewsToggle" name="linkedinNewsToggle">
-                        <label for="linkedinNewsToggle">News/follow</label>
-                </div>
-                <div class="a-toggle">
-                    <input type="checkbox" id="linkedinFeedToggle" name="linkedinFeedToggle">
-                        <label for="linkedinFeedToggle">Feed</label>
-                </div>
-                <div class="a-toggle">
-                    <input type="checkbox" id="linkedinNotificationsToggle" name="linkedinNotificationsToggle">
-                        <label for="linkedinNotificationsToggle">Notification counts</label>
+                <div class="toggle-group hide-checkboxes">
+                    <div class="a-toggle platform-ipad-mac">
+                        <input type="checkbox" id="linkedinNewsToggle" name="linkedinNewsToggle">
+                            <label for="linkedinNewsToggle">News/follow</label>
+                    </div>
+                    <div class="a-toggle">
+                        <input type="checkbox" id="linkedinFeedToggle" name="linkedinFeedToggle">
+                            <label for="linkedinFeedToggle">Feed</label>
+                    </div>
+                    <div class="a-toggle">
+                        <input type="checkbox" id="linkedinNotificationsToggle" name="linkedinNotificationsToggle">
+                            <label for="linkedinNotificationsToggle">Notification counts</label>
+                    </div>
                 </div>
             </div>
             
@@ -178,9 +192,11 @@
                     <input type="checkbox" id="googleSwitch" checked>
                         <span class="slider round"></span>
                 </label>
-                <div class="a-toggle">
-                    <input type="checkbox" id="googleAdsToggle" name="googleAdsToggle">
-                        <label for="googleAdsToggle">Ads</label>
+                <div class="toggle-group hide-checkboxes">
+                    <div class="a-toggle">
+                        <input type="checkbox" id="googleAdsToggle" name="googleAdsToggle">
+                            <label for="googleAdsToggle">Ads</label>
+                    </div>
                 </div>
             </div>
         </div>
@@ -188,9 +204,23 @@
         <div class="save-toggle">
             <input type="button" class="saveButton" value="Save settings">
         </div>
-        
-        <div class="github-link">
-            <p class="smaller-font">To flag bugs or suggest improvements, visit the <a href="https://github.com/ulyngs/digital-self-control" target="_blank">GitHub repository</a>.</p>
+        <div class="toggle-group center-align">
+            <div class="a-toggle friction-toggle">
+                <input type="checkbox" id="frictionToggle" name="frictionToggle">
+                    <label for="frictionToggle">Delay to change settings</label>
+            </div>
+            <div class="a-toggle friction-customisation">
+                <input type="number" id="waitTime" name="waitTime" value="10" max="15">
+                    <label for="waitTime">Wait time (seconds)</label>
+            </div>
+            <div class="a-toggle friction-customisation">
+                <input type="text" id="waitText" name="waitText" value="What's your intention?">
+                    <label for="waitText">Message</label>
+            </div>
         </div>
+        <div class="github-link">
+            <p class="smaller-font">To suggest improvements, go to <a href="https://github.com/ulyngs/digital-self-control" target="_blank">GitHub</a>.</p>
+        </div>
+    </div>
 </body>
 </html>
