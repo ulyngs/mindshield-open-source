@@ -10,7 +10,9 @@
     window.hasRun = true;
     
     const platformsWeTarget = [ "youtube", "facebook", "twitter", "instagram", "linkedin", "google" ];
-    const elementsThatCanBeHidden = [ "youtubeRecVids",
+    const elementsThatCanBeHidden = [ "youtubeSearch",
+                                      "youtubeRecVids",
+                                      "youtubeSearch",
                                       "youtubeThumbnails",
                                       "youtubeProfileImg",
                                       "youtubeShorts",
@@ -23,6 +25,9 @@
                                       "youtubeComments", "twitterNotifications", "twitterTrends", "twitterFollow", "twitterTimeline", "facebookFeed", "facebookWatch", "facebookNotifications", "facebookStories", "facebookChat", "linkedinNews", "linkedinNotifications", "linkedinFeed", "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramSuggestions", "googleAds" ];
     
     // YouTube CSS
+    const youtubeSearchCssOn = 'ytd-searchbox { display: flex; }';
+    const youtubeSearchCssOff = 'ytd-searchbox { display: none; }';
+    
     const youtubeRecVidsCssOn = 'ytd-browse[page-subtype="home"] { visibility: visible; } div[tab-identifier="FEwhat_to_watch"] { visibility: visible; }';
     const youtubeRecVidsCssOff = 'ytd-browse[page-subtype="home"] { visibility: hidden; } div[tab-identifier="FEwhat_to_watch"] { visibility: hidden; }';
      
