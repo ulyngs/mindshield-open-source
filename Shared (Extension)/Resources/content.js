@@ -12,7 +12,6 @@
     const platformsWeTarget = [ "youtube", "facebook", "twitter", "instagram", "linkedin", "google" ];
     const elementsThatCanBeHidden = [ "youtubeSearch",
                                       "youtubeRecVids",
-                                      "youtubeSearch",
                                       "youtubeThumbnails",
                                       "youtubeProfileImg",
                                       "youtubeShorts",
