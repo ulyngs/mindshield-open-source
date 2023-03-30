@@ -3,8 +3,8 @@
     "default_locale": "en",
 
     "name": "MindShield",
-    "description": "Take control of your attention on the internet.",
-    "version": "1.5.1",
+    "description": "Hide distractions on the web (YT, FB,IG,TW,LI,Google).",
+    "version": "1.6",
 
     "icons": {
         "48": "images/icon-app-48.png",
