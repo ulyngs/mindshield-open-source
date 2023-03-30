@@ -25,8 +25,8 @@
                                       "youtubeComments", "twitterNotifications", "twitterTrends", "twitterFollow", "twitterTimeline", "facebookFeed", "facebookWatch", "facebookNotifications", "facebookStories", "facebookChat", "linkedinNews", "linkedinNotifications", "linkedinFeed", "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramSuggestions", "googleAds" ];
     
     // YouTube CSS
-    const youtubeSearchCssOn = 'ytd-searchbox { display: flex; }';
-    const youtubeSearchCssOff = 'ytd-searchbox { display: none; }';
+    const youtubeSearchCssOn = 'ytd-searchbox { display: flex; } button[aria-label="Search YouTube"] {display: block;}';
+    const youtubeSearchCssOff = 'ytd-searchbox { display: none; } button[aria-label="Search YouTube"] {display: none;}';
     
     const youtubeRecVidsCssOn = 'ytd-browse[page-subtype="home"] { visibility: visible; } div[tab-identifier="FEwhat_to_watch"] { visibility: visible; }';
     const youtubeRecVidsCssOff = 'ytd-browse[page-subtype="home"] { visibility: hidden; } div[tab-identifier="FEwhat_to_watch"] { visibility: hidden; }';
