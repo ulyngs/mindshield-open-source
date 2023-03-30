@@ -182,7 +182,6 @@ document.addEventListener('DOMContentLoaded', function() {
         browser.storage.sync.get(key, function(result) {
           if (result[key] == false ) {
               currentSwitch.checked = false;
-              document.querySelector(".dropdown." + platform_to_check + " button").disabled = true;
           } else {
               currentSwitch.checked = true;
           }
@@ -211,12 +210,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 
             } else {
                 //console.log("just switched on");
-                // hide all distracting elements
+
+                // restore saved state
                 elementsThatCanBeHidden.filter(elem => elem.indexOf(platform) !== -1).forEach(function(some_element){
-                    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                        chrome.tabs.sendMessage(tabs[0].id, { method: "hideAll", element: some_element });
-                      });
-                    document.getElementById(some_element + "Toggle").checked = true;
+                    var currentToggle = document.getElementById(some_element + "Toggle");
+                    var key = some_element + "Status";
+                    
+                    browser.storage.sync.get(key, function(result) {
+                        currentToggle.checked = result[key];
+                        
+                        if(currentToggle.checked){
+                            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                                chrome.tabs.sendMessage(tabs[0].id, { method: "change", element: some_element });
+                              });
+                        }
+                    });
                 });
                 
                 // Save the state of the toggle
