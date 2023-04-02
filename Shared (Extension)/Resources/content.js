@@ -165,10 +165,10 @@
                       var key = item + "Status";
                       
                       browser.storage.sync.get(key, function(result) {
-                          if (result[key] == false){
-                              createStyleElement(styleName, eval(item + "CssOn"));
-                          } else {
+                          if (result[key] == true){
                               createStyleElement(styleName, eval(item + "CssOff"));
+                          } else {
+                              createStyleElement(styleName, eval(item + "CssOn"));
                           };
                       });
                   });
