@@ -109,12 +109,28 @@ document.addEventListener('DOMContentLoaded', function() {
         browser.storage.sync.set({ "addFriction": document.getElementById("frictionToggle").checked });
     });
     
-    // store wait customisation immediately
+    // store wait customisation
+    // wait time
+    var savedTextTime = document.getElementById("savedTextTime");
+    let hideTimeOut;
+    
     document.getElementById("waitTime").addEventListener('input', function(){
-        browser.storage.sync.set({ "waitTime": parseInt(document.getElementById("waitTime").value) });
-    });
-    document.getElementById("waitText").addEventListener('input', function(){
-        browser.storage.sync.set({ "waitText": document.getElementById("waitText").value });
+        clearTimeout(hideTimeOut);
+        
+        let waitValue = parseInt(document.getElementById("waitTime").value);
+        const maxLimit = 600;
+        const minLimit = 1;
+        
+        if(waitValue < minLimit){
+            document.getElementById("waitTime").value = minLimit;
+        } else if(waitValue > maxLimit){
+            savedTextTime.innerText = "Maximum is " + maxLimit;
+            document.getElementById("waitTime").value = maxLimit;
+            savedTextTime.style.display = 'block';
+            hideTimeOut = setTimeout(function() {
+                savedTextTime.style.display = 'none';
+            }, 2500);
+        }
     });
     
     const platformsWeTarget = [ "youtube", "facebook", "twitter", "instagram", "linkedin", "google" ];
@@ -265,6 +281,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 browser.storage.sync.set({ [key]: document.getElementById(element + "Toggle").checked });
             });
+            
+            // save the delay time
+            let waitValue = parseInt(document.getElementById("waitTime").value);
+            browser.storage.sync.set({ "waitTime": waitValue });
+            // save the delay message
+            browser.storage.sync.set({ "waitText": document.getElementById("waitText").value });
         
             e.target.setAttribute("value", "......");
             delay(250).then(() => e.target.setAttribute("value", "Saved!"));

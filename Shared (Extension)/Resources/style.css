@@ -75,20 +75,6 @@ div._aak6._aak9 div._aak3 { display: none; }
 ** YOUTUBE **
 ************/
 
-/***** home page *****/
-/** hide recommended videos **/
-ytd-browse[page-subtype="home"] { visibility: hidden; } div[tab-identifier="FEwhat_to_watch"] { visibility: hidden; }
-
-/** hide shorts **/
-#endpoint.yt-simple-endpoint.ytd-guide-entry-renderer[title="Shorts"], ytd-mini-guide-entry-renderer[aria-label="Shorts"] { display: none; } ytm-pivot-bar-renderer[role="tablist"] ytm-pivot-bar-item-renderer:nth-child(2){ display: none; }
-
-/***** hide related videos when you watch a video *****/
-#related { visibility: hidden; display: none; } #app ytm-item-section-renderer[section-identifier="related-items"] { display: none; }
-
-/***** hide comment ********/
-#comments { visibility: hidden; } #app ytm-comments-entry-point-header-renderer { display: none; }
-
-
 /* hide suggested videos popping up on end screen */
 .ytp-endscreen-content {
     display: none !important;
