@@ -179,13 +179,11 @@
                                                                       );
             };
             
-            var key = platform + "Status";
+            var platformKey = platform + "Status";
             
-            browser.storage.sync.get(key, function(result) {
-                //console.log("saved status for " + platform + " is " + result[key]);
-                
-              if (result[key] == true || result[key] == undefined) {
-                  
+            browser.storage.sync.get(platformKey, function(platformResult) {
+                //console.log("saved status for " + platform + " is " + result[platformKey]);
+                  console.log(platformResult[platformKey]);
                   // loop over the elements and create HTML style element for each
                   // If an element's key in storage is set to 'false', show the
                   // element, otherwise hide it
@@ -194,14 +192,14 @@
                       var key = item + "Status";
                       
                       browser.storage.sync.get(key, function(result) {
-                          if (result[key] == true){
+                          if (result[key] == true && platformResult[platformKey] == true){
                               createStyleElement(styleName, eval(item + "CssOff"));
                           } else {
                               createStyleElement(styleName, eval(item + "CssOn"));
                           };
                       });
                   });
-              }
+              
             });
         };
     });

@@ -216,6 +216,15 @@ document.addEventListener('DOMContentLoaded', function() {
         browser.storage.sync.get(key, function(result) {
           if (result[key] == false ) {
               currentSwitch.checked = false;
+              
+              // disable the checkboxes if the switch is off
+              var filteredElements = elementsThatCanBeHidden.filter(element =>
+                element.includes(platform_to_check)
+              );
+              filteredElements.forEach(function (item) {
+                  document.getElementById(item + "Toggle").disabled = true;
+              });
+              
           } else {
               currentSwitch.checked = true;
           }
@@ -225,6 +234,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // handle when then switches are turned off or on
     platformsWeTarget.forEach(function(platform) {
         var currentSwitch = document.querySelector('.dropdown.' + platform + ' input');
+        var allCheckboxes = document.querySelectorAll('.dropdown.' + platform + ' .a-toggle input');
+        
         
         currentSwitch.addEventListener("change", function() {
             if(!currentSwitch.checked){
@@ -237,6 +248,12 @@ document.addEventListener('DOMContentLoaded', function() {
                       });
                     document.getElementById(some_element + "Toggle").checked = false;
                 });
+                
+                // disable the checkboxes
+                allCheckboxes.forEach(aCheckbox => {
+                        aCheckbox.disabled = true;
+                });
+                
 
                 // Save the state of the toggle
                 var key = platform + "Status";
@@ -259,6 +276,11 @@ document.addEventListener('DOMContentLoaded', function() {
                               });
                         }
                     });
+                });
+                
+                // disable the checkboxes
+                allCheckboxes.forEach(aCheckbox => {
+                        aCheckbox.disabled = false;
                 });
                 
                 // Save the state of the toggle
