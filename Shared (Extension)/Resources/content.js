@@ -24,7 +24,20 @@
                                       "youtubeComments",
                                       "youtubeAds",
                                       "twitterExplore",
-                                      "twitterNotifications", "twitterTrends", "twitterFollow", "twitterTimeline", "facebookFeed", "facebookWatch", "facebookNotifications", "facebookStories", "facebookChat", "linkedinNews", "linkedinNotifications", "linkedinFeed", "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramSuggestions", "googleAds" ];
+                                      "twitterNotifications",
+                                      "twitterTrends",
+                                      "twitterFollow",
+                                      "twitterTimeline",
+                                      "facebookFeed",
+                                      "facebookWatch",
+                                      "facebookNotifications",
+                                      "facebookStories",
+                                      "facebookChat",
+                                      "linkedinNews",
+                                      "linkedinNotifications",
+                                      "linkedinFeed",
+                                      "instagramFeed",
+                                      "instagramStories", "instagramMutedStories", "instagramExplore", "instagramSuggestions", "googleAds" ];
     
     // YouTube CSS
     const youtubeSearchCssOn = 'ytd-searchbox { display: flex; } button[aria-label="Search YouTube"] {display: block;}';
@@ -117,8 +130,8 @@
     const instagramSuggestionsCssOff = 'div._aak6._aak9 div._aak3 { display: none; }';
     
     // LinkedIn CSS
-    const linkedinFeedCssOn = '#ember33, #main .scaffold-finite-scroll, #feed-container {display: block;}';
-    const linkedinFeedCssOff = '#ember33, #main .scaffold-finite-scroll, #feed-container {display: none;}';
+    const linkedinFeedCssOn = '#ember33, main .scaffold-finite-scroll, #feed-container {display: block;}';
+    const linkedinFeedCssOff = '#ember33, main .scaffold-finite-scroll, #feed-container {display: none !important;}';
     
     const linkedinNotificationsCssOn = 'span.notification-badge--show, #nav-notifications-small-badge, #nav-people-small-badge { display: block !important; }'
     const linkedinNotificationsCssOff = 'span.notification-badge--show, #nav-notifications-small-badge, #nav-people-small-badge { display: none !important; }'

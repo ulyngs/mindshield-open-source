@@ -151,7 +151,16 @@ document.addEventListener('DOMContentLoaded', function() {
                                       "twitterNotifications",
                                       "twitterTrends",
                                       "twitterFollow",
-                                      "twitterTimeline", "facebookFeed", "facebookWatch", "facebookNotifications", "facebookStories", "facebookChat", "linkedinNews", "linkedinNotifications", "linkedinFeed", "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramSuggestions", "googleAds" ];
+                                      "twitterTimeline",
+                                      "facebookFeed",
+                                      "facebookWatch",
+                                      "facebookNotifications",
+                                      "facebookStories",
+                                      "facebookChat",
+                                      "linkedinNews",
+                                      "linkedinNotifications",
+                                      "linkedinFeed",
+                                      "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramSuggestions", "googleAds" ];
     
     // create function to set a checkbox according to current view status on the page
     function setCheckboxState(element_to_check, id_of_toggle){
