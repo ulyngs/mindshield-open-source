@@ -160,6 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                       "linkedinNews",
                                       "linkedinNotifications",
                                       "linkedinFeed",
+                                      "linkedinAds",
                                       "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramSuggestions", "googleAds" ];
     
     // create function to set a checkbox according to current view status on the page
