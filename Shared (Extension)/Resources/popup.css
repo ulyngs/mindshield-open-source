@@ -37,54 +37,7 @@ body {
 }
 
 
-/******* HIDE IRRELEVANT TOGGLES *******/
-@media only screen and (max-device-width: 1312px) {
-    .youtube-large-only {
-        display:none
-    }
-}
 
-/* iPhone */
-@media only screen and (max-device-width: 768px) {
-    .platform-ipad-mac {
-        display: none;
-    }
-    
-    body {
-        width: 100%
-    }
-    #delay-content {
-        margin: auto;
-        width: 50%;
-    }
-    #delay-content img {
-        width: 60% !important;
-        margin-bottom: 10px !important;
-    }
-    #how-to-image, #how-to-arrow {
-        width: 1.2em !important;
-        vertical-align: bottom important;
-    }
-    #how-to-image {
-        display: inline-block !important;
-    }
-    p.previews-text {
-        display: inline-block !important;
-        margin: 5px 0px 1px 2px !important;
-    }
-    #how-to-description {
-        padding: 8px;
-        font-style: italic;
-        margin: 0px;
-    }
-}
-
-
-@media only screen and (min-device-width: 768px) {
-    .platform-iphone {
-        display: none;
-    }
-}
 
 a:visited {
     color: gray;
@@ -418,3 +371,47 @@ input:checked + .slider:before {
   opacity: 1;
 }
 
+
+
+/******* HIDE IRRELEVANT TOGGLES *******/
+/* iPhone */
+@media only screen and (max-device-width: 768px) {
+    .platform-ipad-mac {
+        display: none;
+    }
+    
+    body {
+        width: 100%
+    }
+    #delay-content {
+        margin: auto;
+        width: 50%;
+    }
+    #delay-content img {
+        width: 60% !important;
+        margin-bottom: 10px !important;
+    }
+    #how-to-image, #how-to-arrow {
+        width: 1.2em !important;
+        vertical-align: bottom important;
+    }
+    #how-to-image {
+        display: inline-block !important;
+    }
+    p.previews-text {
+        display: inline-block !important;
+        margin: 5px 0px 1px 2px !important;
+    }
+    #how-to-description {
+        padding: 8px;
+        font-style: italic;
+        margin: 0px;
+    }
+}
+
+
+@media only screen and (min-device-width: 768px) {
+    .platform-iphone {
+        display: none;
+    }
+}
