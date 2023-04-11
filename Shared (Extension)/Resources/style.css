@@ -85,20 +85,3 @@ div[tab-identifier="FEwhat_to_watch"] { visibility: hidden; }
     display: none !important;
 }
 
-/* hide ads on the search page */
-ytm-promoted-sparkles-text-search-renderer,
-ytd-promoted-sparkles-text-search-renderer,
-ytd-promoted-sparkles-web-renderer,
-ytd-carousel-ad-renderer,
-ytd-ad-slot-renderer {
-    display: none !important;
-}
-
-#masthead-ad { display: none; } /* display: flex; */
-
-ytd-ad-slot-renderer { display: none; } /* display: inline; */
-
-/* hide the ads on a video page */
-ytm-promoted-sparkles-web-renderer, ytm-companion-ad-renderer, #player-ads {
-    display: none !important;
-}
