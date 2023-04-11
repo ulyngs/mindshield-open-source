@@ -161,7 +161,9 @@ document.addEventListener('DOMContentLoaded', function() {
                                       "linkedinNotifications",
                                       "linkedinFeed",
                                       "linkedinAds",
-                                      "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramSuggestions", "googleAds" ];
+                                      "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramSuggestions",
+                                      "googleAds",
+                                      "googleBackground" ];
     
     // create function to set a checkbox according to current view status on the page
     function setCheckboxState(element_to_check, id_of_toggle){

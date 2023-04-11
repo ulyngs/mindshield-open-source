@@ -326,6 +326,15 @@ input:checked + .slider:before {
     box-shadow: inset 0 1px 3px rgba(0,0,0, .1), 0 0 0 6px rgba(203, 34, 237, .2);
 }
 
+
+/* harmonise ordinary check box */
+.ordinary-checkbox [type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
+
 .website-label {
     display: inline-block;
     margin: 0px 5px 10px 0px;
@@ -408,3 +417,4 @@ input:checked + .slider:before {
 #delay-content.show {
   opacity: 1;
 }
+
