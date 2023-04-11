@@ -75,6 +75,11 @@ div._aak6._aak9 div._aak3 { display: none; }
 ** YOUTUBE **
 ************/
 
+/* hide recommended videos by default, so that they don't flash on the screen before they are hidden*/
+ytd-browse[page-subtype="home"] { visibility: hidden; }
+div[tab-identifier="FEwhat_to_watch"] { visibility: hidden; }
+
+
 /* hide suggested videos popping up on end screen */
 .ytp-endscreen-content {
     display: none !important;
