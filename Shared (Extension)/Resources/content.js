@@ -9,7 +9,7 @@
     }
     window.hasRun = true;
     
-    const platformsWeTarget = [ "youtube", "facebook", "twitter", "instagram", "linkedin", "google" ];
+    const platformsWeTarget = [ "youtube", "facebook", "twitter", "instagram", "linkedin", "whatsapp", "google" ];
     const elementsThatCanBeHidden = [ "youtubeSearch",
                                       "youtubeRecVids",
                                       "youtubeThumbnails",
@@ -39,6 +39,7 @@
                                       "linkedinAds",
                                       "instagramFeed",
                                       "instagramStories", "instagramMutedStories", "instagramExplore", "instagramSuggestions",
+                                      "whatsappPreview",
                                       "googleAds",
                                       "googleBackground" ];
     
@@ -145,6 +146,10 @@
     
     const linkedinAdsCssOn = 'section.ad-banner-container { display: block !important;}';
     const linkedinAdsCssOff = 'section.ad-banner-container { display: none;}';
+    
+    // WhatsApp
+    const whatsappPreviewCssOn = ''
+    const whatsappPreviewCssOff = 'div[data-testid="cell-frame-secondary"] { display: none; }'
 
     // Google search CSS
     const googleAdsCssOn = '#tads, #atvcap, .commercial-unit-desktop-rhs {display: block !important;}'
@@ -179,11 +184,11 @@
                                                                       );
             };
             
-            var platformKey = platform + "Status";
+            var key = platform + "Status";
             
-            browser.storage.sync.get(platformKey, function(platformResult) {
-                //console.log("saved status for " + platform + " is " + result[platformKey]);
-                  console.log(platformResult[platformKey]);
+            browser.storage.sync.get(key, function(result) {
+                
+                let platformIsOn = result[key];
                   // loop over the elements and create HTML style element for each
                   // If an element's key in storage is set to 'false', show the
                   // element, otherwise hide it
@@ -192,7 +197,7 @@
                       var key = item + "Status";
                       
                       browser.storage.sync.get(key, function(result) {
-                          if (result[key] == true && platformResult[platformKey] == true){
+                          if (result[key] == true && platformIsOn){
                               createStyleElement(styleName, eval(item + "CssOff"));
                           } else {
                               createStyleElement(styleName, eval(item + "CssOn"));

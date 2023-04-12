@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    const platformsWeTarget = [ "youtube", "facebook", "twitter", "instagram", "linkedin", "google" ];
+    const platformsWeTarget = [ "youtube", "facebook", "twitter", "instagram", "linkedin", "whatsapp", "google" ];
     const elementsThatCanBeHidden = [ "youtubeSearch",
                                       "youtubeRecVids",
                                       "youtubeThumbnails",
@@ -162,6 +162,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                       "linkedinFeed",
                                       "linkedinAds",
                                       "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramSuggestions",
+                                      "whatsappPreview",
                                       "googleAds",
                                       "googleBackground" ];
     
