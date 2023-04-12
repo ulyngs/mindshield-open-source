@@ -372,6 +372,28 @@ input:checked + .slider:before {
 }
 
 
+#what-sites {
+    text-align: left;
+    margin-bottom: 1em;
+    cursor: pointer;
+}
+#sites-text {
+    display: inline-block;
+    margin: 0;
+    font-style: italic;
+    font-size: 0.9em;
+    vertical-align: bottom
+}
+#sites-arrow {
+    width: 0.7em;
+    vertical-align: middle;
+}
+#sites-available {
+    margin-left: 0px;
+    padding-left: 1.3em;
+    margin-top: 0.5em;
+    font-size: 0.9em;
+}
 
 /******* HIDE IRRELEVANT TOGGLES *******/
 /* iPhone */
@@ -391,12 +413,12 @@ input:checked + .slider:before {
         width: 60% !important;
         margin-bottom: 10px !important;
     }
-    #how-to-image, #how-to-arrow {
-        width: 1.2em !important;
-        vertical-align: bottom important;
-    }
     #how-to-image {
         display: inline-block !important;
+    }
+    #how-to-image, .how-to-arrow {
+        width: 1.2em !important;
+        vertical-align: bottom important;
     }
     p.previews-text {
         display: inline-block !important;

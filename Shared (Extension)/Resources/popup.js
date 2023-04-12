@@ -350,4 +350,18 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
     
+    const sites = document.querySelector('#what-sites');
+    const sitesText = document.querySelector('#sites-available');
+    const sitesArrow = document.querySelector('#sites-arrow');
+
+    sites.addEventListener("click", function() {
+      if (sitesText.style.display === "none") {
+          sitesText.style.display = "block";
+          sitesArrow.setAttribute('src', sitesArrow.getAttribute("data-src-expanded"));
+      } else {
+          sitesText.style.display = "none";
+          sitesArrow.setAttribute('src', sitesArrow.getAttribute("data-src-closed"));
+      }
+    });
+    
 }, false);
