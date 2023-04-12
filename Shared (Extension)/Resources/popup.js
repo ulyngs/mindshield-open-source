@@ -338,29 +338,35 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const howTo = document.querySelector('#hide-previews');
     const howToText = document.querySelector('#how-to-description');
-    const howToArrow = document.querySelector('#how-to-arrow');
+    const howToArrowRight = document.querySelector('#how-to-arrow-right');
+    const howToArrowDown = document.querySelector('#how-to-arrow-down');
 
     howTo.addEventListener("click", function() {
       if (howToText.style.display === "none") {
-        howToText.style.display = "block";
-        howToArrow.setAttribute('src', howToArrow.getAttribute("data-src-expanded"));
+          howToText.style.display = "block";
+          howToArrowRight.style.display = "none";
+          howToArrowDown.style.display = "inline-block";
       } else {
-        howToText.style.display = "none";
-        howToArrow.setAttribute('src', howToArrow.getAttribute("data-src-closed"));
+          howToText.style.display = "none";
+          howToArrowRight.style.display = "inline-block";
+          howToArrowDown.style.display = "none";
       }
     });
     
     const sites = document.querySelector('#what-sites');
     const sitesText = document.querySelector('#sites-available');
-    const sitesArrow = document.querySelector('#sites-arrow');
+    const sitesArrowRight = document.querySelector('#sites-arrow-right');
+    const sitesArrowDown = document.querySelector('#sites-arrow-down');
 
     sites.addEventListener("click", function() {
       if (sitesText.style.display === "none") {
           sitesText.style.display = "block";
-          sitesArrow.setAttribute('src', sitesArrow.getAttribute("data-src-expanded"));
+          sitesArrowRight.style.display = "none";
+          sitesArrowDown.style.display = "inline-block";
       } else {
           sitesText.style.display = "none";
-          sitesArrow.setAttribute('src', sitesArrow.getAttribute("data-src-closed"));
+          sitesArrowRight.style.display = "inline-block";
+          sitesArrowDown.style.display = "none";
       }
     });
     

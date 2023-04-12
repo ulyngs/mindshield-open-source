@@ -12,6 +12,7 @@ body {
 
 .smaller-font {
     font-size: 0.85em;
+    margin: 5px 0 0 0;
 }
 
 .a-toggle,
@@ -40,10 +41,10 @@ body {
 
 
 a:visited {
-    color: gray;
+    color: rgb(69, 69, 69);
 }
 a {
-    color: gray;
+    color: rgb(69, 69, 69);
 }
 
 .github-link {
@@ -191,17 +192,6 @@ input:checked + .slider:before {
     margin-top: 8px;
 }
 
-
-@media (prefers-color-scheme: dark) {
-    /* Dark Mode styles go here. */
-    .colored-font {
-        color: lightgray;
-    }
-    
-    #delay-content img {
-        filter: invert(100%) sepia(0%) saturate(7399%) hue-rotate(180deg) brightness(112%) contrast(80%);
-    }
-}
 
 
 /******  make the checkboxes use 'prohibited' symbols   ******/
@@ -393,6 +383,31 @@ input:checked + .slider:before {
     padding-left: 1.3em;
     margin-top: 0.5em;
     font-size: 0.9em;
+}
+
+@media (prefers-color-scheme: dark) {
+    /* Dark Mode styles go here. */
+    .colored-font {
+        color: lightgray;
+    }
+    
+    #delay-content img {
+        filter: invert(100%) sepia(0%) saturate(7399%) hue-rotate(180deg) brightness(112%) contrast(80%);
+    }
+    
+    a:visited {
+        color: rgb(194, 194, 194);
+    }
+    a {
+        color: rgb(194, 194, 194);
+    }
+    #sites-arrow path {
+        fill: rgb(194, 194, 194);
+    }
+    #sites-arrow-right path, #sites-arrow-down path,
+    #how-to-arrow-right path, #how-to-arrow-down path {
+        fill: rgb(194, 194, 194);
+    }
 }
 
 /******* HIDE IRRELEVANT TOGGLES *******/
