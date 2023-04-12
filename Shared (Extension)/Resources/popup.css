@@ -416,18 +416,25 @@ input:checked + .slider:before {
     #how-to-image {
         display: inline-block !important;
     }
-    #how-to-image, .how-to-arrow {
+    #how-to-image {
         width: 1.2em !important;
         vertical-align: bottom important;
+    }
+    #how-to-arrow {
+        width: 0.9em;
+        vertical-align: middle;
+        padding: 0px 1px 0px 3px;
     }
     p.previews-text {
         display: inline-block !important;
         margin: 5px 0px 1px 2px !important;
     }
     #how-to-description {
+        font-size: 0.9em;
         padding: 8px;
         font-style: italic;
         margin: 0px;
+        max-width: 90%;
     }
 }
 

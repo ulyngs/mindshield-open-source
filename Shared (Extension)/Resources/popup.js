@@ -343,10 +343,10 @@ document.addEventListener('DOMContentLoaded', function() {
     howTo.addEventListener("click", function() {
       if (howToText.style.display === "none") {
         howToText.style.display = "block";
-        howToArrow.style.display = "inline-block";
+        howToArrow.setAttribute('src', howToArrow.getAttribute("data-src-expanded"));
       } else {
         howToText.style.display = "none";
-        howToArrow.style.display = "none";
+        howToArrow.setAttribute('src', howToArrow.getAttribute("data-src-closed"));
       }
     });
     
