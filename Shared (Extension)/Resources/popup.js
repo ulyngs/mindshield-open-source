@@ -163,6 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                       "linkedinAds",
                                       "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramSuggestions",
                                       "whatsappPreview",
+                                      "whatsappNotificationPrompt",
                                       "googleAds",
                                       "googleBackground" ];
     

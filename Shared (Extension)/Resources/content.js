@@ -40,6 +40,7 @@
                                       "instagramFeed",
                                       "instagramStories", "instagramMutedStories", "instagramExplore", "instagramSuggestions",
                                       "whatsappPreview",
+                                      "whatsappNotificationPrompt",
                                       "googleAds",
                                       "googleBackground" ];
     
@@ -150,6 +151,8 @@
     // WhatsApp
     const whatsappPreviewCssOn = ''
     const whatsappPreviewCssOff = 'div[data-testid="cell-frame-secondary"] { display: none; }'
+    const whatsappNotificationPromptCssOn = ''
+    const whatsappNotificationPromptCssOff = 'span[data-testid="chat-butterbar"] { display: none; }'
 
     // Google search CSS
     const googleAdsCssOn = '#tads, #atvcap, .commercial-unit-desktop-rhs {display: block !important;}'
