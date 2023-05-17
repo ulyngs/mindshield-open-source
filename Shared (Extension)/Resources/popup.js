@@ -145,6 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                       "youtubeExplore",
                                       "youtubeMore",
                                       "youtubeRelated",
+                                      "youtubeSidebar",
                                       "youtubeComments",
                                       "youtubeAds",
                                       "twitterExplore",
