@@ -1,9 +1,12 @@
 /**************
 ** FACEBOOK **
 **************/
-
+/* hide these elements by default, so they're not flashing before Mindshield's CSS is injected */
 /*** feed ***/
-#ssrb_feed_start + div { visibility: hidden; }
+#ssrb_feed_start + div, div.x1hc1fzr.x1unhpq9.x6o7n8i { visibility: hidden; } #screen-root div > div[data-mcomponent="MContainer"] > div.m.displayed:nth-child(n+6) { display: none; }
+
+/*** chat ***/
+div[role="complementary"] div[data-visualcompletion="ignore-dynamic"] > div.x1n2onr6:not([role="cell"]) { visibility: hidden; }
 
 /*** stories ***/
 /* desktop */
