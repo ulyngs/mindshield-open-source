@@ -88,6 +88,50 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
     
+    /*
+    var redirectToggle = document.getElementById("redirectToggleYT");
+    var redirectCustomisation = document.querySelector(".redirect-customisation");
+    
+    // Add event listener to detect changes in the checkbox status
+    redirectToggle.addEventListener('change', function() {
+        // If the checkbox is checked, show the URL
+        if (redirectToggle.checked) {
+            redirectCustomisation.style.display = "block";
+        } else {
+            // Otherwise, hide it
+            redirectCustomisation.style.display = "none";
+        }
+        
+    });
+    */
+    
+    // store wait customisation
+    // wait time
+    /*
+    var savedTextTime = document.getElementById("savedTextTime");
+    let hideTimeOut;
+    
+    document.getElementById("waitTime").addEventListener('input', function(){
+        clearTimeout(hideTimeOut);
+        
+        let waitValue = parseInt(document.getElementById("waitTime").value);
+        const maxLimit = 600;
+        const minLimit = 1;
+        
+        if(waitValue < minLimit){
+            document.getElementById("waitTime").value = minLimit;
+        } else if(waitValue > maxLimit){
+            savedTextTime.innerText = "Maximum is " + maxLimit;
+            document.getElementById("waitTime").value = maxLimit;
+            savedTextTime.style.display = 'block';
+            hideTimeOut = setTimeout(function() {
+                savedTextTime.style.display = 'none';
+            }, 2500);
+        }
+    });
+    */
+    
+    
     var frictionToggle = document.getElementById("frictionToggle");
     var frictionCustomisation = document.querySelectorAll(".friction-customisation");
     
