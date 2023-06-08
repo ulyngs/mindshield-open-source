@@ -179,6 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const platformsWeTarget = [ "youtube", "facebook", "twitter", "instagram", "linkedin", "whatsapp", "google" ];
     const elementsThatCanBeHidden = [ "youtubeSearch",
+                                      "youtubeSearchPredict",
                                       "youtubeRecVids",
                                       "youtubeThumbnails",
                                       "youtubeProfileImg",
