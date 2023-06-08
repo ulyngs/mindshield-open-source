@@ -1,4 +1,5 @@
 (function() {
+    
     /**
      * Check and set a global guard variable.
      * If this content script is injected into the same page again,
@@ -11,6 +12,7 @@
     
     const platformsWeTarget = [ "youtube", "facebook", "twitter", "instagram", "linkedin", "whatsapp", "google" ];
     const elementsThatCanBeHidden = [ "youtubeSearch",
+                                      "youtubeSearchPredict",
                                       "youtubeRecVids",
                                       "youtubeThumbnails",
                                       "youtubeProfileImg",
@@ -49,6 +51,9 @@
     const youtubeSearchCssOn = 'ytd-searchbox { display: flex; } button[aria-label="Search YouTube"] {display: block;}';
     const youtubeSearchCssOff = 'ytd-searchbox { display: none; } button[aria-label="Search YouTube"] {display: none;}';
     
+    const youtubeSearchPredictCssOn = '';
+    const youtubeSearchPredictCssOff = 'div.gstl_50 { display: none !important; }';
+    
     const youtubeRecVidsCssOn = 'ytd-browse[page-subtype="home"] { visibility: visible !important; } div[tab-identifier="FEwhat_to_watch"] { visibility: visible !important; }';
     const youtubeRecVidsCssOff = 'ytd-browse[page-subtype="home"] { display: none; } div[tab-identifier="FEwhat_to_watch"] { visibility: hidden; }';
      
@@ -80,7 +85,7 @@
     const youtubeRelatedCssOff = '#related { visibility: hidden; display: none; } #app ytm-item-section-renderer[section-identifier="related-items"] { display: none; } ytm-single-column-watch-next-results-renderer .related-chips-slot-wrapper { transform: none !important; }';
     
     const youtubeSidebarCssOn = '';
-    const youtubeSidebarCssOff = '#secondary { display: none; } ';
+    const youtubeSidebarCssOff = '#secondary { display: none; } video.html5-main-video { width: 100% !important; object-fit: contain; }';
     
     const youtubeCommentsCssOn = '#comments { visibility: visible; } #app ytm-comments-entry-point-header-renderer { display: block; }';
     const youtubeCommentsCssOff = '#comments { visibility: hidden; } #app ytm-comments-entry-point-header-renderer { display: none; }';
@@ -90,7 +95,7 @@
     
     // Facebook CSS
     const facebookFeedCssOn = '#ssrb_feed_start + div, div.x1hc1fzr.x1unhpq9.x6o7n8i { visibility: visible; } #screen-root div > div[data-mcomponent="MContainer"] > div.m.displayed:nth-child(n+6) { display: block; }'
-    const facebookFeedCssOff = '#ssrb_feed_start + div, div.x1hc1fzr.x1unhpq9.x6o7n8i { visibility: hidden; } #screen-root div > div[data-mcomponent="MContainer"] > div.m.displayed:nth-child(n+6) { display: none; }'
+    const facebookFeedCssOff = '#ssrb_feed_start + div, div.x1hc1fzr.x1unhpq9.x6o7n8i { visibility: hidden; } #screen-root div:not([data-adjust-on-keyboard-shown="true"]) > div[data-mcomponent="MContainer"] > div.m.displayed:nth-child(n+6) { display: none; }'
     
     const facebookWatchCssOn = '#screen-root div[data-mcomponent="MScreen"] div[data-mcomponent="MContainer"] div[data-mcomponent="MContainer"]:nth-child(2) div[role="button"]:nth-child(4) {display: flex;}'
     const facebookWatchCssOff = '#screen-root div[data-mcomponent="MScreen"] div[data-mcomponent="MContainer"] div[data-mcomponent="MContainer"]:nth-child(2) div[role="button"]:nth-child(4) {display: none;}'
@@ -185,7 +190,7 @@
             );
             
             // if we're on mobile twitter, then don't hide the explore element as it's the search button
-            if (window.location.hostname.includes("mobile.twitter")){
+            if (window.location.hostname.includes("m.twitter")){
                 var filteredElements = elementsThatCanBeHidden.filter(element =>
                                                                       !element.includes("Explore")
                                                                       );
