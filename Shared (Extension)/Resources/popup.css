@@ -462,10 +462,6 @@ footer .toggle-group {
         color: lightgray;
     }
     
-    #delay-content img {
-        filter: invert(100%) sepia(0%) saturate(7399%) hue-rotate(180deg) brightness(112%) contrast(80%);
-    }
-    
     a,
     a:visited {
         color: gray;
