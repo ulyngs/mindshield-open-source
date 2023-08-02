@@ -4,21 +4,16 @@
 document.addEventListener('DOMContentLoaded', function() {
     // set friction checkbox
     browser.storage.sync.get("addFriction", function(result) {
-      var frictionToggle = document.getElementById("frictionToggle");
-      var frictionCustomisation = document.querySelectorAll(".friction-customisation");
-      
-      frictionToggle.checked = result.addFriction;
-      
-        if (result.addFriction == undefined || !frictionToggle.checked) {
-            // don't show the customisation options if we haven't checked the box
-            for (var i = 0; i < frictionCustomisation.length; i++) {
-                frictionCustomisation[i].style.display = "none";
-                }
-        } else {
-            for (var i = 0; i < frictionCustomisation.length; i++) {
-                frictionCustomisation[i].style.display = "block";
-                }
-        }
+        var frictionToggle = document.getElementById("frictionToggle");
+        var frictionCustomisationArrow = document.getElementById("frictionCustomisationArrow");
+        
+        frictionToggle.checked = result.addFriction;
+        
+          if (result.addFriction == undefined || !frictionToggle.checked) {
+              frictionCustomisationArrow.style.display = "none";
+          } else {
+              frictionCustomisationArrow.style.display = "block";
+          }
         
       var popupContainer = document.getElementById("popup-content");
       var messageContainer = document.getElementById("delay-content");
@@ -88,69 +83,41 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
     
-    /*
-    var redirectToggle = document.getElementById("redirectToggleYT");
-    var redirectCustomisation = document.querySelector(".redirect-customisation");
-    
-    // Add event listener to detect changes in the checkbox status
-    redirectToggle.addEventListener('change', function() {
-        // If the checkbox is checked, show the URL
-        if (redirectToggle.checked) {
-            redirectCustomisation.style.display = "block";
-        } else {
-            // Otherwise, hide it
-            redirectCustomisation.style.display = "none";
-        }
-        
-    });
-    */
-    
-    // store wait customisation
-    // wait time
-    /*
-    var savedTextTime = document.getElementById("savedTextTime");
-    let hideTimeOut;
-    
-    document.getElementById("waitTime").addEventListener('input', function(){
-        clearTimeout(hideTimeOut);
-        
-        let waitValue = parseInt(document.getElementById("waitTime").value);
-        const maxLimit = 600;
-        const minLimit = 1;
-        
-        if(waitValue < minLimit){
-            document.getElementById("waitTime").value = minLimit;
-        } else if(waitValue > maxLimit){
-            savedTextTime.innerText = "Maximum is " + maxLimit;
-            document.getElementById("waitTime").value = maxLimit;
-            savedTextTime.style.display = 'block';
-            hideTimeOut = setTimeout(function() {
-                savedTextTime.style.display = 'none';
-            }, 2500);
-        }
-    });
-    */
-    
-    
+    // make the friction customisation arrow and text appear/disappear with the delay toggle
     var frictionToggle = document.getElementById("frictionToggle");
-    var frictionCustomisation = document.querySelectorAll(".friction-customisation");
+    var frictionCustomisationArrow = document.getElementById("frictionCustomisationArrow");
     
     // Add event listener to detect changes in the checkbox status
     frictionToggle.addEventListener('change', function() {
-        // If the checkbox is checked, show the delay time input
-        if (frictionToggle.checked) {
-            for (var i = 0; i < frictionCustomisation.length; i++) {
-                frictionCustomisation[i].style.display = "block";
-              }
-        } else {
-            // Otherwise, hide it
-            for (var i = 0; i < frictionCustomisation.length; i++) {
-                frictionCustomisation[i].style.display = "none";
-              }
-        }
-        
         // store the setting
         browser.storage.sync.set({ "addFriction": document.getElementById("frictionToggle").checked });
+        
+        // If the checkbox is checked, show the delay time input
+        if (frictionToggle.checked) {
+            frictionCustomisationArrow.style.display = "block";
+        } else {
+            frictionCustomisationArrow.style.display = "none";
+        }
+        
+    });
+    
+    // make the frictionCustomisationArrow go from right to down on click
+    var frictionCustomisationArrowRight = document.getElementById("frictionCustomisationArrowRight");
+    var frictionCustomisationArrowDown = document.getElementById("frictionCustomisationArrowDown");
+    var frictionCustomisationOptions = document.querySelector(".toggle-group.friction-customisation");
+    
+    // Add event listener to detect changes in the checkbox status
+    frictionCustomisationArrow.addEventListener('click', function() {
+        // If the checkbox is checked, show the delay time input
+        if (frictionCustomisationArrowRight.style.display == "inline") {
+            frictionCustomisationArrowRight.style.display = "none";
+            frictionCustomisationArrowDown.style.display = "inline";
+            frictionCustomisationOptions.style.display = "block";
+        } else {
+            frictionCustomisationArrowRight.style.display = "inline";
+            frictionCustomisationArrowDown.style.display = "none";
+            frictionCustomisationOptions.style.display = "none";
+        }
     });
     
     // store wait customisation
@@ -193,6 +160,9 @@ document.addEventListener('DOMContentLoaded', function() {
                                       "youtubeSidebar",
                                       "youtubeComments",
                                       "youtubeAds",
+                                      "youtubeViews",
+                                      "youtubeLikes",
+                                      "youtubeSubscribers",
                                       "twitterExplore",
                                       "twitterNotifications",
                                       "twitterTrends",
@@ -281,9 +251,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // handle when then switches are turned off or on
     platformsWeTarget.forEach(function(platform) {
-        var currentSwitch = document.querySelector('.dropdown.' + platform + ' input');
+        var currentSwitch = document.querySelector('#website-toggles #toggle-' + platform + ' input');
         var allCheckboxes = document.querySelectorAll('.dropdown.' + platform + ' .a-toggle input');
-        
         
         currentSwitch.addEventListener("change", function() {
             if(!currentSwitch.checked){
@@ -342,6 +311,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setSwitch(platform, platform + "Switch");
     });
     
+    
     // show the options for the website we're currently on
     chrome.tabs.query({active: true, currentWindow: true}, function(tab){
         platformsWeTarget.forEach(function(platform) {
@@ -349,6 +319,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (currentHost.origin.includes(platform)){
                 document.querySelector('.dropdown.' + platform).classList.add('shown');
+                document.querySelector('#website-toggles #toggle-' + platform).classList.add('shown-inline');
             }
         });
     });
@@ -359,28 +330,38 @@ document.addEventListener('DOMContentLoaded', function() {
         return new Promise(resolve => setTimeout(resolve, time));
     }
     
-    var saveButtons = document.querySelectorAll('.saveButton');
-    for (let i = 0; i < saveButtons.length; i++) {
-
-        saveButtons[i].addEventListener('click', (e) => {
-            // save the state of the checkboxes to local storage
-            elementsThatCanBeHidden.forEach(function (element) {
-                var key = element + "Status";
-                
-                browser.storage.sync.set({ [key]: document.getElementById(element + "Toggle").checked });
-            });
-            
-            // save the delay time
-            let waitValue = parseInt(document.getElementById("waitTime").value);
-            browser.storage.sync.set({ "waitTime": waitValue });
-            // save the delay message
-            browser.storage.sync.set({ "waitText": document.getElementById("waitText").value });
+    var saveButton = document.querySelector('#saveButton');
+    
+    saveButton.addEventListener('click', (e) => {
         
-            e.target.setAttribute("value", "......");
-            delay(250).then(() => e.target.setAttribute("value", "Saved!"));
-            delay(1500).then(() => e.target.setAttribute("value", "Save settings"));
-      })
-    }
+        // loop over the elements for the page we're currently on and set storage according to the checkboxes
+        chrome.tabs.query({active: true, currentWindow: true}, function(tab){
+            platformsWeTarget.forEach(function(platform) {
+                var currentHost = new URL(tab[0].url);
+                
+                if (currentHost.origin.includes(platform)){
+                    var filteredElements = elementsThatCanBeHidden.filter(element =>
+                                                                          element.includes(platform)
+                                                                          );
+                    
+                    filteredElements.forEach(function (element) {
+                        var key = element + "Status";
+                        browser.storage.sync.set({ [key]: document.getElementById(element + "Toggle").checked });
+                    });
+                }
+            });
+        });
+        
+        // save the delay time
+        let waitValue = parseInt(document.getElementById("waitTime").value);
+        browser.storage.sync.set({ "waitTime": waitValue });
+        // save the delay message
+        browser.storage.sync.set({ "waitText": document.getElementById("waitText").value });
+    
+        e.target.setAttribute("value", "......");
+        delay(250).then(() => e.target.setAttribute("value", "Saved!"));
+        delay(1500).then(() => e.target.setAttribute("value", "Save settings"));
+    })
     
     const howTo = document.querySelector('#hide-previews');
     const howToText = document.querySelector('#how-to-description');

@@ -13,111 +13,180 @@
     </div>
     <div id="popup-content" style="display: none;">
         <div class="toggle-wrapper">
-            <div class="dropdown youtube">
-                <p class="website-label">YouTube</p>
-                <label class="switch">
-                    <input type="checkbox" id="youtubeSwitch" checked name="youtubeSwitch">
-                        <span class="slider round"></span>
-                </label>
-                <div class="toggle-group">
-                    <h2>Home page</h2>
-                    <div class="a-toggle platform-iphone" id="hide-previews">
-                        <div id="how-to-arrow-right" style="display: inline-block;">
-                            <svg width="12px" height="12px" version="1.1" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg">
-                             <path d="m360 1170-90-91.199 478.8-478.8-478.8-478.8 90-91.199 570 570z"/>
-                            </svg>
-                        </div>
-                        <div id="how-to-arrow-down" style="display: none;">
-                            <svg width="12px" height="12px" version="1.1" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg">
-                             <path d="m652.1 915.27 526.35-524.55c28.742-30.539 28.742-77.246 0-105.99-28.742-28.742-77.246-28.742-105.99 0l-472.46 472.46-472.46-472.46c-30.539-28.742-77.246-28.742-105.99 0-28.742 28.742-28.742 75.449 0 105.99l524.55 524.55c30.539 28.742 77.246 28.742 105.99 0z" fill-rule="evenodd"/>
-                            </svg>
-                        </div>
-                        <p class="previews-text">Auto-playing previews</p>
-                        <p id="how-to-description" style="display: none;">Tap your account image > Settings > Account > untick 'Video previews'</p>
-                    </div>
-                    <div class="a-toggle hide-checkboxes">
-                        <input type="checkbox" id="youtubeSearchToggle" name="youtubeSearchToggle">
-                            <label for="youtubeSearchToggle">Search box</label>
-                    </div>
-                    <div class="a-toggle hide-checkboxes platform-ipad-mac">
-                        <input type="checkbox" id="youtubeSearchPredictToggle" name="youtubeSearchPredictToggle">
-                            <label for="youtubeSearchPredictToggle">Search predictions</label>
-                    </div>
-                    <div class="a-toggle hide-checkboxes">
-                        <input type="checkbox" id="youtubeRecVidsToggle" name="youtubeRecVidsToggle">
-                            <label for="youtubeRecVidsToggle">Recommended videos</label>
-                    </div>
-                    <div class="a-toggle hide-checkboxes">
-                        <input type="checkbox" id="youtubeShortsToggle" name="youtubeShortsToggle">
-                            <label for="youtubeShortsToggle">Shorts</label>
-                    </div>
-                    <div class="a-toggle hide-checkboxes">
-                        <input type="checkbox" id="youtubeSubscriptionsToggle" name="youtubeSubscriptionsToggle">
-                            <label for="youtubeSubscriptionsToggle">Subscriptions</label>
-                    </div>
-                    <div class="a-toggle hide-checkboxes">
-                        <input type="checkbox" id="youtubeLibraryToggle" name="youtubeLibraryToggle">
-                            <label for="youtubeLibraryToggle">Library</label>
-                    </div>
-                    <div class="a-toggle hide-checkboxes platform-ipad-mac">
-                        <input type="checkbox" id="youtubeHistoryToggle" name="youtubeHistoryToggle">
-                            <label for="youtubeHistoryToggle">History</label>
-                    </div>
-                    <div class="a-toggle hide-checkboxes platform-ipad-mac youtube-large-only">
-                        <input type="checkbox" id="youtubeExploreToggle" name="youtubeExploreToggle">
-                            <label for="youtubeExploreToggle">Explore</label>
-                    </div>
-                    <div class="a-toggle hide-checkboxes platform-ipad-mac youtube-large-only">
-                        <input type="checkbox" id="youtubeMoreToggle" name="youtubeMoreToggle">
-                            <label for="youtubeMoreToggle">More from YouTube</label>
-                    </div>
+            <div id="website-toggles">
+                <div id="toggle-youtube" class="website-toggle">
+                    <p class="website-label">YouTube</p>
+                    <label class="switch">
+                        <input type="checkbox" id="youtubeSwitch" checked name="youtubeSwitch">
+                            <span class="slider round"></span>
+                    </label>
                 </div>
-                <div class="toggle-group">
-                    <h2>When watching</h2>
-                    <div class="a-toggle hide-checkboxes">
+                <div id="toggle-facebook" class="website-toggle">
+                    <p class="website-label">Facebook</p>
+                    <label class="switch">
+                        <input type="checkbox" id="facebookSwitch" checked>
+                            <span class="slider round"></span>
+                    </label>
+                </div>
+                <div id="toggle-twitter" class="website-toggle">
+                    <p class="website-label">Twitter</p>
+                    <label class="switch">
+                        <input type="checkbox" id="twitterSwitch" checked>
+                            <span class="slider round"></span>
+                    </label>
+                </div>
+                <div id="toggle-instagram" class="website-toggle">
+                    <p class="website-label">Instagram</p>
+                    <label class="switch">
+                        <input type="checkbox" id="instagramSwitch" checked>
+                            <span class="slider round"></span>
+                    </label>
+                </div>
+                <div id="toggle-linkedin" class="website-toggle">
+                    <p class="website-label">Linkedin</p>
+                    <label class="switch">
+                        <input type="checkbox" id="linkedinSwitch" checked>
+                            <span class="slider round"></span>
+                    </label>
+                </div>
+                <div id="toggle-whatsapp" class="website-toggle">
+                    <p class="website-label">WhatsApp</p>
+                    <label class="switch">
+                        <input type="checkbox" id="whatsappSwitch" checked>
+                            <span class="slider round"></span>
+                    </label>
+                </div>
+                <div id="toggle-google" class="website-toggle">
+                    <p class="website-label">Google</p>
+                    <label class="switch">
+                        <input type="checkbox" id="googleSwitch" checked>
+                            <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div id="what-sites">
+                <div id="sites-arrow-right" style="display: inline-block;">
+                    <svg width="12px" height="12px" version="1.1" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg">
+                     <path d="m360 1170-90-91.199 478.8-478.8-478.8-478.8 90-91.199 570 570z"/>
+                    </svg>
+                </div>
+                <div id="sites-arrow-down" style="display: none;">
+                    <svg width="12px" height="12px" version="1.1" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg">
+                     <path d="m652.1 915.27 526.35-524.55c28.742-30.539 28.742-77.246 0-105.99-28.742-28.742-77.246-28.742-105.99 0l-472.46 472.46-472.46-472.46c-30.539-28.742-77.246-28.742-105.99 0-28.742 28.742-28.742 75.449 0 105.99l524.55 524.55c30.539 28.742 77.246 28.742 105.99 0z" fill-rule="evenodd"/>
+                    </svg>
+                </div>
+                <p id="sites-text">Sites</p>
+                <ul id="sites-available" style="display: none;">
+                  <li><a href="https://www.youtube.com" target="_blank">youtube.com</a></li>
+                  <li><a href="https://www.facebook.com" target="_blank">facebook.com</a></li>
+                  <li><a href="https://www.twitter.com" target="_blank">twitter.com</a></li>
+                  <li><a href="https://www.instagram.com" target="_blank">instagram.com</a></li>
+                  <li><a href="https://www.linkedin.com" target="_blank">linkedin.com</a></li>
+                  <li class="platform-ipad-mac"><a href="https://web.whatsapp.com" target="_blank">web.whatsapp.com</a></li>
+                  <li><a href="https://www.google.com" target="_blank">google.com</a></li>
+                </ul>
+            </div>
+            <div class="dropdown youtube">
+                <div class="toggle-group hide-checkboxes">
+                  <h2>Menu bar</h2>
+                  <div class="a-toggle">
+                      <input type="checkbox" id="youtubeShortsToggle" name="youtubeShortsToggle">
+                      <label for="youtubeShortsToggle">Shorts</label>
+                  </div>
+                  <div class="a-toggle">
+                      <input type="checkbox" id="youtubeSubscriptionsToggle" name="youtubeSubscriptionsToggle">
+                      <label for="youtubeSubscriptionsToggle">Subscriptions</label>
+                  </div>
+                  <div class="a-toggle">
+                      <input type="checkbox" id="youtubeLibraryToggle" name="youtubeLibraryToggle">
+                      <label for="youtubeLibraryToggle">Library</label>
+                  </div>
+                  <div class="a-toggle platform-ipad-mac">
+                      <input type="checkbox" id="youtubeHistoryToggle" name="youtubeHistoryToggle">
+                      <label for="youtubeHistoryToggle">History</label>
+                  </div>
+                  <div class="a-toggle platform-ipad-mac">
+                      <input type="checkbox" id="youtubeExploreToggle" name="youtubeExploreToggle">
+                      <label for="youtubeExploreToggle">Explore</label>
+                  </div>
+                  <div class="a-toggle platform-ipad-mac">
+                      <input type="checkbox" id="youtubeMoreToggle" name="youtubeMoreToggle">
+                      <label for="youtubeMoreToggle">More from YouTube</label>
+                  </div>
+                </div>
+                <div class="toggle-group hide-checkboxes">
+                  <h2>Home page</h2>
+                  <div class="a-toggle platform-iphone" id="hide-previews">
+                      <div id="how-to-arrow-right" style="display: inline-block;">
+                          <svg width="12px" height="12px" version="1.1" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg">
+                           <path d="m360 1170-90-91.199 478.8-478.8-478.8-478.8 90-91.199 570 570z"/>
+                          </svg>
+                      </div>
+                      <div id="how-to-arrow-down" style="display: none;">
+                          <svg width="12px" height="12px" version="1.1" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg">
+                           <path d="m652.1 915.27 526.35-524.55c28.742-30.539 28.742-77.246 0-105.99-28.742-28.742-77.246-28.742-105.99 0l-472.46 472.46-472.46-472.46c-30.539-28.742-77.246-28.742-105.99 0-28.742 28.742-28.742 75.449 0 105.99l524.55 524.55c30.539 28.742 77.246 28.742 105.99 0z" fill-rule="evenodd"/>
+                          </svg>
+                      </div>
+                      <p class="previews-text">Auto-playing previews</p>
+                      <p id="how-to-description" style="display: none;">Tap your account image > Settings > Account > untick 'Video previews'</p>
+                  </div>
+                  <div class="a-toggle">
+                      <input type="checkbox" id="youtubeRecVidsToggle" name="youtubeRecVidsToggle">
+                      <label for="youtubeRecVidsToggle">Recommended videos</label>
+                  </div>
+                  <div class="a-toggle">
+                      <input class="hide-checkbox" type="checkbox" id="youtubeProfileImgToggle" name="youtubeProfileImgToggle">
+                          <label for="youtubeProfileImgToggle">Account images</label>
+                  </div>
+                </div>
+                <div class="toggle-group hide-checkboxes">
+                    <h2>Watch page</h2>
+                    <div class="a-toggle">
                         <input type="checkbox" id="youtubeRelatedToggle" name="youtubeRelatedToggle">
-                            <label for="youtubeRelatedToggle">Related/Up next videos</label>
+                        <label for="youtubeRelatedToggle">Related/Up next videos</label>
                     </div>
                     <div class="a-toggle hide-checkboxes platform-ipad-mac">
                         <input type="checkbox" id="youtubeSidebarToggle" name="youtubeSidebarToggle">
                             <label for="youtubeSidebarToggle">Entire right sidebar</label>
                     </div>
-                    <div class="a-toggle hide-checkboxes">
+                    <div class="a-toggle">
                         <input type="checkbox" id="youtubeCommentsToggle" name="youtubeCommentsToggle">
-                            <label for="youtubeCommentsToggle">Comments</label>
+                        <label for="youtubeCommentsToggle">Comments</label>
+                    </div>
+                    <div class="a-toggle">
+                        <input class="hide-checkbox" type="checkbox" id="youtubeLikesToggle" name="youtubeLikesToggle">
+                            <label for="youtubeLikesToggle">Like numbers</label>
                     </div>
                 </div>
-                <div class="toggle-group">
+                <div class="toggle-group hide-checkboxes">
                     <h2>General</h2>
-                    <div class="a-toggle hide-checkboxes">
-                        <input class="hide-checkbox" type="checkbox" id="youtubeThumbnailsToggle" name="youtubeThumbnailsToggle">
-                            <label for="youtubeThumbnailsToggle">Thumbnails</label>
-                    </div>
-                    <div class="a-toggle hide-checkboxes">
-                        <input class="hide-checkbox" type="checkbox" id="youtubeProfileImgToggle" name="youtubeProfileImgToggle">
-                            <label for="youtubeProfileImgToggle">Account images</label>
-                    </div>
-                    <div class="a-toggle hide-checkboxes">
+                    <div class="a-toggle">
                         <input class="hide-checkbox" type="checkbox" id="youtubeAdsToggle" name="youtubeAdsToggle">
                             <label for="youtubeAdsToggle">Ads</label>
                     </div>
-                    <!--
-                    <div class="a-toggle ordinary-checkbox">
-                        <input type="checkbox" id="redirectToggleYT" name="redirectToggleYT">
-                            <label for="redirectToggleYT">Redirect home</label>
+                    <div class="a-toggle">
+                          <input class="hide-checkbox" type="checkbox" id="youtubeThumbnailsToggle" name="youtubeThumbnailsToggle">
+                          <label for="youtubeThumbnailsToggle">Video thumbnails</label>
+                      </div>
+                    <div class="a-toggle">
+                        <input class="hide-checkbox" type="checkbox" id="youtubeViewsToggle" name="youtubeViewsToggle">
+                            <label for="youtubeViewsToggle">View numbers</label>
                     </div>
-                    <div class="a-toggle redirect-customisation" style="display: none;">
-                        <input type="text" id="redirectYoutube" name="redirectYoutube" value="https://www.youtube.com/feed/subscriptions">
+                    <div class="a-toggle">
+                        <input class="hide-checkbox" type="checkbox" id="youtubeSubscribersToggle" name="youtubeSubscribersToggle">
+                            <label for="youtubeSubscribersToggle">Subscriber numbers</label>
                     </div>
-                    -->
-                </div>
+                    <div class="a-toggle">
+                        <input type="checkbox" id="youtubeSearchToggle" name="youtubeSearchToggle">
+                            <label for="youtubeSearchToggle">Search box</label>
+                    </div>
+                    <div class="a-toggle platform-ipad-mac">
+                        <input type="checkbox" id="youtubeSearchPredictToggle" name="youtubeSearchPredictToggle">
+                            <label for="youtubeSearchPredictToggle">Search predictions</label>
+                    </div>
+                 </div>
             </div>
             <div class="dropdown facebook">
-                <p class="website-label">Facebook</p>
-                <label class="switch">
-                    <input type="checkbox" id="facebookSwitch" checked>
-                        <span class="slider round"></span>
-                </label>
                 <div class="toggle-group hide-checkboxes">
                     <div class="a-toggle">
                         <input type="checkbox" id="facebookFeedToggle" name="facebookFeedToggle">
@@ -142,11 +211,6 @@
                 </div>
             </div>
             <div class="dropdown twitter">
-                <p class="website-label">Twitter</p>
-                <label class="switch">
-                    <input type="checkbox" id="twitterSwitch" checked>
-                        <span class="slider round"></span>
-                </label>
                 <div class="toggle-group hide-checkboxes">
                     <div class="a-toggle">
                         <input type="checkbox" id="twitterExploreToggle" name="twitterExploreToggle">
@@ -172,11 +236,6 @@
             </div>
             
             <div class="dropdown instagram">
-                <p class="website-label">Instagram</p>
-                <label class="switch">
-                    <input type="checkbox" id="instagramSwitch" checked>
-                        <span class="slider round"></span>
-                </label>
                 <div class="toggle-group hide-checkboxes">
                     <div class="a-toggle">
                         <input type="checkbox" id="instagramFeedToggle" name="instagramFeedToggle">
@@ -202,11 +261,6 @@
             </div>
             
             <div class="dropdown linkedin">
-                <p class="website-label">Linkedin</p>
-                <label class="switch">
-                    <input type="checkbox" id="linkedinSwitch" checked>
-                        <span class="slider round"></span>
-                </label>
                 <div class="toggle-group hide-checkboxes">
                     <div class="a-toggle platform-ipad-mac">
                         <input type="checkbox" id="linkedinNewsToggle" name="linkedinNewsToggle">
@@ -228,11 +282,6 @@
             </div>
             
             <div class="dropdown whatsapp">
-                <p class="website-label">WhatsApp</p>
-                <label class="switch">
-                    <input type="checkbox" id="whatsappSwitch" checked>
-                        <span class="slider round"></span>
-                </label>
                 <div class="toggle-group hide-checkboxes">
                     <div class="a-toggle platform-ipad-mac">
                         <input type="checkbox" id="whatsappPreviewToggle" name="whatsappPreviewToggle">
@@ -246,11 +295,6 @@
             </div>
             
             <div class="dropdown google">
-                <p class="website-label">Google</p>
-                <label class="switch">
-                    <input type="checkbox" id="googleSwitch" checked>
-                        <span class="slider round"></span>
-                </label>
                 <div class="toggle-group">
                     <div class="a-toggle hide-checkboxes">
                         <input type="checkbox" id="googleAdsToggle" name="googleAdsToggle">
@@ -263,51 +307,44 @@
                 </div>
             </div>
         </div>
-        
-        <div class="save-toggle">
-            <input type="button" class="saveButton" value="Save settings">
-        </div>
-        <div class="toggle-group center-align">
-            <div class="a-toggle friction-toggle">
-                <input type="checkbox" id="frictionToggle" name="frictionToggle">
-                    <label for="frictionToggle">Delay to change settings</label>
+        <footer>
+            <div class="footer-settings">
+                <div class="save-toggle">
+                    <input type="button" id="saveButton" value="Save settings">
+                </div>
+                <div class="a-toggle friction-toggle">
+                    <input type="checkbox" id="frictionToggle" name="frictionToggle">
+                    <label for="frictionToggle">Delay to open settings</label>
+                    <div id="frictionCustomisationArrow">
+                        <div id="frictionCustomisationArrowRight" style="display: inline;">
+                            <svg width="12px" height="12px" version="1.1" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg">
+                             <path d="m360 1170-90-91.199 478.8-478.8-478.8-478.8 90-91.199 570 570z" fill="#808080" />
+                            </svg>
+                        </div>
+                        <div id="frictionCustomisationArrowDown" style="display: none;">
+                            <svg width="12px" height="12px" version="1.1" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg">
+                             <path d="m652.1 915.27 526.35-524.55c28.742-30.539 28.742-77.246 0-105.99-28.742-28.742-77.246-28.742-105.99 0l-472.46 472.46-472.46-472.46c-30.539-28.742-77.246-28.742-105.99 0-28.742 28.742-28.742 75.449 0 105.99l524.55 524.55c30.539 28.742 77.246 28.742 105.99 0z" fill="#808080" fill-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <p id="friction-customisation-prompt">Customise</p>
+                    </div>
+                </div>
             </div>
-            <div class="a-toggle friction-customisation">
-                <input type="number" id="waitTime" name="waitTime" value="10" max="15">
-                    <label for="waitTime">Wait time (seconds)</label>
+            <div class="toggle-group center-align friction-customisation" style="display: none;">
+                <div class="a-toggle">
+                    <input type="number" id="waitTime" name="waitTime" value="10" min="1" max="600">
+                    <label for="waitTime"> Wait time (seconds)</label>
                     <p id="savedTextTime" style="display: none; color: red;"></p>
+                </div>
+                <div class="a-toggle">
+                    <input type="text" id="waitText" name="waitText" value="What's your intention?">
+                    <label for="waitText"> Text</label>
+                </div>
             </div>
-            <div class="a-toggle friction-customisation">
-                <input type="text" id="waitText" name="waitText" value="What's your intention?">
-                    <label for="waitText">Message</label>
+            <div class="suggestions-link">
+                <a href="https://github.com/ulyngs/mindshield-open-source/issues" target="_blank">Suggest improvements</a>
             </div>
-        </div>
-        <div id="what-sites">
-            <div id="sites-arrow-right" style="display: inline-block;">
-                <svg width="12px" height="12px" version="1.1" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg">
-                 <path d="m360 1170-90-91.199 478.8-478.8-478.8-478.8 90-91.199 570 570z"/>
-                </svg>
-            </div>
-            <div id="sites-arrow-down" style="display: none;">
-                <svg width="12px" height="12px" version="1.1" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg">
-                 <path d="m652.1 915.27 526.35-524.55c28.742-30.539 28.742-77.246 0-105.99-28.742-28.742-77.246-28.742-105.99 0l-472.46 472.46-472.46-472.46c-30.539-28.742-77.246-28.742-105.99 0-28.742 28.742-28.742 75.449 0 105.99l524.55 524.55c30.539 28.742 77.246 28.742 105.99 0z" fill-rule="evenodd"/>
-                </svg>
-            </div>
-            <p id="sites-text">Sites available</p>
-            <ul id="sites-available" style="display: none;">
-              <li><a href="https://www.youtube.com" target="_blank">youtube.com</a></li>
-              <li><a href="https://www.facebook.com" target="_blank">facebook.com</a></li>
-              <li><a href="https://www.twitter.com" target="_blank">twitter.com</a></li>
-              <li><a href="https://www.instagram.com" target="_blank">instagram.com</a></li>
-              <li><a href="https://www.linkedin.com" target="_blank">linkedin.com</a></li>
-              <li class="platform-ipad-mac"><a href="https://web.whatsapp.com" target="_blank">web.whatsapp.com</a></li>
-              <li><a href="https://www.google.com" target="_blank">google.com</a></li>
-            </ul>
-        </div>
-        <div class="github-link">
-            <hr>
-            <p class="smaller-font"><a href="https://github.com/ulyngs/mindshield-open-source/issues" target="_blank">Suggest improvements</a></p>
-        </div>
+        </footer>
     </div>
 </body>
 </html>

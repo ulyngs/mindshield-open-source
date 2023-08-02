@@ -3,11 +3,19 @@
 }
 
 body {
-    width: 180px;
-    padding: 10px;
-
+    width: 200px;
+    padding: 10px 10px 100px 10px;
     font-family: system-ui;
     text-align: center;
+    background-color: #F5F5F5;
+    color: #333333;
+}
+
+.website-toggle {
+    display: none;
+}
+#website-toggles {
+    display: inline;
 }
 
 .smaller-font {
@@ -105,6 +113,9 @@ a {
 .shown {
   display: block !important;
 }
+.shown-inline {
+  display: inline !important;
+}
 
 /*** TOGGLES ***/
 /* The switch - the box around the slider */
@@ -180,19 +191,17 @@ input:checked + .slider:before {
     background-color: rgba(0,0,0,0.7);
 }
 
-.saveButton {
-    background-color: #008CBA;
+#saveButton {
+    background-color: #3498DB;
     border: none;
     color: white;
     padding: 7px;
     text-align: center;
     text-decoration: none;
-    font-size: 0.9em;
+    font-size: 0.8em;
     font-weight: bold;
-    margin-top: 8px;
+    border-radius: 2px;
 }
-
-
 
 /******  make the checkboxes use 'prohibited' symbols   ******/
 /* Base for label styling */
@@ -363,16 +372,18 @@ input:checked + .slider:before {
 
 
 #what-sites {
+    display: inline;
     text-align: left;
     margin-bottom: 1em;
     cursor: pointer;
 }
 #sites-text {
-    display: inline-block;
+    display: inline;
     margin: 0;
     font-style: italic;
     font-size: 0.9em;
-    vertical-align: bottom
+    vertical-align: text-bottom;
+    color: gray;
 }
 #sites-arrow {
     width: 0.7em;
@@ -381,9 +392,69 @@ input:checked + .slider:before {
 #sites-available {
     margin-left: 0px;
     padding-left: 1.3em;
-    margin-top: 0.5em;
+    margin-top: 0em;
     font-size: 0.9em;
 }
+
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    padding: 4px 8px;
+    font-size: 0.9em;
+    border-top: 1px solid rgb(207, 206, 206);
+    background-color: #F5F5F5;
+}
+
+footer a,
+footer a:visited {
+    color: #9b9fa7;
+    text-decoration: none;
+
+}
+
+.footer-settings {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.save-toggle {
+    flex: 1 0 50%; /* Flex-grow | Flex-shrink | Flex-basis */
+    text-align: left;
+    5px 0px 0px 2px;
+    padding: 0px 3px;
+}
+
+.friction-toggle {
+    flex: 1 0 45%; /* Flex-grow | Flex-shrink | Flex-basis */
+    padding: 0px 3px;
+}
+
+footer .toggle-group {
+    margin: 0px 0px 5px 0px;
+}
+
+#friction-customisation-prompt {
+    display: inline;
+    font-style: italic;
+    color: gray;
+}
+
+#frictionCustomisationArrow {
+    margin-top: 3px;
+}
+
+.suggestions-link {
+    margin-top: 2px;
+}
+
+
+
+
+
 
 @media (prefers-color-scheme: dark) {
     /* Dark Mode styles go here. */
@@ -395,11 +466,9 @@ input:checked + .slider:before {
         filter: invert(100%) sepia(0%) saturate(7399%) hue-rotate(180deg) brightness(112%) contrast(80%);
     }
     
+    a,
     a:visited {
-        color: rgb(194, 194, 194);
-    }
-    a {
-        color: rgb(194, 194, 194);
+        color: gray;
     }
     #sites-arrow path {
         fill: rgb(194, 194, 194);
@@ -409,6 +478,10 @@ input:checked + .slider:before {
         fill: rgb(194, 194, 194);
     }
 }
+
+
+
+
 
 /******* HIDE IRRELEVANT TOGGLES *******/
 /* iPhone */
@@ -459,3 +532,5 @@ input:checked + .slider:before {
         display: none;
     }
 }
+
+
