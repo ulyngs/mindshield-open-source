@@ -15,6 +15,7 @@
                                       "youtubeSearchPredict",
                                       "youtubeRecVids",
                                       "youtubeThumbnails",
+                                      "youtubeNotifications",
                                       "youtubeProfileImg",
                                       "youtubeShorts",
                                       "youtubeSubscriptions",
@@ -60,8 +61,13 @@
     const youtubeRecVidsCssOn = 'ytd-browse[page-subtype="home"] { visibility: visible !important; } div[tab-identifier="FEwhat_to_watch"] { visibility: visible !important; }';
     const youtubeRecVidsCssOff = 'ytd-browse[page-subtype="home"] { display: none; } div[tab-identifier="FEwhat_to_watch"] { visibility: hidden; }';
     
-    const youtubeThumbnailsCssOn = 'ytd-thumbnail {display: block; } ytd-compact-video-renderer { padding: 0px 10px 10px 10px; /* mobile */ .media-item-thumbnail-container, .video-thumbnail-img { display: block; }';
+    const youtubeThumbnailsCssOn = 'ytd-thumbnail {display: block; } ytd-compact-video-renderer { padding: 0px 10px 10px 10px; } /* mobile */ .media-item-thumbnail-container, .video-thumbnail-img { display: block; }';
     const youtubeThumbnailsCssOff = 'ytd-thumbnail { display: none; } /* mobile */ .media-item-thumbnail-container, .video-thumbnail-img { display: none !important; } .reel-shelf-items ytm-reel-item-renderer, .reel-shelf-items .reel-item-endpoint, .video-thumbnail-container-vertical { height: 100px !important; }';
+    const youtubeThumbnailsCssBlur = 'ytd-thumbnail img { filter: blur(7px); } /* mobile */ .media-item-thumbnail-container, .video-thumbnail-img { filter: blur(7px); }';
+    
+    const youtubeNotificationsCssOn = '';
+    const youtubeNotificationsCssOff = 'ytd-notification-topbar-button-renderer.ytd-masthead { display: none !important; }';
+    const youtubeNotificationsCssBlur = 'ytd-notification-topbar-button-renderer.ytd-masthead .yt-spec-icon-badge-shape__badge { display: none; }';
     
     const youtubeProfileImgCssOn = '#avatar-link {display: inline-block; visibility: visible;} .channel-thumbnail-icon {display: inline-block;}';
     const youtubeProfileImgCssOff = '#avatar-link {display: none; visibility: hidden;} .channel-thumbnail-icon {display: none;}';
@@ -220,13 +226,27 @@
                       var styleName = item + "Style";
                       var key = item + "Status";
                       
-                      browser.storage.sync.get(key, function(result) {
-                          if (result[key] == true && !(platformIsOn == false)){
-                              createStyleElement(styleName, eval(item + "CssOff"));
-                          } else {
-                              createStyleElement(styleName, eval(item + "CssOn"));
-                          };
-                      });
+                      if (item === "youtubeThumbnails" || item === "youtubeNotifications") {
+                          
+                          browser.storage.sync.get(key, function(result) {
+                              
+                              console.log(result[key]);
+                              
+                              if (result[key] == undefined || result[key] === false){
+                                  createStyleElement(styleName, eval(item + "CssOn"));
+                              } else {
+                                  createStyleElement(styleName, eval(item + "Css" + result[key]));
+                              };
+                          });
+                      } else {
+                          browser.storage.sync.get(key, function(result) {
+                              if (result[key] == true){
+                                  createStyleElement(styleName, eval(item + "CssOff"));
+                              } else {
+                                  createStyleElement(styleName, eval(item + "CssOn"));
+                              };
+                          });
+                      }
                   });
               
             });
@@ -238,11 +258,21 @@
         if(message.method === "check"){
             var currentStyle = document.getElementById(message.element + "Style");
     
-            if (currentStyle == undefined){
-                sendResponse({text: "style element is undefined"});
+            // only check the blur element for elements that have it
+            if(message.element == "youtubeThumbnails" || message.element == "youtubeNotifications"){
+                if (currentStyle.innerHTML === eval(message.element + 'CssBlur')){
+                    sendResponse({text: "blur"});
+                }
+            }
+            
+           // do the other checks for all
+           if (currentStyle == undefined){
+               sendResponse({text: "style element is undefined"});
+               
             } else if (currentStyle.innerHTML === eval(message.element + 'CssOn')) {
                 sendResponse({text: "visible"});
-            } else {
+                
+            } else if (currentStyle.innerHTML === eval(message.element + 'CssOff')){
                 sendResponse({text: "hidden"});
             };
         };
@@ -268,6 +298,16 @@
             } else {
                 currentStyle.innerHTML = eval(message.element + 'CssOn')
             }
+        };
+        
+        // handle blur events
+        if(message.method === "changeHideBlur"){
+            if (currentStyle == undefined){
+                console.log("not on active tab");
+            } else {
+                
+                currentStyle.innerHTML = eval(message.element + 'Css' + message.action)
+            };
         };
     });
 })();

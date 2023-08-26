@@ -149,6 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                       "youtubeSearchPredict",
                                       "youtubeRecVids",
                                       "youtubeThumbnails",
+                                      "youtubeNotifications",
                                       "youtubeProfileImg",
                                       "youtubeShorts",
                                       "youtubeSubscriptions",
@@ -209,20 +210,77 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     
     // create function to make a checkbox toggle view status on and off
-    function toggleViewStatus(element_to_change, id_of_toggle){
+    function toggleViewStatusCheckbox(element_to_change, id_of_toggle){
         var currentCheckbox = document.getElementById(id_of_toggle);
         
         currentCheckbox.addEventListener('click', function() {
             chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
                 chrome.tabs.sendMessage(tabs[0].id, { method: "change", element: element_to_change });
-              });
-            }, false);
+            });
+        }, false);
     };
+    
+    // create function to set a button according to current view status on the page
+    function setButtonState(element_to_check, id_of_toggle){
+        var currentButton = document.getElementById(id_of_toggle);
+        
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            
+            chrome.tabs.sendMessage(tabs[0].id, { method: "check", element: element_to_check }, function(response){
+                if (response.text === "hidden"){
+                    currentButton.setAttribute("data-state", "Off");
+                } else if (response.text === "visible"){
+                    currentButton.setAttribute("data-state", "On");
+                } else if (response.text === "blur"){
+                    currentButton.setAttribute("data-state", "Blur");
+                } else {
+                    // if the style element is undefined, set to saved status
+                    var key = element_to_check + "Status";
+                    
+                    browser.storage.sync.get(key, function(result) {
+                        var status = result[key];
+                        currentButton.setAttribute("data-state", result[key]);
+                    });
+                }
+            });
+        });
+    };
+
+    
+    // create function to make a button toggle view status on and off
+    function toggleViewStatusButton(element_to_change, id_of_toggle){
+        var currentButton = document.getElementById(id_of_toggle);
+        let state;
+
+        currentButton.addEventListener('click', function() {
+            if (currentButton.getAttribute("data-state") == "On"){
+                currentButton.setAttribute("data-state", "Off");
+                state = "Off";
+            } else if (currentButton.getAttribute("data-state") == "Off"){
+                currentButton.setAttribute("data-state", "Blur");
+                state = "Blur";
+            } else {
+                currentButton.setAttribute("data-state", "On");
+                state = "On";
+            }
+            
+            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                chrome.tabs.sendMessage(tabs[0].id, { method: "changeHideBlur", element: element_to_change, action: state });
+            });
+        }, false);
+    };
+
+
     
     // assign the functions to the checkboxes
     elementsThatCanBeHidden.forEach(function (item) {
-        setCheckboxState(item, item + "Toggle");
-        toggleViewStatus(item, item + "Toggle");
+        if (item === "youtubeThumbnails" || item === "youtubeNotifications") {
+            setButtonState(item, item + "Toggle");
+            toggleViewStatusButton(item, item + "Toggle");
+        } else {
+            setCheckboxState(item, item + "Toggle");
+            toggleViewStatusCheckbox(item, item + "Toggle");
+        }
     });
     
     // set switches according to current status
