@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                       "linkedinNotifications",
                                       "linkedinFeed",
                                       "linkedinAds",
-                                      "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramSuggestions",
+                                      "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramReels", "instagramSuggestions",
                                       "whatsappPreview",
                                       "whatsappNotificationPrompt",
                                       "googleAds",

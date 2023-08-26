@@ -44,8 +44,8 @@
                                       "linkedinNotifications",
                                       "linkedinFeed",
                                       "linkedinAds",
-                                      "instagramFeed",
-                                      "instagramStories", "instagramMutedStories", "instagramExplore", "instagramSuggestions",
+                                      "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore",
+                                      "instagramReels", "instagramSuggestions",
                                       "whatsappPreview",
                                       "whatsappNotificationPrompt",
                                       "googleAds",
@@ -146,8 +146,8 @@
     const twitterTimelineCssOff = 'div[data-testid="primaryColumn"] section[role="region"] {visibility: hidden; }';
     
     // Instagram CSS
-    const instagramFeedCssOn = 'main[role="main"] section._aalv > div._aam1 article { visibility: visible; }';
-    const instagramFeedCssOff = 'main[role="main"] section._aalv > div._aam1 article { visibility: hidden; }';
+    const instagramFeedCssOn = '';
+    const instagramFeedCssOff = 'main[role="main"] section._aalv > div._aam1 article { visibility: hidden; } main[role="main"] .xw7yly9 > div:nth-child(2) {display: none !important; }';
     
     const instagramStoriesCssOn = 'main[role="main"] div._aac4._aac5._aac6 { display: block; } main ._aauo[role="menu"] {display: flex;}';
     const instagramStoriesCssOff = 'main[role="main"] div._aac4._aac5._aac6 { display: none; } main ._aauo[role="menu"] {display: none;}';
@@ -155,11 +155,14 @@
     const instagramMutedStoriesCssOn = 'main[role="main"] div[role="menu"] button[role="menuitem"].xbyyjgo { display: flex; }';
     const instagramMutedStoriesCssOff = 'main[role="main"] div[role="menu"] button[role="menuitem"].xbyyjgo { display: none; }';
     
-    const instagramExploreCssOn = 'a[href="/explore/"] { display: inline; }';
-    const instagramExploreCssOff = 'a[href="/explore/"] { display: none; }';
+    const instagramExploreCssOn = '';
+    const instagramExploreCssOff = 'a[href^="/explore/"] { display: none; }';
     
-    const instagramSuggestionsCssOn = 'div._aak6._aak9 div._aak3 { display: flex; }';
-    const instagramSuggestionsCssOff = 'div._aak6._aak9 div._aak3 { display: none; }';
+    const instagramReelsCssOn = '';
+    const instagramReelsCssOff = 'a[href^="/reels/"] { display: none; }';
+    
+    const instagramSuggestionsCssOn = '';
+    const instagramSuggestionsCssOff = 'div._aak6._aak9 div._aak3 { display: none; } div._aak3._agh4 {display: none !important; }';
     
     // LinkedIn CSS
     const linkedinFeedCssOn = 'main.scaffold-layout__main:not(:has(.nt-content)) .scaffold-finite-scroll, #feed-container {display: block;}';
