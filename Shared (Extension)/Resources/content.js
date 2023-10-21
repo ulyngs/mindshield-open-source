@@ -68,9 +68,10 @@
     const youtubeNotificationsCssOn = '';
     const youtubeNotificationsCssOff = 'ytd-notification-topbar-button-renderer.ytd-masthead { display: none !important; }';
     const youtubeNotificationsCssBlur = 'ytd-notification-topbar-button-renderer.ytd-masthead .yt-spec-icon-badge-shape__badge { display: none; }';
+
     
-    const youtubeProfileImgCssOn = '#avatar-link {display: inline-block; visibility: visible;} .channel-thumbnail-icon {display: inline-block;}';
-    const youtubeProfileImgCssOff = '#avatar-link {display: none; visibility: hidden;} .channel-thumbnail-icon {display: none;}';
+    const youtubeProfileImgCssOn = '#avatar-link {display: inline-block; visibility: visible;} .channel-thumbnail-icon {display: inline-block;} #channel-thumbnail { display: block;}';
+    const youtubeProfileImgCssOff = '#avatar-link {display: none; visibility: hidden;} .channel-thumbnail-icon, #channel-thumbnail {display: none;}';
    
     const youtubeShortsCssOn = '#endpoint.yt-simple-endpoint.ytd-guide-entry-renderer[title="Shorts"], ytd-mini-guide-entry-renderer[aria-label="Shorts"] { display: block; } ytm-pivot-bar-renderer[role="tablist"] ytm-pivot-bar-item-renderer:nth-child(2), ytd-reel-shelf-renderer, ytd-rich-shelf-renderer[is-shorts] { display: flex; }'
     const youtubeShortsCssOff = '#endpoint.yt-simple-endpoint.ytd-guide-entry-renderer[title="Shorts"],ytd-mini-guide-entry-renderer[aria-label="Shorts"], ytd-reel-shelf-renderer, ytd-rich-shelf-renderer[is-shorts] { display: none; } ytm-pivot-bar-renderer[role="tablist"] ytm-pivot-bar-item-renderer:nth-child(2), ytm-reel-shelf-renderer { display: none !important; } ';
