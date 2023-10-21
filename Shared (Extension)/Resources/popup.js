@@ -2,6 +2,49 @@
 // https://developer.chrome.com/docs/extensions/mv3/messaging/
 
 document.addEventListener('DOMContentLoaded', function() {
+    const platformsWeTarget = [ "youtube", "facebook", "twitter", "instagram", "linkedin", "whatsapp", "google" ];
+    const elementsThatCanBeHidden = [ "youtubeSearch",
+                                      "youtubeSearchPredict",
+                                      "youtubeRecVids",
+                                      "youtubeThumbnails",
+                                      "youtubeNotifications",
+                                      "youtubeProfileImg",
+                                      "youtubeShorts",
+                                      "youtubeSubscriptions",
+                                      "youtubeLibrary",
+                                      "youtubeHistory",
+                                      "youtubeExplore",
+                                      "youtubeMore",
+                                      "youtubeRelated",
+                                      "youtubeSidebar",
+                                      "youtubeComments",
+                                      "youtubeAds",
+                                      "youtubeViews",
+                                      "youtubeLikes",
+                                      "youtubeSubscribers"
+                                      "twitterExplore",
+                                      "twitterNotifications",
+                                      "twitterTrends",
+                                      "twitterFollow",
+                                      "twitterTimeline",
+                                      "facebookFeed",
+                                      "facebookWatch",
+                                      "facebookNotifications",
+                                      "facebookStories",
+                                      "facebookChat",
+                                      "linkedinNews",
+                                      "linkedinNotifications",
+                                      "linkedinFeed",
+                                      "linkedinAds",
+                                      "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramReels", "instagramSuggestions",
+                                      "whatsappPreview",
+                                      "whatsappNotificationPrompt",
+                                      "googleAds",
+                                      "googleBackground" ];
+    
+    
+    
+    
     // set friction checkbox
     browser.storage.sync.get("addFriction", function(result) {
         var frictionToggle = document.getElementById("frictionToggle");
@@ -143,46 +186,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 2500);
         }
     });
-    
-    const platformsWeTarget = [ "youtube", "facebook", "twitter", "instagram", "linkedin", "whatsapp", "google" ];
-    const elementsThatCanBeHidden = [ "youtubeSearch",
-                                      "youtubeSearchPredict",
-                                      "youtubeRecVids",
-                                      "youtubeThumbnails",
-                                      "youtubeNotifications",
-                                      "youtubeProfileImg",
-                                      "youtubeShorts",
-                                      "youtubeSubscriptions",
-                                      "youtubeLibrary",
-                                      "youtubeHistory",
-                                      "youtubeExplore",
-                                      "youtubeMore",
-                                      "youtubeRelated",
-                                      "youtubeSidebar",
-                                      "youtubeComments",
-                                      "youtubeAds",
-                                      "youtubeViews",
-                                      "youtubeLikes",
-                                      "youtubeSubscribers",
-                                      "twitterExplore",
-                                      "twitterNotifications",
-                                      "twitterTrends",
-                                      "twitterFollow",
-                                      "twitterTimeline",
-                                      "facebookFeed",
-                                      "facebookWatch",
-                                      "facebookNotifications",
-                                      "facebookStories",
-                                      "facebookChat",
-                                      "linkedinNews",
-                                      "linkedinNotifications",
-                                      "linkedinFeed",
-                                      "linkedinAds",
-                                      "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramReels", "instagramSuggestions",
-                                      "whatsappPreview",
-                                      "whatsappNotificationPrompt",
-                                      "googleAds",
-                                      "googleBackground" ];
     
     // create function to set a checkbox according to current view status on the page
     function setCheckboxState(element_to_check, id_of_toggle){
