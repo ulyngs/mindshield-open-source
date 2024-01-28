@@ -117,7 +117,7 @@
     
     // Instagram CSS
     const instagramFeedCssOn = '';
-    const instagramFeedCssOff = 'main[role="main"] section._aalv > div._aam1 article { visibility: hidden; } main[role="main"] .xw7yly9 > div:nth-child(2) {display: none !important; }';
+    const instagramFeedCssOff = 'main[role="main"] div.xw7yly9 > div.x168nmei {display: none !important;}';
     
     const instagramStoriesCssOn = 'main[role="main"] div._aac4._aac5._aac6 { display: block; } main ._aauo[role="menu"] {display: flex;}';
     const instagramStoriesCssOff = 'main[role="main"] div._aac4._aac5._aac6 { display: none; } main ._aauo[role="menu"] {display: none;}';
