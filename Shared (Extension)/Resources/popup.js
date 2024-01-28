@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                       "twitterExplore", "twitterNotifications", "twitterTrends", "twitterFollow", "twitterTimeline",
                                       "facebookFeed", "facebookWatch", "facebookNotifications", "facebookStories", "facebookChat",
                                       "linkedinNews", "linkedinNotifications", "linkedinFeed", "linkedinAds",
-                                      "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramReels", "instagramSuggestions",
+                                      "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramReels", "instagramSuggestions", "instagramComments",
                                       "whatsappPreview","whatsappNotificationPrompt",
                                       "googleAds", "googleBackground" ];
     

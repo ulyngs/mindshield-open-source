@@ -11,45 +11,15 @@
     window.hasRun = true;
     
     const platformsWeTarget = [ "youtube", "facebook", "twitter", "instagram", "linkedin", "whatsapp", "google" ];
-    const elementsThatCanBeHidden = [ "youtubeSearch",
-                                      "youtubeSearchPredict",
-                                      "youtubeRecVids",
-                                      "youtubeThumbnails",
-                                      "youtubeNotifications",
-                                      "youtubeProfileImg",
-                                      "youtubeShorts",
-                                      "youtubeSubscriptions",
-                                      "youtubeLibrary",
-                                      "youtubeHistory",
-                                      "youtubeExplore",
-                                      "youtubeMore",
-                                      "youtubeRelated",
-                                      "youtubeSidebar",
-                                      "youtubeComments",
-                                      "youtubeAds",
-                                      "youtubeViews",
-                                      "youtubeLikes",
-                                      "youtubeSubscribers",
-                                      "twitterExplore",
-                                      "twitterNotifications",
-                                      "twitterTrends",
-                                      "twitterFollow",
-                                      "twitterTimeline",
-                                      "facebookFeed",
-                                      "facebookWatch",
-                                      "facebookNotifications",
-                                      "facebookStories",
-                                      "facebookChat",
-                                      "linkedinNews",
-                                      "linkedinNotifications",
-                                      "linkedinFeed",
-                                      "linkedinAds",
-                                      "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore",
-                                      "instagramReels", "instagramSuggestions",
-                                      "whatsappPreview",
-                                      "whatsappNotificationPrompt",
-                                      "googleAds",
-                                      "googleBackground" ];
+    const elementsThatCanBeHidden = [ "youtubeSearch", "youtubeSearchPredict", "youtubeRecVids", "youtubeThumbnails", "youtubeNotifications", "youtubeProfileImg",
+                                      "youtubeShorts", "youtubeSubscriptions", "youtubeLibrary", "youtubeHistory", "youtubeExplore", "youtubeMore",
+                                      "youtubeRelated", "youtubeSidebar", "youtubeComments", "youtubeAds", "youtubeViews", "youtubeLikes", "youtubeSubscribers",
+                                      "twitterExplore", "twitterNotifications", "twitterTrends", "twitterFollow", "twitterTimeline",
+                                      "facebookFeed", "facebookWatch", "facebookNotifications", "facebookStories", "facebookChat",
+                                      "linkedinNews", "linkedinNotifications", "linkedinFeed", "linkedinAds",
+                                      "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramReels", "instagramSuggestions", "instagramComments",
+                                      "whatsappPreview","whatsappNotificationPrompt",
+                                      "googleAds", "googleBackground" ];
     
     // YouTube CSS
     const youtubeSearchCssOn = '';
@@ -163,6 +133,9 @@
     
     const instagramSuggestionsCssOn = '';
     const instagramSuggestionsCssOff = 'div._aak6._aak9 div._aak3 { display: none; } div._aak3._agh4 {display: none !important; }';
+    
+    const instagramCommentsCssOn = '';
+    const instagramCommentsCssOff = 'div.x9f619.xjbqb8w.x78zum5.x168nmei.x13lgxp2.x5pf9jr.xo71vjh.x1xmf6yo:has(a[href*="/comments/"]) {display: none !important;}';
     
     // LinkedIn CSS
     const linkedinFeedCssOn = 'main.scaffold-layout__main:not(:has(.nt-content)) .scaffold-finite-scroll, #feed-container {display: block;}';
