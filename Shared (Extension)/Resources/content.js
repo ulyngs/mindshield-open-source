@@ -119,8 +119,8 @@
     const instagramFeedCssOn = '';
     const instagramFeedCssOff = 'main[role="main"] div.xw7yly9 > div.x168nmei {display: none !important;}';
     
-    const instagramStoriesCssOn = 'main[role="main"] div._aac4._aac5._aac6 { display: block; } main ._aauo[role="menu"] {display: flex;}';
-    const instagramStoriesCssOff = 'main[role="main"] div._aac4._aac5._aac6 { display: none; } main ._aauo[role="menu"] {display: none;}';
+    const instagramStoriesCssOn = '';
+    const instagramStoriesCssOff = 'main div.xmnaoh6 {display: none !important;}';
     
     const instagramMutedStoriesCssOn = 'main[role="main"] div[role="menu"] button[role="menuitem"].xbyyjgo { display: flex; }';
     const instagramMutedStoriesCssOff = 'main[role="main"] div[role="menu"] button[role="menuitem"].xbyyjgo { display: none; }';
