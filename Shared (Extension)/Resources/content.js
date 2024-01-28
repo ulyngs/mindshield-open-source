@@ -129,7 +129,7 @@
     const instagramExploreCssOff = 'a[href^="/explore/"] { display: none; }';
     
     const instagramReelsCssOn = '';
-    const instagramReelsCssOff = 'a[href^="/reels/"] { display: none; }';
+    const instagramReelsCssOff = 'a[href*="/reels/"] { display: none; }';
     
     const instagramSuggestionsCssOn = '';
     const instagramSuggestionsCssOff = 'div._aak6._aak9 div._aak3 { display: none; } div._aak3._agh4 {display: none !important; }';
