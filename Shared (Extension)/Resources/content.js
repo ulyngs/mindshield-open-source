@@ -117,10 +117,10 @@
     
     // Instagram CSS
     const instagramFeedCssOn = '';
-    const instagramFeedCssOff = 'main[role="main"] div.xw7yly9 > div.x168nmei {display: none !important;}';
+    const instagramFeedCssOff = 'main[role="main"] div.xw7yly9 > div.x168nmei, /* mobile */ section._aalv._aal_ div._aam1 > div.x9f619 {display: none !important;}';
     
     const instagramStoriesCssOn = '';
-    const instagramStoriesCssOff = 'main div.xmnaoh6 {display: none !important;}';
+    const instagramStoriesCssOff = 'main div.xmnaoh6, /* mobile */ section._aalv._aal_ div._aam1 > div._aac4 {display: none !important;}';
     
     const instagramMutedStoriesCssOn = 'main[role="main"] div[role="menu"] button[role="menuitem"].xbyyjgo { display: flex; }';
     const instagramMutedStoriesCssOff = 'main[role="main"] div[role="menu"] button[role="menuitem"].xbyyjgo { display: none; }';
