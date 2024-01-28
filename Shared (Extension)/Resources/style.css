@@ -65,6 +65,11 @@ main[role="main"] div[role="menu"] button[role="menuitem"].xbyyjgo { display: no
 /* suggestions */
 div._aak6._aak9 div._aak3 { display: none; }
 
+/* prompt to 'use app' */
+div._acc8._abpk:has(button._acan) {
+    display: none !important;
+}
+
 
 /******************
 ** GOOGLE SEARCH **
