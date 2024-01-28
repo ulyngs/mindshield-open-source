@@ -3,46 +3,15 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     const platformsWeTarget = [ "youtube", "facebook", "twitter", "instagram", "linkedin", "whatsapp", "google" ];
-    const elementsThatCanBeHidden = [ "youtubeSearch",
-                                      "youtubeSearchPredict",
-                                      "youtubeRecVids",
-                                      "youtubeThumbnails",
-                                      "youtubeNotifications",
-                                      "youtubeProfileImg",
-                                      "youtubeShorts",
-                                      "youtubeSubscriptions",
-                                      "youtubeLibrary",
-                                      "youtubeHistory",
-                                      "youtubeExplore",
-                                      "youtubeMore",
-                                      "youtubeRelated",
-                                      "youtubeSidebar",
-                                      "youtubeComments",
-                                      "youtubeAds",
-                                      "youtubeViews",
-                                      "youtubeLikes",
-                                      "youtubeSubscribers"
-                                      "twitterExplore",
-                                      "twitterNotifications",
-                                      "twitterTrends",
-                                      "twitterFollow",
-                                      "twitterTimeline",
-                                      "facebookFeed",
-                                      "facebookWatch",
-                                      "facebookNotifications",
-                                      "facebookStories",
-                                      "facebookChat",
-                                      "linkedinNews",
-                                      "linkedinNotifications",
-                                      "linkedinFeed",
-                                      "linkedinAds",
+    const elementsThatCanBeHidden = [ "youtubeSearch", "youtubeSearchPredict", "youtubeRecVids", "youtubeThumbnails", "youtubeNotifications", "youtubeProfileImg",
+                                      "youtubeShorts", "youtubeSubscriptions", "youtubeLibrary", "youtubeHistory", "youtubeExplore", "youtubeMore",
+                                      "youtubeRelated", "youtubeSidebar", "youtubeComments", "youtubeAds", "youtubeViews", "youtubeLikes", "youtubeSubscribers",
+                                      "twitterExplore", "twitterNotifications", "twitterTrends", "twitterFollow", "twitterTimeline",
+                                      "facebookFeed", "facebookWatch", "facebookNotifications", "facebookStories", "facebookChat",
+                                      "linkedinNews", "linkedinNotifications", "linkedinFeed", "linkedinAds",
                                       "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramReels", "instagramSuggestions",
-                                      "whatsappPreview",
-                                      "whatsappNotificationPrompt",
-                                      "googleAds",
-                                      "googleBackground" ];
-    
-    
+                                      "whatsappPreview","whatsappNotificationPrompt",
+                                      "googleAds", "googleBackground" ];
     
     
     // set friction checkbox
@@ -438,6 +407,24 @@ document.addEventListener('DOMContentLoaded', function() {
           howToText.style.display = "none";
           howToArrowRight.style.display = "inline-block";
           howToArrowDown.style.display = "none";
+      }
+    });
+    
+    // for hiding showing the removal of video previews on non-mobile
+    const howToNotMobile = document.querySelector('#hide-previews-not-mobile');
+    const howToTextNotMobile = document.querySelector('#how-to-description-not-mobile');
+    const howToArrowRightNotMobile = document.querySelector('#how-to-arrow-right-not-mobile');
+    const howToArrowDownNotMobile = document.querySelector('#how-to-arrow-down-not-mobile');
+
+    howToNotMobile.addEventListener("click", function() {
+      if (howToTextNotMobile.style.display === "none") {
+          howToTextNotMobile.style.display = "block";
+          howToArrowRightNotMobile.style.display = "none";
+          howToArrowDownNotMobile.style.display = "inline-block";
+      } else {
+          howToTextNotMobile.style.display = "none";
+          howToArrowRightNotMobile.style.display = "inline-block";
+          howToArrowDownNotMobile.style.display = "none";
       }
     });
     
