@@ -20,7 +20,7 @@ div[aria-label="Stories"] { display: none; }
 
 /*** watch ***/
 /* desktop */
-a[aria-label^="Watch"] { display: none; }
+/*a[aria-label^="Watch"] { display: none; }*/
 
 /* mobile */
 #screen-root div[data-mcomponent="MScreen"] div[data-mcomponent="MContainer"] div[data-mcomponent="MContainer"]:nth-child(2) div[role="button"]:nth-child(4) {
