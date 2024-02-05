@@ -10,7 +10,7 @@ div[role="complementary"] div[data-visualcompletion="ignore-dynamic"] > div.x1n2
 
 /*** stories ***/
 /* desktop */
-.x78zum5.x1q0g3np.xl56j7k.x1yztbdb.x1y1aw1k { display: none; }
+div[aria-label="Stories"] { display: none; }
 
 /* mobile */
 #screen-root div[data-mcomponent="MContainer"] > div[data-mcomponent="MContainer"]:has(div[aria-label*="story"]) {
