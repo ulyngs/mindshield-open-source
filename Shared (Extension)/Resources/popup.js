@@ -14,6 +14,32 @@ document.addEventListener('DOMContentLoaded', function() {
                                       "googleAds", "googleBackground" ];
     
     
+    // Initialize or increment the open count in localStorage
+        let opensCount = localStorage.getItem('opensCount');
+        opensCount = opensCount ? parseInt(opensCount, 10) + 1 : 1; // Parse to number if exists and increment, else initialize with 1
+        localStorage.setItem('opensCount', opensCount);
+
+        // Check if the user has previously clicked 'No, thanks'
+        let noThanksClicked = localStorage.getItem('noThanksClicked') === 'true';
+
+        // Show the review prompt every 12th open unless 'No, thanks' has been clicked
+        if (opensCount % 12 === 0 && !noThanksClicked) {
+            var reviewPrompt = document.getElementById('reviewPrompt');
+            if (reviewPrompt) {
+                reviewPrompt.style.display = 'block';
+            }
+        }
+    
+    // Handling the 'No, thanks' button click
+        document.getElementById('noThanksButton').addEventListener('click', function() {
+            localStorage.setItem('noThanksClicked', 'true'); // Set the flag when 'No, thanks' is clicked
+            // Optionally hide the prompt immediately
+            var reviewPrompt = document.getElementById('reviewPrompt');
+            if (reviewPrompt) {
+                reviewPrompt.style.display = 'none';
+            }
+        });
+    
     // set friction checkbox
     browser.storage.sync.get("addFriction", function(result) {
         var frictionToggle = document.getElementById("frictionToggle");

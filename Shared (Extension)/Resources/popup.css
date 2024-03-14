@@ -496,7 +496,13 @@ footer .toggle-group {
 
 
 
+.review-prompt-content {
+    margin-bottom: 1.5em;
+}
 
+#noThanksButton {
+    margin-top: 1.5em;
+}
 
 
 @media (prefers-color-scheme: dark) {

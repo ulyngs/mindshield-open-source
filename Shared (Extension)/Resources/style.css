@@ -13,9 +13,9 @@ div[role="complementary"] div[data-visualcompletion="ignore-dynamic"] > div.x1n2
 div[aria-label="Stories"] { display: none; }
 
 /* mobile */
-#screen-root div[data-mcomponent="MContainer"] > div[data-mcomponent="MContainer"]:has(div[aria-label*="story"]) {
+/*#screen-root div[data-mcomponent="MContainer"] > div[data-mcomponent="MContainer"]:has(div[aria-label*="story"]) {
     display: none;
-}
+}*/
 
 
 /*** watch ***/
