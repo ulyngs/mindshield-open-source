@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let noThanksClicked = localStorage.getItem('noThanksClicked') === 'true';
 
         // Show the review prompt every 12th open unless 'No, thanks' has been clicked
-        if (opensCount % 12 === 0 && !noThanksClicked) {
+        if (opensCount % 10 === 0 && !noThanksClicked) {
             var reviewPrompt = document.getElementById('reviewPrompt');
             if (reviewPrompt) {
                 reviewPrompt.style.display = 'block';
