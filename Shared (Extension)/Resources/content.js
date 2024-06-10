@@ -184,7 +184,7 @@
             );
             
             // if we're on mobile twitter, then don't hide the explore element as it's the search button
-            if (window.location.hostname.includes("m.twitter")){
+            if (window.location.hostname.includes("m.twitter") || window.location.hostname.includes("m.x")){
                 var filteredElements = elementsThatCanBeHidden.filter(element =>
                                                                       !element.includes("Explore")
                                                                       );
