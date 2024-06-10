@@ -402,7 +402,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     filteredElements.forEach(function (element) {
                         var key = element + "Status";
-                        browser.storage.sync.set({ [key]: document.getElementById(element + "Toggle").checked });
+                        var element = document.getElementById(element+"Toggle");
+                        var value = (element.getAttribute("data-state") != null) ?
+                                                        element.getAttribute("data-state") :
+                                                        element.checked;
+                        browser.storage.sync.set({ [key]: value });
                     });
                 }
             });
