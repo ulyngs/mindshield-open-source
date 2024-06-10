@@ -109,8 +109,8 @@
     const xTrendsCssOn = 'div[data-testid="sidebarColumn"] section[role="region"] {display: flex;}';
     const xTrendsCssOff = 'div[data-testid="sidebarColumn"] section[role="region"] {display: none; }';
     
-    const xFollowCssOn = 'div[data-testid="sidebarColumn"] div.css-1dbjc4n.r-1bro5k0:has(aside[role="complementary"]) { display: flex;}';
-    const xFollowCssOff = 'div[data-testid="sidebarColumn"] div.css-1dbjc4n.r-1bro5k0:has(aside[role="complementary"]) { display: none;}';
+    const xFollowCssOn = 'div[data-testid="sidebarColumn"] div.css-175oi2r.r-1bro5k0:has(aside[role="complementary"]) { display: flex;}';
+    const xFollowCssOff = 'div[data-testid="sidebarColumn"] div.css-175oi2r.r-1bro5k0:has(aside[role="complementary"]) { display: none;}';
     
     const xTimelineCssOn = 'div[data-testid="primaryColumn"] section[role="region"] {visibility: visible; }';
     const xTimelineCssOff = 'div[data-testid="primaryColumn"] section[role="region"] {visibility: hidden; }';
