@@ -4,7 +4,7 @@
 
     "name": "MindShield",
     "description": "Hide distractions on the web (YT, FB, IG, TW, LI, Google).",
-    "version": "1.18",
+    "version": "1.19",
 
     "icons": {
         "48":  "images/icon-resized-48.png",
@@ -18,7 +18,7 @@
         "css": [ "style.css" ],
         "js": [ "content.js" ],
         "matches": [ "*://web.whatsapp.com/*", "*://www.youtube.com/*", "*://m.youtube.com/*", "*://www.facebook.com/*", "*://m.facebook.com/*", 
-            "*://twitter.com/*", "*://mobile.twitter.com/*", "*://x.com/*", "*://mobile.x.com/*",
+            "*://x.com/*", "*://mobile.x.com/*",
             "*://www.instagram.com/*", "*://www.linkedin.com/*",
             "*://www.google.com/*",
             "*://www.google.co.jp/*",

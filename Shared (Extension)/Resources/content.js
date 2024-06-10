@@ -10,11 +10,11 @@
     }
     window.hasRun = true;
     
-    const platformsWeTarget = [ "youtube", "facebook", "twitter", "instagram", "linkedin", "whatsapp", "google" ];
+    const platformsWeTarget = [ "youtube", "facebook", "x", "instagram", "linkedin", "whatsapp", "google" ];
     const elementsThatCanBeHidden = [ "youtubeSearch", "youtubeSearchPredict", "youtubeRecVids", "youtubeThumbnails", "youtubeNotifications", "youtubeProfileImg",
                                       "youtubeShorts", "youtubeSubscriptions", "youtubeLibrary", "youtubeHistory", "youtubeExplore", "youtubeMore",
                                       "youtubeRelated", "youtubeSidebar", "youtubeComments", "youtubeAds", "youtubeViews", "youtubeLikes", "youtubeSubscribers",
-                                      "twitterExplore", "twitterNotifications", "twitterTrends", "twitterFollow", "twitterTimeline",
+                                      "xExplore", "xNotifications", "xTrends", "xFollow", "xTimeline",
                                       "facebookFeed", "facebookWatch", "facebookNotifications", "facebookStories", "facebookChat",
                                       "linkedinNews", "linkedinNotifications", "linkedinFeed", "linkedinAds",
                                       "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramReels", "instagramSuggestions", "instagramComments",
@@ -99,21 +99,21 @@
     
     
     
-    // Twitter CSS
-    const twitterExploreCssOn = 'nav[role="navigation"] a[href="/explore"] { display: flex; }';
-    const twitterExploreCssOff = 'nav[role="navigation"] a[href="/explore"] { display: none; }';
+    // x CSS
+    const xExploreCssOn = 'nav[role="navigation"] a[href="/explore"] { display: flex; }';
+    const xExploreCssOff = 'nav[role="navigation"] a[href="/explore"] { display: none; }';
     
-    const twitterNotificationsCssOn = 'nav[role="navigation"] a[href="/notifications"] { display: flex; }';
-    const twitterNotificationsCssOff = 'nav[role="navigation"] a[href="/notifications"] { display: none; }';
+    const xNotificationsCssOn = 'nav[role="navigation"] a[href="/notifications"] { display: flex; }';
+    const xNotificationsCssOff = 'nav[role="navigation"] a[href="/notifications"] { display: none; }';
     
-    const twitterTrendsCssOn = 'div[data-testid="sidebarColumn"] section[role="region"] {display: flex;}';
-    const twitterTrendsCssOff = 'div[data-testid="sidebarColumn"] section[role="region"] {display: none; }';
+    const xTrendsCssOn = 'div[data-testid="sidebarColumn"] section[role="region"] {display: flex;}';
+    const xTrendsCssOff = 'div[data-testid="sidebarColumn"] section[role="region"] {display: none; }';
     
-    const twitterFollowCssOn = 'div[data-testid="sidebarColumn"] div.css-1dbjc4n.r-1bro5k0:has(aside[role="complementary"]) { display: flex;}';
-    const twitterFollowCssOff = 'div[data-testid="sidebarColumn"] div.css-1dbjc4n.r-1bro5k0:has(aside[role="complementary"]) { display: none;}';
+    const xFollowCssOn = 'div[data-testid="sidebarColumn"] div.css-1dbjc4n.r-1bro5k0:has(aside[role="complementary"]) { display: flex;}';
+    const xFollowCssOff = 'div[data-testid="sidebarColumn"] div.css-1dbjc4n.r-1bro5k0:has(aside[role="complementary"]) { display: none;}';
     
-    const twitterTimelineCssOn = 'div[data-testid="primaryColumn"] section[role="region"] {visibility: visible; }';
-    const twitterTimelineCssOff = 'div[data-testid="primaryColumn"] section[role="region"] {visibility: hidden; }';
+    const xTimelineCssOn = 'div[data-testid="primaryColumn"] section[role="region"] {visibility: visible; }';
+    const xTimelineCssOff = 'div[data-testid="primaryColumn"] section[role="region"] {visibility: hidden; }';
     
     // Instagram CSS
     const instagramFeedCssOn = '';
@@ -183,8 +183,8 @@
               element.includes(platform)
             );
             
-            // if we're on mobile twitter, then don't hide the explore element as it's the search button
-            if (window.location.hostname.includes("m.twitter") || window.location.hostname.includes("m.x")){
+            // if we're on mobile x, then don't hide the explore element as it's the search button
+            if (window.location.hostname.includes("m.x")){
                 var filteredElements = elementsThatCanBeHidden.filter(element =>
                                                                       !element.includes("Explore")
                                                                       );
