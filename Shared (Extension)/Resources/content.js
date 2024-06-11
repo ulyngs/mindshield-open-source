@@ -183,13 +183,6 @@
               element.includes(platform)
             );
             
-            // if we're on mobile x, then don't hide the explore element as it's the search button
-            if (window.location.hostname.includes("m.x")){
-                var filteredElements = elementsThatCanBeHidden.filter(element =>
-                                                                      !element.includes("Explore")
-                                                                      );
-            };
-            
             var key = platform + "Status";
             
             browser.storage.sync.get(key, function(result) {
