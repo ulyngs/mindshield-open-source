@@ -4,14 +4,14 @@
 
     "name": "MindShield",
     "description": "Hide distractions on the web (YT, FB, IG, TW, LI, Google).",
-    "version": "1.19",
+    "version": "1.20",
 
     "icons": {
-        "48":  "images/icon-resized-48.png",
-        "96":  "images/icon-resized-96.png",
-        "128": "images/icon-resized-128.png",
-        "256": "images/icon-resized-256.png",
-        "512": "images/icon-resized-512.png"
+        "48":  "images/icon-48.png",
+        "96":  "images/icon-96.png",
+        "128": "images/icon-128.png",
+        "256": "images/icon-256.png",
+        "512": "images/icon-512.png"
     },
 
     "content_scripts": [{
@@ -53,10 +53,10 @@
     "browser_action": {
         "default_popup": "popup.html",
         "default_icon": {
-            "16": "images/icon-resized-16.png",
-            "19": "images/icon-resized-19.png",
-            "32": "images/icon-resized-32.png",
-            "38": "images/icon-resized-38.png"
+            "16": "images/popup-16.png",
+            "19": "images/popup-19.png",
+            "32": "images/popup-32.png",
+            "38": "images/popup-38.png"
         }
     },
 
