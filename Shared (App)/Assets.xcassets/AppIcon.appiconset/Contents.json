@@ -103,7 +103,7 @@
       "size" : "83.5x83.5"
     },
     {
-      "filename" : "icon-resized-1024 1.png",
+      "filename" : "ios.png",
       "idiom" : "ios-marketing",
       "scale" : "1x",
       "size" : "1024x1024"
@@ -127,43 +127,43 @@
       "size" : "32x32"
     },
     {
-      "filename" : "icon-resized-64.png",
+      "filename" : "bigsur64.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "32x32"
     },
     {
-      "filename" : "icon-resized-128.png",
+      "filename" : "bigsur128.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "128x128"
     },
     {
-      "filename" : "icon-resized-256 1.png",
+      "filename" : "bigsur_256x256x32 1.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "128x128"
     },
     {
-      "filename" : "icon-resized-256.png",
+      "filename" : "bigsur_256x256x32.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "256x256"
     },
     {
-      "filename" : "icon-resized-512 1.png",
+      "filename" : "bigsur_512x512x32 1.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "256x256"
     },
     {
-      "filename" : "icon-resized-512.png",
+      "filename" : "bigsur_512x512x32.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "512x512"
     },
     {
-      "filename" : "icon-resized-1024.png",
+      "filename" : "macos.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "512x512"

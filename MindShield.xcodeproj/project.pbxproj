@@ -43,8 +43,6 @@
 		D76921FD2756452E00EB4CEA /* popup.css in Resources */ = {isa = PBXBuildFile; fileRef = D76921AD2756452E00EB4CEA /* popup.css */; };
 		D76921FE2756452E00EB4CEA /* popup.js in Resources */ = {isa = PBXBuildFile; fileRef = D76921AE2756452E00EB4CEA /* popup.js */; };
 		D76921FF2756452E00EB4CEA /* popup.js in Resources */ = {isa = PBXBuildFile; fileRef = D76921AE2756452E00EB4CEA /* popup.js */; };
-		D7692211275645D800EB4CEA /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D7692210275645D800EB4CEA /* Icon.png */; };
-		D7692212275645D800EB4CEA /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D7692210275645D800EB4CEA /* Icon.png */; };
 		D769221727564D8F00EB4CEA /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = D769221627564D8F00EB4CEA /* style.css */; };
 		D769221827564D8F00EB4CEA /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = D769221627564D8F00EB4CEA /* style.css */; };
 		D76E9F05294E487F0067C09D /* iPad_turn_on_two_annotated.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D76E9F03294E487F0067C09D /* iPad_turn_on_two_annotated.jpeg */; };
@@ -94,6 +92,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B81FBB7D2C4B6EEB001AD714 /* icon.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = icon.svg; sourceTree = "<group>"; };
 		D76674DE294E282900F4863B /* iPhone_turn_on_two_anon.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iPhone_turn_on_two_anon.jpeg; sourceTree = "<group>"; };
 		D76674DF294E282900F4863B /* iPhone_turn_on_one_annotated.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iPhone_turn_on_one_annotated.jpeg; sourceTree = "<group>"; };
 		D769219E2756452C00EB4CEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = ../Base.lproj/Main.html; sourceTree = "<group>"; };
@@ -122,7 +121,6 @@
 		D76921D62756452E00EB4CEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D76921DB2756452E00EB4CEA /* MindShield Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "MindShield Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D76921E02756452E00EB4CEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D7692210275645D800EB4CEA /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		D769221627564D8F00EB4CEA /* style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
 		D76E9F03294E487F0067C09D /* iPad_turn_on_two_annotated.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iPad_turn_on_two_annotated.jpeg; sourceTree = "<group>"; };
 		D76E9F04294E487F0067C09D /* iPad_turn_on_one_annotated.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iPad_turn_on_one_annotated.jpeg; sourceTree = "<group>"; };
@@ -189,7 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				D769219D2756452C00EB4CEA /* Main.html */,
-				D7692210275645D800EB4CEA /* Icon.png */,
+				B81FBB7D2C4B6EEB001AD714 /* icon.svg */,
 				D76921A02756452C00EB4CEA /* Style.css */,
 				D76921A12756452C00EB4CEA /* Script.js */,
 			);
@@ -406,7 +404,6 @@
 				D76921EC2756452E00EB4CEA /* Assets.xcassets in Resources */,
 				D76674E0294E282900F4863B /* iPhone_turn_on_two_anon.jpeg in Resources */,
 				D76921BF2756452E00EB4CEA /* Main.storyboard in Resources */,
-				D7692211275645D800EB4CEA /* Icon.png in Resources */,
 				D76921E62756452E00EB4CEA /* Style.css in Resources */,
 				D76674E1294E282900F4863B /* iPhone_turn_on_one_annotated.jpeg in Resources */,
 				D76E9F05294E487F0067C09D /* iPad_turn_on_two_annotated.jpeg in Resources */,
@@ -417,7 +414,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D7692212275645D800EB4CEA /* Icon.png in Resources */,
 				D76921E72756452E00EB4CEA /* Style.css in Resources */,
 				D76921E92756452E00EB4CEA /* Script.js in Resources */,
 				D7607A1D276792B100FB0E82 /* Main.storyboard in Resources */,
