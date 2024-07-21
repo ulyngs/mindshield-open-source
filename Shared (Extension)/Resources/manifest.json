@@ -18,7 +18,7 @@
         "css": [ "style.css" ],
         "js": [ "content.js" ],
         "matches": [ "*://web.whatsapp.com/*", "*://www.youtube.com/*", "*://m.youtube.com/*", "*://www.facebook.com/*", "*://m.facebook.com/*", 
-            "*://x.com/*", "*://mobile.x.com/*",
+            "*://x.com/*",
             "*://www.instagram.com/*", "*://www.linkedin.com/*",
             "*://www.google.com/*",
             "*://www.google.co.jp/*",

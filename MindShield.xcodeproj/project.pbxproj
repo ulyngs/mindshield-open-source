@@ -49,6 +49,8 @@
 		D76E9F06294E487F0067C09D /* iPad_turn_on_one_annotated.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D76E9F04294E487F0067C09D /* iPad_turn_on_one_annotated.jpeg */; };
 		F32DDEA92C4BF95B00CA441C /* icon-square.svg in Resources */ = {isa = PBXBuildFile; fileRef = F32DDEA82C4BF95B00CA441C /* icon-square.svg */; };
 		F32DDEAA2C4BF95B00CA441C /* icon-square.svg in Resources */ = {isa = PBXBuildFile; fileRef = F32DDEA82C4BF95B00CA441C /* icon-square.svg */; };
+		F3B35BA22C4D41C40066A0BD /* icon-1024.png in Resources */ = {isa = PBXBuildFile; fileRef = F3B35BA12C4D41C40066A0BD /* icon-1024.png */; };
+		F3B35BA32C4D41C40066A0BD /* icon-1024.png in Resources */ = {isa = PBXBuildFile; fileRef = F3B35BA12C4D41C40066A0BD /* icon-1024.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +130,7 @@
 		D78C7777294DC1A2003A6A0A /* MindShield.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = MindShield.entitlements; sourceTree = "<group>"; };
 		D78C7778294DC1B6003A6A0A /* MindShield.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MindShield.entitlements; sourceTree = "<group>"; };
 		F32DDEA82C4BF95B00CA441C /* icon-square.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "icon-square.svg"; sourceTree = "<group>"; };
+		F3B35BA12C4D41C40066A0BD /* icon-1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-1024.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +191,7 @@
 		D769219C2756452C00EB4CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F3B35BA12C4D41C40066A0BD /* icon-1024.png */,
 				F32DDEA82C4BF95B00CA441C /* icon-square.svg */,
 				D769219D2756452C00EB4CEA /* Main.html */,
 				D76921A02756452C00EB4CEA /* Style.css */,
@@ -408,6 +412,7 @@
 				D76674E0294E282900F4863B /* iPhone_turn_on_two_anon.jpeg in Resources */,
 				D76921BF2756452E00EB4CEA /* Main.storyboard in Resources */,
 				D76921E62756452E00EB4CEA /* Style.css in Resources */,
+				F3B35BA22C4D41C40066A0BD /* icon-1024.png in Resources */,
 				D76674E1294E282900F4863B /* iPhone_turn_on_one_annotated.jpeg in Resources */,
 				D76E9F05294E487F0067C09D /* iPad_turn_on_two_annotated.jpeg in Resources */,
 			);
@@ -417,6 +422,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3B35BA32C4D41C40066A0BD /* icon-1024.png in Resources */,
 				D76921E72756452E00EB4CEA /* Style.css in Resources */,
 				D76921E92756452E00EB4CEA /* Script.js in Resources */,
 				D7607A1D276792B100FB0E82 /* Main.storyboard in Resources */,

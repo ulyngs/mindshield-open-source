@@ -546,6 +546,16 @@ footer .toggle-group {
 /******* HIDE IRRELEVANT TOGGLES *******/
 /* iPhone */
 @media only screen and (max-device-width: 768px) {
+    .multi-state-checkbox[data-state="Black"]::after {
+        content: '';
+        position: absolute;
+        top: 0px !important;
+        left: 0px !important;
+        width: 15px;
+        height: 16px;
+        background-color: black;
+    }
+    
     .platform-ipad-mac {
         display: none;
     }
