@@ -34,6 +34,7 @@
     const youtubeThumbnailsCssOn = 'ytd-thumbnail, ytd-playlist-thumbnail {display: block; } ytd-compact-video-renderer { padding: 0px 10px 10px 10px; } /* mobile */ .media-item-thumbnail-container, .video-thumbnail-img { display: block; }';
     const youtubeThumbnailsCssOff = 'ytd-thumbnail, ytd-playlist-thumbnail { display: none; } /* mobile */ .media-item-thumbnail-container, .video-thumbnail-img { display: none !important; } .reel-shelf-items ytm-reel-item-renderer, .reel-shelf-items .reel-item-endpoint, .video-thumbnail-container-vertical { height: 100px !important; }';
     const youtubeThumbnailsCssBlur = 'ytd-thumbnail img, ytd-playlist-thumbnail img { filter: blur(7px); } /* mobile */ .media-item-thumbnail-container, .video-thumbnail-img { filter: blur(7px); }';
+    const youtubeThumbnailsCssBlack = 'ytd-thumbnail img, ytd-playlist-thumbnail img { filter: brightness(0); } /* mobile */ .media-item-thumbnail-container, .video-thumbnail-img { filter: brightness(0); }';
     
     const youtubeNotificationsCssOn = '';
     const youtubeNotificationsCssOff = 'ytd-notification-topbar-button-renderer.ytd-masthead { display: none !important; }';
@@ -231,7 +232,10 @@
             if(message.element == "youtubeThumbnails" || message.element == "youtubeNotifications"){
                 if (currentStyle.innerHTML === eval(message.element + 'CssBlur')){
                     sendResponse({text: "blur"});
+                } else if (currentStyle.innerHTML === eval(message.element + 'CssBlack')){
+                    sendResponse({text: "black"});
                 }
+                
             }
             
            // do the other checks for all
@@ -270,7 +274,7 @@
         };
         
         // handle blur events
-        if(message.method === "changeHideBlur"){
+        if(message.method === "changeMultiToggle"){
             if (currentStyle == undefined){
                 console.log("not on active tab");
             } else {

@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, false);
     };
     
-    // create function to set a button according to current view status on the page
+    // create function to set a three-state button (hide-blur-show)
     function setButtonState(element_to_check, id_of_toggle){
         var currentButton = document.getElementById(id_of_toggle);
         
@@ -243,10 +243,37 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     };
-
     
-    // create function to make a button toggle view status on and off
-    function toggleViewStatusButton(element_to_change, id_of_toggle){
+    // create function to set a four-state button (hide-blur-black-show)
+    function setButtonStateFour(element_to_check, id_of_toggle){
+        var currentButton = document.getElementById(id_of_toggle);
+        
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            
+            chrome.tabs.sendMessage(tabs[0].id, { method: "check", element: element_to_check }, function(response){
+                if (response.text === "hidden"){
+                    currentButton.setAttribute("data-state", "Off");
+                } else if (response.text === "visible"){
+                    currentButton.setAttribute("data-state", "On");
+                } else if (response.text === "blur"){
+                    currentButton.setAttribute("data-state", "Blur");
+                } else if (response.text === "black"){
+                    currentButton.setAttribute("data-state", "Black");
+                } else {
+                    // if the style element is undefined, set to saved status
+                    var key = element_to_check + "Status";
+                    
+                    browser.storage.sync.get(key, function(result) {
+                        var status = result[key];
+                        currentButton.setAttribute("data-state", result[key]);
+                    });
+                }
+            });
+        });
+    };
+    
+    // create function to make a four-state button toggle status (hide-blur-black-view)
+    function toggleViewStatusMultiToggle(element_to_change, id_of_toggle){
         var currentButton = document.getElementById(id_of_toggle);
         let state;
 
@@ -257,13 +284,16 @@ document.addEventListener('DOMContentLoaded', function() {
             } else if (currentButton.getAttribute("data-state") == "Off"){
                 currentButton.setAttribute("data-state", "Blur");
                 state = "Blur";
+            } else if (currentButton.getAttribute("data-state") == "Blur"){
+                currentButton.setAttribute("data-state", "Black");
+                state = "Black";
             } else {
                 currentButton.setAttribute("data-state", "On");
                 state = "On";
             }
             
             chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                chrome.tabs.sendMessage(tabs[0].id, { method: "changeHideBlur", element: element_to_change, action: state });
+                chrome.tabs.sendMessage(tabs[0].id, { method: "changeMultiToggle", element: element_to_change, action: state });
             });
         }, false);
     };
@@ -273,8 +303,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // assign the functions to the checkboxes
     elementsThatCanBeHidden.forEach(function (item) {
         if (item === "youtubeThumbnails" || item === "youtubeNotifications") {
-            setButtonState(item, item + "Toggle");
-            toggleViewStatusButton(item, item + "Toggle");
+            setButtonStateFour(item, item + "Toggle");
+            toggleViewStatusMultiToggle(item, item + "Toggle");
         } else {
             setCheckboxState(item, item + "Toggle");
             toggleViewStatusCheckbox(item, item + "Toggle");
