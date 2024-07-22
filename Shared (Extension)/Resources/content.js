@@ -10,7 +10,7 @@
     }
     window.hasRun = true;
     
-    const platformsWeTarget = [ "youtube", "facebook", "x", "instagram", "linkedin", "whatsapp", "google" ];
+    const platformsWeTarget = [ "youtube", "facebook", "x", "instagram", "linkedin", "whatsapp", "google", "reddit" ];
     const elementsThatCanBeHidden = [ "youtubeSearch", "youtubeSearchPredict", "youtubeRecVids", "youtubeThumbnails", "youtubeNotifications", "youtubeProfileImg",
                                       "youtubeShorts", "youtubeSubscriptions", "youtubeLibrary", "youtubeHistory", "youtubeExplore", "youtubeMore",
                                       "youtubeRelated", "youtubeSidebar", "youtubeComments", "youtubeAds", "youtubeViews", "youtubeLikes", "youtubeSubscribers",
@@ -19,7 +19,8 @@
                                       "linkedinNews", "linkedinNotifications", "linkedinFeed", "linkedinAds",
                                       "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramReels", "instagramSuggestions", "instagramComments",
                                       "whatsappPreview","whatsappNotificationPrompt",
-                                      "googleAds", "googleBackground" ];
+                                      "googleAds", "googleBackground",
+                                      "redditFeed", "redditPopular", "redditAll", "redditRecent", "redditCommunities", "redditNotification", "redditChat"];
     
     // YouTube CSS
     const youtubeSearchCssOn = '';
@@ -165,15 +166,42 @@
     const googleBackgroundCssOff = '#tads, #atvcap .ptJHdc.yY236b.c3mZkd, #tads .CnP9N.U3A9Ac.irmCpc,.commercial-unit-mobile-top,.commercial-unit-mobile-top .v7hl4d,.commercial-unit-mobile-bottom .v7hl4d {background-color: #F2E6C3 !important;}'
     const googleBackgroundCssOn = ''
     
+    // Reddit CSS
+    const redditFeedCssOn = ""
+    const redditFeedCssOff = "shreddit-feed { display: none; }"
+    const redditPopularCssOn = ""
+    const redditPopularCssOff = "a[href='/r/popular/'] { display: none; }"
+    const redditAllCssOn = ""
+    const redditAllCssOff = "a[href='/r/all/'] { display: none; }"
+    const redditRecentCssOn = ""
+    const redditRecentCssOff = "reddit-recent-pages { display: none; }"
+    const redditCommunitiesCssOn = ""
+    const redditCommunitiesCssOff = "[aria-controls='communities_section'] + faceplate-auto-height-animator { display: none; }   [aria-controls='communities_section'] { display: none; }"
+    const redditNotificationCssOn = ""
+    const redditNotificationCssOff = "#mini-inbox-tooltip { display: none; }"
+    const redditChatCssOn = ""
+    const redditChatCssOff = "reddit-chat-header-button { display: none; }"
+    
+    
+    // Used for telling the application that the CSS modified is within a shadow-dom.
+    // If a variable is declared in this dict, the style is appended in the given CSS selector
+    const shadowSelectors = {
+        "redditPopular": "left-nav-top-section",
+        "redditAll": "left-nav-top-section",
+    }
+    
     
     // function to create style element with the specified CSS content
     function createStyleElement(some_style_id, some_css){
-        if(!document.getElementById(some_style_id)){
+        const elementToHide = some_style_id.replace("Style", "");
+        const dom = (elementToHide in shadowSelectors) ? document.querySelector(shadowSelectors[elementToHide]).shadowRoot : document.head;
+        //const dom = document;
+        if(!dom.querySelector("#" + some_style_id)){
             var styleElement = document.createElement("style");
             styleElement.id = some_style_id;
-            document.head.appendChild(styleElement).innerHTML = some_css;
+            dom.appendChild(styleElement).innerHTML = some_css;
         } else {
-            document.getElementById(some_style_id).innerHTML = some_css;
+            dom.querySelector("#" + some_style_id).innerHTML = some_css;
         };
     };
     
@@ -253,7 +281,9 @@
     
     // let the content script toggle elements when the popup asks for it
     browser.runtime.onMessage.addListener((message) => {
-        var currentStyle = document.getElementById(message.element + "Style");
+        const dom = (message.element in shadowSelectors) ? document.querySelector(shadowSelectors[message.element]).shadowRoot : document.head;
+        //const dom = document;
+        var currentStyle = dom.querySelector("#" + message.element + "Style");
         
         if(message.method === "change"){
             if (currentStyle == undefined){

@@ -17,7 +17,7 @@
     "content_scripts": [{
         "css": [ "style.css" ],
         "js": [ "content.js" ],
-        "matches": [ "*://web.whatsapp.com/*", "*://www.youtube.com/*", "*://m.youtube.com/*", "*://www.facebook.com/*", "*://m.facebook.com/*", 
+        "matches": [ "*://web.whatsapp.com/*", "*://www.youtube.com/*", "*://m.youtube.com/*", "*://www.facebook.com/*", "*://m.facebook.com/*",
             "*://x.com/*",
             "*://www.instagram.com/*", "*://www.linkedin.com/*",
             "*://www.google.com/*",
@@ -47,7 +47,9 @@
             "*://www.google.com.co/*",
             "*://www.google.pl/*",
             "*://www.google.pt/*",
-            "*://www.google.com.pk/*"]
+            "*://www.google.com.pk/*",
+            "*://www.reddit.com/*",
+            "*://reddit.com/*"]
     }],
 
     "browser_action": {
