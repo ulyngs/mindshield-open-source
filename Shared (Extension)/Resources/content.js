@@ -20,7 +20,7 @@
                                       "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramReels", "instagramSuggestions", "instagramComments",
                                       "whatsappPreview","whatsappNotificationPrompt",
                                       "googleAds", "googleBackground",
-                                      "redditFeed", "redditPopular", "redditAll", "redditRecent", "redditCommunities", "redditNotification", "redditChat"];
+                                      "redditFeed", "redditPopular", "redditAll", "redditRecent", "redditCommunities", "redditNotification", "redditChat", "redditTrending", "redditPopularCommunities"];
     
     // YouTube CSS
     const youtubeSearchCssOn = '';
@@ -181,6 +181,10 @@
     const redditNotificationCssOff = "#mini-inbox-tooltip { display: none; }"
     const redditChatCssOn = ""
     const redditChatCssOff = "reddit-chat-header-button { display: none; }"
+    const redditTrendingCssOn = ""
+    const redditTrendingCssOff = "[search-telemetry-source='popular_carousel'] { display: none; }"
+    const redditPopularCommunitiesCssOn = ""
+    const redditPopularCommunitiesCssOff = "#popular-communities-list { display: none; }  [aria-label='Popular Communities'] { display: none; }"
     
     
     // Used for telling the application that the CSS modified is within a shadow-dom.
