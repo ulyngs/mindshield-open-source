@@ -2,7 +2,7 @@
 // https://developer.chrome.com/docs/extensions/mv3/messaging/
 
 document.addEventListener('DOMContentLoaded', function() {
-    const platformsWeTarget = [ "youtube", "facebook", "x", "instagram", "linkedin", "whatsapp", "google" ];
+    const platformsWeTarget = [ "youtube", "facebook", "x", "instagram", "linkedin", "whatsapp", "google", "reddit" ];
     const elementsThatCanBeHidden = [ "youtubeSearch", "youtubeSearchPredict", "youtubeRecVids", "youtubeThumbnails", "youtubeNotifications", "youtubeProfileImg",
                                       "youtubeShorts", "youtubeSubscriptions", "youtubeLibrary", "youtubeHistory", "youtubeExplore", "youtubeMore",
                                       "youtubeRelated", "youtubeSidebar", "youtubeComments", "youtubeAds", "youtubeViews", "youtubeLikes", "youtubeSubscribers",
@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                       "linkedinNews", "linkedinNotifications", "linkedinFeed", "linkedinAds",
                                       "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramReels", "instagramSuggestions", "instagramComments",
                                       "whatsappPreview","whatsappNotificationPrompt",
-                                      "googleAds", "googleBackground" ];
+                                      "googleAds", "googleBackground",
+                                      "redditFeed", "redditPopular", "redditAll", "redditRecent", "redditCommunities", "redditNotification", "redditChat", "redditTrending", "redditPopularCommunities"];
     
     
     // Initialize or increment the open count in localStorage
