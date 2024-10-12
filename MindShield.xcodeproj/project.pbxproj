@@ -47,6 +47,7 @@
 		D769221827564D8F00EB4CEA /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = D769221627564D8F00EB4CEA /* style.css */; };
 		D76E9F05294E487F0067C09D /* iPad_turn_on_two_annotated.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D76E9F03294E487F0067C09D /* iPad_turn_on_two_annotated.jpeg */; };
 		D76E9F06294E487F0067C09D /* iPad_turn_on_one_annotated.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D76E9F04294E487F0067C09D /* iPad_turn_on_one_annotated.jpeg */; };
+		F307B9F62CBA68F40073345A /* insta_home_screen_small.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F307B9F52CBA68F40073345A /* insta_home_screen_small.mp4 */; };
 		F32DDEA92C4BF95B00CA441C /* icon-square.svg in Resources */ = {isa = PBXBuildFile; fileRef = F32DDEA82C4BF95B00CA441C /* icon-square.svg */; };
 		F32DDEAA2C4BF95B00CA441C /* icon-square.svg in Resources */ = {isa = PBXBuildFile; fileRef = F32DDEA82C4BF95B00CA441C /* icon-square.svg */; };
 		F3B35BA22C4D41C40066A0BD /* icon-1024.png in Resources */ = {isa = PBXBuildFile; fileRef = F3B35BA12C4D41C40066A0BD /* icon-1024.png */; };
@@ -129,6 +130,7 @@
 		D76E9F04294E487F0067C09D /* iPad_turn_on_one_annotated.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iPad_turn_on_one_annotated.jpeg; sourceTree = "<group>"; };
 		D78C7777294DC1A2003A6A0A /* MindShield.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = MindShield.entitlements; sourceTree = "<group>"; };
 		D78C7778294DC1B6003A6A0A /* MindShield.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MindShield.entitlements; sourceTree = "<group>"; };
+		F307B9F52CBA68F40073345A /* insta_home_screen_small.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = insta_home_screen_small.mp4; sourceTree = "<group>"; };
 		F32DDEA82C4BF95B00CA441C /* icon-square.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "icon-square.svg"; sourceTree = "<group>"; };
 		F3B35BA12C4D41C40066A0BD /* icon-1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-1024.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -247,6 +249,7 @@
 				D76921BA2756452E00EB4CEA /* LaunchScreen.storyboard */,
 				D76921BD2756452E00EB4CEA /* Main.storyboard */,
 				D76921C02756452E00EB4CEA /* Info.plist */,
+				F307B9F52CBA68F40073345A /* insta_home_screen_small.mp4 */,
 			);
 			path = "iOS (App)";
 			sourceTree = "<group>";
@@ -413,6 +416,7 @@
 				D76921BF2756452E00EB4CEA /* Main.storyboard in Resources */,
 				D76921E62756452E00EB4CEA /* Style.css in Resources */,
 				F3B35BA22C4D41C40066A0BD /* icon-1024.png in Resources */,
+				F307B9F62CBA68F40073345A /* insta_home_screen_small.mp4 in Resources */,
 				D76674E1294E282900F4863B /* iPhone_turn_on_one_annotated.jpeg in Resources */,
 				D76E9F05294E487F0067C09D /* iPad_turn_on_two_annotated.jpeg in Resources */,
 			);
@@ -668,7 +672,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 31;
 				DEVELOPMENT_TEAM = 7YEYWQKK25;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
@@ -680,7 +684,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.13;
+				MARKETING_VERSION = 1.14;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -699,7 +703,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 31;
 				DEVELOPMENT_TEAM = 7YEYWQKK25;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
@@ -711,7 +715,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.13;
+				MARKETING_VERSION = 1.14;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -734,7 +738,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 39;
 				DEVELOPMENT_TEAM = 7YEYWQKK25;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (App)/Info.plist";
@@ -750,7 +754,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.20;
+				MARKETING_VERSION = 1.22;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -773,7 +777,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 39;
 				DEVELOPMENT_TEAM = 7YEYWQKK25;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (App)/Info.plist";
@@ -789,7 +793,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.20;
+				MARKETING_VERSION = 1.22;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -886,7 +890,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 43;
+				CURRENT_PROJECT_VERSION = 44;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 7YEYWQKK25;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -900,7 +904,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 1.20;
+				MARKETING_VERSION = 1.21;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -925,7 +929,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 43;
+				CURRENT_PROJECT_VERSION = 44;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 7YEYWQKK25;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -939,7 +943,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 1.20;
+				MARKETING_VERSION = 1.21;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
