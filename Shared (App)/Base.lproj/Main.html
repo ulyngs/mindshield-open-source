@@ -10,43 +10,69 @@
     <script src="../Script.js" defer></script>
 </head>
 <body>
+  <div class="scrollable-content">
     <img class="platform-mac app-icon" src="../icon-square.svg" alt='MindShield Icon'>
-    
-    <p>This extension lets you hide distractions on YouTube, Facebook, Twitter, Instagram, Linkedin, and Google.com. It's open source and collects zero data - you can find the source code <a href="https://github.com/ulyngs/mindshield-open-source">on GitHub</a>.</p>
-    <p class="platform-ios platform-iphone">To turn it on, open Safari and go to one of the target sites. Then:<br>
-    1) In the toolbar tap 'Aa' -> 'Manage Extensions', and toggle the extension on.<br>
-    2) Tap the extension and allow access
-    </p>
-    <div class="row platform-ios platform-iphone">
-      <div class="column">
-        <p>Step 1:</p>
-        <img src="../iPhone_turn_on_one_annotated.jpeg" alt="iPhone screenshot of the Safari app, where the 'Aa' icon in the corner has been tapped." style="width:100%">
-      </div>
-      <div class="column">
-        <p>Step 2:</p>
-        <img src="../iPhone_turn_on_two_anon.jpeg" alt="iPhone screenshot of the Safari app, being asked to allow access." style="width:100%">
-      </div>
-    </div>
-    
-    <p class="platform-ios platform-ipad">To turn it on, open Safari and go to one of the target sites. Then:<br>
-    1) In the browser address bar, tap the puzzle icon -> 'Manage Extensions', and toggle the extension on.<br>
-    2) Tap the extension and allow access
-    </p>
-    <div class="row platform-ios platform-ipad">
-      <div class="column">
-        <p>Step 1:</p>
-        <img src="../iPad_turn_on_one_annotated.jpeg" style="width:100%">
-      </div>
-      <div class="column">
-        <p>Step 2:</p>
-        <img src="../iPad_turn_on_two_annotated.jpeg" style="width:100%">
-      </div>
-    </div>
-    
-    <p class="platform-mac">To turn it on, first toggle it on in Safari Extensions preferences. Then go to one of the target sites, click the extension icon in the toolbar, and allow access.
-    </p>
-    <p class="platform-mac state-on">The 'MindShield' extension is currently on. You can turn it off in Safari Extensions preferences.</p>
-    <p class="platform-mac state-off">The 'MindShield' extension is currently off. You can turn it on in Safari Extensions preferences.</p>
-    <button class="platform-mac open-preferences">Quit and Open Safari Extensions Preferences…</button>
+        
+        <p>This extension lets you hide distractions on YouTube, Facebook, Twitter, Instagram, Linkedin, and Google.com. It's open source and collects zero data - you can find the source code <a href="https://github.com/ulyngs/mindshield-open-source">on GitHub</a>.</p>
+        <h1>To turn it on</h1>
+        <p class="platform-ios platform-iphone">Open Safari and go to one of the target sites. Then:</p>
+        <ol>
+            <li>In the toolbar tap 'Aa' -> 'Manage Extensions', and toggle the extension on.<br></li>
+            <li>Tap the extension and allow access</li>
+        </ol>
+        <div class="row platform-ios platform-iphone">
+            <div class="column">
+                <p>Step 1:</p>
+                <img src="../iPhone_turn_on_one_annotated.jpeg" alt="iPhone screenshot of the Safari app, where the 'Aa' icon in the corner has been tapped." style="width:100%">
+            </div>
+            <div class="column">
+                <p>Step 2:</p>
+                <img src="../iPhone_turn_on_two_anon.jpeg" alt="iPhone screenshot of the Safari app, being asked to allow access." style="width:100%">
+            </div>
+        </div>
+        <div class="platform-ios platform-iphone">
+            <h1>Create home screen icon that opens a platform directly in Safari</h1>
+            <p>Example for Instagram (afterwards, you can delete the normal app):</p>
+            <ol>
+                <li>Open the Shortcuts app on your iPhone</li>
+                <li>Tap + to create a new shortcut </li>
+                <li>Tap the name of your new shortcut (in the top) and rename it to e.g., "Instagram Safari" </li>
+                <li>Search for the “Open URLs” action and tap it</li>
+                <li>Tap URL and and input "instagram.com"</li>
+                <li>Tap the 'Share' icon in the bottom right and select 'Add to Home Screen'</li>
+                <li>Select the icon you want and tapp 'Add'</li>
+            </ol>
+            <!-- Video for the iPhone app -->
+            <video controls width="100%">
+                <source src="../insta_home_screen_small.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        
+        <div class="platform-ios platform-ipad">
+            <p class="platform-ios platform-ipad">First open Safari and go to one of the target sites. Then:</p>
+            <ol>
+                <li>In the browser address bar, tap the puzzle icon -> 'Manage Extensions', and toggle the extension on.</li>
+                <li>Tap the extension and allow access</li>
+            </ol>
+        </div>
+        
+        <div class="row platform-ios platform-ipad">
+            <div class="column">
+                <p>Step 1:</p>
+                <img src="../iPad_turn_on_one_annotated.jpeg" style="width:100%">
+            </div>
+            <div class="column">
+                <p>Step 2:</p>
+                <img src="../iPad_turn_on_two_annotated.jpeg" style="width:100%">
+            </div>
+        </div>
+        
+        <p class="platform-mac">To turn it on, first toggle it on in Safari Extensions preferences. Then go to one of the target sites, click the extension icon in the toolbar, and allow access.
+        </p>
+        <p class="platform-mac state-on">The 'MindShield' extension is currently on. You can turn it off in Safari Extensions preferences.</p>
+        <p class="platform-mac state-off">The 'MindShield' extension is currently off. You can turn it on in Safari Extensions preferences.</p>
+        <button class="platform-mac open-preferences">Quit and Open Safari Extensions Preferences…</button
+  </div>
 </body>
 </html>

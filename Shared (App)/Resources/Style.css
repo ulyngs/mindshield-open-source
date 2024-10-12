@@ -10,9 +10,27 @@
     --spacing: 20px;
 }
 
+h1 {
+    text-align: left;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.scrollable-content {
+    max-height: 100vh; /* Set the maximum height to viewport height */
+    overflow-y: auto;  /* Enable vertical scrolling */
+    padding: 20px;     /* Optional padding */
+    box-sizing: border-box;
+}
+
 body {
     display: flex;
-    align-items: center;
+    align-items: left;
     justify-content: center;
     flex-direction: column;
 
@@ -72,10 +90,11 @@ button {
     height: 100px;
 }
 
-p {
+p, li {
     font-size: 1.1em;
     margin: 0;
     padding: 0;
+    text-align: left;
 }
 
 .column {
@@ -96,7 +115,7 @@ p {
         display: none;
     }
     
-    p {
+    p, li {
         font-size: 2em;
         margin-bottom: 3vw;
         padding: 0;
@@ -125,7 +144,7 @@ p {
         padding: 20px;
     }
     
-    p {
+    p, li {
         font-size: 1.3em;
         margin-bottom: 0.5vw;
         padding: 0;
