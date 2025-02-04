@@ -138,8 +138,8 @@
     const instagramCommentsCssOff = 'div.x9f619.xjbqb8w.x78zum5.x168nmei.x13lgxp2.x5pf9jr.xo71vjh.x1xmf6yo:has(a[href*="/comments/"]) {display: none !important;}';
     
     // LinkedIn CSS
-    const linkedinFeedCssOn = 'main.scaffold-layout__main:not(:has(.nt-content)) .scaffold-finite-scroll, #feed-container {display: block;}';
-    const linkedinFeedCssOff = 'main.scaffold-layout__main:not(:has(.nt-content)) .scaffold-finite-scroll, #feed-container {display: none !important;}';
+    const linkedinFeedCssOn = '';
+    const linkedinFeedCssOff = 'div.scaffold-finite-scroll.scaffold-finite-scroll--infinite, #feed-container {display: none !important;}';
     
     
     const linkedinNotificationsCssOn = 'span.notification-badge--show, #nav-notifications-small-badge, #nav-people-small-badge { display: block !important; }'
