@@ -206,7 +206,7 @@
         };
     };
     
-    // loop over the platforms. If the platform for the current URL is 'on' (or we haven't saved a status for it), create its style elements
+    // loop over the platforms and create style elements
     platformsWeTarget.forEach(function (platform) {
         if (window.location.hostname.includes(platform)){
             var filteredElements = elementsThatCanBeHidden.filter(element =>
@@ -216,21 +216,17 @@
             var key = platform + "Status";
             
             browser.storage.sync.get(key, function(result) {
-                
-                let platformIsOn = result[key];
-                  // loop over the elements and create HTML style element for each
-                  // If an element's key in storage is set to 'false', show the
-                  // element, otherwise hide it
-                  filteredElements.forEach(function (item) {
-                      var styleName = item + "Style";
-                      var key = item + "Status";
-                      
-                      if (item === "youtubeThumbnails" || item === "youtubeNotifications") {
-                          
+                let platformIsOn = result[key] !== false;
+                  
+                filteredElements.forEach(function (item) {
+                    var styleName = item + "Style";
+                    var key = item + "Status";
+                    
+                    // if platform is off then show all elements; otherwise handle appropriately (ytThumbnails & notifications have three states)
+                    if (!platformIsOn) {
+                        createStyleElement(styleName, eval(item + "CssOn"));
+                    } else if (item === "youtubeThumbnails" || item === "youtubeNotifications") {
                           browser.storage.sync.get(key, function(result) {
-                              
-                              console.log(result[key]);
-                              
                               if (result[key] == undefined || result[key] === false){
                                   createStyleElement(styleName, eval(item + "CssOn"));
                               } else {
