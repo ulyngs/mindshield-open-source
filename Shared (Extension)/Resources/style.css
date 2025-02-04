@@ -1,44 +1,10 @@
 /**************
 ** FACEBOOK **
 **************/
-/* hide these elements by default, so they're not flashing before Mindshield's CSS is injected */
+/*
+/* hide feed by default, so it isn't flashing before Mindshield's CSS is injected */
 /*** feed ***/
 #ssrb_feed_start + div, div.x1hc1fzr.x1unhpq9.x6o7n8i { visibility: hidden; } #screen-root div > div[data-mcomponent="MContainer"] > div.m.displayed:nth-child(n+6) { display: none; }
-
-/*** chat ***/
-div[role="complementary"] div[data-visualcompletion="ignore-dynamic"] > div.x1n2onr6:not([role="cell"]) { visibility: hidden; }
-
-/*** stories ***/
-/* desktop */
-div[aria-label="Stories"] { display: none; }
-
-/* mobile */
-/*#screen-root div[data-mcomponent="MContainer"] > div[data-mcomponent="MContainer"]:has(div[aria-label*="story"]) {
-    display: none;
-}*/
-
-
-/*** watch ***/
-/* desktop */
-/*a[aria-label^="Watch"] { display: none; }*/
-
-/* mobile */
-#screen-root div[data-mcomponent="MScreen"] div[data-mcomponent="MContainer"] div[data-mcomponent="MContainer"]:nth-child(2) div[role="button"]:nth-child(4) {
-    display: none;
-}
-
-#screen-root div[data-mcomponent="MScreen"] div[data-mcomponent="MContainer"] div[data-mcomponent="MContainer"]:nth-child(2):has(div[role="button"]:nth-child(4)) {
-    background-color: white !important;
-    border-bottom: 2px solid #dadde1;
-}
-
-/*** gaming ***/
-a[aria-label="Gaming"] { display: none; }
-
-/****** RIGHT SIDE BAR ********/
-/* hide sponsored content */
-a[aria-label="Advertiser"] { display: none; }
-
 
 /**************
 ** LINKEDIN **
