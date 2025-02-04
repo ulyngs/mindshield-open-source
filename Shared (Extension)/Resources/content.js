@@ -132,7 +132,7 @@
     const instagramReelsCssOff = 'a[href="/reels/"] { display: none; }';
     
     const instagramSuggestionsCssOn = '';
-    const instagramSuggestionsCssOff = 'div._aak6._aak9 div._aak3 { display: none; } div._aak3._agh4 {display: none !important; }';
+    const instagramSuggestionsCssOff = 'div.x78zum5.xdt5ytf.xdj266r.x11i5rnm.xod5an3.x169t7cy.x1j7kr1c.xvbhtw8:has(a[href="/explore/people/"]) { display: none; }';
     
     const instagramCommentsCssOn = '';
     const instagramCommentsCssOff = 'div.x9f619.xjbqb8w.x78zum5.x168nmei.x13lgxp2.x5pf9jr.xo71vjh.x1xmf6yo:has(a[href*="/comments/"]) {display: none !important;}';
