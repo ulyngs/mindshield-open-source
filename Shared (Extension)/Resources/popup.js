@@ -4,7 +4,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const platformsWeTarget = [ "youtube", "facebook", "x", "instagram", "linkedin", "whatsapp", "google", "reddit" ];
     const elementsThatCanBeHidden = [ "youtubeSearch", "youtubeSearchPredict", "youtubeRecVids", "youtubeThumbnails", "youtubeNotifications", "youtubeProfileImg",
-                                      "youtubeShorts", "youtubeSubscriptions", "youtubeLibrary", "youtubeHistory", "youtubeExplore", "youtubeMore",
+                                      "youtubeShorts", "youtubeSubscriptions", "youtubeHistory", "youtubeExplore", "youtubeMore",
                                       "youtubeRelated", "youtubeSidebar", "youtubeComments", "youtubeAds", "youtubeViews", "youtubeLikes", "youtubeSubscribers",
                                       "xExplore", "xNotifications", "xTrends", "xFollow", "xTimeline",
                                       "facebookFeed", "facebookWatch", "facebookNotifications", "facebookStories", "facebookChat",
