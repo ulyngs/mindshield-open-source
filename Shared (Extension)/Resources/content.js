@@ -15,7 +15,7 @@
                                       "youtubeShorts", "youtubeSubscriptions", "youtubeHistory", "youtubeExplore", "youtubeMore",
                                       "youtubeRelated", "youtubeSidebar", "youtubeComments", "youtubeAds", "youtubeViews", "youtubeLikes", "youtubeSubscribers",
                                       "xExplore", "xNotifications", "xTrends", "xFollow", "xTimeline",
-                                      "facebookFeed", "facebookWatch", "facebookNotifications", "facebookStories", "facebookChat",
+                                      "facebookFeed", "facebookWatch", "facebookNotifications", "facebookStories", "facebookChat", "facebookSponsored",
                                       "linkedinNews", "linkedinNotifications", "linkedinFeed", "linkedinAds",
                                       "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramReels", "instagramSuggestions", "instagramComments",
                                       "whatsappPreview","whatsappNotificationPrompt",
@@ -95,8 +95,10 @@
     
     const facebookStoriesCssOn = '';
     const facebookStoriesCssOff = 'div[aria-label="Stories"] { display: none; } #screen-root div[data-mcomponent="MContainer"] > div[data-mcomponent="MContainer"]:has(div[aria-label*="story"]) { display: none;}';
-    
-    
+
+    const facebookSponsoredCssOn = '';
+    const facebookSponsoredCssOff = 'a[aria-label="Advertiser"] { display: none; }';
+
     // x CSS
     const xExploreCssOn = 'nav[role="navigation"] a[href="/explore"] { display: flex; }';
     const xExploreCssOff = 'nav[role="navigation"] a[href="/explore"] { display: none; }';

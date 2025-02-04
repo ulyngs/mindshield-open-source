@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                       "youtubeShorts", "youtubeSubscriptions", "youtubeHistory", "youtubeExplore", "youtubeMore",
                                       "youtubeRelated", "youtubeSidebar", "youtubeComments", "youtubeAds", "youtubeViews", "youtubeLikes", "youtubeSubscribers",
                                       "xExplore", "xNotifications", "xTrends", "xFollow", "xTimeline",
-                                      "facebookFeed", "facebookWatch", "facebookNotifications", "facebookStories", "facebookChat",
+                                      "facebookFeed", "facebookWatch", "facebookNotifications", "facebookStories", "facebookChat", "facebookSponsored",
                                       "linkedinNews", "linkedinNotifications", "linkedinFeed", "linkedinAds",
                                       "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramReels", "instagramSuggestions", "instagramComments",
                                       "whatsappPreview","whatsappNotificationPrompt",
