@@ -30,10 +30,10 @@ body {
 }
 
 .tooltip-content {
-  display: none;
+    display: none;
 }
 .comments-toggle-wrapper:hover + .tooltip-content {
-  display: block;
+    display: block;
 }
 
 .toggle-group {
@@ -44,9 +44,6 @@ body {
     font-size: 0.95em;
     margin: 0px 0px 5px 0px;
 }
-
-
-
 
 a:visited {
     color: rgb(69, 69, 69);
@@ -60,46 +57,45 @@ a {
     padding-top: 10px;
 }
 
-
 /* for hoverable dropdown */
 .dropbtn {
-  background-color: white;
-  color: black;
-  padding: 4px;
-  font-size: 0.9em;
-  border: none;
-  margin-left: 0px;
+    background-color: white;
+    color: black;
+    padding: 4px;
+    font-size: 0.9em;
+    border: none;
+    margin-left: 0px;
 }
 
 .dropdown .dropbtn:hover {
     background-color: #008CBA;
-    color: white
+    color: white;
 }
 .dropbtn:disabled {
-  background-color: #ccc;
-  color: #888;
+    background-color: #ccc;
+    color: #888;
 }
 .dropbtn:disabled:hover {
-  background-color: #ccc;
-  color: #888;
+    background-color: #ccc;
+    color: #888;
 }
 
 .dropdown {
-  position: relative;
-  display: none;
-  clear: both;
+    position: relative;
+    display: none;
+    clear: both;
 }
 
 .dropdown .dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  padding: 12px 10px 5px 14px;
-  width: 140px;
-  font-size: 0.95em;
-  border-radius: 3px;
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    padding: 12px 10px 5px 14px;
+    width: 140px;
+    font-size: 0.95em;
+    border-radius: 3px;
 }
 
 .dropdown-content .a-toggle:hover {
@@ -111,69 +107,65 @@ a {
 }
 
 .shown {
-  display: block !important;
+    display: block !important;
 }
 .shown-inline {
-  display: inline !important;
+    display: inline !important;
 }
 
 /*** TOGGLES ***/
-/* The switch - the box around the slider */
 .switch {
-  position: relative;
-  display: inline-block;
-  width: 30px;
-  height: 18px;
-  vertical-align: top;
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 18px;
+    vertical-align: top;
 }
 
-/* Hide default HTML checkbox */
 .switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
-/* The slider */
 .slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .1s;
-  transition: .1s;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .1s;
+    transition: .1s;
 }
 
 .slider:before {
-  position: absolute;
-  content: "";
-  height: 14px;
-  width: 14px;
-  left: 2px;
-  bottom: 2px;
-  background-color: white;
-  -webkit-transition: .1s;
-  transition: .1s;
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .1s;
+    transition: .1s;
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+    background-color: #2196F3;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+    box-shadow: 0 0 1px #2196F3;
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(12px);
-  -ms-transform: translateX(12px);
-  transform: translateX(12px);
+    -webkit-transform: translateX(12px);
+    -ms-transform: translateX(12px);
+    transform: translateX(12px);
 }
 
-/* handle checkboxes that can be blurred */
 .multi-state-checkbox {
     cursor: pointer;
     display: inline-block;
@@ -194,15 +186,15 @@ input:checked + .slider:before {
 }
 
 .multi-state-checkbox[data-state="On"]::after {
-    content: '';  /* Empty for show state */
+    content: '';
 }
 
 .multi-state-checkbox[data-state="Off"]::after {
     content: '\01F6AB';
     position: absolute;
-    top: -1px;  /* Match with other checkboxes */
-    left: -2px;  /* Match with other checkboxes */
-    font-size: 14px;  /* Match with other checkboxes */
+    top: -1px;
+    left: -2px;
+    font-size: 14px;
 }
 
 .multi-state-checkbox[data-state="Blur"]::after {
@@ -224,21 +216,17 @@ input:checked + .slider:before {
     background-color: black;
 }
 
-
-
-/* Rounded sliders */
 .slider.round {
-  border-radius: 34px;
+    border-radius: 34px;
 }
 
 .slider.round:before {
-  border-radius: 50%;
+    border-radius: 50%;
 }
 
 .toggle-wrapper {
     text-align: left;
 }
-
 
 .overlay {
     background-color: rgba(0,0,0,0.7);
@@ -256,8 +244,59 @@ input:checked + .slider:before {
     border-radius: 2px;
 }
 
-/******  make the checkboxes use 'prohibited' symbols   ******/
-/* Base for label styling */
+/****** Custom Elements ******/
+.custom-elements {
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+.custom-element {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.custom-element span {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 10px;
+}
+
+.custom-element button {
+    background-color: #e74c3c;
+    border: none;
+    color: white;
+    padding: 3px 8px;
+    font-size: 0.8em;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.custom-element button:hover {
+    background-color: #c0392b;
+}
+
+/* Style for Add more elements button */
+button[id$="AddElementButton"] {
+    background-color: #3498DB;
+    border: none;
+    color: white;
+    padding: 7px;
+    text-align: center;
+    font-size: 0.8em;
+    font-weight: bold;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+button[id$="AddElementButton"]:hover {
+    background-color: #2980B9;
+}
+
+/****** Checkboxes ******/
 .hide-checkboxes [type="checkbox"]:not(:checked),
 .hide-checkboxes [type="checkbox"]:checked {
     position: absolute;
@@ -270,9 +309,8 @@ input:checked + .slider:before {
     padding-left: 24px;
     line-height: 1.4;
     cursor: pointer;
-    font-size: 16px
+    font-size: 16px;
 }
-/* checkbox aspect */
 .hide-checkboxes [type="checkbox"]:not(:checked) + label:before,
 .hide-checkboxes [type="checkbox"]:checked + label:before {
     content: '';
@@ -286,9 +324,8 @@ input:checked + .slider:before {
     border-radius: .2em;
     box-shadow: inset 0 1px 3px rgba(0,0,0, .1), 0 0 0 rgba(203, 34, 237, .2);
     -webkit-transition: all .275s;
-            transition: all .275s;
+    transition: all .275s;
 }
-/* checked mark aspect */
 .hide-checkboxes [type="checkbox"]:not(:checked) + label:after,
 .hide-checkboxes [type="checkbox"]:checked + label:after {
     content: '\01F6AB';
@@ -299,20 +336,18 @@ input:checked + .slider:before {
     color: #CB22ED;
     line-height: 0;
     -webkit-transition: all .1s;
-            transition: all .1s;
+    transition: all .1s;
 }
-/* checked mark aspect changes */
 .hide-checkboxes [type="checkbox"]:not(:checked) + label:after {
     opacity: 0;
     -webkit-transform: scale(0) rotate(45deg);
-            transform: scale(0) rotate(45deg);
+    transform: scale(0) rotate(45deg);
 }
 .hide-checkboxes [type="checkbox"]:checked + label:after {
     opacity: 1;
     -webkit-transform: scale(1) rotate(0);
-            transform: scale(1) rotate(0);
+    transform: scale(1) rotate(0);
 }
-/* Disabled checkbox */
 .hide-checkboxes [type="checkbox"]:disabled:not(:checked) + label:before,
 .hide-checkboxes [type="checkbox"]:disabled:checked + label:before {
     box-shadow: none;
@@ -325,20 +360,16 @@ input:checked + .slider:before {
 .hide-checkboxes [type="checkbox"]:disabled + label {
     color: #aaa;
 }
-/* Accessibility */
 .hide-checkboxes [type="checkbox"]:checked:focus + label:before,
 .hide-checkboxes [type="checkbox"]:not(:checked):focus + label:before {
     box-shadow: inset 0 1px 3px rgba(0,0,0, .1), 0 0 0 6px rgba(203, 34, 237, .2);
 }
 
-
-/* harmonise ordinary check box */
 .ordinary-checkbox [type="checkbox"] {
     width: 15px;
     height: 15px;
     cursor: pointer;
 }
-
 
 .website-label {
     display: inline-block;
@@ -348,21 +379,19 @@ input:checked + .slider:before {
     font-weight: bold;
 }
 
-/* style the message box */
 #message-box {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 2em;
-      font-weight: bold;
-    }
-
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    font-weight: bold;
+}
 
 #waitTime {
     width: 50px;
@@ -382,7 +411,7 @@ input:checked + .slider:before {
 }
 .a-toggle p {
     margin: 0;
-    padding: 0
+    padding: 0;
 }
 #delay-message {
     font-size: 1.8em;
@@ -396,17 +425,16 @@ input:checked + .slider:before {
 }
 
 @keyframes breathe {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
 }
 
-
 .breathing {
-  animation-name: breathe;
-  animation-duration: 6s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
+    animation-name: breathe;
+    animation-duration: 6s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
 }
 
 #delay-content img {
@@ -415,14 +443,13 @@ input:checked + .slider:before {
 }
 
 #delay-content {
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
 }
 
 #delay-content.show {
-  opacity: 1;
+    opacity: 1;
 }
-
 
 #what-sites {
     display: inline;
@@ -449,7 +476,6 @@ input:checked + .slider:before {
     font-size: 0.9em;
 }
 
-
 footer {
     position: fixed;
     bottom: 0;
@@ -465,7 +491,6 @@ footer a,
 footer a:visited {
     color: #9b9fa7;
     text-decoration: none;
-
 }
 
 .footer-settings {
@@ -475,14 +500,13 @@ footer a:visited {
 }
 
 .save-toggle {
-    flex: 1 0 50%; /* Flex-grow | Flex-shrink | Flex-basis */
+    flex: 1 0 50%;
     text-align: left;
-    5px 0px 0px 2px;
     padding: 0px 3px;
 }
 
 .friction-toggle {
-    flex: 1 0 45%; /* Flex-grow | Flex-shrink | Flex-basis */
+    flex: 1 0 45%;
     padding: 0px 3px;
 }
 
@@ -504,85 +528,122 @@ footer .toggle-group {
     margin-top: 2px;
 }
 
-
-
 .review-prompt-content {
     margin-bottom: 1.5em;
 }
+
+
 
 #noThanksButton {
     margin-top: 1.5em;
 }
 
-
 @media (prefers-color-scheme: dark) {
     /* Dark Mode styles go here. */
     .colored-font {
-        color: lightgray;
+    color: lightgray;
     }
-    
+
     .friction-customisation input {
-        background-color: white;
-        color: black;
+    background-color: white;
+    color: black;
     }
-    
+
     a,
     a:visited {
-        color: gray;
+    color: gray;
     }
-    #sites-arrow path {
-        fill: rgb(194, 194, 194);
+    #sites-arrow指示: #sites-arrow path {
+    fill: rgb(194, 194, 194);
     }
     #sites-arrow-right path, #sites-arrow-down path,
     #how-to-arrow-right path, #how-to-arrow-down path {
-        fill: rgb(194, 194, 194);
+    fill: rgb(194, 194, 194);
+    }
+
+    .custom-element button {
+    background-color: #e74c3c;
+    color: white;
+    }
+
+    .custom-element button:hover {
+    background-color: #c0392b;
+    }
+
+    button[id$="AddElementButton"] {
+    background-color: #3498DB;
+    color: white;
+    }
+
+    button[id$="AddElementButton"]:hover {
+    background-color: #2980B9;
     }
 }
 
+p.previews-text {
+        display: inline;
+        font-style: italic;
+        font-size: 0.95em;
+    }
+p.how-to-description {
+    font-size: 0.95em;
+}
 
+.custom-element button {
+    margin-left: 5px;
+    padding: 2px 8px;
+    font-size: 12px;
+}
+#editSelectorModal textarea {
+    width: 80%;
+    height: 5em;
+    font-family: monospace;
+}
+#editSelectorModal button {
+    margin-right: 10px;
+    padding: 5px 10px;
+}
 
-
-
-/******* HIDE IRRELEVANT TOGGLES *******/
-/* iPhone */
+/******* HIDE IRRELEVANT TOGGLES ******/
+/ iPhone */
 @media only screen and (max-device-width: 768px) {
     .multi-state-checkbox[data-state="Black"]::after {
-        content: '';
-        position: absolute;
-        top: 0px !important;
-        left: 0px !important;
-        width: 15px;
-        height: 16px;
-        background-color: black;
+    content: '';
+    position: absolute;
+    top: 0px !important;
+    left: 0px !important;
+    width: 15px;
+    height: 16px;
+    background-color: black;
     }
-    
+
     .platform-ipad-mac {
-        display: none;
+    display: none;
     }
-    
+
     .multi-state-checkbox[data-state="Blur"]::after,
     .multi-state-checkbox[data-state="Black"]::after {
-        top: -2px;
-        left: -3px;
+    top: -2px;
+    left: -3px;
     }
-    
+
     body {
-        width: 100%
+    width: 100%
     }
     #delay-content {
-        margin: auto;
-        width: 50%;
+    margin: auto;
+    width: 50%;
     }
     #delay-content img {
-        width: 60% !important;
-        margin-bottom: 10px !important;
+    width: 60% !important;
+    margin-bottom: 10px !important;
     }
     #how-to-image {
-        display: inline-block !important;
+    display: inline-block !important;
     }
     #how-to-image {
-        width: 1.2em !important;
-        vertical-align: bottom important;
+    width: 1.2em !important;
+    vertical-align: bottom !important;
     }
     #how-to-arrow {
         width: 0.9em;
@@ -590,23 +651,100 @@ footer .toggle-group {
         padding: 0px 1px 0px 3px;
     }
     p.previews-text {
-        display: inline-block !important;
-        margin: 5px 0px 1px 2px !important;
-    }
+            display: inline-block !important;
+            margin: 5px 0px 1px 2px !important;
+        }
     #how-to-description {
-        font-size: 0.9em;
-        padding: 8px;
-        font-style: italic;
-        margin: 0px;
-        max-width: 90%;
+    font-size: 0.9em;
+    padding: 8px;
+    font-style: italic;
+    margin: 0px;
+    max-width: 90%;
     }
 }
 
 /* when larger then iPhone, don't show the iphone-only toggles */
 @media only screen and (min-device-width: 768px) {
     .platform-iphone {
-        display: none;
+    display: none;
     }
 }
 
+button[id$="AddElementButton"] {
+    background-color: #1a1a1a; /* Blackish when inactive */
+    color: #ffffff;
+    padding: 6px 12px;
+    font-size: 0.85em;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px; /* Slightly rounded */
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
 
+button[id$="AddElementButton"]:hover:not(.active) {
+    background-color: #2d2d2d; /* Lighter blackish on hover */
+}
+
+button[id$="AddElementButton"].active {
+    background-color: #ffffff; /* White when active */
+    color: #000000;
+}
+
+
+/* Style for refresh button */
+#youtubeRefreshCustomElements,
+#facebookRefreshCustomElements,
+#xRefreshCustomElements,
+#instagramRefreshCustomElements,
+#linkedinRefreshCustomElements,
+#whatsappRefreshCustomElements,
+#googleRefreshCustomElements,
+#redditRefreshCustomElements {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+#youtubeRefreshCustomElements:hover,
+#facebookRefreshCustomElements:hover,
+#xRefreshCustomElements:hover,
+#instagramRefreshCustomElements:hover,
+#linkedinRefreshCustomElements:hover,
+#whatsappRefreshCustomElements:hover,
+#googleRefreshCustomElements:hover,
+#redditRefreshCustomElements:hover {
+    background-color: #e0e0e0;
+}
+
+
+/* Style for custom elements controls container */
+.custom-elements-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Style for refresh symbol */
+.refresh-symbol {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.refresh-symbol svg {
+    fill: #666;
+    transition: fill 0.2s;
+}
+
+.refresh-symbol:hover svg {
+    fill: #333;
+}
