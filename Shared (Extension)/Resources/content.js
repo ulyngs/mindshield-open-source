@@ -1,3 +1,4 @@
+// content.js
 (function() {
     /**
      * Check and set a global guard variable.
@@ -22,7 +23,7 @@
                                      "googleAds", "googleBackground",
                                      "redditFeed", "redditPopular", "redditAll", "redditRecent", "redditCommunities", "redditNotification", "redditChat", "redditTrending", "redditPopularCommunities"];
 
-    // --- CSS Definitions (Unchanged) ---
+    // --- CSS Definitions (Keep as they are) ---
     const youtubeSearchCssOn = ''; const youtubeSearchCssOff = '#center > yt-searchbox.ytSearchboxComponentHost.ytSearchboxComponentDesktop.ytd-masthead, ytd-searchbox { display: none; } button[aria-label="Search YouTube"] {display: none;}';
     const youtubeSearchPredictCssOn = ''; const youtubeSearchPredictCssOff = 'div.gstl_50 { display: none !important; }';
     const youtubeRecVidsCssOn = 'ytd-browse[page-subtype="home"] { visibility: visible !important; } div[tab-identifier="FEwhat_to_watch"] { visibility: visible !important; }'; const youtubeRecVidsCssOff = 'ytd-browse[page-subtype="home"] { display: none; } div[tab-identifier="FEwhat_to_watch"] { visibility: hidden; }';
@@ -42,39 +43,32 @@
     const youtubeViewsCssOn = ''; const youtubeViewsCssOff = '/* watch page */ #metadata-line.ytd-video-meta-block > .ytd-video-meta-block:first-of-type {display: none !important; } #metadata-line.ytd-video-meta-block>.ytd-video-meta-block:not(:first-of-type):before, #metadata-line.ytd-grid-video-renderer>.ytd-grid-video-renderer:not(:first-of-type):before { content: ""; margin: 0px; } /* video page */ #info-container > .ytd-watch-metadata > .yt-formatted-string:nth-of-type(1), #info-container > .ytd-watch-metadata > .yt-formatted-string:nth-of-type(2) { display: none; } /* channel page */ ytd-two-column-browse-results-renderer #metadata-line span.ytd-grid-video-renderer:first-of-type { display: none !important; } /* m.youtube.com */ ytm-badge-and-byline-renderer .ytm-badge-and-byline-item-byline:not(:first-of-type):not(:last-of-type), ytm-badge-and-byline-renderer .ytm-badge-and-byline-separator:not(:first-of-type) { display: none; } .slim-video-metadata-header .secondary-text .yt-core-attributed-string {display: none;}';
     const youtubeLikesCssOn = ''; const youtubeLikesCssOff = 'ytd-watch-metadata #top-level-buttons-computed like-button-view-model .yt-spec-button-shape-next__button-text-content { display: none !important; } /* m.youtube.com */ ytm-slim-video-metadata-section-renderer like-button-view-model .yt-spec-button-shape-next__button-text-content { display: none !important; }';
     const youtubeSubscribersCssOn = ''; const youtubeSubscribersCssOff = '#owner-sub-count, #subscriber-count { display: none !important; } /* m.youtube.com */ .slim-owner-icon-and-title .subhead .yt-core-attributed-string { display: none !important; }';
-
     const facebookFeedCssOn = '#ssrb_feed_start + div, div.x1hc1fzr.x1unhpq9.x6o7n8i { visibility: visible !important; } #screen-root div > div[data-mcomponent="MContainer"] > div.m.displayed:nth-child(n+6) { display: block !important; }'; const facebookFeedCssOff = '#ssrb_feed_start + div, div.x1hc1fzr.x1unhpq9.x6o7n8i { visibility: hidden !important; } #screen-root div:not([data-adjust-on-keyboard-shown="true"]) > div[data-mcomponent="MContainer"] > div.m.displayed:nth-child(n+7) { display: none !important; }';
     const facebookWatchCssOn = ''; const facebookWatchCssOff = 'a[href$="/watch/"], a[aria-label="Video"] { display: none !important; } /* mobile */ div[role="button"]:has(div[data-hidden-ref-key="videos.jewel.hidden"]) {display: none !important;} div.m.displayed:has(div[data-hidden-ref-key="videos.jewel.hidden"]) {background-color: white !important;} ';
     const facebookNotificationsCssOn = 'div[aria-hidden="true"][aria-label*="Notifications"], #screen-root div[data-mcomponent="MScreen"] div[data-mcomponent="MContainer"] div[data-mcomponent="MContainer"]:nth-child(2) div[role="button"]:nth-child(5) div[data-mcomponent="MContainer"]:nth-child(3) {visibility: visible !important;}'; const facebookNotificationsCssOff = 'div[aria-hidden="true"][aria-label*="Notifications"], #screen-root div[data-mcomponent="MScreen"] div[data-mcomponent="MContainer"] div[data-mcomponent="MContainer"]:nth-child(2) div[role="button"]:nth-child(5) div[data-mcomponent="MContainer"]:nth-child(3) {visibility: hidden !important;}';
     const facebookChatCssOn = 'div[role="complementary"] div[data-visualcompletion="ignore-dynamic"] > div.x1n2onr6:not([role="cell"]) { visibility: visible !important; }'; const facebookChatCssOff = 'div[role="complementary"] div[data-visualcompletion="ignore-dynamic"] > div.x1n2onr6:not([role="cell"]) { visibility: hidden !important; }';
     const facebookStoriesCssOn = 'div[aria-label="Stories"], #screen-root div[data-mcomponent="MContainer"] > div[data-mcomponent="MContainer"]:has(div[aria-label*="story"]) { display: block !important;}'; const facebookStoriesCssOff = 'div[aria-label="Stories"] { display: none !important; } #screen-root div[data-mcomponent="MContainer"] > div[data-mcomponent="MContainer"]:has(div[aria-label*="story"]) { display: none !important;}';
     const facebookSponsoredCssOn = ''; const facebookSponsoredCssOff = 'a[aria-label="Advertiser"] { display: none !important; }';
-
     const xExploreCssOn = 'nav[role="navigation"] a[href="/explore"] { display: flex !important; }'; const xExploreCssOff = 'nav[role="navigation"] a[href="/explore"] { display: none !important; }';
     const xNotificationsCssOn = 'nav[role="navigation"] a[href="/notifications"] { display: flex !important; }'; const xNotificationsCssOff = 'nav[role="navigation"] a[href="/notifications"] { display: none !important; }';
     const xTrendsCssOn = 'div[data-testid="sidebarColumn"] section[role="region"] {display: flex !important;}'; const xTrendsCssOff = 'div[data-testid="sidebarColumn"] section[role="region"] {display: none !important; }';
     const xFollowCssOn = 'div[data-testid="sidebarColumn"] div.css-175oi2r.r-1bro5k0:has(aside[role="complementary"]) { display: flex !important;}'; const xFollowCssOff = 'div[data-testid="sidebarColumn"] div.css-175oi2r.r-1bro5k0:has(aside[role="complementary"]) { display: none !important;}';
     const xTimelineCssOn = 'div[data-testid="primaryColumn"] section[role="region"] {visibility: visible !important; }'; const xTimelineCssOff = 'div[data-testid="primaryColumn"] section[role="region"] {visibility: hidden !important; }';
-
-    const instagramFeedCssOn = 'main[role="main"] div.xw7yly9 > div.x168nmei, section._aalv._aal_ div._aam1 > div.x9f619, main[role="main"] div.x9f619.xjbqb8w.x78zum5.x168nmei.x13lgxp2.x5pf9jr.xo71vjh.x1uhb9sk.x1plvlek.xryxfnj.x1c4vz4f.x2lah0s.xdt5ytf.xqjyukv.x6s0dn4.x1oa3qoh.x1nhvcw1:has(article) {display: block !important;}'; const instagramFeedCssOff = 'main[role="main"] div.xw7yly9 > div.x168nmei, /* mobile */ section._aalv._aal_ div._aam1 > div.x9f619, /* mobile 8 Apr 2024 */ main[role="main"] div.x9f619.xjbqb8w.x78zum5.x168nmei.x13lgxp2.x5pf9jr.xo71vjh.x1uhb9sk.x1plvlek.xryxfnj.x1c4vz4f.x2lah0s.xdt5ytf.xqjyukv.x6s0dn4.x1oa3qoh.x1nhvcw1:has(article) {display: none !important;}';
+    const instagramFeedCssOn = 'main[role="main"] div.xw7yly9 > div.x168nmei, section._aalv._aal_ div._aam1 > div.x9f619, main[role="main"] div.x9f619.xjbqb8w.x78zum5.x168nmei.x13lgxp2.x5pf9jr.xo71vjh.x1uhb9sk.x1plvlek.xryxfnj.x1c4vz4f.x2lah0s.xdt5ytf.xqjyukv.x6s0dn4.x1oa3qoh.x1nhvcw1:has(article) {display: block !important;}'; const instagramFeedCssOff = 'main[role="main"] div.xw7yly9 > div.x168nmei, /* mobile */ section._aalv._aal_ div._aam1 > div._aac4, /* mobile 8 Apr 2024 */ main[role="main"] div.x9f619.xjbqb8w.x78zum5.x168nmei.x13lgxp2.x5pf9jr.xo71vjh.x1uhb9sk.x1plvlek.xryxfnj.x1c4vz4f.x2lah0s.xdt5ytf.xqjyukv.x6s0dn4.x1oa3qoh.x1nhvcw1:has(article) {display: none !important;}';
     const instagramStoriesCssOn = 'main div.xmnaoh6, section._aalv._aal_ div._aam1 > div._aac4, main[role="main"] div.x1ixjvfu.x1q0q8m5.xso031l {display: block !important;}'; const instagramStoriesCssOff = 'main div.xmnaoh6, /* mobile */ section._aalv._aal_ div._aam1 > div._aac4, /* mobile 8 Apr 2024 */  main[role="main"] div.x1ixjvfu.x1q0q8m5.xso031l {display: none !important;}';
     const instagramMutedStoriesCssOn = 'main[role="main"] div[role="menu"] button[role="menuitem"].xbyyjgo { display: flex !important; }'; const instagramMutedStoriesCssOff = 'main[role="main"] div[role="menu"] button[role="menuitem"].xbyyjgo { display: none !important; }';
     const instagramExploreCssOn = 'a[href="/explore/"] { display: flex !important; }'; const instagramExploreCssOff = 'a[href="/explore/"] { display: none !important; }';
     const instagramReelsCssOn = 'a[href="/reels/"] { display: flex !important; }'; const instagramReelsCssOff = 'a[href="/reels/"] { display: none !important; }';
     const instagramSuggestionsCssOn = 'div.x78zum5.xdt5ytf.xdj266r.x11i5rnm.xod5an3.x169t7cy.x1j7kr1c.xvbhtw8:has(a[href="/explore/people/"]) { display: block !important; }'; const instagramSuggestionsCssOff = 'div.x78zum5.xdt5ytf.xdj266r.x11i5rnm.xod5an3.x169t7cy.x1j7kr1c.xvbhtw8:has(a[href="/explore/people/"]) { display: none !important; }';
     const instagramCommentsCssOn = 'div.x9f619.xjbqb8w.x78zum5.x168nmei.x13lgxp2.x5pf9jr.xo71vjh.x1xmf6yo:has(a[href*="/comments/"]) {display: block !important;}'; const instagramCommentsCssOff = 'div.x9f619.xjbqb8w.x78zum5.x168nmei.x13lgxp2.x5pf9jr.xo71vjh.x1xmf6yo:has(a[href*="/comments/"]) {display: none !important;}';
-
     const linkedinFeedCssOn = 'div.scaffold-finite-scroll.scaffold-finite-scroll--infinite, #feed-container {display: block !important;}'; const linkedinFeedCssOff = 'div.scaffold-finite-scroll.scaffold-finite-scroll--infinite, #feed-container {display: none !important;}';
     const linkedinNotificationsCssOn = 'span.notification-badge--show, #nav-notifications-small-badge, #nav-people-small-badge { display: block !important; }'; const linkedinNotificationsCssOff = 'span.notification-badge--show, #nav-notifications-small-badge, #nav-people-small-badge { display: none !important; }';
     const linkedinNewsCssOn = '#feed-news-module, .feed-follows-module { display: block !important; }'; const linkedinNewsCssOff = '#feed-news-module, .feed-follows-module { display: none !important; }';
     const linkedinAdsCssOn = 'section.ad-banner-container { display: block !important;}'; const linkedinAdsCssOff = 'section.ad-banner-container { display: none !important;}'; // Added !important
-
     const whatsappPreviewCssOn = 'div[data-testid="cell-frame-secondary"] { display: block !important; }'; const whatsappPreviewCssOff = 'div[data-testid="cell-frame-secondary"] { display: none !important; }';
     const whatsappNotificationPromptCssOn = 'span[data-testid="chat-butterbar"] { display: block !important; }'; const whatsappNotificationPromptCssOff = 'span[data-testid="chat-butterbar"] { display: none !important; }';
-
     const googleAdsCssOn = '#tads, #atvcap, .commercial-unit-desktop-rhs {display: block !important;}'; const googleAdsCssOff = '#tads, #atvcap, .commercial-unit-desktop-rhs {display: none !important;}'; // Added !important
     const googleBackgroundCssOn = '#tads, #atvcap .ptJHdc.yY236b.c3mZkd, #tads .CnP9N.U3A9Ac.irmCpc,.commercial-unit-mobile-top,.commercial-unit-mobile-top .v7hl4d,.commercial-unit-mobile-bottom .v7hl4d {background-color: transparent !important;}'; const googleBackgroundCssOff = '#tads, #atvcap .ptJHdc.yY236b.c3mZkd, #tads .CnP9N.U3A9Ac.irmCpc,.commercial-unit-mobile-top,.commercial-unit-mobile-top .v7hl4d,.commercial-unit-mobile-bottom .v7hl4d {background-color: #F2E6C3 !important;}';
-
     const redditFeedCssOn = 'shreddit-feed { display: block !important; }'; const redditFeedCssOff = 'shreddit-feed { display: none !important; }';
     const redditPopularCssOn = 'a[href="/r/popular/"] { display: flex !important; }'; const redditPopularCssOff = 'a[href="/r/popular/"] { display: none !important; }';
     const redditAllCssOn = 'a[href="/r/all/"] { display: flex !important; }'; const redditAllCssOff = 'a[href="/r/all/"] { display: none !important; }';
@@ -93,213 +87,108 @@
 
     // --- Helper Functions ---
 
-    // Function to create/update style element in head or shadow DOM
     function createStyleElement(some_style_id, some_css) {
          const elementToHide = some_style_id.replace("Style", "");
-         let domRoot = document.head; // Default to document head
-
-         // Check if this element needs shadow DOM targeting
+         let domRoot = document.head;
           if (elementToHide in shadowSelectors) {
               const shadowHostSelector = shadowSelectors[elementToHide];
               const shadowHost = document.querySelector(shadowHostSelector);
               if (shadowHost && shadowHost.shadowRoot) {
                   domRoot = shadowHost.shadowRoot;
               } else {
-                   // console.warn(`Shadow host '${shadowHostSelector}' for '${elementToHide}' not found or shadow root not accessible.`);
-                    // Fallback to document head or skip? For now, log and maybe skip.
-                   // Fallback to head might apply style incorrectly. Let's just log and potentially skip.
                    console.warn(`Shadow host '${shadowHostSelector}' for '${elementToHide}' not found or shadow root not accessible. Style NOT applied.`);
-                   return; // Stop if shadow root isn't available when expected
+                   return;
               }
           }
-
          let styleElement = domRoot.querySelector("#" + some_style_id);
          if (!styleElement) {
              styleElement = document.createElement("style");
              styleElement.id = some_style_id;
-             styleElement.textContent = some_css; // Use textContent for style elements
+             styleElement.textContent = some_css;
              domRoot.appendChild(styleElement);
          } else {
-             // Only update if the CSS is different to avoid unnecessary reflows
              if (styleElement.textContent !== some_css) {
                   styleElement.textContent = some_css;
              }
          }
     }
 
-    // Function to generate a CSS selector (refined version)
      function generateCSSSelector(el) {
-        if (!(el instanceof Element)) return null; // Check if it's a valid element
-
-        // Prioritize ID if unique and reasonably simple
+        if (!(el instanceof Element)) return null;
         if (el.id) {
             const idSelector = `#${CSS.escape(el.id)}`;
-            try {
-                if (document.querySelectorAll(idSelector).length === 1) {
-                    return idSelector;
-                }
-            } catch (e) { /* Invalid ID selector, proceed */ }
+            try { if (document.querySelectorAll(idSelector).length === 1) return idSelector; } catch (e) {}
         }
-
-        // Path-based selector as fallback
-        let path = [];
-        let currentEl = el;
+        let path = []; let currentEl = el;
         while (currentEl && currentEl !== document.documentElement && currentEl !== document.body) {
-            let selector = currentEl.nodeName.toLowerCase();
-            let parent = currentEl.parentElement;
-
-            if (!parent) break; // Stop if no parent
-
-            // Add nth-child/nth-of-type for robustness
-            let index = 1;
-            let sibling = currentEl.previousElementSibling;
-            while (sibling) {
-                if (sibling.nodeName.toLowerCase() === selector) {
-                    index++;
-                }
-                sibling = sibling.previousElementSibling;
-            }
+            let selector = currentEl.nodeName.toLowerCase(); let parent = currentEl.parentElement;
+            if (!parent) break;
+            let index = 1; let sibling = currentEl.previousElementSibling;
+            while (sibling) { if (sibling.nodeName.toLowerCase() === selector) index++; sibling = sibling.previousElementSibling; }
             if (index > 1) {
-                 // Check if nth-of-type is more specific
-                 let ofTypeIndex = 1;
-                 let ofTypeSibling = currentEl.previousElementSibling;
-                 while (ofTypeSibling) {
-                     if (ofTypeSibling.nodeName.toLowerCase() === selector) {
-                          ofTypeIndex++;
-                     }
-                      ofTypeSibling = ofTypeSibling.previousElementSibling;
-                 }
-                 if (ofTypeIndex === index) { // nth-of-type is equivalent or better
-                     selector += `:nth-of-type(${index})`;
-                 } else {
-                     selector += `:nth-child(${index})`; // Fallback to nth-child
-                 }
+                 let ofTypeIndex = 1; let ofTypeSibling = currentEl.previousElementSibling;
+                 while (ofTypeSibling) { if (ofTypeSibling.nodeName.toLowerCase() === selector) ofTypeIndex++; ofTypeSibling = ofTypeSibling.previousElementSibling; }
+                 selector += (ofTypeIndex === index) ? `:nth-of-type(${index})` : `:nth-child(${index})`;
             } else {
-                 // Check if it's the only one of its type among siblings
-                 let nextSibling = currentEl.nextElementSibling;
-                 let hasSimilarNext = false;
-                 while (nextSibling) {
-                     if (nextSibling.nodeName.toLowerCase() === selector) {
-                         hasSimilarNext = true;
-                         break;
-                     }
-                     nextSibling = nextSibling.nextElementSibling;
-                 }
-                 if (!hasSimilarNext && index === 1) {
-                    // It's the first and only one of its type, just tag name might be enough in this context
-                 } else if (index === 1) {
-                     // It's the first but not the only one, need index
-                      selector += ':nth-of-type(1)'; // Be explicit
-                 }
+                 let nextSibling = currentEl.nextElementSibling; let hasSimilarNext = false;
+                 while (nextSibling) { if (nextSibling.nodeName.toLowerCase() === selector) { hasSimilarNext = true; break; } nextSibling = nextSibling.nextElementSibling; }
+                 if (hasSimilarNext) selector += ':nth-of-type(1)';
             }
-
-            // Add significant classes (optional, can make selectors brittle)
-            // if (currentEl.classList.length > 0) {
-            //    Consider adding classes selectively based on common patterns or stability
-            //    let stableClass = Array.from(currentEl.classList).find(c => !/^[a-z0-9-_]+$/i.test(c)); // Example: Avoid dynamic classes
-            //    if(stableClass) selector += `.${CSS.escape(stableClass)}`;
-            // }
-
-            path.unshift(selector);
-            currentEl = parent;
+            path.unshift(selector); currentEl = parent;
         }
-
-        if (path.length === 0) return null; // Could not generate path
-
-        // Ensure the generated selector is valid and unique (within reason)
+        if (path.length === 0) return null;
         const fullPath = path.join(' > ');
         try {
             const elements = document.querySelectorAll(fullPath);
             if (elements.length !== 1) {
-                // If not unique, maybe add body/html prefix or log a warning
-                // console.warn(`Generated selector '${fullPath}' is not unique (${elements.length} matches). Hiding might affect multiple elements.`);
-                // Let's try prefixing with body for more specificity
                 const bodyPath = `body > ${fullPath}`;
                 if(document.querySelectorAll(bodyPath).length === 1) return bodyPath;
-            }
-            return fullPath;
-        } catch (e) {
-            console.error("Error validating generated selector:", fullPath, e);
-            return null; // Invalid selector generated
-        }
+            } return fullPath;
+        } catch (e) { console.error("Error validating generated selector:", fullPath, e); return null; }
     }
 
     // --- Site Identification ---
     let currentSiteIdentifier = null;
-    let currentPlatform = null; // Store the matched platform name if applicable
+    let currentPlatform = null;
     const currentHostname = window.location.hostname;
-
     for (const platform of platformsWeTarget) {
-        // More specific check for platforms like google (avoid matching googleadservices.com etc.)
         if ((platform === 'google' && currentHostname.includes('google.') && !currentHostname.startsWith('ads.')) ||
-            (platform !== 'google' && currentHostname.includes(platform)))
-        {
-            currentPlatform = platform;
-            currentSiteIdentifier = platform;
-            break; // Found the most relevant platform
+            (platform !== 'google' && currentHostname.includes(platform))) {
+            currentPlatform = platform; currentSiteIdentifier = platform; break;
         }
     }
-    // If no platform matched, use the hostname for generic sites
-    if (!currentSiteIdentifier && currentHostname) {
-        currentSiteIdentifier = currentHostname;
-    }
+    if (!currentSiteIdentifier && currentHostname) { currentSiteIdentifier = currentHostname; }
     console.log("MindShield content script running on:", currentSiteIdentifier || "Unknown site");
 
     // --- Apply Initial Styles ---
-
-    // 1. Apply Custom Hidden Elements (for this specific site/platform)
     if (currentSiteIdentifier) {
         const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;
-        const customStyleId = `customHidden_${currentSiteIdentifier.replace(/\./g, '_')}Style`; // Sanitize ID
-
+        const customStyleId = `customHidden_${currentSiteIdentifier.replace(/\./g, '_')}Style`;
         browser.storage.sync.get(customStorageKey, function(result) {
             let customSelectors = result[customStorageKey] || [];
-            if (!Array.isArray(customSelectors)) customSelectors = []; // Ensure array
-
+            if (!Array.isArray(customSelectors)) customSelectors = [];
             if (customSelectors.length > 0) {
-                const css = customSelectors
-                    .map(selector => `${selector} { display: none !important; }`)
-                    .join('\n');
+                const css = customSelectors.map(selector => `${selector} { display: none !important; }`).join('\n');
                 createStyleElement(customStyleId, css);
                 console.log(`Applied ${customSelectors.length} custom rules for ${currentSiteIdentifier}`);
-            } else {
-                // Ensure the style tag is removed or empty if no selectors exist
-                createStyleElement(customStyleId, '');
-            }
+            } else { createStyleElement(customStyleId, ''); }
         });
     }
-
-    // 2. Apply Predefined Element Styles (only for targeted platforms)
     if (currentPlatform) {
         const platformStatusKey = `${currentPlatform}Status`;
-
         browser.storage.sync.get(platformStatusKey, function(platformResult) {
-            let platformIsOn = platformResult[platformStatusKey] !== false; // Default to ON if not set
-
+            let platformIsOn = platformResult[platformStatusKey] !== false;
             elementsThatCanBeHidden
-                .filter(element => element.startsWith(currentPlatform)) // Only elements for this platform
+                .filter(element => element.startsWith(currentPlatform))
                 .forEach(function(item) {
-                    const styleName = item + "Style";
-                    const itemStatusKey = item + "Status";
-
-                    if (!platformIsOn) {
-                        // Platform is OFF, ensure element is VISIBLE (use 'On' CSS)
-                        createStyleElement(styleName, eval(item + "CssOn"));
-                    } else {
-                        // Platform is ON, check individual element status
+                    const styleName = item + "Style"; const itemStatusKey = item + "Status";
+                    if (!platformIsOn) { createStyleElement(styleName, eval(item + "CssOn")); }
+                    else {
                         browser.storage.sync.get(itemStatusKey, function(itemResult) {
-                            let statusValue = itemResult[itemStatusKey]; // Can be true/false for checkboxes, or "On"/"Off"/"Blur"/"Black" for multi
-
-                            let cssToApply;
+                            let statusValue = itemResult[itemStatusKey]; let cssToApply;
                             if (item === "youtubeThumbnails" || item === "youtubeNotifications") {
-                                // Multi-state toggle
-                                let state = statusValue || "On"; // Default to "On"
-                                // Map state to CSS variable name
-                                cssToApply = eval(item + "Css" + state);
-                            } else {
-                                // Simple checkbox toggle (true means hidden/Off)
-                                cssToApply = (statusValue === true) ? eval(item + "CssOff") : eval(item + "CssOn");
-                            }
+                                let state = statusValue || "On"; cssToApply = eval(item + "Css" + state);
+                            } else { cssToApply = (statusValue === true) ? eval(item + "CssOff") : eval(item + "CssOn"); }
                             createStyleElement(styleName, cssToApply);
                         });
                     }
@@ -307,155 +196,77 @@
         });
     }
 
-
     // --- Message Listener from Popup ---
-
     chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-        // Check if the message requires a specific site identifier context
-        if (message.element && currentPlatform && !message.element.startsWith(currentPlatform)) {
-             // console.log(`Ignoring message for element ${message.element} as current platform is ${currentPlatform}`);
-            return; // Message is for a different platform's element
-        }
-
+        if (message.element && currentPlatform && !message.element.startsWith(currentPlatform)) { return; }
         var styleName = message.element ? message.element + "Style" : null;
-         let domRoot = document.head;
-         if (message.element && message.element in shadowSelectors) {
-             const shadowHost = document.querySelector(shadowSelectors[message.element]);
-             if (shadowHost && shadowHost.shadowRoot) {
-                 domRoot = shadowHost.shadowRoot;
-             } else {
-                  // Shadow root not found, cannot reliably check/modify style
-                  console.warn(`Cannot process message for ${message.element}: Shadow root not found.`);
-                  if (message.method === "check") sendResponse({ text: "unknown (shadow root)" });
-                  return true; // Indicate async response potentially needed if check was called
-             }
-         }
-         var currentStyleElement = styleName ? domRoot.querySelector("#" + styleName) : null;
-
-        // --- Handle Check Requests ---
+        let domRoot = document.head;
+        if (message.element && message.element in shadowSelectors) {
+            const shadowHost = document.querySelector(shadowSelectors[message.element]);
+            if (shadowHost && shadowHost.shadowRoot) { domRoot = shadowHost.shadowRoot; }
+            else { console.warn(`Cannot process message for ${message.element}: Shadow root not found.`); if (message.method === "check") sendResponse({ text: "unknown (shadow root)" }); return true; }
+        }
+        var currentStyleElement = styleName ? domRoot.querySelector("#" + styleName) : null;
         if (message.method === "check" && message.element) {
             if (!currentStyleElement) {
-                // Style element doesn't exist, try reading from storage as fallback
                 browser.storage.sync.get(message.element + "Status", function(result) {
-                     let storedValue = result[message.element + "Status"];
-                     if (message.element === "youtubeThumbnails" || message.element === "youtubeNotifications") {
-                          sendResponse({ text: (storedValue || "On").toLowerCase() }); // Use stored multi-state value or default 'on'
-                     } else {
-                          sendResponse({ text: storedValue === true ? "hidden" : "visible" }); // Map boolean to visibility
-                     }
-                });
-                return true; // Indicate async response
+                    let storedValue = result[message.element + "Status"];
+                    if (message.element === "youtubeThumbnails" || message.element === "youtubeNotifications") { sendResponse({ text: (storedValue || "On").toLowerCase() }); }
+                    else { sendResponse({ text: storedValue === true ? "hidden" : "visible" }); }
+                }); return true;
             }
-
-            const currentCss = currentStyleElement.textContent; // Use textContent
-            let responseText = "unknown"; // Default
-
-            // Check against known CSS states for this element
-            if (currentCss === eval(message.element + 'CssOn')) {
-                responseText = "visible";
-            } else if (currentCss === eval(message.element + 'CssOff')) {
-                responseText = "hidden";
-            } else if ((message.element === "youtubeThumbnails" || message.element === "youtubeNotifications")) {
-                if (currentCss === eval(message.element + 'CssBlur')) {
-                    responseText = "blur";
-                } else if (currentCss === eval(message.element + 'CssBlack')) {
-                    // Note: youtubeNotificationsCssBlack might be same as Off
-                    responseText = (message.element === "youtubeNotifications" && youtubeNotificationsCssBlack === youtubeNotificationsCssOff) ? "hidden" : "black";
-                }
+            const currentCss = currentStyleElement.textContent; let responseText = "unknown";
+            if (currentCss === eval(message.element + 'CssOn')) responseText = "visible";
+            else if (currentCss === eval(message.element + 'CssOff')) responseText = "hidden";
+            else if ((message.element === "youtubeThumbnails" || message.element === "youtubeNotifications")) {
+                if (currentCss === eval(message.element + 'CssBlur')) responseText = "blur";
+                else if (currentCss === eval(message.element + 'CssBlack')) responseText = (message.element === "youtubeNotifications" && youtubeNotificationsCssBlack === youtubeNotificationsCssOff) ? "hidden" : "black";
             }
-
-            sendResponse({text: responseText});
-            return false; // Synchronous response sent
+            sendResponse({text: responseText}); return false;
         }
-
-        // --- Handle Change Requests (Predefined Elements) ---
         if (message.method === "change" && message.element) {
-             if (currentStyleElement) {
-                const cssOn = eval(message.element + 'CssOn');
-                const cssOff = eval(message.element + 'CssOff');
-                currentStyleElement.textContent = (currentStyleElement.textContent === cssOn) ? cssOff : cssOn;
-            } else {
-                // Style element doesn't exist, apply based on assumption it's currently 'On' -> turn 'Off'
-                createStyleElement(styleName, eval(message.element + 'CssOff'));
-            }
-        } else if (message.method === "changeMultiToggle" && message.element && message.action) {
-             const cssToApply = eval(message.element + 'Css' + message.action); // e.g., youtubeThumbnailsCssBlur
-             createStyleElement(styleName, cssToApply);
-
-        } else if (message.method === "showAll" && message.element) {
-             // Force element to be visible (use 'On' style)
-             const cssOn = eval(message.element + 'CssOn');
-             createStyleElement(styleName, cssOn);
-
-        } else if (message.method === "hideAll" && message.element) { // Likely unused now, but keep for safety
-            // Force element to be hidden (use 'Off' style)
-             const cssOff = eval(message.element + 'CssOff');
-             createStyleElement(styleName, cssOff);
-        }
-
-        // --- Handle Custom Element Selection ---
-        else if (message.method === "startSelecting") {
-            startSelecting();
-        } else if (message.method === "stopSelecting") { // If popup closes or cancels
-            stopSelecting();
-        } else if (message.method === "selectHighlightedElement") {
-            selectElementByHighlight();
-        }
-        // --- Handle Custom Element Removal ---
+            if (currentStyleElement) { const cssOn = eval(message.element + 'CssOn'); const cssOff = eval(message.element + 'CssOff'); currentStyleElement.textContent = (currentStyleElement.textContent === cssOn) ? cssOff : cssOn; }
+            else { createStyleElement(styleName, eval(message.element + 'CssOff')); }
+        } else if (message.method === "changeMultiToggle" && message.element && message.action) { const cssToApply = eval(message.element + 'Css' + message.action); createStyleElement(styleName, cssToApply); }
+        else if (message.method === "showAll" && message.element) { const cssOn = eval(message.element + 'CssOn'); createStyleElement(styleName, cssOn); }
+        else if (message.method === "hideAll" && message.element) { const cssOff = eval(message.element + 'CssOff'); createStyleElement(styleName, cssOff); }
+        else if (message.method === "startSelecting") { startSelecting(); }
+        else if (message.method === "stopSelecting") { stopSelecting(message.cancelled); }
         else if (message.method === "removeCustomElement" && message.selector && currentSiteIdentifier) {
             const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;
             browser.storage.sync.get(customStorageKey, function(result) {
-                let customSelectors = result[customStorageKey] || [];
-                if (!Array.isArray(customSelectors)) customSelectors = [];
-
+                let customSelectors = result[customStorageKey] || []; if (!Array.isArray(customSelectors)) customSelectors = [];
                 customSelectors = customSelectors.filter(s => s !== message.selector);
-
                 browser.storage.sync.set({ [customStorageKey]: customSelectors }, function() {
-                     if (chrome.runtime.lastError) {
-                         console.error("Error removing custom selector from storage:", chrome.runtime.lastError);
-                     } else {
-                         // Re-apply the combined custom CSS
-                        applyCustomElementStyles(currentSiteIdentifier, customSelectors);
-                         console.log(`Removed selector and updated styles for ${currentSiteIdentifier}: ${message.selector}`);
-                     }
+                    if (chrome.runtime.lastError) console.error("Error removing custom selector from storage:", chrome.runtime.lastError);
+                    else { applyCustomElementStyles(currentSiteIdentifier, customSelectors); console.log(`Removed selector and updated styles for ${currentSiteIdentifier}: ${message.selector}`); }
                 });
             });
+        } else if (message.method === "refreshCustomElements" && currentSiteIdentifier) {
+            const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;
+            browser.storage.sync.get(customStorageKey, function(result) {
+                let customSelectors = result[customStorageKey] || []; if (!Array.isArray(customSelectors)) customSelectors = [];
+                applyCustomElementStyles(currentSiteIdentifier, customSelectors); console.log(`Refreshed custom styles for ${currentSiteIdentifier}`);
+            });
         }
-        // --- Handle Custom Element Refresh ---
-         else if (message.method === "refreshCustomElements" && currentSiteIdentifier) {
-              const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;
-              browser.storage.sync.get(customStorageKey, function(result) {
-                  let customSelectors = result[customStorageKey] || [];
-                  if (!Array.isArray(customSelectors)) customSelectors = [];
-                  applyCustomElementStyles(currentSiteIdentifier, customSelectors);
-                  console.log(`Refreshed custom styles for ${currentSiteIdentifier}`);
-              });
-        }
-
-        // Return true if sending an async response (e.g., for "check" with storage fallback)
-        // Otherwise, return false or nothing.
         return false;
     });
 
-
     // --- Element Selection Logic ---
     let isSelecting = false;
-    let highlightOverlay = null; // Use a dedicated overlay div
+    let highlightOverlay = null;
     let selectorDisplay = null;
     let currentHighlightedElement = null;
+    let lastTapTime = 0;
     const highlightStyleId = 'mindshield-highlight-style';
 
     function createHighlightOverlay() {
         if (!highlightOverlay) {
             highlightOverlay = document.createElement('div');
-            highlightOverlay.style.position = 'absolute'; // Position based on target
-            highlightOverlay.style.backgroundColor = 'rgba(255, 0, 0, 0.3)'; // Red transparent overlay
-            highlightOverlay.style.border = '1px dashed red';
-            highlightOverlay.style.zIndex = '2147483646'; // High z-index, below selectorDisplay
-            highlightOverlay.style.pointerEvents = 'none'; // Allow clicks to pass through
-            highlightOverlay.style.margin = '0';
-            highlightOverlay.style.padding = '0';
-            highlightOverlay.style.boxSizing = 'border-box';
+            highlightOverlay.style.position = 'absolute'; highlightOverlay.style.backgroundColor = 'rgba(255, 0, 0, 0.3)';
+            highlightOverlay.style.border = '1px dashed red'; highlightOverlay.style.zIndex = '2147483646';
+            highlightOverlay.style.pointerEvents = 'none'; highlightOverlay.style.margin = '0';
+            highlightOverlay.style.padding = '0'; highlightOverlay.style.boxSizing = 'border-box';
             document.body.appendChild(highlightOverlay);
         }
     }
@@ -463,18 +274,12 @@
     function createSelectorDisplay() {
         if (!selectorDisplay) {
             selectorDisplay = document.createElement('div');
-            selectorDisplay.style.position = 'fixed'; // Fixed position relative to viewport
-            selectorDisplay.style.background = 'rgba(0, 0, 0, 0.8)';
-            selectorDisplay.style.color = 'white';
-            selectorDisplay.style.padding = '3px 6px';
-            selectorDisplay.style.borderRadius = '3px';
-            selectorDisplay.style.zIndex = '2147483647'; // Max z-index
-            selectorDisplay.style.fontSize = '11px';
-            selectorDisplay.style.fontFamily = 'monospace';
-            selectorDisplay.style.pointerEvents = 'none'; // Does not interfere with mouse events
-            selectorDisplay.style.maxWidth = '300px';
-            selectorDisplay.style.whiteSpace = 'nowrap';
-            selectorDisplay.style.overflow = 'hidden';
+            selectorDisplay.style.position = 'fixed'; selectorDisplay.style.background = 'rgba(0, 0, 0, 0.8)';
+            selectorDisplay.style.color = 'white'; selectorDisplay.style.padding = '3px 6px';
+            selectorDisplay.style.borderRadius = '3px'; selectorDisplay.style.zIndex = '2147483647';
+            selectorDisplay.style.fontSize = '11px'; selectorDisplay.style.fontFamily = 'monospace';
+            selectorDisplay.style.pointerEvents = 'none'; selectorDisplay.style.maxWidth = '300px';
+            selectorDisplay.style.whiteSpace = 'nowrap'; selectorDisplay.style.overflow = 'hidden';
             selectorDisplay.style.textOverflow = 'ellipsis';
             document.body.appendChild(selectorDisplay);
         }
@@ -483,17 +288,12 @@
     function startSelecting() {
         if (isSelecting) return;
         isSelecting = true;
-        console.log("Starting element selection mode.");
-
-        createHighlightOverlay();
-        createSelectorDisplay();
-
-        // Use capturing phase to ensure our listener runs first
+        console.log("Starting element selection mode (click/tap).");
+        createHighlightOverlay(); createSelectorDisplay();
         document.addEventListener('mousemove', highlightElement, true);
+        document.addEventListener('touchstart', highlightElement, { capture: true, passive: true });
         document.addEventListener('click', selectElementOnClick, true);
-        document.addEventListener('keydown', handleSelectionKeys, true); // Handle Esc/Space
-
-        // Add a class to body to potentially disable other hover effects
+        document.addEventListener('touchend', selectElementOnTap, true);
         document.body.classList.add('mindshield-selecting');
     }
 
@@ -501,181 +301,148 @@
         if (!isSelecting) return;
         isSelecting = false;
         console.log("Stopping element selection mode.");
-
         document.removeEventListener('mousemove', highlightElement, true);
+        document.removeEventListener('touchstart', highlightElement, { capture: true });
         document.removeEventListener('click', selectElementOnClick, true);
-        document.removeEventListener('keydown', handleSelectionKeys, true);
-
-        if (highlightOverlay) {
-            highlightOverlay.remove();
-            highlightOverlay = null;
-        }
-        if (selectorDisplay) {
-            selectorDisplay.remove();
-            selectorDisplay = null;
-        }
+        document.removeEventListener('touchend', selectElementOnTap, true);
+        if (highlightOverlay) { highlightOverlay.remove(); highlightOverlay = null; }
+        if (selectorDisplay) { selectorDisplay.remove(); selectorDisplay = null; }
         currentHighlightedElement = null;
-
-        // Remove temporary style/class
         document.body.classList.remove('mindshield-selecting');
-        const tempStyle = document.getElementById(highlightStyleId);
-        if(tempStyle) tempStyle.remove();
-
-        // Notify popup if selection was cancelled (e.g., by Esc)
-        if (cancelled) {
-             browser.runtime.sendMessage({ method: "selectionCanceled" }).catch(e => console.debug("Popup likely closed, message failed:", e));
-        }
+        const tempStyle = document.getElementById(highlightStyleId); if(tempStyle) tempStyle.remove();
+        if (cancelled) { browser.runtime.sendMessage({ method: "selectionCanceled" }).catch(e => console.debug("Popup likely closed:", e)); }
     }
 
     function highlightElement(event) {
         if (!isSelecting) return;
-
-        event.preventDefault(); // Prevent default hover effects/actions
-        event.stopPropagation(); // Stop event from bubbling further
-
         const el = event.target;
-
-        // Ignore overlay/display elements themselves
         if (!el || el === highlightOverlay || el === selectorDisplay || el === document.body || el === document.documentElement) {
-            // Optionally hide overlay if mouse is not over a valid element
             if (highlightOverlay) highlightOverlay.style.display = 'none';
-            currentHighlightedElement = null;
-            return;
+            if (selectorDisplay) selectorDisplay.style.display = 'none';
+            currentHighlightedElement = null; return;
         }
-
-        currentHighlightedElement = el; // Store the currently hovered element
-
-        // Generate selector for display
+        currentHighlightedElement = el;
         const selector = generateCSSSelector(el);
+        let posX, posY;
+        if (event.touches && event.touches.length > 0) { posX = event.touches[0].clientX; posY = event.touches[0].clientY; }
+        else if (event.clientX !== undefined) { posX = event.clientX; posY = event.clientY; }
+        else { if (selectorDisplay) selectorDisplay.style.display = 'none'; if (highlightOverlay) highlightOverlay.style.display = 'none'; return; }
         if (selectorDisplay) {
             selectorDisplay.textContent = selector || "Cannot select this element";
-            // Position selector display near the cursor or element edge
-            const posX = event.clientX + 15;
-            const posY = event.clientY + 15;
-            // Keep within viewport bounds
-            selectorDisplay.style.left = `${Math.min(posX, window.innerWidth - selectorDisplay.offsetWidth - 10)}px`;
-            selectorDisplay.style.top = `${Math.min(posY, window.innerHeight - selectorDisplay.offsetHeight - 10)}px`;
+            const displayPosX = posX + 15; const displayPosY = posY + 15;
+            selectorDisplay.style.left = `${Math.min(displayPosX, window.innerWidth - selectorDisplay.offsetWidth - 10)}px`;
+            selectorDisplay.style.top = `${Math.min(displayPosY, window.innerHeight - selectorDisplay.offsetHeight - 10)}px`;
             selectorDisplay.style.display = 'block';
         }
-
-        // Position and show the highlight overlay
         if (highlightOverlay) {
             const rect = el.getBoundingClientRect();
-            highlightOverlay.style.top = `${rect.top + window.scrollY}px`;
-            highlightOverlay.style.left = `${rect.left + window.scrollX}px`;
-            highlightOverlay.style.width = `${rect.width}px`;
-            highlightOverlay.style.height = `${rect.height}px`;
+            highlightOverlay.style.top = `${rect.top + window.scrollY}px`; highlightOverlay.style.left = `${rect.left + window.scrollX}px`;
+            highlightOverlay.style.width = `${rect.width}px`; highlightOverlay.style.height = `${rect.height}px`;
             highlightOverlay.style.display = 'block';
         }
     }
 
     function selectElementOnClick(event) {
-         if (!isSelecting || !currentHighlightedElement) return;
-
-         event.preventDefault();
-         event.stopPropagation();
-
-         const elToSelect = currentHighlightedElement; // Use the element stored during mousemove
-         stopSelecting(); // Stop selection mode *before* processing
-
-         if (!elToSelect || elToSelect === document.body || elToSelect === document.documentElement) {
-             console.log("Selection ignored (invalid target).");
-             return; // Ignore clicks on invalid targets
-         }
-
-         processSelectedElement(elToSelect);
-    }
-
-     function selectElementByHighlight() {
-         if (!isSelecting || !currentHighlightedElement) return;
-
-         const elToSelect = currentHighlightedElement;
-         stopSelecting(); // Stop selection mode *before* processing
-
-         if (!elToSelect || elToSelect === document.body || elToSelect === document.documentElement) {
-              console.log("Selection ignored (invalid target).");
-             return; // Ignore invalid targets
-         }
-
-         processSelectedElement(elToSelect);
-     }
-
-    function handleSelectionKeys(event) {
+        // Ghost click prevention
+        if (Date.now() - lastTapTime < 500) { event.preventDefault(); event.stopPropagation(); console.log("Ghost click prevented."); return; }
+        // Must be in selecting mode
         if (!isSelecting) return;
 
-        if (event.key === 'Escape') {
-            event.preventDefault();
-            event.stopPropagation();
-            console.log("Selection cancelled by Escape key.");
-            stopSelecting(true); // Stop and mark as cancelled
-        } else if (event.code === 'Space' && currentHighlightedElement) {
-            // Prevent spacebar from scrolling or typing if focus is not on input
-             if (document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA' && !document.activeElement?.isContentEditable) {
-                  event.preventDefault();
-                  event.stopPropagation();
-                  selectElementByHighlight(); // Select the currently highlighted element
-             }
+        // **** MODIFICATION START ****
+        // Check if the click happened directly on the element we last highlighted.
+        // If not, ignore this click for selection purposes (it might be dismissing the popup or clicking elsewhere).
+        if (event.target !== currentHighlightedElement) {
+             console.log("Click target is not the highlighted element. Ignoring click for selection.", event.target, currentHighlightedElement);
+             // IMPORTANT: Do *not* call stopSelecting() here. Let the user continue trying to select.
+             // Do not prevent default or stop propagation either, let the click happen normally.
+            return;
         }
+        // **** MODIFICATION END ****
+
+        // If we reach here, the click was on the intended target while selecting.
+        console.log("Click detected on highlighted element:", currentHighlightedElement);
+        event.preventDefault(); // Prevent default action (like navigation) for the selected element
+        event.stopPropagation(); // Stop the event from bubbling further
+
+        const elToSelect = currentHighlightedElement;
+        stopSelecting(); // Stop selection mode *now* because a valid selection occurred
+
+        if (!elToSelect || elToSelect === document.body || elToSelect === document.documentElement) { console.log("Selection ignored (invalid target after check)."); return; }
+        processSelectedElement(elToSelect);
+    }
+
+    function selectElementOnTap(event) {
+        if (!isSelecting) return;
+
+        // Record tap time for ghost click prevention
+        lastTapTime = Date.now();
+
+        // Use the element that was highlighted *before* the touchend event started
+        const elToSelect = currentHighlightedElement;
+
+        // If no element was highlighted when the tap ended, ignore.
+        if (!elToSelect) {
+            console.log("Tap selection ignored (no highlighted element at time of tap).");
+            // Do NOT stop selection here. User might have tapped empty space.
+            return;
+        }
+
+        // Check if the primary touch point's target in the touchend event matches
+        // This is an extra check, though currentHighlightedElement should be reliable
+        // const touchTarget = event.changedTouches?.[0]?.target;
+        // if (touchTarget !== elToSelect) {
+        //     console.log("Tap end target doesn't match highlighted. Ignoring.");
+        //     return;
+        // }
+
+        console.log("Tap detected on highlighted element:", elToSelect);
+        // Prevent default actions (like link navigation, or triggering a click event later) ONLY if we are selecting this element.
+        event.preventDefault();
+        event.stopPropagation();
+
+        stopSelecting(); // Stop selection mode because a valid selection tap occurred
+
+        if (elToSelect === document.body || elToSelect === document.documentElement) { console.log("Tap selection ignored (invalid target)."); return; }
+        processSelectedElement(elToSelect);
     }
 
     function processSelectedElement(el) {
         const selector = generateCSSSelector(el);
         if (!selector) {
-            console.warn("Could not generate a reliable selector for the clicked element.", el);
-            // Optionally notify the user via the popup? Difficult from content script.
-            // Maybe send a specific failure message back?
-             browser.runtime.sendMessage({ method: "selectionFailed", reason: "Could not generate selector" }).catch(e => console.debug("Popup likely closed, message failed:", e));
-            return;
+            console.warn("Could not generate a reliable selector for the element.", el);
+            browser.runtime.sendMessage({ method: "selectionFailed", reason: "Could not generate selector" }).catch(e => console.debug("Popup likely closed:", e)); return;
         }
-
-        console.log("Selected element:", el);
-        console.log("Generated selector:", selector);
-
+        console.log("Selected element:", el, "Generated selector:", selector);
         if (!currentSiteIdentifier) {
             console.error("Cannot save selected element: currentSiteIdentifier is not set.");
-            return;
+            browser.runtime.sendMessage({ method: "selectionFailed", reason: "Site identifier missing" }).catch(e => console.debug("Popup likely closed:", e)); return;
         }
-
-        // Add the selector to storage and apply styles
         const storageKey = `${currentSiteIdentifier}CustomHiddenElements`;
         browser.storage.sync.get(storageKey, function(result) {
-            let customSelectors = result[storageKey] || [];
-            if (!Array.isArray(customSelectors)) customSelectors = []; // Ensure array
-
+            let customSelectors = result[storageKey] || []; if (!Array.isArray(customSelectors)) customSelectors = [];
             if (!customSelectors.includes(selector)) {
                 customSelectors.push(selector);
                 browser.storage.sync.set({ [storageKey]: customSelectors }, function() {
                     if (chrome.runtime.lastError) {
                         console.error("Error saving custom selectors:", chrome.runtime.lastError);
-                        // Notify popup about the failure?
-                         browser.runtime.sendMessage({ method: "selectionFailed", reason: "Storage error" }).catch(e => console.debug("Popup likely closed, message failed:", e));
+                        browser.runtime.sendMessage({ method: "selectionFailed", reason: "Storage error" }).catch(e => console.debug("Popup likely closed:", e));
                     } else {
-                        // Apply the new combined styles
                         applyCustomElementStyles(currentSiteIdentifier, customSelectors);
-
-                        // Send confirmation back to popup
-                        browser.runtime.sendMessage({
-                            method: "elementSelected",
-                            selector: selector
-                        }).catch(e => console.debug("Popup likely closed, message failed:", e));
+                        browser.runtime.sendMessage({ method: "elementSelected", selector: selector }).catch(e => console.debug("Popup likely closed:", e));
                         console.log(`Selector added and styles updated for ${currentSiteIdentifier}: ${selector}`);
                     }
                 });
             } else {
-                // Selector already exists, maybe notify popup?
-                 console.log("Selector already hidden:", selector);
-                 browser.runtime.sendMessage({ method: "selectionCanceled", reason: "Already hidden" }).catch(e => console.debug("Popup likely closed, message failed:", e));
+                console.log("Selector already hidden:", selector);
+                browser.runtime.sendMessage({ method: "selectionCanceled", reason: "Already hidden" }).catch(e => console.debug("Popup likely closed:", e));
             }
         });
     }
 
-     // Helper to apply/update the stylesheet for custom elements
-     function applyCustomElementStyles(siteIdentifier, selectors) {
+    function applyCustomElementStyles(siteIdentifier, selectors) {
         const styleId = `customHidden_${siteIdentifier.replace(/\./g, '_')}Style`;
-        const css = selectors.length > 0
-            ? selectors.map(s => `${s} { display: none !important; }`).join('\n')
-            : ''; // Empty string if no selectors
+        const css = selectors.length > 0 ? selectors.map(s => `${s} { display: none !important; }`).join('\n') : '';
         createStyleElement(styleId, css);
-     }
+    }
 
 })();

@@ -506,42 +506,32 @@ footer .toggle-group {
 @media (prefers-color-scheme: dark) {
     /* Dark Mode styles go here. */
     .colored-font {
-    color: lightgray;
+        color: lightgray;
     }
 
     .friction-customisation input {
-    background-color: white;
-    color: black;
+        background-color: white;
+        color: black;
     }
 
-    a,
-    a:visited {
-    color: gray;
+    a, a:visited {
+        color: gray;
     }
     #sites-arrow指示: #sites-arrow path {
-    fill: rgb(194, 194, 194);
+        fill: rgb(194, 194, 194);
     }
     #sites-arrow-right path, #sites-arrow-down path,
     #how-to-arrow-right path, #how-to-arrow-down path {
-    fill: rgb(194, 194, 194);
-    }
-
-    .custom-element button {
-    background-color: #e74c3c;
-    color: white;
-    }
-
-    .custom-element button:hover {
-    background-color: #c0392b;
+        fill: rgb(194, 194, 194);
     }
 
     button[id$="AddElementButton"] {
-    background-color: #3498DB;
-    color: white;
+        background-color: #3498DB;
+        color: white;
     }
 
     button[id$="AddElementButton"]:hover {
-    background-color: #2980B9;
+        background-color: #2980B9;
     }
 }
 
@@ -554,11 +544,6 @@ p.how-to-description {
     font-size: 0.95em;
 }
 
-.custom-element button {
-    margin-left: 5px;
-    padding: 2px 8px;
-    font-size: 12px;
-}
 #editSelectorModal textarea {
     width: 80%;
     height: 5em;
@@ -570,45 +555,49 @@ p.how-to-description {
 }
 
 /******* HIDE IRRELEVANT TOGGLES ******/
-/ iPhone */
+/* iPhone */
 @media only screen and (max-device-width: 768px) {
+    footer .footer-bottom-row {
+        padding: 10px;
+    }
+    
     .multi-state-checkbox[data-state="Black"]::after {
-    content: '';
-    position: absolute;
-    top: 0px !important;
-    left: 0px !important;
-    width: 15px;
-    height: 16px;
-    background-color: black;
+        content: '';
+        position: absolute;
+        top: 0px !important;
+        left: 0px !important;
+        width: 15px;
+        height: 16px;
+        background-color: black;
     }
 
     .platform-ipad-mac {
-    display: none;
+        display: none;
     }
 
     .multi-state-checkbox[data-state="Blur"]::after,
     .multi-state-checkbox[data-state="Black"]::after {
-    top: -2px;
-    left: -3px;
+        top: -2px;
+        left: -3px;
     }
 
     body {
-    width: 100%
+        width: 100%
     }
     #delay-content {
-    margin: auto;
-    width: 50%;
+        margin: auto;
+        width: 50%;
     }
     #delay-content img {
-    width: 60% !important;
-    margin-bottom: 10px !important;
+        width: 60% !important;
+        margin-bottom: 10px !important;
     }
     #how-to-image {
-    display: inline-block !important;
+        display: inline-block !important;
     }
     #how-to-image {
-    width: 1.2em !important;
-    vertical-align: bottom !important;
+        width: 1.2em !important;
+        vertical-align: bottom !important;
     }
     #how-to-arrow {
         width: 0.9em;
@@ -620,18 +609,18 @@ p.how-to-description {
             margin: 5px 0px 1px 2px !important;
         }
     #how-to-description {
-    font-size: 0.9em;
-    padding: 8px;
-    font-style: italic;
-    margin: 0px;
-    max-width: 90%;
+        font-size: 0.9em;
+        padding: 8px;
+        font-style: italic;
+        margin: 0px;
+        max-width: 90%;
     }
 }
 
 /* when larger then iPhone, don't show the iphone-only toggles */
 @media only screen and (min-device-width: 768px) {
     .platform-iphone {
-    display: none;
+        display: none;
     }
 }
 
@@ -750,7 +739,8 @@ button[id$="AddElementButton"].active {
 .remove-symbol {
     background: none;
     border: none;
-    padding: 4px;
+    padding: 0px;
+    margin: 0 4px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -765,6 +755,9 @@ button[id$="AddElementButton"].active {
 .remove-symbol svg {
     stroke: #666;
     transition: stroke 0.2s;
+    width: 18px; 
+    height: 18px;
+    stroke-width: 3;
 }
 
 .remove-symbol:hover svg path {
@@ -841,7 +834,7 @@ footer .footer-bottom-row {
 
 /* Ensure footer settings stay above */
 footer .footer-settings {
-    margin-bottom: 10px; /* Add space below settings */
+    margin-bottom: 4px; /* Add space below settings */
 }
 footer .friction-customisation {
      margin-bottom: 10px; /* Add space below friction options if shown */

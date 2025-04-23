@@ -408,7 +408,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const span = document.createElement('span');
             span.textContent = selector;
             span.title = selector; // Show full selector on hover
-            div.appendChild(span);
 
             const button = document.createElement('button');
             button.className = 'remove-symbol';
@@ -438,6 +437,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
             div.appendChild(button);
+            div.appendChild(span);
 
             container.appendChild(div);
         });
@@ -456,22 +456,67 @@ document.addEventListener('DOMContentLoaded', function() {
 
          if (addButton) {
              addButton.addEventListener('click', function() {
-                 addButton.classList.add('active');
-                 addButton.textContent = 'Hover over element, then click or press Space';
-                 isSelectionModeActive = true;
-                 chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                     if (tabs[0]?.id) {
-                         chrome.tabs.sendMessage(tabs[0].id, { method: "startSelecting" }, err => {
-                              if (chrome.runtime.lastError) console.warn("Error sending 'startSelecting' message:", chrome.runtime.lastError.message);
-                         });
-                     }
-                 });
-                 document.addEventListener('keydown', handleSpacebar); // Add listener specific to selection mode
+                 // If already active, clicking again cancels selection mode
+                 if (isSelectionModeActive) {
+                     isSelectionModeActive = false;
+                     addButton.classList.remove('active');
+                     addButton.textContent = 'Hide custom element'; // Reset button text
+                     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                         if (tabs[0]?.id) {
+                             chrome.tabs.sendMessage(tabs[0].id, { method: "stopSelecting", cancelled: true }, err => {
+                                  if (chrome.runtime.lastError) console.warn("Error sending 'stopSelecting' message:", chrome.runtime.lastError.message);
+                             });
+                         }
+                     });
+                 } else {
+                     // Activate selection mode
+                     isSelectionModeActive = true;
+                     addButton.classList.add('active');
+                     // MODIFIED: Changed button text for universal click/tap
+                     addButton.textContent = 'Click/Tap element to hide';
+                     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                         if (tabs[0]?.id) {
+                             chrome.tabs.sendMessage(tabs[0].id, { method: "startSelecting" }, err => {
+                                  if (chrome.runtime.lastError) {
+                                     console.warn("Error sending 'startSelecting' message:", chrome.runtime.lastError.message);
+                                     // Reset button state if message failed
+                                     isSelectionModeActive = false;
+                                     addButton.classList.remove('active');
+                                     addButton.textContent = 'Hide custom element';
+                                  }
+                             });
+                         } else {
+                             // Reset button state if no active tab
+                             isSelectionModeActive = false;
+                             addButton.classList.remove('active');
+                             addButton.textContent = 'Hide custom element';
+                         }
+                     });
+                     // REMOVED: document.addEventListener('keydown', handleSpacebar);
+                 }
              });
          } else { console.error("Add button not found:", addButtonId); }
 
          if (refreshButton) {
              refreshButton.addEventListener('click', function() {
+                 // If selection mode is active, stop it first
+                 if (isSelectionModeActive) {
+                     isSelectionModeActive = false;
+                     const currentAddButton = document.getElementById(addButtonId);
+                     if(currentAddButton) {
+                         currentAddButton.classList.remove('active');
+                         currentAddButton.textContent = 'Hide custom element';
+                     }
+                     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                         if (tabs[0]?.id) {
+                             chrome.tabs.sendMessage(tabs[0].id, { method: "stopSelecting", cancelled: true }, err => {
+                                 if (chrome.runtime.lastError) console.warn("Error sending 'stopSelecting' before refresh:", chrome.runtime.lastError.message);
+                             });
+                         }
+                     });
+                 }
+
+                 // Proceed with refresh
                  const storageKey = `${siteIdentifier}CustomHiddenElements`;
                  browser.storage.sync.get(storageKey, function(result) {
                      let customSelectors = result[storageKey] || [];
@@ -489,24 +534,8 @@ document.addEventListener('DOMContentLoaded', function() {
          } else { console.error("Refresh button not found:", refreshButtonId); }
      }
 
-     // Handle spacebar press during selection mode
-     function handleSpacebar(event) {
-        // Check if the event target is an input field, if so, ignore spacebar
-        if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA' || event.target.isContentEditable) {
-            return;
-        }
-         if (isSelectionModeActive && event.code === 'Space') {
-             event.preventDefault(); // Prevent scrolling or typing space
-             chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                 if (tabs[0]?.id) {
-                     chrome.tabs.sendMessage(tabs[0].id, { method: "selectHighlightedElement" }, err => {
-                          if (chrome.runtime.lastError) console.warn("Error sending 'selectHighlightedElement' message:", chrome.runtime.lastError.message);
-                     });
-                 }
-             });
-             // Selection mode will be stopped by the response message
-         }
-     }
+     // REMOVED: handleSpacebar function is no longer needed.
+     // function handleSpacebar(event) { ... }
 
     // --- Main Logic: Determine Site and Setup UI ---
 
@@ -612,7 +641,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Ensure message is relevant to the current site being displayed
         if (!currentSiteIdentifier) return; // No site identified yet or invalid page
 
-        if ((message.method === "elementSelected" || message.method === "selectionCanceled")) {
+        if ((message.method === "elementSelected" || message.method === "selectionCanceled" || message.method === "selectionFailed")) {
             console.log('Received message:', message);
 
             // Find the correct 'Add' button (platform-specific or generic)
@@ -624,7 +653,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             isSelectionModeActive = false;
-            document.removeEventListener('keydown', handleSpacebar); // Clean up listener IMPORTANT
+            // REMOVED: document.removeEventListener('keydown', handleSpacebar); // Clean up listener IMPORTANT
 
             if (message.method === "elementSelected" && message.selector) {
                 const storageKey = `${currentSiteIdentifier}CustomHiddenElements`;
@@ -643,6 +672,14 @@ document.addEventListener('DOMContentLoaded', function() {
                         });
                     }
                 });
+            } else if (message.method === "selectionFailed") {
+                // Optional: Show a temporary message to the user?
+                console.error("Element selection failed:", message.reason);
+                if (addButton) {
+                    const originalText = addButton.textContent;
+                    addButton.textContent = 'Selection Failed!';
+                    setTimeout(() => { addButton.textContent = originalText; }, 2000);
+                }
             }
         }
         // Note: No sendResponse needed here unless specifically required by sender
