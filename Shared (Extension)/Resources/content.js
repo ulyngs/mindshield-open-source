@@ -23,7 +23,7 @@
 
      // YouTube CSS
      const youtubeSearchCssOn = '';
-     const youtubeSearchCssOff = 'ytd-searchbox { display: none; } button[aria-label="Search YouTube"] {display: none;}';
+     const youtubeSearchCssOff = '#center > yt-searchbox.ytSearchboxComponentHost.ytSearchboxComponentDesktop.ytd-masthead, ytd-searchbox { display: none; } button[aria-label="Search YouTube"] {display: none;}';
      const youtubeSearchPredictCssOn = '';
      const youtubeSearchPredictCssOff = 'div.gstl_50 { display: none !important; }';
      const youtubeRecVidsCssOn = 'ytd-browse[page-subtype="home"] { visibility: visible !important; } div[tab-identifier="FEwhat_to_watch"] { visibility: visible !important; }';
