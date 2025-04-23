@@ -426,7 +426,13 @@ document.addEventListener('DOMContentLoaded', function() {
             div.appendChild(span);
 
             const button = document.createElement('button');
-            button.textContent = 'Remove';
+            button.className = 'remove-symbol';
+            button.innerHTML = `
+                <svg width="14px" height="14px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18M6 6l12 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            `;
+            button.title = 'Remove';
             button.addEventListener('click', function() {
                 const storageKey = `${platform}CustomHiddenElements`;
                 browser.storage.sync.get(storageKey, function(result) {

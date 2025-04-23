@@ -244,41 +244,6 @@ input:checked + .slider:before {
     border-radius: 2px;
 }
 
-/****** Custom Elements ******/
-.custom-elements {
-    margin-top: 10px;
-    font-size: 0.9em;
-}
-
-.custom-element {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 5px;
-}
-
-.custom-element span {
-    flex-grow: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    margin-right: 10px;
-}
-
-.custom-element button {
-    background-color: #e74c3c;
-    border: none;
-    color: white;
-    padding: 3px 8px;
-    font-size: 0.8em;
-    border-radius: 2px;
-    cursor: pointer;
-}
-
-.custom-element button:hover {
-    background-color: #c0392b;
-}
-
 /* Style for Add more elements button */
 button[id$="AddElementButton"] {
     background-color: #3498DB;
@@ -747,4 +712,50 @@ button[id$="AddElementButton"].active {
 
 .refresh-symbol:hover svg {
     fill: #333;
+}
+
+/****** Custom Elements ******/
+.custom-elements {
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+.custom-element {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.custom-element span {
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 10px;
+}
+
+/* Style for remove symbol */
+.remove-symbol {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+}
+
+.remove-symbol:hover {
+    background: red;
+}
+
+.remove-symbol svg {
+    stroke: #666;
+    transition: stroke 0.2s;
+}
+
+.remove-symbol:hover svg path {
+    stroke: white !important;
 }
