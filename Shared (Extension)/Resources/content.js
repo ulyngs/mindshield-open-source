@@ -358,7 +358,9 @@
          const selector = generateCSSSelector(el);
          if (!selector) return;
 
-         highlightStyle.innerHTML = `${selector} { outline: 2px solid red !important; }`;
+         // Apply a transparent overlay
+         highlightStyle.innerHTML = `${selector} { background-color: rgba(255, 0, 0, 0.3) !important; }`;
+
          selectorDisplay.innerText = selector;
 
          const rect = el.getBoundingClientRect();
