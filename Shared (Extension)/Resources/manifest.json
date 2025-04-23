@@ -4,7 +4,7 @@
 
     "name": "MindShield",
     "description": "Hide distractions on the web (YT, FB, IG, TW, LI, Reddit, Google).",
-    "version": "1.23",
+    "version": "2.0",
 
     "icons": {
         "48":  "images/icon-48.png",
@@ -15,41 +15,10 @@
     },
 
     "content_scripts": [{
+        "run_at": "document_start",
         "css": [ "style.css" ],
         "js": [ "content.js" ],
-        "matches": [ "*://web.whatsapp.com/*", "*://www.youtube.com/*", "*://m.youtube.com/*", "*://www.facebook.com/*", "*://m.facebook.com/*",
-            "*://x.com/*",
-            "*://www.instagram.com/*", "*://www.linkedin.com/*",
-            "*://www.google.com/*",
-            "*://www.google.co.jp/*",
-            "*://www.google.co.uk/*",
-            "*://www.google.es/*",
-            "*://www.google.ca/*",
-            "*://www.google.de/*",
-            "*://www.google.it/*",
-            "*://www.google.fr/*",
-            "*://www.google.com.au/*",
-            "*://www.google.com.tw/*",
-            "*://www.google.nl/*",
-            "*://www.google.com.br/*",
-            "*://www.google.com.tr/*",
-            "*://www.google.be/*",
-            "*://www.google.com.gr/*",
-            "*://www.google.co.in/*",
-            "*://www.google.com.mx/*",
-            "*://www.google.dk/*",
-            "*://www.google.com.ar/*",
-            "*://www.google.ch/*",
-            "*://www.google.cl/*",
-            "*://www.google.at/*",
-            "*://www.google.co.kr/*",
-            "*://www.google.ie/*",
-            "*://www.google.com.co/*",
-            "*://www.google.pl/*",
-            "*://www.google.pt/*",
-            "*://www.google.com.pk/*",
-            "*://www.reddit.com/*",
-            "*://reddit.com/*"]
+        "matches": [ "<all_urls>" ]
     }],
 
     "browser_action": {
@@ -62,5 +31,10 @@
         }
     },
 
-    "permissions": [ "storage", "tabs" ]
+    "permissions": [
+        "storage",
+        "tabs",
+        "activeTab",
+        "scripting"
+      ]
 }

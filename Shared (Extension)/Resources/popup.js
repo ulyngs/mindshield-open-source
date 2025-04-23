@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let isSelectionModeActive = false;
 
     const platformsWeTarget = ["youtube", "facebook", "x", "instagram", "linkedin", "whatsapp", "google", "reddit"];
+    // Combined list - includes predefined elements and placeholders for custom elements per platform
     const elementsThatCanBeHidden = ["youtubeSearch", "youtubeSearchPredict", "youtubeRecVids", "youtubeThumbnails", "youtubeNotifications", "youtubeProfileImg",
                                      "youtubeShorts", "youtubeSubscriptions", "youtubeHistory", "youtubeExplore", "youtubeMore",
                                      "youtubeRelated", "youtubeSidebar", "youtubeComments", "youtubeAds", "youtubeViews", "youtubeLikes", "youtubeSubscribers",
@@ -16,84 +17,58 @@ document.addEventListener('DOMContentLoaded', function() {
                                      "googleAds", "googleBackground",
                                      "redditFeed", "redditPopular", "redditAll", "redditRecent", "redditCommunities", "redditNotification", "redditChat", "redditTrending", "redditPopularCommunities"];
 
-    // Initialize or increment the open count in localStorage
+    let currentPlatform = null; // e.g., "youtube", "facebook"
+    let currentSiteIdentifier = null; // e.g., "youtube", "facebook", "www.wikipedia.org"
+
+    // --- Initialization and Review Prompt ---
     let opensCount = localStorage.getItem('opensCount');
     opensCount = opensCount ? parseInt(opensCount, 10) + 1 : 1;
     localStorage.setItem('opensCount', opensCount);
-
-    // Check if the user has previously clicked 'No, thanks'
     let noThanksClicked = localStorage.getItem('noThanksClicked') === 'true';
-
-    // Show the review prompt every 10th open unless 'No, thanks' has been clicked
     if (opensCount % 10 === 0 && !noThanksClicked) {
         var reviewPrompt = document.getElementById('reviewPrompt');
-        if (reviewPrompt) {
-            reviewPrompt.style.display = 'block';
-        }
+        if (reviewPrompt) reviewPrompt.style.display = 'block';
     }
-
-    // Handling the 'No, thanks' button click
     document.getElementById('noThanksButton').addEventListener('click', function() {
         localStorage.setItem('noThanksClicked', 'true');
         var reviewPrompt = document.getElementById('reviewPrompt');
-        if (reviewPrompt) {
-            reviewPrompt.style.display = 'none';
-        }
+        if (reviewPrompt) reviewPrompt.style.display = 'none';
     });
 
-    // Set friction checkbox
-    browser.storage.sync.get("addFriction", function(result) {
-        var frictionToggle = document.getElementById("frictionToggle");
-        var frictionCustomisationArrow = document.getElementById("frictionCustomisationArrow");
-
-        frictionToggle.checked = result.addFriction;
-
-        if (result.addFriction == undefined || !frictionToggle.checked) {
-            frictionCustomisationArrow.style.display = "none";
-        } else {
-            frictionCustomisationArrow.style.display = "block";
-        }
-
-        var popupContainer = document.getElementById("popup-content");
-        var messageContainer = document.getElementById("delay-content");
-
-        browser.storage.sync.get("waitText").then(function(result) {
-            var waitText = result.waitText;
+    // --- Friction Delay Logic ---
+    function setupFrictionDelay() {
+        browser.storage.sync.get(["addFriction", "waitText", "waitTime"]).then((result) => {
+            var frictionToggle = document.getElementById("frictionToggle");
+            var frictionCustomisationArrow = document.getElementById("frictionCustomisationArrow");
+            var popupContainer = document.getElementById("popup-content");
+            var messageContainer = document.getElementById("delay-content");
             var messageBox = document.getElementById("delay-message");
+            var waitTextBox = document.getElementById("waitText");
+            var waitTimeBox = document.getElementById("waitTime");
+            var countdownBox = document.getElementById("delay-time");
 
-            if (waitText != null) {
-                document.getElementById("waitText").value = result.waitText;
-                messageBox.innerText = result.waitText;
-            } else {
-                document.getElementById("waitText").value = "What's your intention?";
-                messageBox.innerText = "What is your intention?";
-            }
-        });
+            const defaultWaitTime = 10;
+            const defaultWaitText = "What's your intention?";
 
-        if (result["addFriction"]) {
-            popupContainer.style.display = "none";
-            messageContainer.style.display = "block";
+            frictionToggle.checked = result.addFriction || false;
+            frictionCustomisationArrow.style.display = frictionToggle.checked ? "block" : "none";
 
-            setTimeout(function() {
-                messageContainer.classList.add("show");
-            }, 100);
+            let effectiveWaitText = result.waitText || defaultWaitText;
+            waitTextBox.value = effectiveWaitText;
+            messageBox.innerText = effectiveWaitText;
 
-            browser.storage.sync.get("waitTime").then(function(result) {
-                var waitTime = result.waitTime;
-                var countdownBox = document.getElementById("delay-time");
-                var countdown = 0;
+            let effectiveWaitTime = result.waitTime || defaultWaitTime;
+            waitTimeBox.value = effectiveWaitTime;
+            countdownBox.innerText = effectiveWaitTime;
 
-                if (waitTime != null) {
-                    document.getElementById("waitTime").value = waitTime;
-                    countdownBox.innerText = waitTime;
-                    countdown = waitTime;
-                } else {
-                    countdownBox.innerText = "10";
-                    document.getElementById("waitTime").value = "10";
-                    countdown = 10;
-                }
+            if (frictionToggle.checked) {
+                popupContainer.style.display = "none";
+                messageContainer.style.display = "block";
 
-                var timerId = setInterval(function() {
+                setTimeout(() => messageContainer.classList.add("show"), 100);
+
+                let countdown = effectiveWaitTime;
+                var timerId = setInterval(() => {
                     countdown--;
                     if (countdown >= 0) {
                         countdownBox.innerText = countdown;
@@ -103,319 +78,328 @@ document.addEventListener('DOMContentLoaded', function() {
                         clearInterval(timerId);
                     }
                 }, 1000);
-            });
-        } else {
-            messageContainer.style.display = "none";
-            messageContainer.classList.remove("show");
-            popupContainer.style.display = "block";
-        }
-    });
+            } else {
+                messageContainer.style.display = "none";
+                messageContainer.classList.remove("show");
+                popupContainer.style.display = "block";
+            }
+        });
 
-    // Make the friction customisation arrow and text appear/disappear with the delay toggle
-    var frictionToggle = document.getElementById("frictionToggle");
-    var frictionCustomisationArrow = document.getElementById("frictionCustomisationArrow");
+        var frictionToggle = document.getElementById("frictionToggle");
+        var frictionCustomisationArrow = document.getElementById("frictionCustomisationArrow");
+        frictionToggle.addEventListener('change', function() {
+            browser.storage.sync.set({ "addFriction": frictionToggle.checked });
+            frictionCustomisationArrow.style.display = frictionToggle.checked ? "block" : "none";
+            // Optional: Reload popup or re-run setupFrictionDelay after a brief moment if immediate effect is needed
+        });
 
-    frictionToggle.addEventListener('change', function() {
-        browser.storage.sync.set({ "addFriction": document.getElementById("frictionToggle").checked });
+        var frictionCustomisationArrowRight = document.getElementById("frictionCustomisationArrowRight");
+        var frictionCustomisationArrowDown = document.getElementById("frictionCustomisationArrowDown");
+        var frictionCustomisationOptions = document.querySelector(".toggle-group.friction-customisation");
+        frictionCustomisationArrow.addEventListener('click', function() {
+            const isHidden = frictionCustomisationArrowRight.style.display !== "none";
+            frictionCustomisationArrowRight.style.display = isHidden ? "none" : "inline";
+            frictionCustomisationArrowDown.style.display = isHidden ? "inline" : "none";
+            frictionCustomisationOptions.style.display = isHidden ? "block" : "none";
+        });
 
-        if (frictionToggle.checked) {
-            frictionCustomisationArrow.style.display = "block";
-        } else {
-            frictionCustomisationArrow.style.display = "none";
-        }
-    });
+        var savedTextTime = document.getElementById("savedTextTime");
+        let hideTimeOut;
+        document.getElementById("waitTime").addEventListener('input', function() {
+            clearTimeout(hideTimeOut);
+            let waitValue = parseInt(document.getElementById("waitTime").value);
+            const maxLimit = 600;
+            const minLimit = 1;
 
-    // Make the frictionCustomisationArrow go from right to down on click
-    var frictionCustomisationArrowRight = document.getElementById("frictionCustomisationArrowRight");
-    var frictionCustomisationArrowDown = document.getElementById("frictionCustomisationArrowDown");
-    var frictionCustomisationOptions = document.querySelector(".toggle-group.friction-customisation");
+            if (isNaN(waitValue) || waitValue < minLimit) {
+                 document.getElementById("waitTime").value = minLimit;
+            } else if (waitValue > maxLimit) {
+                savedTextTime.innerText = "Maximum is " + maxLimit;
+                document.getElementById("waitTime").value = maxLimit;
+                savedTextTime.style.display = 'block';
+                hideTimeOut = setTimeout(() => savedTextTime.style.display = 'none', 2500);
+            } else {
+                 savedTextTime.style.display = 'none';
+            }
+        });
+    }
+    setupFrictionDelay(); // Call the setup function
 
-    frictionCustomisationArrow.addEventListener('click', function() {
-        if (frictionCustomisationArrowRight.style.display == "inline") {
-            frictionCustomisationArrowRight.style.display = "none";
-            frictionCustomisationArrowDown.style.display = "inline";
-            frictionCustomisationOptions.style.display = "block";
-        } else {
-            frictionCustomisationArrowRight.style.display = "inline";
-            frictionCustomisationArrowDown.style.display = "none";
-            frictionCustomisationOptions.style.display = "none";
-        }
-    });
 
-    // Store wait customisation
-    var savedTextTime = document.getElementById("savedTextTime");
-    let hideTimeOut;
+    // --- Helper Functions for Toggles ---
 
-    document.getElementById("waitTime").addEventListener('input', function() {
-        clearTimeout(hideTimeOut);
-
-        let waitValue = parseInt(document.getElementById("waitTime").value);
-        const maxLimit = 600;
-        const minLimit = 1;
-
-        if (waitValue < minLimit) {
-            document.getElementById("waitTime").value = minLimit;
-        } else if (waitValue > maxLimit) {
-            savedTextTime.innerText = "Maximum is " + maxLimit;
-            document.getElementById("waitTime").value = maxLimit;
-            savedTextTime.style.display = 'block';
-            hideTimeOut = setTimeout(function() {
-                savedTextTime.style.display = 'none';
-            }, 2500);
-        }
-    });
-
-    // Create function to set a checkbox according to current view status on the page
+    // Set checkbox state based on content script check or storage
     function setCheckboxState(element_to_check, id_of_toggle) {
         var currentToggle = document.getElementById(id_of_toggle);
+        if (!currentToggle) return; // Element might not exist if generic site
 
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-            chrome.tabs.sendMessage(tabs[0].id, { method: "check", element: element_to_check }, function(response) {
-                if (response.text === "hidden") {
-                    currentToggle.checked = true;
-                } else if (response.text === "visible") {
-                    currentToggle.checked = false;
-                } else {
-                    elementsThatCanBeHidden.forEach(function(element) {
-                        var key = element_to_check + "Status";
+            // Prevent errors on non-http pages
+            if (!tabs[0] || !tabs[0].id || tabs[0].url?.startsWith('chrome://') || tabs[0].url?.startsWith('about:')) {
+                currentToggle.disabled = true;
+                 // Optionally set a default state or get from storage
+                 browser.storage.sync.get(element_to_check + "Status", function(result) {
+                    currentToggle.checked = result[element_to_check + "Status"] || false;
+                 });
+                return;
+            }
 
-                        browser.storage.sync.get(key, function(result) {
-                            currentToggle.checked = result[key];
-                        });
+            chrome.tabs.sendMessage(tabs[0].id, { method: "check", element: element_to_check }, function(response) {
+                 if (chrome.runtime.lastError) {
+                    console.warn("Error sending message (might be content script not ready or invalid page):", chrome.runtime.lastError.message);
+                    // Fallback to storage if message fails
+                     browser.storage.sync.get(element_to_check + "Status", function(result) {
+                        currentToggle.checked = result[element_to_check + "Status"] || false;
+                    });
+                    currentToggle.disabled = true; // Disable if we can't communicate
+                    return;
+                 }
+
+                if (response && response.text === "hidden") {
+                    currentToggle.checked = true;
+                } else if (response && response.text === "visible") {
+                    currentToggle.checked = false;
+                } else { // Fallback to storage if content script doesn't know (e.g., style not applied yet)
+                    browser.storage.sync.get(element_to_check + "Status", function(result) {
+                        currentToggle.checked = result[element_to_check + "Status"] || false; // Default to false if not set
                     });
                 }
             });
         });
     }
 
-    // Create function to make a checkbox toggle view status on and off
+    // Make checkbox toggle element visibility via content script
     function toggleViewStatusCheckbox(element_to_change, id_of_toggle) {
         var currentCheckbox = document.getElementById(id_of_toggle);
+         if (!currentCheckbox) return;
 
         currentCheckbox.addEventListener('click', function() {
             chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                chrome.tabs.sendMessage(tabs[0].id, { method: "change", element: element_to_change });
+                if (tabs[0]?.id) {
+                    chrome.tabs.sendMessage(tabs[0].id, { method: "change", element: element_to_change }, err => {
+                         if (chrome.runtime.lastError) console.warn("Error sending 'change' message:", chrome.runtime.lastError.message);
+                    });
+                }
             });
         }, false);
     }
 
-    // Create function to set a three-state button (hide-blur-show)
-    function setButtonState(element_to_check, id_of_toggle) {
+     // Set a four-state button (hide-blur-black-show)
+     function setButtonStateFour(element_to_check, id_of_toggle) {
         var currentButton = document.getElementById(id_of_toggle);
+        if (!currentButton) return;
 
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-            chrome.tabs.sendMessage(tabs[0].id, { method: "check", element: element_to_check }, function(response) {
-                if (response.text === "hidden") {
-                    currentButton.setAttribute("data-state", "Off");
-                } else if (response.text === "visible") {
-                    currentButton.setAttribute("data-state", "On");
-                } else if (response.text === "blur") {
-                    currentButton.setAttribute("data-state", "Blur");
-                } else {
-                    var key = element_to_check + "Status";
+             if (!tabs[0] || !tabs[0].id || tabs[0].url?.startsWith('chrome://') || tabs[0].url?.startsWith('about:')) {
+                 currentButton.disabled = true;
+                 browser.storage.sync.get(element_to_check + "Status", function(result) {
+                     currentButton.setAttribute("data-state", result[element_to_check + "Status"] || "On");
+                 });
+                 return;
+             }
 
-                    browser.storage.sync.get(key, function(result) {
-                        currentButton.setAttribute("data-state", result[key]);
+            chrome.tabs.sendMessage(tabs[0].id, { method: "check", element: element_to_check }, function(response) {
+                 if (chrome.runtime.lastError) {
+                     console.warn("Error sending 'check' message for multi-state:", chrome.runtime.lastError.message);
+                     browser.storage.sync.get(element_to_check + "Status", function(result) {
+                         currentButton.setAttribute("data-state", result[element_to_check + "Status"] || "On");
+                     });
+                     currentButton.disabled = true;
+                     return;
+                 }
+
+                let state = "On"; // Default
+                if (response && response.text === "hidden") {
+                    state = "Off";
+                } else if (response && response.text === "visible") {
+                    state = "On";
+                } else if (response && response.text === "blur") {
+                    state = "Blur";
+                } else if (response && response.text === "black") {
+                    state = "Black";
+                } else { // Fallback to storage
+                    browser.storage.sync.get(element_to_check + "Status", function(result) {
+                        currentButton.setAttribute("data-state", result[element_to_check + "Status"] || "On");
                     });
+                    return; // Don't overwrite from storage if we got a response
                 }
+                currentButton.setAttribute("data-state", state);
             });
         });
     }
 
-    // Create function to set a four-state button (hide-blur-black-show)
-    function setButtonStateFour(element_to_check, id_of_toggle) {
-        var currentButton = document.getElementById(id_of_toggle);
-
-        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-            chrome.tabs.sendMessage(tabs[0].id, { method: "check", element: element_to_check }, function(response) {
-                if (response.text === "hidden") {
-                    currentButton.setAttribute("data-state", "Off");
-                } else if (response.text === "visible") {
-                    currentButton.setAttribute("data-state", "On");
-                } else if (response.text === "blur") {
-                    currentButton.setAttribute("data-state", "Blur");
-                } else if (response.text === "black") {
-                    currentButton.setAttribute("data-state", "Black");
-                } else {
-                    var key = element_to_check + "Status";
-
-                    browser.storage.sync.get(key, function(result) {
-                        currentButton.setAttribute("data-state", result[key]);
-                    });
-                }
-            });
-        });
-    }
-
-    // Create function to make a four-state button toggle status (hide-blur-black-view)
+    // Make a four-state button toggle status (hide-blur-black-view)
     function toggleViewStatusMultiToggle(element_to_change, id_of_toggle) {
         var currentButton = document.getElementById(id_of_toggle);
-        let state;
+        if (!currentButton) return;
 
         currentButton.addEventListener('click', function() {
-            if (currentButton.getAttribute("data-state") == "On") {
-                currentButton.setAttribute("data-state", "Off");
-                state = "Off";
-            } else if (currentButton.getAttribute("data-state") == "Off") {
-                currentButton.setAttribute("data-state", "Blur");
-                state = "Blur";
-            } else if (currentButton.getAttribute("data-state") == "Blur") {
-                currentButton.setAttribute("data-state", "Black");
-                state = "Black";
-            } else {
-                currentButton.setAttribute("data-state", "On");
-                state = "On";
+            let currentState = currentButton.getAttribute("data-state");
+            let nextState;
+
+            if (currentState == "On") {
+                nextState = "Off";
+            } else if (currentState == "Off") {
+                nextState = "Blur";
+            } else if (currentState == "Blur") {
+                nextState = "Black";
+            } else { // Black or invalid -> On
+                nextState = "On";
             }
+            currentButton.setAttribute("data-state", nextState);
 
             chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                chrome.tabs.sendMessage(tabs[0].id, { method: "changeMultiToggle", element: element_to_change, action: state });
+                if (tabs[0]?.id) {
+                    chrome.tabs.sendMessage(tabs[0].id, { method: "changeMultiToggle", element: element_to_change, action: nextState }, err => {
+                        if (chrome.runtime.lastError) console.warn("Error sending 'changeMultiToggle' message:", chrome.runtime.lastError.message);
+                    });
+                }
             });
         }, false);
     }
 
-    // Assign the functions to the checkboxes
+    // Assign the functions to the PREDEFINED checkboxes/buttons
     elementsThatCanBeHidden.forEach(function(item) {
-        if (item === "youtubeThumbnails" || item === "youtubeNotifications") {
-            setButtonStateFour(item, item + "Toggle");
-            toggleViewStatusMultiToggle(item, item + "Toggle");
-        } else {
-            setCheckboxState(item, item + "Toggle");
-            toggleViewStatusCheckbox(item, item + "Toggle");
+        // These only apply to specific platforms, handled later by setSwitch enablement
+        if (item.startsWith('youtube') || item.startsWith('facebook') || item.startsWith('x') ||
+            item.startsWith('instagram') || item.startsWith('linkedin') || item.startsWith('whatsapp') ||
+            item.startsWith('google') || item.startsWith('reddit'))
+        {
+            if (item === "youtubeThumbnails" || item === "youtubeNotifications") {
+                setButtonStateFour(item, item + "Toggle");
+                toggleViewStatusMultiToggle(item, item + "Toggle");
+            } else {
+                setCheckboxState(item, item + "Toggle");
+                toggleViewStatusCheckbox(item, item + "Toggle");
+            }
         }
     });
 
-    // Set switches according to current status
+    // --- Platform Switch Logic ---
+
+    // Set platform switches according to stored status and enable/disable controls
     function setSwitch(platform_to_check, id_of_switch) {
         var currentSwitch = document.getElementById(id_of_switch);
+        if (!currentSwitch) return; // Should exist, but safety check
 
         var key = platform_to_check + "Status";
-
         browser.storage.sync.get(key, function(result) {
-            if (result[key] == false) {
-                currentSwitch.checked = false;
+            // Default to true if not explicitly set to false
+            let platformIsEnabled = result[key] !== false;
+            currentSwitch.checked = platformIsEnabled;
 
-                var filteredElements = elementsThatCanBeHidden.filter(element =>
-                    element.includes(platform_to_check)
-                );
-                filteredElements.forEach(function(item) {
-                    document.getElementById(item + "Toggle").disabled = true;
-                });
-            } else {
-                currentSwitch.checked = true;
-            }
+            // Enable/disable toggles associated with this platform
+            var platformToggles = document.querySelectorAll(`.dropdown.${platform_to_check} .a-toggle input, .dropdown.${platform_to_check} .a-toggle button`);
+            platformToggles.forEach(toggle => {
+                 // Exclude Add/Refresh buttons for custom elements from this disabling
+                 if (!toggle.id.includes('AddElementButton') && !toggle.id.includes('RefreshSymbol')) {
+                     toggle.disabled = !platformIsEnabled;
+                 }
+            });
         });
     }
 
-    // Handle when the switches are turned off or on
-    platformsWeTarget.forEach(function(platform) {
+    // Handle platform switch changes
+    function setupPlatformSwitchListener(platform) {
         var currentSwitch = document.querySelector('#website-toggles #toggle-' + platform + ' input');
-        var allCheckboxes = document.querySelectorAll('.dropdown.' + platform + ' .a-toggle input');
+        if (!currentSwitch) return;
 
         currentSwitch.addEventListener("change", function() {
-            if (!currentSwitch.checked) {
-                elementsThatCanBeHidden.filter(elem => elem.indexOf(platform) !== -1).forEach(function(some_element) {
+            const platformIsEnabled = currentSwitch.checked;
+            var platformToggles = document.querySelectorAll(`.dropdown.${platform} .a-toggle input, .dropdown.${platform} .a-toggle button`);
+
+            if (!platformIsEnabled) {
+                // Show all elements for this platform and uncheck/reset toggles
+                elementsThatCanBeHidden.filter(elem => elem.startsWith(platform)).forEach(function(some_element) {
                     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                        chrome.tabs.sendMessage(tabs[0].id, { method: "showAll", element: some_element });
-                    });
-                    document.getElementById(some_element + "Toggle").checked = false;
-                });
-
-                allCheckboxes.forEach(aCheckbox => {
-                    aCheckbox.disabled = true;
-                });
-
-                var key = platform + "Status";
-                browser.storage.sync.set({ [key]: false });
-            } else {
-                elementsThatCanBeHidden.filter(elem => elem.indexOf(platform) !== -1).forEach(function(some_element) {
-                    var currentToggle = document.getElementById(some_element + "Toggle");
-                    var key = some_element + "Status";
-
-                    browser.storage.sync.get(key, function(result) {
-                        currentToggle.checked = result[key];
-
-                        if (currentToggle.checked) {
-                            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                                chrome.tabs.sendMessage(tabs[0].id, { method: "change", element: some_element });
-                            });
+                        if (tabs[0]?.id) {
+                             chrome.tabs.sendMessage(tabs[0].id, { method: "showAll", element: some_element }, err => {
+                                 if (chrome.runtime.lastError) console.warn("Error sending 'showAll' message:", chrome.runtime.lastError.message);
+                             });
                         }
                     });
+                    var toggle = document.getElementById(some_element + "Toggle");
+                    if (toggle) {
+                        if (toggle.type === 'checkbox') {
+                            toggle.checked = false;
+                        } else if (toggle.tagName === 'BUTTON') { // Multi-state button
+                            toggle.setAttribute('data-state', 'On');
+                        }
+                    }
                 });
-
-                allCheckboxes.forEach(aCheckbox => {
-                    aCheckbox.disabled = false;
+                // Disable toggles
+                 platformToggles.forEach(toggle => {
+                     if (!toggle.id.includes('AddElementButton') && !toggle.id.includes('RefreshSymbol')) {
+                         toggle.disabled = true;
+                     }
+                 });
+            } else {
+                // Enable toggles and re-apply stored states
+                platformToggles.forEach(toggle => {
+                    if (!toggle.id.includes('AddElementButton') && !toggle.id.includes('RefreshSymbol')) {
+                         toggle.disabled = false;
+                    }
                 });
+                elementsThatCanBeHidden.filter(elem => elem.startsWith(platform)).forEach(function(some_element) {
+                     var toggle = document.getElementById(some_element + "Toggle");
+                     if (!toggle) return;
 
-                var key = platform + "Status";
-                browser.storage.sync.set({ [key]: true });
+                    var key = some_element + "Status";
+                     browser.storage.sync.get(key, function(result) {
+                         let storedValue = result[key];
+                         let shouldBeHidden = false;
+
+                         if (toggle.type === 'checkbox') {
+                             toggle.checked = storedValue || false; // default false
+                             shouldBeHidden = toggle.checked;
+                         } else if (toggle.tagName === 'BUTTON') { // Multi-state
+                             let state = storedValue || "On"; // default On
+                             toggle.setAttribute('data-state', state);
+                              shouldBeHidden = (state === "Off" || state === "Blur" || state === "Black");
+                         }
+
+                         // Re-apply the state if it's not the default 'On'/'visible' state
+                         if (shouldBeHidden) {
+                             chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                                 if (tabs[0]?.id) {
+                                      if (toggle.tagName === 'BUTTON') {
+                                           chrome.tabs.sendMessage(tabs[0].id, { method: "changeMultiToggle", element: some_element, action: toggle.getAttribute('data-state') }, err => {
+                                                if (chrome.runtime.lastError) console.warn("Error sending 'changeMultiToggle' on enable:", chrome.runtime.lastError.message);
+                                           });
+                                      } else {
+                                           chrome.tabs.sendMessage(tabs[0].id, { method: "change", element: some_element }, err => {
+                                               if (chrome.runtime.lastError) console.warn("Error sending 'change' on enable:", chrome.runtime.lastError.message);
+                                           });
+                                      }
+                                 }
+                             });
+                         }
+                     });
+                });
             }
+            // Store the new platform status
+            var storageKey = platform + "Status";
+            browser.storage.sync.set({ [storageKey]: platformIsEnabled });
         });
-
-        // Handle refresh symbol
-        const refreshSymbol = document.getElementById(`${platform}RefreshSymbol`);
-        if (refreshSymbol) {
-            refreshSymbol.addEventListener('click', function() {
-                const storageKey = `${platform}CustomHiddenElements`;
-                browser.storage.sync.get(storageKey, function(result) {
-                    let customSelectors = result[storageKey] || [];
-                    updateCustomElementsList(platform, customSelectors);
-                });
-            });
-        }
-    });
-
-    platformsWeTarget.forEach(function(platform) {
-        setSwitch(platform, platform + "Switch");
-    });
-
-    // Show the options for the website we're currently on and initialize custom elements
-    let currentPlatform = null;
-    chrome.tabs.query({active: true, currentWindow: true}, function(tab) {
-        platformsWeTarget.forEach(function(platform) {
-            var currentHost = new URL(tab[0].url);
-
-            if (currentHost.origin.includes(platform)) {
-                currentPlatform = platform;
-                document.querySelector('.dropdown.' + platform).classList.add('shown');
-                document.querySelector('#website-toggles #toggle-' + platform).classList.add('shown-inline');
-
-                // Initialize custom elements
-                const storageKey = `${platform}CustomHiddenElements`;
-                browser.storage.sync.get(storageKey, function(result) {
-                    let customSelectors = result[storageKey] || [];
-                    updateCustomElementsList(platform, customSelectors);
-                });
-
-                // Handle "Add more elements" button
-                const addButton = document.getElementById(`${platform}AddElementButton`);
-                addButton.addEventListener('click', function() {
-                    addButton.classList.add('active');
-                    addButton.textContent = 'Hover over an element then click or press the space bar';
-                    isSelectionModeActive = true;
-                    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                        chrome.tabs.sendMessage(tabs[0].id, { method: "startSelecting" });
-                    });
-                    document.addEventListener('keydown', handleSpacebar);
-                });
-            }
-        });
-    });
-
-    // Handle spacebar press to select element
-    function handleSpacebar(event) {
-        if (isSelectionModeActive && event.code === 'Space') {
-            event.preventDefault();
-            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                chrome.tabs.sendMessage(tabs[0].id, { method: "selectHighlightedElement" });
-            });
-        }
     }
 
-    // Update custom elements list in popup
-    function updateCustomElementsList(platform, selectors) {
-        console.log('updateCustomElementsList called for', platform, 'with selectors:', selectors);
-        const container = document.getElementById(`${platform}CustomElements`);
-        container.innerHTML = '';
+    // --- Custom Element Hiding Logic ---
+
+    // Update the list of custom hidden elements in the popup
+    function updateCustomElementsList(siteIdentifier, selectors) {
+        console.log('updateCustomElementsList called for', siteIdentifier, 'with selectors:', selectors);
+        const containerId = currentPlatform ? `${siteIdentifier}CustomElements` : 'genericCustomElements';
+        const container = document.getElementById(containerId);
+        if (!container) {
+            console.error("Could not find custom elements container:", containerId);
+            return;
+        }
+        container.innerHTML = ''; // Clear existing list
+
+        if (!Array.isArray(selectors)) {
+            console.warn("Selectors is not an array for", siteIdentifier, selectors);
+            selectors = []; // Ensure it's an array
+        }
 
         selectors.forEach(selector => {
             const div = document.createElement('div');
@@ -423,25 +407,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const span = document.createElement('span');
             span.textContent = selector;
+            span.title = selector; // Show full selector on hover
             div.appendChild(span);
 
             const button = document.createElement('button');
             button.className = 'remove-symbol';
             button.innerHTML = `
-                <svg width="14px" height="14px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M18 6L6 18M6 6l12 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            `;
+                <svg width="14px" height="14px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>`;
             button.title = 'Remove';
             button.addEventListener('click', function() {
-                const storageKey = `${platform}CustomHiddenElements`;
+                const storageKey = `${siteIdentifier}CustomHiddenElements`;
                 browser.storage.sync.get(storageKey, function(result) {
-                    let customSelectors = result[storageKey] || [];
-                    customSelectors = customSelectors.filter(s => s !== selector);
-                    browser.storage.sync.set({ [storageKey]: customSelectors }, function() {
-                        updateCustomElementsList(platform, customSelectors);
+                    let currentSelectors = result[storageKey] || [];
+                    currentSelectors = currentSelectors.filter(s => s !== selector);
+                    browser.storage.sync.set({ [storageKey]: currentSelectors }, function() {
+                        // Update UI
+                        updateCustomElementsList(siteIdentifier, currentSelectors);
+                        // Tell content script to unhide
                         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                            chrome.tabs.sendMessage(tabs[0].id, { method: "removeCustomElement", selector: selector });
+                             if (tabs[0]?.id) {
+                                 chrome.tabs.sendMessage(tabs[0].id, { method: "removeCustomElement", selector: selector }, err => {
+                                      if (chrome.runtime.lastError) console.warn("Error sending 'removeCustomElement' message:", chrome.runtime.lastError.message);
+                                 });
+                             }
                         });
                     });
                 });
@@ -451,70 +442,244 @@ document.addEventListener('DOMContentLoaded', function() {
             container.appendChild(div);
         });
 
-        console.log('Updated container content:', container.innerHTML);
+        console.log('Updated container content for', containerId, ':', container.innerHTML);
     }
 
-    // Handle messages from content script
+     // Setup listeners for Add/Refresh buttons (needs siteIdentifier)
+     function setupCustomElementControls(siteIdentifier) {
+         const platformSpecific = platformsWeTarget.includes(siteIdentifier);
+         const addButtonId = platformSpecific ? `${siteIdentifier}AddElementButton` : 'genericAddElementButton';
+         const refreshButtonId = platformSpecific ? `${siteIdentifier}RefreshSymbol` : 'genericRefreshSymbol';
+
+         const addButton = document.getElementById(addButtonId);
+         const refreshButton = document.getElementById(refreshButtonId);
+
+         if (addButton) {
+             addButton.addEventListener('click', function() {
+                 addButton.classList.add('active');
+                 addButton.textContent = 'Hover over element, then click or press Space';
+                 isSelectionModeActive = true;
+                 chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                     if (tabs[0]?.id) {
+                         chrome.tabs.sendMessage(tabs[0].id, { method: "startSelecting" }, err => {
+                              if (chrome.runtime.lastError) console.warn("Error sending 'startSelecting' message:", chrome.runtime.lastError.message);
+                         });
+                     }
+                 });
+                 document.addEventListener('keydown', handleSpacebar); // Add listener specific to selection mode
+             });
+         } else { console.error("Add button not found:", addButtonId); }
+
+         if (refreshButton) {
+             refreshButton.addEventListener('click', function() {
+                 const storageKey = `${siteIdentifier}CustomHiddenElements`;
+                 browser.storage.sync.get(storageKey, function(result) {
+                     let customSelectors = result[storageKey] || [];
+                     updateCustomElementsList(siteIdentifier, customSelectors);
+                     // Optional: Tell content script to re-apply all custom styles for this site
+                     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                        if (tabs[0]?.id) {
+                           chrome.tabs.sendMessage(tabs[0].id, { method: "refreshCustomElements" }, err => {
+                                if (chrome.runtime.lastError) console.warn("Error sending 'refreshCustomElements' message:", chrome.runtime.lastError.message);
+                           });
+                        }
+                     });
+                 });
+             });
+         } else { console.error("Refresh button not found:", refreshButtonId); }
+     }
+
+     // Handle spacebar press during selection mode
+     function handleSpacebar(event) {
+        // Check if the event target is an input field, if so, ignore spacebar
+        if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA' || event.target.isContentEditable) {
+            return;
+        }
+         if (isSelectionModeActive && event.code === 'Space') {
+             event.preventDefault(); // Prevent scrolling or typing space
+             chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                 if (tabs[0]?.id) {
+                     chrome.tabs.sendMessage(tabs[0].id, { method: "selectHighlightedElement" }, err => {
+                          if (chrome.runtime.lastError) console.warn("Error sending 'selectHighlightedElement' message:", chrome.runtime.lastError.message);
+                     });
+                 }
+             });
+             // Selection mode will be stopped by the response message
+         }
+     }
+
+    // --- Main Logic: Determine Site and Setup UI ---
+
+    chrome.tabs.query({active: true, currentWindow: true}, function(tab) {
+        if (chrome.runtime.lastError || !tab || tab.length === 0 || !tab[0].url) {
+             console.error("Could not get active tab information.");
+             document.getElementById('popup-content').innerHTML = "<p class='error-message'>Could not get tab information. Try reloading the page.</p>";
+             document.getElementById('popup-content').style.display = 'block';
+             document.getElementById('delay-content').style.display = 'none'; // Hide delay content too
+            return;
+        }
+
+        let currentURL;
+        try {
+            currentURL = new URL(tab[0].url);
+        } catch (e) {
+            console.warn("Invalid URL:", tab[0].url);
+             document.getElementById('popup-content').innerHTML = `<p class='error-message'>Cannot run on this page (${tab[0].url.split('/')[0]}...).</p>`;
+              document.getElementById('popup-content').style.display = 'block';
+              document.getElementById('delay-content').style.display = 'none';
+            return;
+        }
+
+        const currentHost = currentURL.hostname; // Use hostname for generic identification
+        document.getElementById('currentSiteName').textContent = currentHost; // Display current site name
+
+        // Check if it's a targeted platform
+        platformsWeTarget.forEach(function(platform) {
+            if (currentHost.includes(platform)) { // Simple check, might need refinement for subdomains
+                currentPlatform = platform;
+                currentSiteIdentifier = platform;
+            }
+        });
+
+        if (currentPlatform) {
+            // Show controls for the TARGETED platform
+            document.querySelector('.dropdown.' + currentPlatform).classList.add('shown');
+            document.querySelector('#website-toggles #toggle-' + currentPlatform).classList.add('shown-inline');
+            document.getElementById('website-toggles').style.display = 'block'; // Ensure toggles are visible
+            document.getElementById('generic-site-options').style.display = 'none'; // Hide generic section
+            document.getElementById('currentSiteInfo').style.display = 'none'; // Hide generic site name display
+
+             // Set up platform switch and its listeners
+            setSwitch(currentPlatform, currentPlatform + "Switch");
+            setupPlatformSwitchListener(currentPlatform);
+
+             // Initialize custom elements for this platform
+            setupCustomElementControls(currentPlatform);
+            const storageKey = `${currentPlatform}CustomHiddenElements`;
+            browser.storage.sync.get(storageKey, function(result) {
+                updateCustomElementsList(currentPlatform, result[storageKey] || []);
+            });
+
+        } else if (currentHost && !currentURL.protocol.startsWith('chrome') && !currentURL.protocol.startsWith('about')) {
+            // Show controls for a GENERIC site
+            currentSiteIdentifier = currentHost; // Use hostname
+            document.getElementById('website-toggles').style.display = 'none'; // Hide platform toggles
+            document.getElementById('generic-site-options').style.display = 'block'; // Show generic section
+            document.getElementById('currentSiteInfo').style.display = 'block'; // Show generic site name display
+
+            // Initialize custom elements for this generic site
+            setupCustomElementControls(currentSiteIdentifier);
+            const storageKey = `${currentSiteIdentifier}CustomHiddenElements`;
+            browser.storage.sync.get(storageKey, function(result) {
+                 updateCustomElementsList(currentSiteIdentifier, result[storageKey] || []);
+            });
+
+             // Hide all specific platform dropdowns just in case
+             platformsWeTarget.forEach(p => {
+                 const dropdown = document.querySelector(`.dropdown.${p}`);
+                 if (dropdown) dropdown.classList.remove('shown');
+             });
+
+        } else {
+            // Not a supported page (e.g., chrome://, about:, file://)
+            document.getElementById('popup-content').innerHTML = `<p class='error-message'>Extension cannot modify this page (${currentURL.protocol}//...).</p>`;
+            // Friction delay logic might have already hidden popup-content, ensure it's shown
+            document.getElementById('popup-content').style.display = 'block';
+            document.getElementById('delay-content').style.display = 'none';
+             // Hide everything else
+             document.getElementById('website-toggles').style.display = 'none';
+             document.getElementById('generic-site-options').style.display = 'none';
+             document.getElementById('currentSiteInfo').style.display = 'none';
+             document.querySelector('footer').style.display = 'none'; // Hide footer too
+        }
+
+         // Initialize predefined elements for the current platform (if any)
+         if(currentPlatform) {
+             elementsThatCanBeHidden.filter(e => e.startsWith(currentPlatform)).forEach(item => {
+                  if (item === "youtubeThumbnails" || item === "youtubeNotifications") {
+                      setButtonStateFour(item, item + "Toggle");
+                  } else {
+                      setCheckboxState(item, item + "Toggle");
+                  }
+             });
+         }
+
+    });
+
+
+    // --- Message Handling from Content Script ---
     chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-        if ((message.method === "elementSelected" || message.method === "selectionCanceled") && currentPlatform) {
+        // Ensure message is relevant to the current site being displayed
+        if (!currentSiteIdentifier) return; // No site identified yet or invalid page
+
+        if ((message.method === "elementSelected" || message.method === "selectionCanceled")) {
             console.log('Received message:', message);
-            const addButton = document.getElementById(`${currentPlatform}AddElementButton`);
-            addButton.classList.remove('active');
-            addButton.textContent = 'Hide custom elements';
+
+            // Find the correct 'Add' button (platform-specific or generic)
+            const addButtonId = currentPlatform ? `${currentSiteIdentifier}AddElementButton` : 'genericAddElementButton';
+            const addButton = document.getElementById(addButtonId);
+            if (addButton) {
+                addButton.classList.remove('active');
+                addButton.textContent = 'Hide custom element'; // Reset button text
+            }
+
             isSelectionModeActive = false;
-            document.removeEventListener('keydown', handleSpacebar); // Clean up listener
-            if (message.method === "elementSelected") {
-                const storageKey = `${currentPlatform}CustomHiddenElements`;
+            document.removeEventListener('keydown', handleSpacebar); // Clean up listener IMPORTANT
+
+            if (message.method === "elementSelected" && message.selector) {
+                const storageKey = `${currentSiteIdentifier}CustomHiddenElements`;
                 browser.storage.sync.get(storageKey, function(result) {
                     let customSelectors = result[storageKey] || [];
+                     if (!Array.isArray(customSelectors)) customSelectors = []; // Ensure array
                     if (!customSelectors.includes(message.selector)) {
                         customSelectors.push(message.selector);
                         browser.storage.sync.set({ [storageKey]: customSelectors }, function() {
-                            updateCustomElementsList(currentPlatform, customSelectors);
+                            if (chrome.runtime.lastError) {
+                                console.error("Error saving custom selectors:", chrome.runtime.lastError);
+                            } else {
+                                // Update the list in the popup
+                                updateCustomElementsList(currentSiteIdentifier, customSelectors);
+                            }
                         });
                     }
                 });
             }
         }
+        // Note: No sendResponse needed here unless specifically required by sender
     });
 
-    // Helper function to wait for a specified time before executing
+    // --- Save Button and Footer Logic ---
+
     function delay(time) {
         return new Promise(resolve => setTimeout(resolve, time));
     }
 
     var saveButton = document.querySelector('#saveButton');
-
     saveButton.addEventListener('click', (e) => {
-        chrome.tabs.query({active: true, currentWindow: true}, function(tab) {
-            platformsWeTarget.forEach(function(platform) {
-                var currentHost = new URL(tab[0].url);
+        // Save predefined element states ONLY for the CURRENT targeted platform (if any)
+        if (currentPlatform) {
+            elementsThatCanBeHidden
+                .filter(element => element.startsWith(currentPlatform))
+                .forEach(function(element) {
+                    var key = element + "Status";
+                    var elementToggle = document.getElementById(element + "Toggle");
+                     if (!elementToggle) return; // Skip if toggle doesn't exist
 
-                if (currentHost.origin.includes(platform)) {
-                    var filteredElements = elementsThatCanBeHidden.filter(element =>
-                        element.includes(platform)
-                    );
+                    var value = (elementToggle.getAttribute("data-state") != null) ?
+                                elementToggle.getAttribute("data-state") : // Multi-state button
+                                elementToggle.checked; // Checkbox
+                    browser.storage.sync.set({ [key]: value });
+                });
+             // Also save the platform's overall status switch
+             var platformSwitch = document.getElementById(currentPlatform + "Switch");
+             if (platformSwitch) {
+                 browser.storage.sync.set({ [currentPlatform + "Status"]: platformSwitch.checked });
+             }
+        }
+        // NOTE: Custom elements are saved immediately on selection/removal, not here.
 
-                    filteredElements.forEach(function(element) {
-                        var key = element + "Status";
-                        var elementToggle = document.getElementById(element + "Toggle");
-                        var value = (elementToggle.getAttribute("data-state") != null) ?
-                            elementToggle.getAttribute("data-state") :
-                            elementToggle.checked;
-                        browser.storage.sync.set({ [key]: value });
-                    });
-
-                    // Save custom elements
-                    const storageKey = `${platform}CustomHiddenElements`;
-                    const container = document.getElementById(`${platform}CustomElements`);
-                    const selectors = Array.from(container.getElementsByClassName('custom-element'))
-                        .map(div => div.querySelector('span').textContent);
-                    browser.storage.sync.set({ [storageKey]: selectors });
-                }
-            });
-        });
-
-        let waitValue = parseInt(document.getElementById("waitTime").value);
+        // Save friction settings
+        let waitValue = parseInt(document.getElementById("waitTime").value) || 10; // Default 10 if NaN
         browser.storage.sync.set({ "waitTime": waitValue });
         browser.storage.sync.set({ "waitText": document.getElementById("waitText").value });
 
@@ -523,55 +688,25 @@ document.addEventListener('DOMContentLoaded', function() {
         delay(1500).then(() => e.target.setAttribute("value", "Save settings"));
     });
 
-    const howTo = document.querySelector('#hide-previews');
-    const howToText = document.querySelector('#how-to-description');
-    const howToArrowRight = document.querySelector('#how-to-arrow-right');
-    const howToArrowDown = document.querySelector('#how-to-arrow-down');
+    // --- Footer Accordions ---
+    function setupAccordion(triggerId, contentId, arrowRightId, arrowDownId) {
+        const trigger = document.querySelector(triggerId);
+        const content = document.querySelector(contentId);
+        const arrowRight = document.querySelector(arrowRightId);
+        const arrowDown = document.querySelector(arrowDownId);
 
-    howTo.addEventListener("click", function() {
-        if (howToText.style.display === "none") {
-            howToText.style.display = "block";
-            howToArrowRight.style.display = "none";
-            howToArrowDown.style.display = "inline-block";
-        } else {
-            howToText.style.display = "none";
-            howToArrowRight.style.display = "inline-block";
-            howToArrowDown.style.display = "none";
-        }
-    });
+        if (!trigger || !content || !arrowRight || !arrowDown) return;
 
-    const howToNotMobile = document.querySelector('#hide-previews-not-mobile');
-    const howToTextNotMobile = document.querySelector('#how-to-description-not-mobile');
-    const howToArrowRightNotMobile = document.querySelector('#how-to-arrow-right-not-mobile');
-    const howToArrowDownNotMobile = document.querySelector('#how-to-arrow-down-not-mobile');
+        trigger.addEventListener("click", function() {
+            const isHidden = content.style.display === "none";
+            content.style.display = isHidden ? "block" : "none";
+            arrowRight.style.display = isHidden ? "none" : "inline-block";
+            arrowDown.style.display = isHidden ? "inline-block" : "none";
+        });
+    }
 
-    howToNotMobile.addEventListener("click", function() {
-        if (howToTextNotMobile.style.display === "none") {
-            howToTextNotMobile.style.display = "block";
-            howToArrowRightNotMobile.style.display = "none";
-            howToArrowDownNotMobile.style.display = "inline-block";
-        } else {
-            howToTextNotMobile.style.display = "none";
-            howToArrowRightNotMobile.style.display = "inline-block";
-            howToArrowDownNotMobile.style.display = "none";
-        }
-    });
-
-    const sites = document.querySelector('#what-sites');
-    const sitesText = document.querySelector('#sites-available');
-    const sitesArrowRight = document.querySelector('#sites-arrow-right');
-    const sitesArrowDown = document.querySelector('#sites-arrow-down');
-
-    sites.addEventListener("click", function() {
-        if (sitesText.style.display === "none") {
-            sitesText.style.display = "block";
-            sitesArrowRight.style.display = "none";
-            sitesArrowDown.style.display = "inline-block";
-        } else {
-            sitesText.style.display = "none";
-            sitesArrowRight.style.display = "inline-block";
-            sitesArrowDown.style.display = "none";
-        }
-    });
+    setupAccordion('#hide-previews', '#how-to-description', '#how-to-arrow-right', '#how-to-arrow-down');
+    setupAccordion('#hide-previews-not-mobile', '#how-to-description-not-mobile', '#how-to-arrow-right-not-mobile', '#how-to-arrow-down-not-mobile');
+    setupAccordion('#what-sites', '#sites-available', '#sites-arrow-right', '#sites-arrow-down');
 
 }, false);

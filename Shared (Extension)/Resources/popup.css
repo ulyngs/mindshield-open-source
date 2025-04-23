@@ -417,7 +417,7 @@ button[id$="AddElementButton"]:hover {
 }
 
 #what-sites {
-    display: inline;
+    display: flex;
     text-align: left;
     margin-bottom: 1em;
     cursor: pointer;
@@ -771,3 +771,82 @@ button[id$="AddElementButton"].active {
     stroke: white !important;
 }
 
+#generic-site-options {
+    margin-top: 0.5em;
+}
+
+
+/* Styles for the new footer bottom row */
+footer .footer-bottom-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;        /* Space above this row */
+    padding-top: 5px;       /* Optional: space inside the row top */
+    border-top: 1px solid #eee; /* Optional: faint line separator */
+}
+
+/* Adjustments for items within the flex row */
+.footer-bottom-row #what-sites {
+    margin: 0; /* Remove default margins if any */
+    flex-shrink: 0; /* Prevent it from shrinking too much */
+}
+.footer-bottom-row #what-sites #sites-text {
+    /* Reduce margin if needed */
+    margin-left: 5px;
+    color: #555; /* Optional: slightly dimmer color */
+    font-size: 0.9em;
+}
+.footer-bottom-row #what-sites ul#sites-available {
+    /* Position the dropdown list appropriately if it opens */
+    position: absolute;
+    bottom: 25px; /* Adjust as needed so it opens upwards */
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 5px;
+    z-index: 10;
+    width: 180px; /* Adjust width */
+}
+
+.footer-bottom-row .suggestions-link {
+    margin: 0; /* Remove default margins */
+    text-align: right; /* Align text to the right */
+    flex-shrink: 0;
+}
+
+.footer-bottom-row .suggestions-link a {
+    display: inline-flex; /* Use flex to align icon and text */
+    align-items: center;   /* Center icon and text vertically */
+    text-decoration: none;
+    color: #555; /* Or your preferred link color */
+    font-size: 0.9em;
+}
+
+.footer-bottom-row .suggestions-link a:hover {
+    text-decoration: underline;
+}
+
+/* Style for the GitHub icon */
+.footer-bottom-row .suggestions-link .github-icon {
+    width: 14px;  /* Adjust size as needed */
+    height: 14px;
+    margin-right: 5px; /* Space between icon and text */
+    vertical-align: middle; /* Helps alignment in some cases */
+    fill: black; /* Match icon color to text or use brand color */
+}
+.footer-bottom-row .suggestions-link a:hover .github-icon {
+    fill: #007bff; /* Change icon color on hover */
+}
+
+/* Ensure footer settings stay above */
+footer .footer-settings {
+    margin-bottom: 10px; /* Add space below settings */
+}
+footer .friction-customisation {
+     margin-bottom: 10px; /* Add space below friction options if shown */
+}
+
+#currentSiteInfo p {
+    margin-top: 0;
+}
