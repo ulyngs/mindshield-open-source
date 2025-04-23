@@ -460,7 +460,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Received message:', message);
             const addButton = document.getElementById(`${currentPlatform}AddElementButton`);
             addButton.classList.remove('active');
-            addButton.textContent = 'Add';
+            addButton.textContent = 'Hide custom elements';
             isSelectionModeActive = false;
             document.removeEventListener('keydown', handleSpacebar); // Clean up listener
             if (message.method === "elementSelected") {

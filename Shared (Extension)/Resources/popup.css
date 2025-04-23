@@ -635,9 +635,7 @@ p.how-to-description {
     }
 }
 
-button[id$="AddElementButton"] {
-    background-color: #1a1a1a; /* Blackish when inactive */
-    color: #ffffff;
+button[id$="AddElementButton"], #saveButton {
     padding: 6px 12px;
     font-size: 0.85em;
     font-weight: 500;
@@ -647,8 +645,21 @@ button[id$="AddElementButton"] {
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-button[id$="AddElementButton"]:hover:not(.active) {
+#saveButton {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+#saveButton:hover {
     background-color: #2d2d2d; /* Lighter blackish on hover */
+}
+
+button[id$="AddElementButton"] {
+    background-color: rgb(228, 228, 231);
+    color: rgb(24, 24, 27);
+}
+
+button[id$="AddElementButton"]:hover:not(.active) {
+    background-color: rgb(232, 232, 234);
 }
 
 button[id$="AddElementButton"].active {
@@ -759,3 +770,4 @@ button[id$="AddElementButton"].active {
 .remove-symbol:hover svg path {
     stroke: white !important;
 }
+
