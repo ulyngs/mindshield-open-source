@@ -517,7 +517,7 @@ footer .toggle-group {
     a, a:visited {
         color: gray;
     }
-    #sites-arrow指示: #sites-arrow path {
+    #sites-arrow path {
         fill: rgb(194, 194, 194);
     }
     #sites-arrow-right path, #sites-arrow-down path,
