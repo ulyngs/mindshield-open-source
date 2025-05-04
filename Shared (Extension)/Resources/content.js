@@ -265,7 +265,7 @@
      let feedbackContainer = null;
      let currentHighlightedElement = null;
      let lastTapTime = 0;
-     let lastSelectedSelector = null;
+     let sessionHiddenSelectors = [];
      const highlightStyleId = 'mindshield-highlight-style';
 
      function createHighlightOverlay() {
@@ -419,20 +419,24 @@
      }
 
      function handleUndo() {
-         if (!lastSelectedSelector || !currentSiteIdentifier) return;
+         if (sessionHiddenSelectors.length === 0 || !currentSiteIdentifier) return;
          const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;
          browser.storage.sync.get(customStorageKey, function(result) {
              let customSelectors = result[customStorageKey] || [];
              if (!Array.isArray(customSelectors)) customSelectors = [];
-             customSelectors = customSelectors.filter(s => s !== lastSelectedSelector);
+             const selectorToRemove = sessionHiddenSelectors.pop(); // Remove most recent selector
+             customSelectors = customSelectors.filter(s => s !== selectorToRemove);
              browser.storage.sync.set({ [customStorageKey]: customSelectors }, function() {
-                 if (chrome.runtime.lastError) {
-                     console.error("Error removing custom selector from storage:", chrome.runtime.lastError);
+                 if (browser.runtime.lastError) {
+                     console.error("Error removing custom selector from storage:", browser.runtime.lastError);
                  } else {
                      applyCustomElementStyles(currentSiteIdentifier, customSelectors);
-                     console.log(`Undid hiding selector for ${currentSiteIdentifier}: ${lastSelectedSelector}`);
-                     lastSelectedSelector = null;
-                     updateFeedbackMessage('Click element to hide it');
+                     console.log(`Undid hiding selector for ${currentSiteIdentifier}: ${selectorToRemove}`);
+                     if (sessionHiddenSelectors.length > 0) {
+                         updateFeedbackMessage('Element hidden', true); // Keep Undo button if more to undo
+                     } else {
+                         updateFeedbackMessage('Hover over an element'); // No more to undo
+                     }
                  }
              });
          });
@@ -460,10 +464,11 @@
          document.removeEventListener('touchstart', highlightElement, { capture: true });
          document.removeEventListener('click', selectElementOnClick, true);
          document.removeEventListener('touchend', selectElementOnTap, true);
-         // Remove drag event listeners
          if (feedbackContainer) {
              feedbackContainer.removeEventListener('mousedown', startDragging);
              feedbackContainer.removeEventListener('touchstart', startDragging);
+             feedbackContainer.remove();
+             feedbackContainer = null;
          }
          document.removeEventListener('mousemove', drag);
          document.removeEventListener('mouseup', stopDragging);
@@ -471,12 +476,13 @@
          document.removeEventListener('touchend', stopDragging);
          if (highlightOverlay) { highlightOverlay.remove(); highlightOverlay = null; }
          if (selectorDisplay) { selectorDisplay.remove(); selectorDisplay = null; }
-         if (feedbackContainer) { feedbackContainer.remove(); feedbackContainer = null; }
          currentHighlightedElement = null;
-         lastSelectedSelector = null;
+         sessionHiddenSelectors = []; // Clear session selectors
          document.body.classList.remove('mindshield-selecting');
          const tempStyle = document.getElementById(highlightStyleId); if(tempStyle) tempStyle.remove();
-         if (cancelled) { browser.runtime.sendMessage({ method: "selectionCanceled" }).catch(e => console.debug("Popup likely closed:", e)); }
+         if (cancelled) {
+             browser.runtime.sendMessage({ method: "selectionCanceled" }).catch(e => console.debug("Popup likely closed:", e));
+         }
      }
 
      function highlightElement(event) {
@@ -589,15 +595,15 @@
              if (!Array.isArray(customSelectors)) customSelectors = [];
              if (!customSelectors.includes(selector)) {
                  customSelectors.push(selector);
+                 sessionHiddenSelectors.push(selector); // Add to session tracking
                  browser.storage.sync.set({ [storageKey]: customSelectors }, function() {
-                     if (chrome.runtime.lastError) {
-                         console.error("Error saving custom selectors:", chrome.runtime.lastError);
+                     if (browser.runtime.lastError) {
+                         console.error("Error saving custom selectors:", browser.runtime.lastError);
                          browser.runtime.sendMessage({ method: "selectionFailed", reason: "Storage error" }).catch(e => console.debug("Popup likely closed:", e));
                      } else {
                          applyCustomElementStyles(currentSiteIdentifier, customSelectors);
                          browser.runtime.sendMessage({ method: "elementSelected", selector: selector }).catch(e => console.debug("Popup likely closed:", e));
                          console.log(`Selector added and styles updated for ${currentSiteIdentifier}: ${selector}`);
-                         lastSelectedSelector = selector;
                          updateFeedbackMessage('Element hidden', true);
                      }
                  });
