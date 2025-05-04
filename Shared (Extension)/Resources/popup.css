@@ -387,6 +387,8 @@ button[id$="AddElementButton"]:hover {
 
 .delay-time-wrapper {
     color: gray;
+    font-size: 1.5em;
+    margin: 0;
 }
 
 @keyframes breathe {
@@ -403,7 +405,7 @@ button[id$="AddElementButton"]:hover {
 }
 
 #delay-content img {
-    width: 70%;
+    width: 85%;
     margin-bottom: 30px;
 }
 
