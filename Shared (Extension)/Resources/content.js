@@ -167,19 +167,6 @@
      console.log("MindShield content script running on:", currentSiteIdentifier || "Unknown site");
 
      // --- Apply Initial Styles ---
-     if (currentSiteIdentifier) {
-         const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;
-         const customStyleId = `customHidden_${currentSiteIdentifier.replace(/\./g, '_')}Style`;
-         browser.storage.sync.get(customStorageKey, function(result) {
-             let customSelectors = result[customStorageKey] || [];
-             if (!Array.isArray(customSelectors)) customSelectors = [];
-             if (customSelectors.length > 0) {
-                 const css = customSelectors.map(selector => `${selector} { display: none !important; }`).join('\n');
-                 createStyleElement(customStyleId, css);
-                 console.log(`Applied ${customSelectors.length} custom rules for ${currentSiteIdentifier}`);
-             } else { createStyleElement(customStyleId, ''); }
-         });
-     }
      if (currentPlatform) {
          const platformStatusKey = `${currentPlatform}Status`;
          browser.storage.sync.get(platformStatusKey, function(platformResult) {
@@ -204,6 +191,11 @@
 
      // --- Message Listener from Popup ---
      chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+         if (message.method === "ping") {
+                 sendResponse({ status: "pong" });
+                 return true; // Keep the channel open for async response
+             }
+         
          if (message.element && currentPlatform && !message.element.startsWith(currentPlatform)) { return; }
          var styleName = message.element ? message.element + "Style" : null;
          let domRoot = document.head;
@@ -435,7 +427,7 @@
                      if (sessionHiddenSelectors.length > 0) {
                          updateFeedbackMessage('Element hidden', true); // Keep Undo button if more to undo
                      } else {
-                         updateFeedbackMessage('Hover over an element'); // No more to undo
+                         updateFeedbackMessage('Click element to hide it'); // No more to undo
                      }
                  }
              });
@@ -619,6 +611,29 @@
          const styleId = `customHidden_${siteIdentifier.replace(/\./g, '_')}Style`;
          const css = selectors.length > 0 ? selectors.map(s => `${s} { display: none !important; }`).join('\n') : '';
          createStyleElement(styleId, css);
+     }
+     
+     if (currentSiteIdentifier) {
+         console.log('Before custom storage get, window.hasRun:', window.hasRun);
+         const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;
+         const customStyleId = `customHidden_${currentSiteIdentifier.replace(/\./g, '_')}Style`;
+         browser.storage.sync.get(customStorageKey, function(result) {
+             if (chrome.runtime.lastError) {
+                 console.error(`Storage error for ${customStorageKey}:`, chrome.runtime.lastError);
+                 createStyleElement(customStyleId, '');
+                 return;
+             }
+             console.log('Custom storage get succeeded for:', customStorageKey);
+             let customSelectors = result[customStorageKey] || [];
+             if (!Array.isArray(customSelectors)) customSelectors = [];
+             if (customSelectors.length > 0) {
+                 const css = customSelectors.map(selector => `${selector} { display: none !important; }`).join('\n');
+                 createStyleElement(customStyleId, css);
+                 console.log(`Applied ${customSelectors.length} custom rules for ${currentSiteIdentifier}`);
+             } else {
+                 createStyleElement(customStyleId, '');
+             }
+         });
      }
 
  })();
