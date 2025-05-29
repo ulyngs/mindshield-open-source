@@ -292,7 +292,7 @@
              feedbackContainer = document.createElement('div');
              feedbackContainer.id = 'mindshield-feedback-container';
              feedbackContainer.style.position = 'fixed';
-             feedbackContainer.style.top = '90px';
+             feedbackContainer.style.top = '100px';
              feedbackContainer.style.left = '10px';
              feedbackContainer.style.background = 'rgba(0, 0, 0, 0.8)';
              feedbackContainer.style.color = 'white';
