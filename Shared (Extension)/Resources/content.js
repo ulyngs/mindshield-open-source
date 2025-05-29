@@ -229,8 +229,10 @@
          else if (message.method === "showAll" && message.element) { const cssOn = eval(message.element + 'CssOn'); createStyleElement(styleName, cssOn); }
          else if (message.method === "hideAll" && message.element) { const cssOff = eval(message.element + 'CssOff'); createStyleElement(styleName, cssOff); }
          else if (message.method === "startSelecting") { startSelecting(); }
-         else if (message.method === "stopSelecting") { stopSelecting(message.cancelled); }
-         else if (message.method === "removeCustomElement" && message.selector && currentSiteIdentifier) {
+         else if (message.method === "stopSelecting") {
+             console.log('Received stopSelecting message, cancelled:', message.cancelled);
+             stopSelecting(message.cancelled);
+         } else if (message.method === "removeCustomElement" && message.selector && currentSiteIdentifier) {
              const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;
              browser.storage.sync.get(customStorageKey, function(result) {
                  let customSelectors = result[customStorageKey] || []; if (!Array.isArray(customSelectors)) customSelectors = [];
@@ -290,7 +292,7 @@
              feedbackContainer = document.createElement('div');
              feedbackContainer.id = 'mindshield-feedback-container';
              feedbackContainer.style.position = 'fixed';
-             feedbackContainer.style.top = '10px';
+             feedbackContainer.style.top = '90px';
              feedbackContainer.style.left = '10px';
              feedbackContainer.style.background = 'rgba(0, 0, 0, 0.8)';
              feedbackContainer.style.color = 'white';
@@ -298,7 +300,7 @@
              feedbackContainer.style.borderRadius = '5px';
              feedbackContainer.style.zIndex = '2147483647';
              feedbackContainer.style.fontFamily = 'Arial, sans-serif';
-             feedbackContainer.style.fontSize = '14px';
+             feedbackContainer.style.fontSize = '18px';
              feedbackContainer.style.display = 'flex';
              feedbackContainer.style.alignItems = 'center';
              feedbackContainer.style.gap = '10px';
@@ -441,41 +443,87 @@
          createHighlightOverlay();
          createSelectorDisplay();
          createFeedbackContainer();
-         document.addEventListener('mousemove', highlightElement, true);
+         document.addEventListener('mousemove', highlightElement, { capture: true });
          document.addEventListener('touchstart', highlightElement, { capture: true, passive: true });
-         document.addEventListener('click', selectElementOnClick, true);
-         document.addEventListener('touchend', selectElementOnTap, true);
+         document.addEventListener('click', selectElementOnClick, { capture: true });
+         document.addEventListener('touchend', selectElementOnTap, { capture: true });
+         document.addEventListener('keydown', handleKeydown, { capture: true }); // Add Escape key listener
          document.body.classList.add('mindshield-selecting');
      }
 
      function stopSelecting(cancelled = false) {
-         if (!isSelecting) return;
-         isSelecting = false;
-         console.log("Stopping element selection mode.");
-         document.removeEventListener('mousemove', highlightElement, true);
-         document.removeEventListener('touchstart', highlightElement, { capture: true });
-         document.removeEventListener('click', selectElementOnClick, true);
-         document.removeEventListener('touchend', selectElementOnTap, true);
-         if (feedbackContainer) {
-             feedbackContainer.removeEventListener('mousedown', startDragging);
-             feedbackContainer.removeEventListener('touchstart', startDragging);
-             feedbackContainer.remove();
-             feedbackContainer = null;
+         if (!isSelecting) {
+             console.log("stopSelecting called but not selecting, skipping");
+             return;
          }
-         document.removeEventListener('mousemove', drag);
-         document.removeEventListener('mouseup', stopDragging);
-         document.removeEventListener('touchmove', drag);
-         document.removeEventListener('touchend', stopDragging);
-         if (highlightOverlay) { highlightOverlay.remove(); highlightOverlay = null; }
-         if (selectorDisplay) { selectorDisplay.remove(); selectorDisplay = null; }
+         console.log("Stopping selection mode, cancelled:", cancelled);
+         isSelecting = false;
+         document.removeEventListener('mousemove', highlightElement, { capture: true });
+         document.removeEventListener('touchstart', highlightElement, { capture: true });
+         document.removeEventListener('click', selectElementOnClick, { capture: true });
+         document.removeEventListener('touchend', selectElementOnTap, { capture: true });
+         document.removeEventListener('keydown', handleKeydown, { capture: true }); // Remove Escape key listener
+         if (feedbackContainer) {
+             console.log("Removing feedback container");
+             // Remove drag-related listeners using stored references
+             if (feedbackContainer._dragListeners) {
+                 feedbackContainer.removeEventListener('mousedown', feedbackContainer._dragListeners.mousedown);
+                 feedbackContainer.removeEventListener('touchstart', feedbackContainer._dragListeners.touchstart, { passive: false });
+                 document.removeEventListener('mousemove', feedbackContainer._dragListeners.mousemove);
+                 document.removeEventListener('mouseup', feedbackContainer._dragListeners.mouseup);
+                 document.removeEventListener('touchmove', feedbackContainer._dragListeners.touchmove, { passive: false });
+                 document.removeEventListener('touchend', feedbackContainer._dragListeners.touchend);
+                 delete feedbackContainer._dragListeners;
+             }
+             try {
+                 if (document.body.contains(feedbackContainer)) {
+                     feedbackContainer.remove();
+                     console.log("feedbackContainer removed successfully");
+                 } else {
+                     console.log("feedbackContainer not in DOM, resetting reference");
+                 }
+                 feedbackContainer = null;
+             } catch (e) {
+                 console.error("Error removing feedbackContainer:", e);
+             }
+         } else {
+             console.log("No feedbackContainer to remove");
+         }
+         if (highlightOverlay) {
+             console.log("Removing highlight overlay");
+             highlightOverlay.remove();
+             highlightOverlay = null;
+         }
+         if (selectorDisplay) {
+             console.log("Removing selector display");
+             selectorDisplay.remove();
+             selectorDisplay = null;
+         }
          currentHighlightedElement = null;
          sessionHiddenSelectors = []; // Clear session selectors
          document.body.classList.remove('mindshield-selecting');
-         const tempStyle = document.getElementById(highlightStyleId); if(tempStyle) tempStyle.remove();
+         const tempStyle = document.getElementById(highlightStyleId);
+         if (tempStyle) {
+             console.log("Removing temp style");
+             tempStyle.remove();
+         }
          if (cancelled) {
+             console.log("Sending selectionCanceled message");
              browser.runtime.sendMessage({ method: "selectionCanceled" }).catch(e => console.debug("Popup likely closed:", e));
          }
+         console.log("stopSelecting completed, feedbackContainer:", feedbackContainer);
      }
+
+     function handleKeydown(event) {
+         if (event.key === 'Escape' && isSelecting) {
+             console.log("Escape key pressed, stopping selection mode");
+             event.preventDefault();
+             event.stopPropagation();
+             stopSelecting(false);
+             browser.runtime.sendMessage({ method: "stopSelectingFromEscape" }).catch(e => console.debug("Popup likely closed:", e));
+         }
+     }
+     
 
      function highlightElement(event) {
          if (!isSelecting) return;

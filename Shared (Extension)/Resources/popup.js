@@ -494,43 +494,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
              if (addButton) {
                  addButton.addEventListener('click', function() {
-                     // If already active, clicking again cancels selection mode
                      if (isSelectionModeActive) {
                          isSelectionModeActive = false;
                          addButton.classList.remove('active');
-                         addButton.textContent = 'Hide custom element'; // Reset button text
+                         addButton.textContent = 'Hide custom element';
                          chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
                              if (tabs[0]?.id) {
-                                 chrome.tabs.sendMessage(tabs[0].id, { method: "stopSelecting", cancelled: true }, err => {
-                                      if (chrome.runtime.lastError) console.warn("Error sending 'stopSelecting' message:", chrome.runtime.lastError.message);
+                                 chrome.tabs.sendMessage(tabs[0].id, { method: "stopSelecting", cancelled: false }, err => {
+                                     if (chrome.runtime.lastError) console.warn("Error sending 'stopSelecting' message:", chrome.runtime.lastError.message);
                                  });
                              }
                          });
                      } else {
-                         // Activate selection mode
                          isSelectionModeActive = true;
                          addButton.classList.add('active');
-                         // MODIFIED: Changed button text for universal click/tap
                          addButton.textContent = 'Click/Tap element to hide';
                          chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
                              if (tabs[0]?.id) {
                                  chrome.tabs.sendMessage(tabs[0].id, { method: "startSelecting" }, err => {
-                                      if (chrome.runtime.lastError) {
+                                     if (chrome.runtime.lastError) {
                                          console.warn("Error sending 'startSelecting' message:", chrome.runtime.lastError.message);
-                                         // Reset button state if message failed
                                          isSelectionModeActive = false;
                                          addButton.classList.remove('active');
                                          addButton.textContent = 'Hide custom element';
-                                      }
+                                     }
                                  });
                              } else {
-                                 // Reset button state if no active tab
                                  isSelectionModeActive = false;
                                  addButton.classList.remove('active');
                                  addButton.textContent = 'Hide custom element';
                              }
                          });
-                         // REMOVED: document.addEventListener('keydown', handleSpacebar);
                      }
                  });
              } else { console.error("Add button not found:", addButtonId); }
@@ -678,6 +672,17 @@ document.addEventListener('DOMContentLoaded', function() {
         chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
             // Ensure message is relevant to the current site being displayed
             if (!currentSiteIdentifier) return; // No site identified yet or invalid page
+            
+            if (message.method === "stopSelectingFromEscape") {
+                console.log('Received stopSelectingFromEscape message');
+                const addButtonId = currentPlatform ? `${currentSiteIdentifier}AddElementButton` : 'genericAddElementButton';
+                const addButton = document.getElementById(addButtonId);
+                if (addButton) {
+                    isSelectionModeActive = false;
+                    addButton.classList.remove('active');
+                    addButton.textContent = 'Hide custom element';
+                }
+            }
 
             if ((message.method === "elementSelected" || message.method === "selectionCanceled" || message.method === "selectionFailed")) {
                 console.log('Received message:', message);
