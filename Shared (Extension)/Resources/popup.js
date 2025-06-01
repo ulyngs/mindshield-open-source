@@ -80,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 var frictionCustomisationArrow = document.getElementById("frictionCustomisationArrow");
                 var popupContainer = document.getElementById("popup-content");
                 var messageContainer = document.getElementById("delay-content");
+                var errorContainer = document.getElementById("error-prompt");
                 var messageBox = document.getElementById("delay-message");
                 var waitTextBox = document.getElementById("waitText");
                 var waitTimeBox = document.getElementById("waitTime");
@@ -102,6 +103,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (frictionToggle.checked) {
                     popupContainer.style.display = "none";
                     messageContainer.style.display = "block";
+                    errorContainer.style.display = "none";
+                    
 
                     setTimeout(() => messageContainer.classList.add("show"), 100);
 
@@ -113,6 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         } else {
                             messageContainer.style.display = "none";
                             popupContainer.style.display = "block";
+                            errorContainer.style.display = "none";
                             clearInterval(timerId);
                         }
                     }, 1000);
@@ -120,6 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     messageContainer.style.display = "none";
                     messageContainer.classList.remove("show");
                     popupContainer.style.display = "block";
+                    errorContainer.style.display = "none";
                 }
             });
 
