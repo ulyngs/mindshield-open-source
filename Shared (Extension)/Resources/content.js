@@ -396,11 +396,15 @@
          }
          console.log("Stopping selection mode, cancelled:", cancelled);
          isSelecting = false;
+
+         // Remove event listeners
          document.removeEventListener('mousemove', highlightElement, { capture: true });
          document.removeEventListener('touchstart', highlightElement, { capture: true });
          document.removeEventListener('click', selectElementOnClick, { capture: true });
          document.removeEventListener('touchend', selectElementOnTap, { capture: true });
          document.removeEventListener('keydown', handleKeydown, { capture: true });
+
+         // Clean up feedback container
          if (feedbackContainer) {
              console.log("Removing feedback container");
              if (feedbackContainer._dragListeners) {
@@ -416,51 +420,66 @@
                  if (document.body.contains(feedbackContainer)) {
                      feedbackContainer.remove();
                      console.log("feedbackContainer removed successfully");
-                 } else {
-                     console.log("feedbackContainer not in DOM, resetting reference");
                  }
                  feedbackContainer = null;
              } catch (e) {
                  console.error("Error removing feedbackContainer:", e);
              }
-         } else {
-             console.log("No feedbackContainer to remove");
          }
+
+         // Clean up highlight overlay
          if (highlightOverlay) {
              console.log("Removing highlight overlay");
-             highlightOverlay.remove();
+             try {
+                 highlightOverlay.remove();
+             } catch (e) {
+                 console.error("Error removing highlightOverlay:", e);
+             }
              highlightOverlay = null;
          }
+
+         // Clean up selector display
          if (selectorDisplay) {
              console.log("Removing selector display");
-             selectorDisplay.remove();
+             try {
+                 selectorDisplay.remove();
+             } catch (e) {
+                 console.error("Error removing selectorDisplay:", e);
+             }
              selectorDisplay = null;
          }
-         currentHighlightedElement = null;
-         sessionHiddenSelectors = [];
-         document.body.classList.remove('mindshield-selecting');
+
+         // Clean up temporary style
          const tempStyle = document.getElementById(highlightStyleId);
          if (tempStyle) {
              console.log("Removing temp style");
-             tempStyle.remove();
+             try {
+                 tempStyle.remove();
+             } catch (e) {
+                 console.error("Error removing tempStyle:", e);
+             }
          }
+
+         currentHighlightedElement = null;
+         sessionHiddenSelectors = [];
+         document.body.classList.remove('mindshield-selecting');
+
          if (cancelled) {
              console.log("Sending selectionCanceled message");
              browser.runtime.sendMessage({ method: "selectionCanceled" }).catch(e => console.debug("Popup likely closed:", e));
          }
-         console.log("stopSelecting completed, feedbackContainer:", feedbackContainer);
+         console.log("stopSelecting completed");
      }
 
+     // This function checks for the 'Escape' key press
      function handleKeydown(event) {
-         if (event.key === 'Escape' && isSelecting) {
-             console.log("Escape key pressed, stopping selection mode");
-             event.preventDefault();
-             event.stopPropagation();
-             stopSelecting(false);
-             browser.runtime.sendMessage({ method: "stopSelectingFromEscape" }).catch(e => console.debug("Popup likely closed:", e));
-         }
+       if (event.key === 'Escape' && isSelecting) {
+         event.preventDefault();
+         event.stopImmediatePropagation();
+         // stop locally, cancelling the current selection session
+         stopSelecting(true);
+       }
      }
-     
 
      function highlightElement(event) {
          if (!isSelecting) return;
