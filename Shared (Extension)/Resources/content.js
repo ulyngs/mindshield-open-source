@@ -9,18 +9,7 @@
     }
     window.hasRun = true;
 
-    const platformsWeTarget = ["youtube", "facebook", "x", "instagram", "linkedin", "whatsapp", "google", "reddit"];
-    // Only includes predefined elements for targeted platforms
-    const elementsThatCanBeHidden = ["youtubeSearch", "youtubeSearchPredict", "youtubeRecVids", "youtubeThumbnails", "youtubeNotifications", "youtubeProfileImg",
-                                     "youtubeShorts", "youtubeSubscriptions", "youtubeHistory", "youtubeExplore", "youtubeMore",
-                                     "youtubeRelated", "youtubeSidebar", "youtubeComments", "youtubeAds", "youtubeViews", "youtubeLikes", "youtubeSubscribers",
-                                     "xExplore", "xNotifications", "xTrends", "xFollow", "xTimeline",
-                                     "facebookFeed", "facebookWatch", "facebookNotifications", "facebookStories", "facebookChat", "facebookSponsored",
-                                     "linkedinNews", "linkedinNotifications", "linkedinFeed", "linkedinAds",
-                                     "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramReels", "instagramSuggestions", "instagramComments",
-                                     "whatsappPreview", "whatsappNotificationPrompt",
-                                     "googleAds", "googleBackground",
-                                     "redditFeed", "redditPopular", "redditAll", "redditRecent", "redditCommunities", "redditNotification", "redditChat", "redditTrending", "redditPopularCommunities"];
+    // --- Platforms & elements targeted are in shared_data.js ---
 
     // --- CSS Definitions are now in selectors.js ---
 

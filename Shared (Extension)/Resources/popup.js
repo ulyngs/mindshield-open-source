@@ -42,18 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         let isSelectionModeActive = false;
 
-        const platformsWeTarget = ["youtube", "facebook", "x", "instagram", "linkedin", "whatsapp", "google", "reddit"];
-        // Combined list - includes predefined elements and placeholders for custom elements per platform
-        const elementsThatCanBeHidden = ["youtubeSearch", "youtubeSearchPredict", "youtubeRecVids", "youtubeThumbnails", "youtubeNotifications", "youtubeProfileImg",
-                                         "youtubeShorts", "youtubeSubscriptions", "youtubeHistory", "youtubeExplore", "youtubeMore",
-                                         "youtubeRelated", "youtubeSidebar", "youtubeComments", "youtubeAds", "youtubeViews", "youtubeLikes", "youtubeSubscribers",
-                                         "xExplore", "xNotifications", "xTrends", "xFollow", "xTimeline",
-                                         "facebookFeed", "facebookWatch", "facebookNotifications", "facebookStories", "facebookChat", "facebookSponsored",
-                                         "linkedinNews", "linkedinNotifications", "linkedinFeed", "linkedinAds",
-                                         "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramReels", "instagramSuggestions", "instagramComments",
-                                         "whatsappPreview", "whatsappNotificationPrompt",
-                                         "googleAds", "googleBackground",
-                                         "redditFeed", "redditPopular", "redditAll", "redditRecent", "redditCommunities", "redditNotification", "redditChat", "redditTrending", "redditPopularCommunities"];
+        // --- Platforms & elements targeted are in shared_data.js ---
 
         let currentPlatform = null; // e.g., "youtube", "facebook"
         let currentSiteIdentifier = null; // e.g., "youtube", "facebook", "www.wikipedia.org"

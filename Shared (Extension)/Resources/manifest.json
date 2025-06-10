@@ -4,7 +4,7 @@
 
     "name": "MindShield",
     "description": "Hide distractions on the web (YT, FB, IG, X, LI, or any other site).",
-    "version": "2.5",
+    "version": "2.6",
 
     "icons": {
         "48":  "images/icon-48.png",
@@ -17,7 +17,7 @@
     "content_scripts": [{
         "run_at": "document_start",
         "css": [ "style.css" ],
-        "js": [ "selectors.js", "content.js" ],
+        "js": [ "shared_data.js", "selectors.js", "content.js" ],
         "matches": [ "<all_urls>" ]
     }],
 
