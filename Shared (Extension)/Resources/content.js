@@ -191,7 +191,7 @@
         return false;
     });
 
-    // --- Element Selection Logic (NO CHANGES NEEDED IN THIS SECTION) ---
+    // --- Element Selection Logic ---
     let isSelecting = false;
     let highlightOverlay = null;
     let selectorDisplay = null;
