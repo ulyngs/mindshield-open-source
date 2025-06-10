@@ -17,7 +17,7 @@
     "content_scripts": [{
         "run_at": "document_start",
         "css": [ "style.css" ],
-        "js": [ "content.js" ],
+        "js": [ "selectors.js", "content.js" ],
         "matches": [ "<all_urls>" ]
     }],
 
