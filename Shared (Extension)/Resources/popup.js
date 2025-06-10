@@ -64,27 +64,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 var waitTextBox = document.getElementById("waitText");
                 var waitTimeBox = document.getElementById("waitTime");
                 var countdownBox = document.getElementById("delay-time");
-
+                
                 const defaultWaitTime = 10;
                 const defaultWaitText = "What's your intention?";
-
+                
                 frictionToggle.checked = result.addFriction || false;
                 frictionCustomisationArrow.style.display = frictionToggle.checked ? "block" : "none";
-
+                
                 let effectiveWaitText = result.waitText || defaultWaitText;
                 waitTextBox.value = effectiveWaitText;
                 messageBox.innerText = effectiveWaitText;
-
+                
                 let effectiveWaitTime = result.waitTime || defaultWaitTime;
                 waitTimeBox.value = effectiveWaitTime;
                 countdownBox.innerText = effectiveWaitTime;
-
+                
                 if (frictionToggle.checked) {
                     popupContainer.style.display = "none";
                     messageContainer.style.display = "block";
                     errorContainer.style.display = "none";
                     setTimeout(() => messageContainer.classList.add("show"), 100);
-
+                    
                     let countdown = effectiveWaitTime;
                     var timerId = setInterval(() => {
                         countdown--;
@@ -104,14 +104,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     errorContainer.style.display = "none";
                 }
             });
-
+            
             var frictionToggle = document.getElementById("frictionToggle");
             var frictionCustomisationArrow = document.getElementById("frictionCustomisationArrow");
             frictionToggle.addEventListener('change', function() {
                 browser.storage.sync.set({ "addFriction": frictionToggle.checked });
                 frictionCustomisationArrow.style.display = frictionToggle.checked ? "block" : "none";
             });
-
+            
             var frictionCustomisationArrowRight = document.getElementById("frictionCustomisationArrowRight");
             var frictionCustomisationArrowDown = document.getElementById("frictionCustomisationArrowDown");
             var frictionCustomisationOptions = document.querySelector(".toggle-group.friction-customisation");
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 frictionCustomisationArrowDown.style.display = isHidden ? "inline" : "none";
                 frictionCustomisationOptions.style.display = isHidden ? "block" : "none";
             });
-
+            
             var savedTextTime = document.getElementById("savedTextTime");
             let hideTimeOut;
             document.getElementById("waitTime").addEventListener('input', function() {
@@ -129,18 +129,40 @@ document.addEventListener('DOMContentLoaded', function() {
                 let waitValue = parseInt(document.getElementById("waitTime").value);
                 const maxLimit = 600;
                 const minLimit = 1;
-
+                
                 if (isNaN(waitValue) || waitValue < minLimit) {
-                     document.getElementById("waitTime").value = minLimit;
+                    document.getElementById("waitTime").value = minLimit;
                 } else if (waitValue > maxLimit) {
                     savedTextTime.innerText = "Maximum is " + maxLimit;
                     document.getElementById("waitTime").value = maxLimit;
                     savedTextTime.style.display = 'block';
                     hideTimeOut = setTimeout(() => savedTextTime.style.display = 'none', 2500);
                 } else {
-                     savedTextTime.style.display = 'none';
+                    savedTextTime.style.display = 'none';
                 }
             });
+            
+            // at the bottom of initializePopup(), before it returns:
+            document.addEventListener('keydown', (e) => {
+              if (e.key === 'Escape' && isSelectionModeActive) {
+                e.preventDefault();
+                // stop selecting in the page
+                chrome.tabs.query({active: true, currentWindow: true}, tabs => {
+                  chrome.tabs.sendMessage(tabs[0].id, { method: "stopSelecting", cancelled: true });
+                });
+                // reset the popup UI
+                const addButtonId = currentPlatform
+                  ? `${currentPlatform}AddElementButton`
+                  : 'genericAddElementButton';
+                const addButton = document.getElementById(addButtonId);
+                if (addButton) {
+                  isSelectionModeActive = false;
+                  addButton.classList.remove('active');
+                  addButton.textContent = 'Hide custom element';
+                }
+              }
+            });
+
         }
         setupFrictionDelay();
 
@@ -673,6 +695,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     addButton.classList.remove('active');
                     addButton.textContent = 'Hide custom element';
                 }
+                // Send stopSelecting message to content script
+                chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                    if (tabs[0]?.id) {
+                        chrome.tabs.sendMessage(tabs[0].id, { method: "stopSelecting", cancelled: true }, err => {
+                            if (chrome.runtime.lastError) {
+                                console.warn("Error sending 'stopSelecting' message:", chrome.runtime.lastError.message);
+                            }
+                        });
+                    }
+                });
             }
 
             if ((message.method === "elementSelected" || message.method === "selectionCanceled" || message.method === "selectionFailed")) {
