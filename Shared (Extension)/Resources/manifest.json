@@ -18,7 +18,8 @@
         "run_at": "document_start",
         "css": [ "style.css" ],
         "js": [ "shared_data.js", "selectors.js", "content.js" ],
-        "matches": [ "<all_urls>" ]
+        "matches": [ "<all_urls>" ],
+        "all_frames": false
     }],
 
     "browser_action": {
