@@ -735,35 +735,56 @@ button[id$="AddElementButton"].active {
     text-overflow: ellipsis;
     white-space: nowrap;
     margin-right: 10px;
+    margin-left: 3px;
 }
 
-/* Style for remove symbol */
-.remove-symbol {
-    background: none;
-    border: none;
-    padding: 0px;
-    margin: 0 4px;
-    cursor: pointer;
-    display: flex;
+/* --- Base Icon Button Style (shadcn-secondary inspired) --- */
+.icon-btn {
+    display: inline-flex; /* Use inline-flex for better alignment */
     align-items: center;
     justify-content: center;
-    border-radius: 3px;
+    border-radius: 6px; /* A bit more rounded */
+    padding: 6px;       /* Increased padding for a better touch target */
+    margin: 0 3px;
+    cursor: pointer;
+
+    /* Subtle border and transparent background */
+    border: 1px solid #e4e4e7; /* hsl(240 5.9% 90%) */
+    background-color: transparent;
+
+    /* Smooth transitions for all properties */
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 }
 
+/* --- SVG Icon Styling --- */
+.icon-btn svg {
+    width: 16px;
+    height: 16px;
+    stroke: #71717a; /* A softer, medium gray - hsl(240 3.8% 46.1%) */
+    stroke-width: 2; /* Slightly thinner for a cleaner look */
+    transition: stroke 0.2s ease-in-out;
+}
+
+/* --- Standard Hover State (for peek-symbol) --- */
+.peek-symbol:hover {
+    background-color: #f4f4f5; /* A very light gray hover - hsl(240 4.8% 95.9%) */
+}
+
+/* --- Destructive Hover State (for remove-symbol) --- */
 .remove-symbol:hover {
-    background: red;
+    background-color: #ef4444; /* A modern, less harsh red */
+    border-color: #dc2626;     /* A darker red for the border on hover */
 }
 
-.remove-symbol svg {
-    stroke: #666;
-    transition: stroke 0.2s;
-    width: 18px; 
-    height: 18px;
-    stroke-width: 3;
+/* Change icon stroke to white on destructive hover */
+.remove-symbol:hover svg {
+    stroke: white; /* No !important needed due to higher specificity */
 }
 
-.remove-symbol:hover svg path {
-    stroke: white !important;
+/* --- Accessibility: Focus State --- */
+.icon-btn:focus-visible {
+    outline: 2px solid #3b82f6; /* A clear blue outline */
+    outline-offset: 2px;
 }
 
 #generic-site-options {
@@ -845,3 +866,5 @@ footer .friction-customisation {
 #currentSiteInfo p {
     margin-top: 0;
 }
+
+
