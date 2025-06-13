@@ -584,12 +584,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const currentHost = currentURL.hostname;
             document.getElementById('currentSiteName').textContent = currentHost;
 
-            platformsWeTarget.forEach(function(platform) {
-                if (currentHost.includes(platform)) {
+            // Precisely identify the platform using the shared platformHostnames map
+            for (const platform in platformHostnames) {
+                if (platformHostnames[platform].includes(currentHost)) {
                     currentPlatform = platform;
-                    currentSiteIdentifier = platform;
+                    break; // Found it
                 }
-            });
+            }
+
+            // If a platform was matched, use its name as the identifier.
+            if (currentPlatform) {
+                currentSiteIdentifier = currentPlatform;
+            }
 
             if (currentPlatform) {
                 document.querySelector('.dropdown.' + currentPlatform).classList.add('shown');

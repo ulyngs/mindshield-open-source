@@ -69,17 +69,21 @@
          } catch (e) { console.error("Error validating generated selector:", fullPath, e); return null; }
      }
 
-     let currentSiteIdentifier = null;
      let currentPlatform = null;
      const currentHostname = window.location.hostname;
-     for (const platform of platformsWeTarget) {
-         if ((platform === 'google' && currentHostname.includes('google.') && !currentHostname.startsWith('ads.')) ||
-             (platform !== 'google' && currentHostname.includes(platform))) {
-             currentPlatform = platform; currentSiteIdentifier = platform; break;
+
+     // Precisely identify the platform by checking the hostname against our new map.
+     for (const platform in platformHostnames) {
+         if (platformHostnames[platform].includes(currentHostname)) {
+             currentPlatform = platform;
+             break; // Found the platform, no need to check further.
          }
      }
-     if (!currentSiteIdentifier && currentHostname) { currentSiteIdentifier = currentHostname; }
-     console.log("MindShield content script running on:", currentSiteIdentifier || "Unknown site");
+
+     // The siteIdentifier is the platform name if matched, otherwise it's the full hostname.
+     const currentSiteIdentifier = currentPlatform || currentHostname;
+
+     console.log(`MindShield running on: ${currentSiteIdentifier}. (Detected Platform: ${currentPlatform || 'None'})`);
 
      if (currentPlatform) {
          const platformStatusKey = `${currentPlatform}Status`;
