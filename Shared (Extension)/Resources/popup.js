@@ -162,45 +162,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
               }
             });
-            
-            function setupHelpAndFAQ() {
-                const helpBtn = document.getElementById('help-icon-btn');
-                const faqDropdown = document.getElementById('faq-dropdown');
-                const faqItems = document.querySelectorAll('.faq-item');
-
-                if (!helpBtn || !faqDropdown) return;
-
-                // Toggle FAQ dropdown visibility
-                helpBtn.addEventListener('click', (event) => {
-                    event.stopPropagation(); // Prevent the click from closing the dropdown immediately
-                    const isVisible = faqDropdown.style.display === 'block';
-                    faqDropdown.style.display = isVisible ? 'none' : 'block';
-                });
-
-                // Handle accordion items
-                faqItems.forEach(item => {
-                    const trigger = item.querySelector('.faq-trigger');
-                    if (trigger) {
-                        trigger.addEventListener('click', () => {
-                            const isOpen = item.dataset.state === 'open';
-                            item.dataset.state = isOpen ? 'closed' : 'open';
-                        });
-                    }
-                });
-
-                // Close dropdown if clicking outside
-                document.addEventListener('click', (event) => {
-                    if (!faqDropdown.contains(event.target) && event.target !== helpBtn && !helpBtn.contains(event.target)) {
-                        faqDropdown.style.display = 'none';
-                    }
-                });
-            }
-            setupHelpAndFAQ();
-
-            setupAccordion('#hide-previews', '#how-to-description', '#how-to-arrow-right', '#how-to-arrow-down');
-            setupAccordion('#hide-previews-not-mobile', '#how-to-description-not-mobile', '#how-to-arrow-right-not-mobile', '#how-to-arrow-down-not-mobile');
-            setupAccordion('#what-sites', '#sites-available', '#sites-arrow-right', '#sites-arrow-down');
-
         }
         setupFrictionDelay();
 
@@ -783,23 +744,58 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         function setupAccordion(triggerId, contentId, arrowRightId, arrowDownId) {
-            const trigger = document.querySelector(triggerId);
-            const content = document.querySelector(contentId);
-            const arrowRight = document.querySelector(arrowRightId);
-            const arrowDown = document.querySelector(arrowDownId);
+                const trigger = document.querySelector(triggerId);
+                const content = document.querySelector(contentId);
+                const arrowRight = document.querySelector(arrowRightId);
+                const arrowDown = document.querySelector(arrowDownId);
 
-            if (!trigger || !content || !arrowRight || !arrowDown) return;
+                if (!trigger || !content || !arrowRight || !arrowDown) return;
 
-            trigger.addEventListener("click", function() {
-                const isHidden = content.style.display === "none";
-                content.style.display = isHidden ? "block" : "none";
-                arrowRight.style.display = isHidden ? "none" : "inline-block";
-                arrowDown.style.display = isHidden ? "inline-block" : "none";
-            });
-        }
+                trigger.addEventListener("click", function() {
+                    const isHidden = content.style.display === "none";
+                    content.style.display = isHidden ? "block" : "none";
+                    arrowRight.style.display = isHidden ? "none" : "inline-block";
+                    arrowDown.style.display = isHidden ? "inline-block" : "none";
+                });
+            }
+            
+            function setupHelpAndFAQ() {
+                const helpBtn = document.getElementById('help-icon-btn');
+                const faqDropdown = document.getElementById('faq-dropdown');
+                const faqItems = document.querySelectorAll('.faq-item');
 
-        setupAccordion('#hide-previews', '#how-to-description', '#how-to-arrow-right', '#how-to-arrow-down');
-        setupAccordion('#hide-previews-not-mobile', '#how-to-description-not-mobile', '#how-to-arrow-right-not-mobile', '#how-to-arrow-down-not-mobile');
-        setupAccordion('#what-sites', '#sites-available', '#sites-arrow-right', '#sites-arrow-down');
+                if (!helpBtn || !faqDropdown) return;
+
+                // Toggle FAQ dropdown visibility
+                helpBtn.addEventListener('click', (event) => {
+                    event.stopPropagation(); // Prevent the click from closing the dropdown immediately
+                    const isVisible = faqDropdown.style.display === 'block';
+                    faqDropdown.style.display = isVisible ? 'none' : 'block';
+                });
+
+                // Handle accordion items
+                faqItems.forEach(item => {
+                    const trigger = item.querySelector('.faq-trigger');
+                    if (trigger) {
+                        trigger.addEventListener('click', () => {
+                            const isOpen = item.dataset.state === 'open';
+                            item.dataset.state = isOpen ? 'closed' : 'open';
+                        });
+                    }
+                });
+
+                // Close dropdown if clicking outside
+                document.addEventListener('click', (event) => {
+                    if (!faqDropdown.contains(event.target) && !helpBtn.contains(event.target)) {
+                        faqDropdown.style.display = 'none';
+                    }
+                });
+            }
+
+            // Setup all interactive elements at the end
+            setupHelpAndFAQ();
+            setupAccordion('#hide-previews', '#how-to-description', '#how-to-arrow-right', '#how-to-arrow-down');
+            setupAccordion('#hide-previews-not-mobile', '#how-to-description-not-mobile', '#how-to-arrow-right-not-mobile', '#how-to-arrow-down-not-mobile');
+            setupAccordion('#what-sites', '#sites-available', '#sites-arrow-right', '#sites-arrow-down');
         }
 }, false);
