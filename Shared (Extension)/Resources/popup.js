@@ -353,7 +353,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 var platformToggles = document.querySelectorAll(`.dropdown.${platform_to_check} .a-toggle input, .dropdown.${platform_to_check} .a-toggle button`);
                 platformToggles.forEach(toggle => {
-                     if (!toggle.id.includes('AddElementButton') && !toggle.id.includes('RefreshSymbol')) {
+                     if (!toggle.id.includes('AddElementButton')) {
                          toggle.disabled = !platformIsEnabled;
                      }
                 });
@@ -387,13 +387,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     });
                      platformToggles.forEach(toggle => {
-                         if (!toggle.id.includes('AddElementButton') && !toggle.id.includes('RefreshSymbol')) {
+                         if (!toggle.id.includes('AddElementButton')) {
                              toggle.disabled = true;
                          }
                      });
                 } else {
                     platformToggles.forEach(toggle => {
-                        if (!toggle.id.includes('AddElementButton') && !toggle.id.includes('RefreshSymbol')) {
+                        if (!toggle.id.includes('AddElementButton')) {
                              toggle.disabled = false;
                         }
                     });
@@ -560,10 +560,7 @@ document.addEventListener('DOMContentLoaded', function() {
          function setupCustomElementControls(siteIdentifier) {
              const platformSpecific = platformsWeTarget.includes(siteIdentifier);
              const addButtonId = platformSpecific ? `${siteIdentifier}AddElementButton` : 'genericAddElementButton';
-             const refreshButtonId = platformSpecific ? `${siteIdentifier}RefreshSymbol` : 'genericRefreshSymbol';
-
              const addButton = document.getElementById(addButtonId);
-             const refreshButton = document.getElementById(refreshButtonId);
 
              if (addButton) {
                  addButton.addEventListener('click', function() {
@@ -601,39 +598,6 @@ document.addEventListener('DOMContentLoaded', function() {
                      }
                  });
              } else { console.error("Add button not found:", addButtonId); }
-
-             if (refreshButton) {
-                 refreshButton.addEventListener('click', function() {
-                     if (isSelectionModeActive) {
-                         isSelectionModeActive = false;
-                         const currentAddButton = document.getElementById(addButtonId);
-                         if(currentAddButton) {
-                             currentAddButton.classList.remove('active');
-                             currentAddButton.textContent = 'Hide custom element';
-                         }
-                         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                             if (tabs[0]?.id) {
-                                 chrome.tabs.sendMessage(tabs[0].id, { method: "stopSelecting", cancelled: true }, err => {
-                                     if (chrome.runtime.lastError) console.warn("Error sending 'stopSelecting' before refresh:", chrome.runtime.lastError.message);
-                                 });
-                             }
-                         });
-                     }
-
-                     const storageKey = `${siteIdentifier}CustomHiddenElements`;
-                     browser.storage.sync.get(storageKey, function(result) {
-                         let customSelectors = result[storageKey] || [];
-                         updateCustomElementsList(siteIdentifier, customSelectors);
-                         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                            if (tabs[0]?.id) {
-                               chrome.tabs.sendMessage(tabs[0].id, { method: "refreshCustomElements" }, err => {
-                                    if (chrome.runtime.lastError) console.warn("Error sending 'refreshCustomElements' message:", chrome.runtime.lastError.message);
-                               });
-                            }
-                         });
-                     });
-                 });
-             } else { console.error("Refresh button not found:", refreshButtonId); }
          }
 
         chrome.tabs.query({active: true, currentWindow: true}, function(tab) {
