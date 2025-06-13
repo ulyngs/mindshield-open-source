@@ -162,6 +162,44 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
               }
             });
+            
+            function setupHelpAndFAQ() {
+                const helpBtn = document.getElementById('help-icon-btn');
+                const faqDropdown = document.getElementById('faq-dropdown');
+                const faqItems = document.querySelectorAll('.faq-item');
+
+                if (!helpBtn || !faqDropdown) return;
+
+                // Toggle FAQ dropdown visibility
+                helpBtn.addEventListener('click', (event) => {
+                    event.stopPropagation(); // Prevent the click from closing the dropdown immediately
+                    const isVisible = faqDropdown.style.display === 'block';
+                    faqDropdown.style.display = isVisible ? 'none' : 'block';
+                });
+
+                // Handle accordion items
+                faqItems.forEach(item => {
+                    const trigger = item.querySelector('.faq-trigger');
+                    if (trigger) {
+                        trigger.addEventListener('click', () => {
+                            const isOpen = item.dataset.state === 'open';
+                            item.dataset.state = isOpen ? 'closed' : 'open';
+                        });
+                    }
+                });
+
+                // Close dropdown if clicking outside
+                document.addEventListener('click', (event) => {
+                    if (!faqDropdown.contains(event.target) && event.target !== helpBtn && !helpBtn.contains(event.target)) {
+                        faqDropdown.style.display = 'none';
+                    }
+                });
+            }
+            setupHelpAndFAQ();
+
+            setupAccordion('#hide-previews', '#how-to-description', '#how-to-arrow-right', '#how-to-arrow-down');
+            setupAccordion('#hide-previews-not-mobile', '#how-to-description-not-mobile', '#how-to-arrow-right-not-mobile', '#how-to-arrow-down-not-mobile');
+            setupAccordion('#what-sites', '#sites-available', '#sites-arrow-right', '#sites-arrow-down');
 
         }
         setupFrictionDelay();
