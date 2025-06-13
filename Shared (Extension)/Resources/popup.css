@@ -893,6 +893,16 @@ footer .friction-customisation {
 }
 
 
+#faq-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black */
+    z-index: 99; /* Below the help container (100) but above everything else */
+}
+
 #help-container {
     position: absolute;
     top: 8px;

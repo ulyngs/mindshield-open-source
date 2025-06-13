@@ -759,38 +759,43 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
             
-            function setupHelpAndFAQ() {
-                const helpBtn = document.getElementById('help-icon-btn');
-                const faqDropdown = document.getElementById('faq-dropdown');
-                const faqItems = document.querySelectorAll('.faq-item');
+        function setupHelpAndFAQ() {
+            const helpBtn = document.getElementById('help-icon-btn');
+            const faqDropdown = document.getElementById('faq-dropdown');
+            const faqOverlay = document.getElementById('faq-overlay'); // Get the overlay
+            const faqItems = document.querySelectorAll('.faq-item');
 
-                if (!helpBtn || !faqDropdown) return;
+            // Make sure all elements exist
+            if (!helpBtn || !faqDropdown || !faqOverlay) return;
 
-                // Toggle FAQ dropdown visibility
-                helpBtn.addEventListener('click', (event) => {
-                    event.stopPropagation(); // Prevent the click from closing the dropdown immediately
-                    const isVisible = faqDropdown.style.display === 'block';
-                    faqDropdown.style.display = isVisible ? 'none' : 'block';
-                });
+            // Toggle FAQ dropdown and overlay visibility
+            helpBtn.addEventListener('click', (event) => {
+                event.stopPropagation();
+                const isVisible = faqDropdown.style.display === 'block';
+                // Set display for both dropdown and overlay
+                faqDropdown.style.display = isVisible ? 'none' : 'block';
+                faqOverlay.style.display = isVisible ? 'none' : 'block';
+            });
 
-                // Handle accordion items
-                faqItems.forEach(item => {
-                    const trigger = item.querySelector('.faq-trigger');
-                    if (trigger) {
-                        trigger.addEventListener('click', () => {
-                            const isOpen = item.dataset.state === 'open';
-                            item.dataset.state = isOpen ? 'closed' : 'open';
-                        });
-                    }
-                });
+            // Handle accordion items (no change here)
+            faqItems.forEach(item => {
+                const trigger = item.querySelector('.faq-trigger');
+                if (trigger) {
+                    trigger.addEventListener('click', () => {
+                        const isOpen = item.dataset.state === 'open';
+                        item.dataset.state = isOpen ? 'closed' : 'open';
+                    });
+                }
+            });
 
-                // Close dropdown if clicking outside
-                document.addEventListener('click', (event) => {
-                    if (!faqDropdown.contains(event.target) && !helpBtn.contains(event.target)) {
-                        faqDropdown.style.display = 'none';
-                    }
-                });
-            }
+            // Close dropdown and overlay if clicking outside
+            document.addEventListener('click', (event) => {
+                if (!faqDropdown.contains(event.target) && !helpBtn.contains(event.target)) {
+                    faqDropdown.style.display = 'none';
+                    faqOverlay.style.display = 'none'; // Also hide the overlay
+                }
+            });
+        }
 
             // Setup all interactive elements at the end
             setupHelpAndFAQ();
