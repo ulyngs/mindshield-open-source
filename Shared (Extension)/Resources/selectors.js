@@ -95,7 +95,7 @@ const cssSelectors = {
 
     // LinkedIn
     linkedinFeedCssOn: 'div.scaffold-finite-scroll.scaffold-finite-scroll--infinite, #feed-container {display: block !important;}',
-    linkedinFeedCssOff: 'div.scaffold-finite-scroll.scaffold-finite-scroll--infinite, div.scaffold-finite-scroll.scaffold-finite-scroll--finite, #feed-container {display: none !important;}',
+    linkedinFeedCssOff: 'div.scaffold-finite-scroll.scaffold-finite-scroll--infinite, div.scaffold-finite-scroll.scaffold-finite-scroll--finite, #feed-container, .feed-container {display: none !important;}',
     linkedinNotificationsCssOn: 'span.notification-badge--show, #nav-notifications-small-badge, #nav-people-small-badge { display: block !important; }',
     linkedinNotificationsCssOff: 'span.notification-badge--show, #nav-notifications-small-badge, #nav-people-small-badge { display: none !important; }',
     linkedinNewsCssOn: '#feed-news-module, .feed-follows-module { display: block !important; }',
