@@ -10,7 +10,7 @@ const platformsWeTarget = ["youtube", "facebook", "x", "instagram", "linkedin", 
 const platformHostnames = {
     "youtube": ["www.youtube.com", "m.youtube.com"],
     "facebook": ["www.facebook.com", "m.facebook.com"],
-    "x": ["x.com", "twitter.com"], // It's good to include twitter.com for robustness
+    "x": ["x.com", "twitter.com"],
     "instagram": ["www.instagram.com"],
     "linkedin": ["www.linkedin.com"],
     "whatsapp": ["web.whatsapp.com"],
@@ -39,7 +39,7 @@ const elementsThatCanBeHidden = [
     // LinkedIn
     "linkedinNews", "linkedinNotifications", "linkedinFeed", "linkedinAds",
     // Instagram
-    "instagramFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramReels", "instagramSuggestions", "instagramComments",
+    "instagramFeed", "instagramSearchFeed", "instagramStories", "instagramMutedStories", "instagramExplore", "instagramReels", "instagramSuggestions", "instagramComments",
     // WhatsApp
     "whatsappPreview", "whatsappNotificationPrompt",
     // Google

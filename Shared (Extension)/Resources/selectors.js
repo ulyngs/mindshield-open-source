@@ -77,8 +77,10 @@ const cssSelectors = {
 
     // Instagram
     instagramFeedCssOn: 'main[role="main"] div.xw7yly9 > div.x168nmei, section._aalv._aal_ div._aam1 > div.x9f619, main[role="main"] div.x9f619.xjbqb8w.x78zum5.x168nmei.x13lgxp2.x5pf9jr.xo71vjh.x1uhb9sk.x1plvlek.xryxfnj.x1c4vz4f.x2lah0s.xdt5ytf.xqjyukv.x6s0dn4.x1oa3qoh.x1nhvcw1:has(article) {display: block !important;}',
-    instagramFeedCssOff: 'main[role="main"] div.xw7yly9 > div.x168nmei, /* mobile */ section._aalv._aal_ div._aam1 > div._aac4, /* mobile 8 Apr 2024 */ main[role="main"] div.x9f619.xjbqb8w.x78zum5.x168nmei.x13lgxp2.x5pf9jr.xo71vjh.x1uhb9sk.x1plvlek.xryxfnj.x1c4vz4f.x2lah0s.xdt5ytf.xqjyukv.x6s0dn4.x1oa3qoh.x1nhvcw1:has(article) {display: none !important;}',
-    instagramStoriesCssOn: 'main div.xmnaoh6, section._aalv._aal_ div._aam1 > div._aac4, main[role="main"] div.x1ixjvfu.x1q0q8m5.xso031l {display: block !important;}',
+    instagramFeedCssOff: 'main[role="main"] div.xw7yly9 > div.x168nmei, /* mobile 25 June */ main[role="main"] .x1qjc9v5 .x9f619:has(article), /* mobile */ section._aalv._aal_ div._aam1 > div._aac4, /* mobile 8 Apr 2024 */ main[role="main"] div.x9f619.xjbqb8w.x78zum5.x168nmei.x13lgxp2.x5pf9jr.xo71vjh.x1uhb9sk.x1plvlek.xryxfnj.x1c4vz4f.x2lah0s.xdt5ytf.xqjyukv.x6s0dn4.x1oa3qoh.x1nhvcw1:has(article) {display: none !important;}',
+    instagramSearchFeedCssOn: '',
+    instagramSearchFeedCssOff: 'main.xvbhtw8 div.x78zum5.xdt5ytf.x11lt19s.x1n2onr6.xph46j.x7x3xai.xsybdxg.x194l6zq, main[role="main"] ._aalg div[data-visualcompletion="loading-state"] {display: none !important;}',
+    instagramStoriesCssOn: 'main div.xmnaoh6, section._aalv._aal_ div._aam1 > div._aac4, /* 15 jun 2025 mobile */ div[data-pagelet="story_tray"], main[role="main"] div.x1ixjvfu.x1q0q8m5.xso031l {display: block !important;}',
     instagramStoriesCssOff: 'main div.xmnaoh6, /* mobile */ section._aalv._aal_ div._aam1 > div._aac4, /* mobile 8 Apr 2024 */  main[role="main"] div.x1ixjvfu.x1q0q8m5.xso031l {display: none !important;}',
     instagramMutedStoriesCssOn: 'main[role="main"] div[role="menu"] button[role="menuitem"].xbyyjgo { display: flex !important; }',
     instagramMutedStoriesCssOff: 'main[role="main"] div[role="menu"] button[role="menuitem"].xbyyjgo { display: none !important; }',
