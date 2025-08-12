@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D714AB822DF7403500854882 /* selectors.js in Resources */ = {isa = PBXBuildFile; fileRef = D714AB812DF7403100854882 /* selectors.js */; };
+		D714AB832DF7403500854882 /* selectors.js in Resources */ = {isa = PBXBuildFile; fileRef = D714AB812DF7403100854882 /* selectors.js */; };
+		D72FA3D72DF826AF0021A2E3 /* shared_data.js in Resources */ = {isa = PBXBuildFile; fileRef = D72FA3D62DF826AB0021A2E3 /* shared_data.js */; };
+		D72FA3D82DF826AF0021A2E3 /* shared_data.js in Resources */ = {isa = PBXBuildFile; fileRef = D72FA3D62DF826AB0021A2E3 /* shared_data.js */; };
 		D7607A1D276792B100FB0E82 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D76921C92756452E00EB4CEA /* Main.storyboard */; };
 		D76674E0294E282900F4863B /* iPhone_turn_on_two_anon.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D76674DE294E282900F4863B /* iPhone_turn_on_two_anon.jpeg */; };
 		D76674E1294E282900F4863B /* iPhone_turn_on_one_annotated.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D76674DF294E282900F4863B /* iPhone_turn_on_one_annotated.jpeg */; };
@@ -97,6 +101,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D714AB812DF7403100854882 /* selectors.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = selectors.js; sourceTree = "<group>"; };
+		D72FA3D62DF826AB0021A2E3 /* shared_data.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = shared_data.js; sourceTree = "<group>"; };
 		D76674DE294E282900F4863B /* iPhone_turn_on_two_anon.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iPhone_turn_on_two_anon.jpeg; sourceTree = "<group>"; };
 		D76674DF294E282900F4863B /* iPhone_turn_on_one_annotated.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iPhone_turn_on_one_annotated.jpeg; sourceTree = "<group>"; };
 		D769219E2756452C00EB4CEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = ../Base.lproj/Main.html; sourceTree = "<group>"; };
@@ -214,6 +220,8 @@
 		D76921A62756452E00EB4CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D72FA3D62DF826AB0021A2E3 /* shared_data.js */,
+				D714AB812DF7403100854882 /* selectors.js */,
 				D76921A72756452E00EB4CEA /* _locales */,
 				D76921A82756452E00EB4CEA /* images */,
 				D76921A92756452E00EB4CEA /* manifest.json */,
@@ -441,6 +449,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D76921FC2756452E00EB4CEA /* popup.css in Resources */,
+				D72FA3D72DF826AF0021A2E3 /* shared_data.js in Resources */,
 				D76921FA2756452E00EB4CEA /* popup.html in Resources */,
 				D76921F22756452E00EB4CEA /* images in Resources */,
 				D76921F42756452E00EB4CEA /* manifest.json in Resources */,
@@ -448,6 +457,7 @@
 				D76921F02756452E00EB4CEA /* _locales in Resources */,
 				D76921F82756452E00EB4CEA /* content.js in Resources */,
 				D76921FE2756452E00EB4CEA /* popup.js in Resources */,
+				D714AB832DF7403500854882 /* selectors.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +466,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D76921FD2756452E00EB4CEA /* popup.css in Resources */,
+				D72FA3D82DF826AF0021A2E3 /* shared_data.js in Resources */,
 				D76921FB2756452E00EB4CEA /* popup.html in Resources */,
 				D76921F32756452E00EB4CEA /* images in Resources */,
 				D76921F52756452E00EB4CEA /* manifest.json in Resources */,
@@ -463,6 +474,7 @@
 				D76921F12756452E00EB4CEA /* _locales in Resources */,
 				D76921F92756452E00EB4CEA /* content.js in Resources */,
 				D76921FF2756452E00EB4CEA /* popup.js in Resources */,
+				D714AB822DF7403500854882 /* selectors.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -672,7 +684,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 50;
+				CURRENT_PROJECT_VERSION = 56;
 				DEVELOPMENT_TEAM = 7YEYWQKK25;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
@@ -684,7 +696,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.5;
+				MARKETING_VERSION = 2.8;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -703,7 +715,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 50;
+				CURRENT_PROJECT_VERSION = 56;
 				DEVELOPMENT_TEAM = 7YEYWQKK25;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
@@ -715,7 +727,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.5;
+				MARKETING_VERSION = 2.8;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -738,7 +750,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 50;
+				CURRENT_PROJECT_VERSION = 56;
 				DEVELOPMENT_TEAM = 7YEYWQKK25;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (App)/Info.plist";
@@ -754,7 +766,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.5;
+				MARKETING_VERSION = 2.8;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -777,7 +789,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 50;
+				CURRENT_PROJECT_VERSION = 56;
 				DEVELOPMENT_TEAM = 7YEYWQKK25;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (App)/Info.plist";
@@ -793,7 +805,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.5;
+				MARKETING_VERSION = 2.8;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -817,7 +829,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 51;
+				CURRENT_PROJECT_VERSION = 56;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 7YEYWQKK25;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -831,7 +843,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 2.5;
+				MARKETING_VERSION = 2.7;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -852,7 +864,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 51;
+				CURRENT_PROJECT_VERSION = 56;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 7YEYWQKK25;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -866,7 +878,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 2.5;
+				MARKETING_VERSION = 2.7;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -890,7 +902,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 51;
+				CURRENT_PROJECT_VERSION = 56;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 7YEYWQKK25;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -904,7 +916,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 2.5;
+				MARKETING_VERSION = 2.7;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -929,7 +941,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 51;
+				CURRENT_PROJECT_VERSION = 56;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 7YEYWQKK25;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -943,7 +955,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 2.5;
+				MARKETING_VERSION = 2.7;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
