@@ -1,3 +1,7 @@
+if (typeof browser === "undefined") {
+    var browser = chrome;
+}
+
 (function () {
 
     // --- All helper functions are defined first, making them available to the entire script ---
@@ -271,10 +275,15 @@
         createSelectorDisplay();
         createFeedbackContainer();
         document.addEventListener('mousemove', highlightElement, { capture: true });
-        document.addEventListener('touchstart', highlightElement, { capture: true, passive: true });
+        document.addEventListener('touchstart', highlightElement, { capture: true });
         document.addEventListener('click', selectElementOnClick, { capture: true });
         document.addEventListener('touchend', selectElementOnTap, { capture: true });
         document.addEventListener('keydown', handleKeydown, { capture: true });
+        
+        // Update storage to reflect that selection has started
+        if (currentSiteIdentifier) {
+            browser.storage.sync.set({ [`${currentSiteIdentifier}SelectionActive`]: true });
+        }
     }
 
     function stopSelecting(cancelled = false) {
@@ -292,8 +301,10 @@
         if (tempStyle) tempStyle.remove();
         feedbackContainer = highlightOverlay = selectorDisplay = currentHighlightedElement = null;
         sessionHiddenSelectors = [];
-        if (cancelled) {
-            browser.runtime.sendMessage({ method: "selectionCanceled" }).catch(e => console.debug("Popup likely closed:", e));
+        
+        // Update storage to reflect that selection has stopped
+        if (currentSiteIdentifier) {
+            browser.storage.sync.set({ [`${currentSiteIdentifier}SelectionActive`]: false });
         }
     }
 
@@ -372,12 +383,16 @@
                     if (browser.runtime.lastError) {
                         console.error("Error saving custom selectors:", browser.runtime.lastError);
                     } else {
-                        applyCustomElementStyles(currentSiteIdentifier, customSelectors);
+                        // The storage change listener will automatically apply the styles
+                        // Also stop selecting mode
+                        browser.storage.sync.set({ [`${currentSiteIdentifier}SelectionActive`]: false });
                         updateFeedbackMessage('Element hidden', true);
                     }
                 });
             } else {
                 updateFeedbackMessage('Element already hidden');
+                // Still stop selecting mode
+                browser.storage.sync.set({ [`${currentSiteIdentifier}SelectionActive`]: false });
             }
         });
     }
@@ -401,55 +416,20 @@
     const currentSiteIdentifier = currentPlatform || currentHostname;
 
     // --- Register the message listener (this will now happen on every execution) ---
-    chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-        // Only handle custom element selection methods
-        if (message.method === "checkCustom" && message.selector) {
-            const customStyleId = `customHidden_${currentSiteIdentifier.replace(/\./g, '_')}Style`;
-            const styleElement = document.head.querySelector(`#${customStyleId}`);
-            let isVisible = true;
-            if (styleElement && styleElement.textContent.includes(`${message.selector} { display: none !important; }`)) {
-                isVisible = false;
-            }
-            sendResponse({ visible: isVisible });
-            return true;
-        }
-
-        if (message.method === "toggleCustomVisibility" && message.selector && currentSiteIdentifier) {
-            const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;
-            browser.storage.sync.get(customStorageKey, function (result) {
-                let customSelectors = result[customStorageKey] || [];
-                if (!Array.isArray(customSelectors)) customSelectors = [];
-                const css = customSelectors
-                    .map(s => s === message.selector && message.visible ? '' : `${s} { display: none !important; }`)
-                    .filter(s => s)
-                    .join('\n');
-                const customStyleId = `customHidden_${currentSiteIdentifier.replace(/\./g, '_')}Style`;
-                createStyleElement(customStyleId, css);
-            });
-            return false;
-        }
-
-        if (message.method === "startSelecting") {
-            startSelecting();
-        } else if (message.method === "stopSelecting") {
-            stopSelecting(message.cancelled);
-        } else if (message.method === "removeCustomElement" && message.selector && currentSiteIdentifier) {
-            const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;
-            browser.storage.sync.get(customStorageKey, function (result) {
-                let customSelectors = result[customStorageKey] || [];
-                if (!Array.isArray(customSelectors)) customSelectors = [];
-                customSelectors = customSelectors.filter(s => s !== message.selector);
-                browser.storage.sync.set({ [customStorageKey]: customSelectors }, function () {
-                    if (chrome.runtime.lastError) console.error("Error removing custom selector from storage:", chrome.runtime.lastError);
-                    else applyCustomElementStyles(currentSiteIdentifier, customSelectors);
-                });
-            });
-        }
-        return false;
-    });
+    // No longer needed - everything is handled through storage changes
+    // chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+    //     // Only handle custom element selection UI methods
+    //     if (message.method === "startSelecting") {
+    //         startSelecting();
+    //     } else if (message.method === "stopSelecting") {
+    //         stopSelecting(message.cancelled);
+    //     }
+    //     return false;
+    // });
 
     // --- Listen for storage changes to apply settings immediately ---
     let lastAppliedSettings = {};
+    let lastAppliedCustomElements = {};
     
     function applySettingsFromStorage() {
         if (currentPlatform) {
@@ -493,18 +473,57 @@
                     });
             });
         }
+        
+        // Also check for custom element changes
+        if (currentSiteIdentifier) {
+            const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;
+            browser.storage.sync.get(customStorageKey, function (result) {
+                let customSelectors = result[customStorageKey] || [];
+                if (!Array.isArray(customSelectors)) customSelectors = [];
+                
+                // Check if custom elements have changed
+                const currentCustomElements = lastAppliedCustomElements[currentSiteIdentifier] || [];
+                if (JSON.stringify(customSelectors) !== JSON.stringify(currentCustomElements)) {
+                    applyCustomElementStyles(currentSiteIdentifier, customSelectors);
+                    lastAppliedCustomElements[currentSiteIdentifier] = [...customSelectors];
+                }
+            });
+            
+            // Check for selection state changes
+            const selectionKey = `${currentSiteIdentifier}SelectionActive`;
+            browser.storage.sync.get(selectionKey, function (result) {
+                const shouldBeSelecting = result[selectionKey] === true;
+                if (shouldBeSelecting && !isSelecting) {
+                    startSelecting();
+                } else if (!shouldBeSelecting && isSelecting) {
+                    stopSelecting(false);
+                }
+            });
+        }
     }
     
     // Listen for storage changes to be responsive
     browser.storage.onChanged.addListener(function(changes, namespace) {
-        if (namespace === 'sync' && currentPlatform) {
-            // Check if any of our platform's settings changed
+        if (namespace === 'sync') {
             let hasRelevantChanges = false;
-            for (let key in changes) {
-                if (key === `${currentPlatform}Status` || 
-                    (key.endsWith('Status') && elementsThatCanBeHidden.some(elem => elem.startsWith(currentPlatform) && elem + 'Status' === key))) {
+            
+            // Check platform-specific changes
+            if (currentPlatform) {
+                for (let key in changes) {
+                    if (key === `${currentPlatform}Status` || 
+                        (key.endsWith('Status') && elementsThatCanBeHidden.some(elem => elem.startsWith(currentPlatform) && elem + 'Status' === key))) {
+                        hasRelevantChanges = true;
+                        break;
+                    }
+                }
+            }
+            
+            // Check custom element changes
+            if (currentSiteIdentifier) {
+                const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;
+                const selectionKey = `${currentSiteIdentifier}SelectionActive`;
+                if (changes[customStorageKey] || changes[selectionKey]) {
                     hasRelevantChanges = true;
-                    break;
                 }
             }
             

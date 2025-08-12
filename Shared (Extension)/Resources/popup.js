@@ -1,3 +1,7 @@
+if (typeof browser === "undefined") {
+    var browser = chrome;
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     // Remove ping/pong logic and initialize popup directly
     initializePopup();
@@ -117,10 +121,10 @@ document.addEventListener('DOMContentLoaded', function () {
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && isSelectionModeActive) {
                     e.preventDefault();
-                    // stop selecting in the page
-                    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-                        chrome.tabs.sendMessage(tabs[0].id, { method: "stopSelecting", cancelled: true });
-                    });
+                    // stop selecting by updating storage
+                    if (currentSiteIdentifier) {
+                        browser.storage.sync.set({ [`${currentSiteIdentifier}SelectionActive`]: false });
+                    }
                     // reset the popup UI
                     const addButtonId = currentPlatform
                         ? `${currentPlatform}AddElementButton`
@@ -312,55 +316,63 @@ document.addEventListener('DOMContentLoaded', function () {
                 peekButton.title = 'Toggle visibility';
                 peekButton.setAttribute('data-visible', 'false');
 
-                // Check visibility by asking content script (this is the only communication we keep)
-                chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                    if (tabs[0]?.id) {
-                        chrome.tabs.sendMessage(tabs[0].id, { method: "checkCustom", selector: selector }, function (response) {
-                            if (chrome.runtime.lastError) {
-                                console.warn("Error checking custom selector state:", chrome.runtime.lastError.message);
-                                peekButton.setAttribute('data-visible', 'false');
-                                peekButton.innerHTML = `
-                                    <svg width="14px" height="14px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                                        <line x1="1" y1="1" x2="23" y2="23"></line>
-                                    </svg>`;
-                            } else if (response && response.visible) {
-                                peekButton.setAttribute('data-visible', 'true');
-                                peekButton.innerHTML = `
-                                    <svg width="14px" height="14px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                    </svg>`;
-                            } else {
-                                peekButton.setAttribute('data-visible', 'false');
-                                peekButton.innerHTML = `
-                                    <svg width="14px" height="14px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                                        <line x1="1" y1="1" x2="23" y2="23"></line>
-                                    </svg>`;
-                            }
-                        });
+                // Check visibility by reading from storage instead of asking content script
+                const storageKey = `${siteIdentifier}CustomHiddenElements`;
+                browser.storage.sync.get(storageKey, function (result) {
+                    let customSelectors = result[storageKey] || [];
+                    if (!Array.isArray(customSelectors)) customSelectors = [];
+                    const isVisible = !customSelectors.includes(selector);
+                    
+                    if (isVisible) {
+                        peekButton.setAttribute('data-visible', 'true');
+                        peekButton.innerHTML = `
+                            <svg width="14px" height="14px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>`;
+                    } else {
+                        peekButton.setAttribute('data-visible', 'false');
+                        peekButton.innerHTML = `
+                            <svg width="14px" height="14px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                <line x1="1" y1="1" x2="23" y2="23"></line>
+                            </svg>`;
                     }
                 });
 
                 peekButton.addEventListener('click', function () {
                     const isVisible = peekButton.getAttribute('data-visible') === 'true';
-                    peekButton.setAttribute('data-visible', isVisible ? 'false' : 'true');
-                    peekButton.innerHTML = isVisible ? `
-                        <svg width="14px" height="14px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                            <line x1="1" y1="1" x2="23" y2="23"></line>
-                        </svg>` : `
-                        <svg width="14px" height="14px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                            <circle cx="12" cy="12" r="3"></circle>
-                        </svg>`;
-                    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                        if (tabs[0]?.id) {
-                            chrome.tabs.sendMessage(tabs[0].id, { method: "toggleCustomVisibility", selector: selector, visible: !isVisible }, err => {
-                                if (chrome.runtime.lastError) console.warn("Error sending 'toggleCustomVisibility' message:", chrome.runtime.lastError.message);
-                            });
+                    const newVisible = !isVisible;
+                    
+                    // Update storage directly - content script will pick it up automatically
+                    const storageKey = `${siteIdentifier}CustomHiddenElements`;
+                    browser.storage.sync.get(storageKey, function (result) {
+                        let customSelectors = result[storageKey] || [];
+                        if (!Array.isArray(customSelectors)) customSelectors = [];
+                        
+                        if (newVisible) {
+                            // Remove selector to show element
+                            customSelectors = customSelectors.filter(s => s !== selector);
+                        } else {
+                            // Add selector to hide element
+                            if (!customSelectors.includes(selector)) {
+                                customSelectors.push(selector);
+                            }
                         }
+                        
+                        browser.storage.sync.set({ [storageKey]: customSelectors }, function () {
+                            // Update UI immediately
+                            peekButton.setAttribute('data-visible', newVisible ? 'false' : 'true');
+                            peekButton.innerHTML = newVisible ? `
+                                <svg width="14px" height="14px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                                </svg>` : `
+                                <svg width="14px" height="14px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>`;
+                        });
                     });
                 });
 
@@ -383,13 +395,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         currentSelectors = currentSelectors.filter(s => s !== selector);
                         browser.storage.sync.set({ [storageKey]: currentSelectors }, function () {
                             updateCustomElementsList(siteIdentifier, currentSelectors);
-                            chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                                if (tabs[0]?.id) {
-                                    chrome.tabs.sendMessage(tabs[0].id, { method: "removeCustomElement", selector: selector }, err => {
-                                        if (chrome.runtime.lastError) console.warn("Error sending 'removeCustomElement' message:", chrome.runtime.lastError.message);
-                                    });
-                                }
-                            });
+                            // Content script will automatically pick up the change through storage listener
                         });
                     });
                 });
@@ -414,33 +420,14 @@ document.addEventListener('DOMContentLoaded', function () {
                         isSelectionModeActive = false;
                         addButton.classList.remove('active');
                         addButton.textContent = 'Hide custom element';
-                        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                            if (tabs[0]?.id) {
-                                chrome.tabs.sendMessage(tabs[0].id, { method: "stopSelecting", cancelled: false }, err => {
-                                    if (chrome.runtime.lastError) console.warn("Error sending 'stopSelecting' message:", chrome.runtime.lastError.message);
-                                });
-                            }
-                        });
+                        // Stop selecting by updating storage - content script will pick it up
+                        browser.storage.sync.set({ [`${siteIdentifier}SelectionActive`]: false });
                     } else {
                         isSelectionModeActive = true;
                         addButton.classList.add('active');
                         addButton.textContent = 'Click/Tap element to hide';
-                        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                            if (tabs[0]?.id) {
-                                chrome.tabs.sendMessage(tabs[0].id, { method: "startSelecting" }, err => {
-                                    if (chrome.runtime.lastError) {
-                                        console.warn("Error sending 'startSelecting' message:", chrome.runtime.lastError.message);
-                                        isSelectionModeActive = false;
-                                        addButton.classList.remove('active');
-                                        addButton.textContent = 'Hide custom element';
-                                    }
-                                });
-                            } else {
-                                isSelectionModeActive = false;
-                                addButton.classList.remove('active');
-                                addButton.textContent = 'Hide custom element';
-                            }
-                        });
+                        // Start selecting by updating storage - content script will pick it up
+                        browser.storage.sync.set({ [`${siteIdentifier}SelectionActive`]: true });
                     }
                 });
             } else { console.error("Add button not found:", addButtonId); }
@@ -537,69 +524,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         });
 
-        chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-            if (!currentSiteIdentifier) return;
-
-            if (message.method === "stopSelectingFromEscape") {
-                console.log('Received stopSelectingFromEscape message');
-                const addButtonId = currentPlatform ? `${currentSiteIdentifier}AddElementButton` : 'genericAddElementButton';
-                const addButton = document.getElementById(addButtonId);
-                if (addButton) {
-                    isSelectionModeActive = false;
-                    addButton.classList.remove('active');
-                    addButton.textContent = 'Hide custom element';
-                }
-                // Send stopSelecting message to content script
-                chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                    if (tabs[0]?.id) {
-                        chrome.tabs.sendMessage(tabs[0].id, { method: "stopSelecting", cancelled: true }, err => {
-                            if (chrome.runtime.lastError) {
-                                console.warn("Error sending 'stopSelecting' message:", chrome.runtime.lastError.message);
-                            }
-                        });
-                    }
-                });
-            }
-
-            if ((message.method === "elementSelected" || message.method === "selectionCanceled" || message.method === "selectionFailed")) {
-                console.log('Received message:', message);
-
-                const addButtonId = currentPlatform ? `${currentSiteIdentifier}AddElementButton` : 'genericAddElementButton';
-                const addButton = document.getElementById(addButtonId);
-                if (addButton) {
-                    addButton.classList.remove('active');
-                    addButton.textContent = 'Hide custom element';
-                }
-
-                isSelectionModeActive = false;
-
-                if (message.method === "elementSelected" && message.selector) {
-                    const storageKey = `${currentSiteIdentifier}CustomHiddenElements`;
-                    browser.storage.sync.get(storageKey, function (result) {
-                        let customSelectors = result[storageKey] || [];
-                        if (!Array.isArray(customSelectors)) customSelectors = [];
-                        if (!customSelectors.includes(message.selector)) {
-                            customSelectors.push(message.selector);
-                            browser.storage.sync.set({ [storageKey]: customSelectors }, function () {
-                                if (chrome.runtime.lastError) {
-                                    console.error("Error saving custom selectors:", chrome.runtime.lastError);
-                                } else {
-                                    updateCustomElementsList(currentSiteIdentifier, customSelectors);
-                                }
-                            });
-                        }
-                    });
-                } else if (message.method === "selectionFailed") {
-                    console.error("Element selection failed:", message.reason);
-                    if (addButton) {
-                        const originalText = addButton.textContent;
-                        addButton.textContent = 'Selection Failed!';
-                        setTimeout(() => { addButton.textContent = originalText; }, 2000);
-                    }
-                }
-            }
-        });
-
         function delay(time) {
             return new Promise(resolve => setTimeout(resolve, time));
         }
@@ -693,5 +617,38 @@ document.addEventListener('DOMContentLoaded', function () {
         setupAccordion('#hide-previews', '#how-to-description', '#how-to-arrow-right', '#how-to-arrow-down');
         setupAccordion('#hide-previews-not-mobile', '#how-to-description-not-mobile', '#how-to-arrow-right-not-mobile', '#how-to-arrow-down-not-mobile');
         setupAccordion('#what-sites', '#sites-available', '#sites-arrow-right', '#sites-arrow-down');
+        
+        // Listen for storage changes to update UI automatically
+        browser.storage.onChanged.addListener(function(changes, namespace) {
+            if (namespace === 'sync' && currentSiteIdentifier) {
+                // Check for custom element changes
+                const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;
+                if (changes[customStorageKey]) {
+                    // Update custom elements list when it changes
+                    const newSelectors = changes[customStorageKey].newValue || [];
+                    updateCustomElementsList(currentSiteIdentifier, newSelectors);
+                }
+                
+                // Check for selection state changes
+                const selectionKey = `${currentSiteIdentifier}SelectionActive`;
+                if (changes[selectionKey]) {
+                    const isActive = changes[selectionKey].newValue === true;
+                    isSelectionModeActive = isActive;
+                    
+                    // Update button state
+                    const addButtonId = currentPlatform ? `${currentSiteIdentifier}AddElementButton` : 'genericAddElementButton';
+                    const addButton = document.getElementById(addButtonId);
+                    if (addButton) {
+                        if (isActive) {
+                            addButton.classList.add('active');
+                            addButton.textContent = 'Click/Tap element to hide';
+                        } else {
+                            addButton.classList.remove('active');
+                            addButton.textContent = 'Hide custom element';
+                        }
+                    }
+                }
+            }
+        });
     }
 }, false);
