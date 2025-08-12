@@ -232,7 +232,17 @@ input:checked + .slider:before {
     background-color: rgba(0,0,0,0.7);
 }
 
-
+#saveButton {
+    background-color: #3498DB;
+    border: none;
+    color: white;
+    padding: 7px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 0.8em;
+    font-weight: bold;
+    border-radius: 2px;
+}
 
 /* Style for Add more elements button */
 button[id$="AddElementButton"] {
@@ -641,7 +651,7 @@ p.how-to-description {
     }
 }
 
-button[id$="AddElementButton"] {
+button[id$="AddElementButton"], #saveButton {
     padding: 6px 12px;
     font-size: 0.85em;
     font-weight: 500;
@@ -651,7 +661,13 @@ button[id$="AddElementButton"] {
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-
+#saveButton {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+#saveButton:hover {
+    background-color: #2d2d2d; /* Lighter blackish on hover */
+}
 
 button[id$="AddElementButton"] {
     background-color: rgb(228, 228, 231);
