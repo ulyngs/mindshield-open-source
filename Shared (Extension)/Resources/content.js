@@ -1,4 +1,4 @@
-(function() {
+(function () {
 
     // --- All helper functions are defined first, making them available to the entire script ---
 
@@ -40,7 +40,7 @@
             const idSelector = `#${CSS.escape(el.id)}`;
             try {
                 if (document.querySelectorAll(idSelector).length === 1) return idSelector;
-            } catch (e) {}
+            } catch (e) { }
         }
         let path = [];
         let currentEl = el;
@@ -244,12 +244,12 @@
     function handleUndo() {
         if (sessionHiddenSelectors.length === 0 || !currentSiteIdentifier) return;
         const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;
-        browser.storage.sync.get(customStorageKey, function(result) {
+        browser.storage.sync.get(customStorageKey, function (result) {
             let customSelectors = result[customStorageKey] || [];
             if (!Array.isArray(customSelectors)) customSelectors = [];
             const selectorToRemove = sessionHiddenSelectors.pop();
             customSelectors = customSelectors.filter(s => s !== selectorToRemove);
-            browser.storage.sync.set({ [customStorageKey]: customSelectors }, function() {
+            browser.storage.sync.set({ [customStorageKey]: customSelectors }, function () {
                 if (browser.runtime.lastError) {
                     console.error("Error removing custom selector from storage:", browser.runtime.lastError);
                 } else {
@@ -362,13 +362,13 @@
             return;
         }
         const storageKey = `${currentSiteIdentifier}CustomHiddenElements`;
-        browser.storage.sync.get(storageKey, function(result) {
+        browser.storage.sync.get(storageKey, function (result) {
             let customSelectors = result[storageKey] || [];
             if (!Array.isArray(customSelectors)) customSelectors = [];
             if (!customSelectors.includes(selector)) {
                 customSelectors.push(selector);
                 sessionHiddenSelectors.push(selector);
-                browser.storage.sync.set({ [storageKey]: customSelectors }, function() {
+                browser.storage.sync.set({ [storageKey]: customSelectors }, function () {
                     if (browser.runtime.lastError) {
                         console.error("Error saving custom selectors:", browser.runtime.lastError);
                     } else {
@@ -401,7 +401,7 @@
     const currentSiteIdentifier = currentPlatform || currentHostname;
 
     // --- Register the message listener (this will now happen on every execution) ---
-    chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+    chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
         if (message.method === "ping") {
             sendResponse({ status: "pong" });
             return true; // Keep message channel open for async response
@@ -428,7 +428,7 @@
 
         if (message.method === "check" && message.element) {
             if (!currentStyleElement) {
-                browser.storage.sync.get(message.element + "Status", function(result) {
+                browser.storage.sync.get(message.element + "Status", function (result) {
                     let storedValue = result[message.element + "Status"];
                     if (message.element === "youtubeThumbnails" || message.element === "youtubeNotifications") {
                         sendResponse({ text: (storedValue || "On").toLowerCase() });
@@ -463,7 +463,7 @@
 
         if (message.method === "toggleCustomVisibility" && message.selector && currentSiteIdentifier) {
             const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;
-            browser.storage.sync.get(customStorageKey, function(result) {
+            browser.storage.sync.get(customStorageKey, function (result) {
                 let customSelectors = result[customStorageKey] || [];
                 if (!Array.isArray(customSelectors)) customSelectors = [];
                 const css = customSelectors
@@ -497,18 +497,18 @@
             stopSelecting(message.cancelled);
         } else if (message.method === "removeCustomElement" && message.selector && currentSiteIdentifier) {
             const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;
-            browser.storage.sync.get(customStorageKey, function(result) {
+            browser.storage.sync.get(customStorageKey, function (result) {
                 let customSelectors = result[customStorageKey] || [];
                 if (!Array.isArray(customSelectors)) customSelectors = [];
                 customSelectors = customSelectors.filter(s => s !== message.selector);
-                browser.storage.sync.set({ [customStorageKey]: customSelectors }, function() {
+                browser.storage.sync.set({ [customStorageKey]: customSelectors }, function () {
                     if (chrome.runtime.lastError) console.error("Error removing custom selector from storage:", chrome.runtime.lastError);
                     else applyCustomElementStyles(currentSiteIdentifier, customSelectors);
                 });
             });
         } else if (message.method === "refreshCustomElements" && currentSiteIdentifier) {
             const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;
-            browser.storage.sync.get(customStorageKey, function(result) {
+            browser.storage.sync.get(customStorageKey, function (result) {
                 let customSelectors = result[customStorageKey] || [];
                 if (!Array.isArray(customSelectors)) customSelectors = [];
                 applyCustomElementStyles(currentSiteIdentifier, customSelectors);
@@ -528,17 +528,17 @@
 
     if (currentPlatform) {
         const platformStatusKey = `${currentPlatform}Status`;
-        browser.storage.sync.get(platformStatusKey, function(platformResult) {
+        browser.storage.sync.get(platformStatusKey, function (platformResult) {
             let platformIsOn = platformResult[platformStatusKey] !== false;
             elementsThatCanBeHidden
                 .filter(element => element.startsWith(currentPlatform))
-                .forEach(function(item) {
+                .forEach(function (item) {
                     const styleName = item + "Style";
                     const itemStatusKey = item + "Status";
                     if (!platformIsOn) {
                         createStyleElement(styleName, cssSelectors[item + "CssOn"]);
                     } else {
-                        browser.storage.sync.get(itemStatusKey, function(itemResult) {
+                        browser.storage.sync.get(itemStatusKey, function (itemResult) {
                             let statusValue = itemResult[itemStatusKey];
                             let cssToApply;
                             if (item === "youtubeThumbnails" || item === "youtubeNotifications") {
@@ -557,7 +557,7 @@
     if (currentSiteIdentifier) {
         console.log('Before custom storage get, window.hasRun:', window.hasRun);
         const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;
-        browser.storage.sync.get(customStorageKey, function(result) {
+        browser.storage.sync.get(customStorageKey, function (result) {
             if (chrome.runtime.lastError) {
                 console.error(`Storage error for ${customStorageKey}:`, chrome.runtime.lastError);
                 return;
@@ -567,7 +567,7 @@
             if (!Array.isArray(customSelectors)) customSelectors = [];
             applyCustomElementStyles(currentSiteIdentifier, customSelectors);
             if (customSelectors.length > 0) {
-                 console.log(`Applied ${customSelectors.length} custom rules for ${currentSiteIdentifier}`);
+                console.log(`Applied ${customSelectors.length} custom rules for ${currentSiteIdentifier}`);
             }
         });
     }

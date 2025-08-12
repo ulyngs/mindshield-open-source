@@ -1,49 +1,52 @@
 {
-    "manifest_version": 3,
-    "default_locale": "en",
-
-    "name": "MindShield",
-    "description": "Hide distractions on the web (YT, FB, IG, X, LI, or any other site).",
-    "version": "2.8",
-
-    "icons": {
-        "48":  "images/icon-48.png",
-        "96":  "images/icon-96.png",
-        "128": "images/icon-128.png",
-        "256": "images/icon-256.png",
-        "512": "images/icon-512.png"
-    },
-
-    "content_scripts": [{
-        "run_at": "document_start",
-        "css": [ "style.css" ],
-        "js": [ "shared_data.js", "selectors.js", "content.js" ],
-        "matches": [ "<all_urls>" ],
-        "all_frames": false
-    }],
-
-    "action": {
-        "default_popup": "popup.html",
-        "default_icon": {
-            "16": "images/popup-16.png",
-            "19": "images/popup-19.png",
-            "32": "images/popup-32.png",
-            "38": "images/popup-38.png"
-        }
-    },
-
-    "permissions": [
-        "storage",
-        "tabs",
-        "activeTab",
-        "scripting"
+  "manifest_version": 3,
+  "default_locale": "en",
+  "name": "MindShield",
+  "description": "Hide distractions on the web (YT, FB, IG, X, LI, or any other site).",
+  "version": "2.8",
+  "icons": {
+    "48": "images/icon-48.png",
+    "96": "images/icon-96.png",
+    "128": "images/icon-128.png",
+    "256": "images/icon-256.png",
+    "512": "images/icon-512.png"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "css": [
+        "style.css"
       ],
-
-    "browser_specific_settings": {
-      "gecko": {
-        "id": "@mindshield",
-        "strict_min_version": "58.0"
-      }
+      "js": [
+        "shared_data.js",
+        "selectors.js",
+        "content.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": false
     }
-
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/popup-16.png",
+      "19": "images/popup-19.png",
+      "32": "images/popup-32.png",
+      "38": "images/popup-38.png"
+    }
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "scripting"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "@mindshield",
+      "strict_min_version": "58.0"
+    }
+  }
 }

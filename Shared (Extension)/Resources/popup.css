@@ -14,6 +14,7 @@ body {
 .website-toggle {
     display: none;
 }
+
 #website-toggles {
     display: inline;
 }
@@ -32,7 +33,8 @@ body {
 .tooltip-content {
     display: none;
 }
-.comments-toggle-wrapper:hover + .tooltip-content {
+
+.comments-toggle-wrapper:hover+.tooltip-content {
     display: block;
 }
 
@@ -40,6 +42,7 @@ body {
     margin: 0px 0px 15px 0px;
     padding: 0px;
 }
+
 .toggle-group h2 {
     font-size: 0.95em;
     margin: 0px 0px 5px 0px;
@@ -48,6 +51,7 @@ body {
 a:visited {
     color: rgb(69, 69, 69);
 }
+
 a {
     color: rgb(69, 69, 69);
 }
@@ -71,10 +75,12 @@ a {
     background-color: #008CBA;
     color: white;
 }
+
 .dropbtn:disabled {
     background-color: #ccc;
     color: #888;
 }
+
 .dropbtn:disabled:hover {
     background-color: #ccc;
     color: #888;
@@ -90,7 +96,7 @@ a {
     display: none;
     position: absolute;
     background-color: #f1f1f1;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
     padding: 12px 10px 5px 14px;
     width: 140px;
@@ -109,6 +115,7 @@ a {
 .shown {
     display: block !important;
 }
+
 .shown-inline {
     display: inline !important;
 }
@@ -152,15 +159,15 @@ a {
     transition: .1s;
 }
 
-input:checked + .slider {
+input:checked+.slider {
     background-color: #2196F3;
 }
 
-input:focus + .slider {
+input:focus+.slider {
     box-shadow: 0 0 1px #2196F3;
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
     -webkit-transform: translateX(12px);
     -ms-transform: translateX(12px);
     transform: translateX(12px);
@@ -175,7 +182,7 @@ input:checked + .slider:before {
     top: -4px;
     left: 0px;
     margin-right: 2px;
-    border: 1px solid rgb(192,192,192);
+    border: 1px solid rgb(192, 192, 192);
     padding: 0;
     background-color: color(srgb 0.9999 1 1);
     border-radius: 3px;
@@ -229,7 +236,7 @@ input:checked + .slider:before {
 }
 
 .overlay {
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 #saveButton {
@@ -268,16 +275,18 @@ button[id$="AddElementButton"]:hover {
     left: 0;
     opacity: 0.01;
 }
-.hide-checkboxes [type="checkbox"]:not(:checked) + label,
-.hide-checkboxes [type="checkbox"]:checked + label {
+
+.hide-checkboxes [type="checkbox"]:not(:checked)+label,
+.hide-checkboxes [type="checkbox"]:checked+label {
     position: relative;
     padding-left: 24px;
     line-height: 1.4;
     cursor: pointer;
     font-size: 16px;
 }
-.hide-checkboxes [type="checkbox"]:not(:checked) + label:before,
-.hide-checkboxes [type="checkbox"]:checked + label:before {
+
+.hide-checkboxes [type="checkbox"]:not(:checked)+label:before,
+.hide-checkboxes [type="checkbox"]:checked+label:before {
     content: '';
     position: absolute;
     left: 0;
@@ -287,12 +296,13 @@ button[id$="AddElementButton"]:hover {
     border: 1px solid #aaa;
     background: #FFF;
     border-radius: .2em;
-    box-shadow: inset 0 1px 3px rgba(0,0,0, .1), 0 0 0 rgba(203, 34, 237, .2);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, .1), 0 0 0 rgba(203, 34, 237, .2);
     -webkit-transition: all .275s;
     transition: all .275s;
 }
-.hide-checkboxes [type="checkbox"]:not(:checked) + label:after,
-.hide-checkboxes [type="checkbox"]:checked + label:after {
+
+.hide-checkboxes [type="checkbox"]:not(:checked)+label:after,
+.hide-checkboxes [type="checkbox"]:checked+label:after {
     content: '\01F6AB';
     position: absolute;
     top: 9px;
@@ -303,31 +313,37 @@ button[id$="AddElementButton"]:hover {
     -webkit-transition: all .1s;
     transition: all .1s;
 }
-.hide-checkboxes [type="checkbox"]:not(:checked) + label:after {
+
+.hide-checkboxes [type="checkbox"]:not(:checked)+label:after {
     opacity: 0;
     -webkit-transform: scale(0) rotate(45deg);
     transform: scale(0) rotate(45deg);
 }
-.hide-checkboxes [type="checkbox"]:checked + label:after {
+
+.hide-checkboxes [type="checkbox"]:checked+label:after {
     opacity: 1;
     -webkit-transform: scale(1) rotate(0);
     transform: scale(1) rotate(0);
 }
-.hide-checkboxes [type="checkbox"]:disabled:not(:checked) + label:before,
-.hide-checkboxes [type="checkbox"]:disabled:checked + label:before {
+
+.hide-checkboxes [type="checkbox"]:disabled:not(:checked)+label:before,
+.hide-checkboxes [type="checkbox"]:disabled:checked+label:before {
     box-shadow: none;
     border-color: #bbb;
     background-color: #e9e9e9;
 }
-.hide-checkboxes [type="checkbox"]:disabled:checked + label:after {
+
+.hide-checkboxes [type="checkbox"]:disabled:checked+label:after {
     color: #777;
 }
-.hide-checkboxes [type="checkbox"]:disabled + label {
+
+.hide-checkboxes [type="checkbox"]:disabled+label {
     color: #aaa;
 }
-.hide-checkboxes [type="checkbox"]:checked:focus + label:before,
-.hide-checkboxes [type="checkbox"]:not(:checked):focus + label:before {
-    box-shadow: inset 0 1px 3px rgba(0,0,0, .1), 0 0 0 6px rgba(203, 34, 237, .2);
+
+.hide-checkboxes [type="checkbox"]:checked:focus+label:before,
+.hide-checkboxes [type="checkbox"]:not(:checked):focus+label:before {
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, .1), 0 0 0 6px rgba(203, 34, 237, .2);
 }
 
 .ordinary-checkbox [type="checkbox"] {
@@ -361,23 +377,28 @@ button[id$="AddElementButton"]:hover {
 #waitTime {
     width: 50px;
 }
+
 .friction-customisation {
     font-size: 0.9em;
     font-style: italic;
     color: gray;
 }
+
 .friction-customisation input {
     margin-bottom: 5px;
 }
+
 .a-toggle.friction-toggle {
     margin-bottom: 10px;
     margin-top: 1em;
     font-size: 0.9em;
 }
+
 .a-toggle p {
     margin: 0;
     padding: 0;
 }
+
 #delay-message {
     font-size: 1.8em;
     line-height: 140%;
@@ -392,9 +413,17 @@ button[id$="AddElementButton"]:hover {
 }
 
 @keyframes breathe {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 .breathing {
@@ -424,6 +453,7 @@ button[id$="AddElementButton"]:hover {
     margin-bottom: 1em;
     cursor: pointer;
 }
+
 #sites-text {
     display: inline;
     margin: 0;
@@ -432,10 +462,12 @@ button[id$="AddElementButton"]:hover {
     vertical-align: text-bottom;
     color: gray;
 }
+
 #sites-arrow {
     width: 0.7em;
     vertical-align: middle;
 }
+
 #sites-available {
     margin-left: 0px;
     padding-left: 1.3em;
@@ -506,6 +538,7 @@ footer .toggle-group {
 }
 
 @media (prefers-color-scheme: dark) {
+
     /* Dark Mode styles go here. */
     .colored-font {
         color: lightgray;
@@ -516,14 +549,19 @@ footer .toggle-group {
         color: black;
     }
 
-    a, a:visited {
+    a,
+    a:visited {
         color: gray;
     }
+
     #sites-arrow path {
         fill: rgb(194, 194, 194);
     }
-    #sites-arrow-right path, #sites-arrow-down path,
-    #how-to-arrow-right path, #how-to-arrow-down path {
+
+    #sites-arrow-right path,
+    #sites-arrow-down path,
+    #how-to-arrow-right path,
+    #how-to-arrow-down path {
         fill: rgb(194, 194, 194);
     }
 
@@ -535,27 +573,33 @@ footer .toggle-group {
     button[id$="AddElementButton"]:hover {
         background-color: #2980B9;
     }
-    
+
     #faq-dropdown {
         background-color: #09090b;
         border-color: #27272a;
         color: #fafafa;
     }
+
     #faq-dropdown h3 {
         color: #a1a1aa;
     }
+
     .faq-item {
         border-bottom-color: #27272a;
     }
+
     .faq-trigger {
         color: #fafafa;
     }
+
     .faq-trigger:hover {
         background-color: #27272a;
     }
+
     .faq-chevron {
         stroke: #a1a1aa;
     }
+
     .faq-content p {
         color: #a1a1aa;
     }
@@ -563,10 +607,11 @@ footer .toggle-group {
 }
 
 p.previews-text {
-        display: inline;
-        font-style: italic;
-        font-size: 0.95em;
-    }
+    display: inline;
+    font-style: italic;
+    font-size: 0.95em;
+}
+
 p.how-to-description {
     font-size: 0.95em;
 }
@@ -576,6 +621,7 @@ p.how-to-description {
     height: 5em;
     font-family: monospace;
 }
+
 #editSelectorModal button {
     margin-right: 10px;
     padding: 5px 10px;
@@ -587,7 +633,7 @@ p.how-to-description {
     footer .footer-bottom-row {
         padding: 10px;
     }
-    
+
     .multi-state-checkbox[data-state="Black"]::after {
         content: '';
         position: absolute;
@@ -611,30 +657,37 @@ p.how-to-description {
     body {
         width: 100%
     }
+
     #delay-content {
         margin: auto;
         width: 50%;
     }
+
     #delay-content img {
         width: 60% !important;
         margin-bottom: 10px !important;
     }
+
     #how-to-image {
         display: inline-block !important;
     }
+
     #how-to-image {
         width: 1.2em !important;
         vertical-align: bottom !important;
     }
+
     #how-to-arrow {
         width: 0.9em;
         vertical-align: middle;
         padding: 0px 1px 0px 3px;
     }
+
     p.previews-text {
-            display: inline-block !important;
-            margin: 5px 0px 1px 2px !important;
-        }
+        display: inline-block !important;
+        margin: 5px 0px 1px 2px !important;
+    }
+
     #how-to-description {
         font-size: 0.9em;
         padding: 8px;
@@ -651,12 +704,14 @@ p.how-to-description {
     }
 }
 
-button[id$="AddElementButton"], #saveButton {
+button[id$="AddElementButton"],
+#saveButton {
     padding: 6px 12px;
     font-size: 0.85em;
     font-weight: 500;
     border: none;
-    border-radius: 6px; /* Slightly rounded */
+    border-radius: 6px;
+    /* Slightly rounded */
     cursor: pointer;
     transition: background-color 0.2s ease, color 0.2s ease;
 }
@@ -665,8 +720,10 @@ button[id$="AddElementButton"], #saveButton {
     background-color: #1a1a1a;
     color: #ffffff;
 }
+
 #saveButton:hover {
-    background-color: #2d2d2d; /* Lighter blackish on hover */
+    background-color: #2d2d2d;
+    /* Lighter blackish on hover */
 }
 
 button[id$="AddElementButton"] {
@@ -679,7 +736,8 @@ button[id$="AddElementButton"]:hover:not(.active) {
 }
 
 button[id$="AddElementButton"].active {
-    background-color: #ffffff; /* White when active */
+    background-color: #ffffff;
+    /* White when active */
     color: #000000;
 }
 
@@ -765,16 +823,20 @@ button[id$="AddElementButton"].active {
 
 /* --- Base Icon Button Style (shadcn-secondary inspired) --- */
 .icon-btn {
-    display: inline-flex; /* Use inline-flex for better alignment */
+    display: inline-flex;
+    /* Use inline-flex for better alignment */
     align-items: center;
     justify-content: center;
-    border-radius: 6px; /* A bit more rounded */
-    padding: 6px;       /* Increased padding for a better touch target */
+    border-radius: 6px;
+    /* A bit more rounded */
+    padding: 6px;
+    /* Increased padding for a better touch target */
     margin: 0 3px;
     cursor: pointer;
 
     /* Subtle border and transparent background */
-    border: 1px solid #e4e4e7; /* hsl(240 5.9% 90%) */
+    border: 1px solid #e4e4e7;
+    /* hsl(240 5.9% 90%) */
     background-color: transparent;
 
     /* Smooth transitions for all properties */
@@ -785,30 +847,37 @@ button[id$="AddElementButton"].active {
 .icon-btn svg {
     width: 16px;
     height: 16px;
-    stroke: #71717a; /* A softer, medium gray - hsl(240 3.8% 46.1%) */
-    stroke-width: 2; /* Slightly thinner for a cleaner look */
+    stroke: #71717a;
+    /* A softer, medium gray - hsl(240 3.8% 46.1%) */
+    stroke-width: 2;
+    /* Slightly thinner for a cleaner look */
     transition: stroke 0.2s ease-in-out;
 }
 
 /* --- Standard Hover State (for peek-symbol) --- */
 .peek-symbol:hover {
-    background-color: #f4f4f5; /* A very light gray hover - hsl(240 4.8% 95.9%) */
+    background-color: #f4f4f5;
+    /* A very light gray hover - hsl(240 4.8% 95.9%) */
 }
 
 /* --- Destructive Hover State (for remove-symbol) --- */
 .remove-symbol:hover {
-    background-color: #ef4444; /* A modern, less harsh red */
-    border-color: #dc2626;     /* A darker red for the border on hover */
+    background-color: #ef4444;
+    /* A modern, less harsh red */
+    border-color: #dc2626;
+    /* A darker red for the border on hover */
 }
 
 /* Change icon stroke to white on destructive hover */
 .remove-symbol:hover svg {
-    stroke: white; /* No !important needed due to higher specificity */
+    stroke: white;
+    /* No !important needed due to higher specificity */
 }
 
 /* --- Accessibility: Focus State --- */
 .icon-btn:focus-visible {
-    outline: 2px solid #3b82f6; /* A clear blue outline */
+    outline: 2px solid #3b82f6;
+    /* A clear blue outline */
     outline-offset: 2px;
 }
 
@@ -821,46 +890,61 @@ button[id$="AddElementButton"].active {
 footer .footer-bottom-row {
     display: flex;
     justify-content: space-between;
-    margin-top: 5px;        /* Space above this row */
-    padding-top: 5px;       /* Optional: space inside the row top */
-    border-top: 1px solid #eee; /* Optional: faint line separator */
+    margin-top: 5px;
+    /* Space above this row */
+    padding-top: 5px;
+    /* Optional: space inside the row top */
+    border-top: 1px solid #eee;
+    /* Optional: faint line separator */
 }
 
 /* Adjustments for items within the flex row */
 .footer-bottom-row #what-sites {
-    margin: 0; /* Remove default margins if any */
-    flex-shrink: 0; /* Prevent it from shrinking too much */
+    margin: 0;
+    /* Remove default margins if any */
+    flex-shrink: 0;
+    /* Prevent it from shrinking too much */
 }
+
 .footer-bottom-row #what-sites #sites-text {
     /* Reduce margin if needed */
     margin-left: 5px;
-    color: #555; /* Optional: slightly dimmer color */
+    color: #555;
+    /* Optional: slightly dimmer color */
     font-size: 0.9em;
 }
+
 .footer-bottom-row #what-sites ul#sites-available {
     /* Position the dropdown list appropriately if it opens */
     position: absolute;
-    bottom: 25px; /* Adjust as needed so it opens upwards */
+    bottom: 25px;
+    /* Adjust as needed so it opens upwards */
     left: 0;
     background-color: white;
     border: 1px solid #ccc;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 5px;
     z-index: 10;
-    width: 180px; /* Adjust width */
+    width: 180px;
+    /* Adjust width */
 }
 
 .footer-bottom-row .suggestions-link {
-    margin: 0; /* Remove default margins */
-    text-align: right; /* Align text to the right */
+    margin: 0;
+    /* Remove default margins */
+    text-align: right;
+    /* Align text to the right */
     flex-shrink: 0;
 }
 
 .footer-bottom-row .suggestions-link a {
-    display: inline-flex; /* Use flex to align icon and text */
-    align-items: center;   /* Center icon and text vertically */
+    display: inline-flex;
+    /* Use flex to align icon and text */
+    align-items: center;
+    /* Center icon and text vertically */
     text-decoration: none;
-    color: #555; /* Or your preferred link color */
+    color: #555;
+    /* Or your preferred link color */
     font-size: 0.9em;
 }
 
@@ -870,22 +954,31 @@ footer .footer-bottom-row {
 
 /* Style for the GitHub icon */
 .footer-bottom-row .suggestions-link .github-icon {
-    width: 14px;  /* Adjust size as needed */
+    width: 14px;
+    /* Adjust size as needed */
     height: 14px;
-    margin-right: 5px; /* Space between icon and text */
-    vertical-align: middle; /* Helps alignment in some cases */
-    fill: black; /* Match icon color to text or use brand color */
+    margin-right: 5px;
+    /* Space between icon and text */
+    vertical-align: middle;
+    /* Helps alignment in some cases */
+    fill: black;
+    /* Match icon color to text or use brand color */
 }
+
 .footer-bottom-row .suggestions-link a:hover .github-icon {
-    fill: #007bff; /* Change icon color on hover */
+    fill: #007bff;
+    /* Change icon color on hover */
 }
 
 /* Ensure footer settings stay above */
 footer .footer-settings {
-    margin-bottom: 4px; /* Add space below settings */
+    margin-bottom: 4px;
+    /* Add space below settings */
 }
+
 footer .friction-customisation {
-     margin-bottom: 10px; /* Add space below friction options if shown */
+    margin-bottom: 10px;
+    /* Add space below friction options if shown */
 }
 
 #currentSiteInfo p {
@@ -899,8 +992,10 @@ footer .friction-customisation {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black */
-    z-index: 99; /* Below the help container (100) but above everything else */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Semi-transparent black */
+    z-index: 99;
+    /* Below the help container (100) but above everything else */
 }
 
 #help-container {
@@ -944,6 +1039,7 @@ footer .friction-customisation {
 .faq-item {
     border-bottom: 1px solid #e4e4e7;
 }
+
 .faq-item:last-child {
     border-bottom: none;
 }
