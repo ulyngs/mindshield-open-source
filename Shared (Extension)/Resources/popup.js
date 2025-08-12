@@ -1,19 +1,47 @@
 document.addEventListener('DOMContentLoaded', function() {
+    let currentTabId = null; // Store tab ID once at initialization
+    
+    // Helper function to validate tab connection
+    function validateTabConnection() {
+        if (!currentTabId) {
+            console.error("No tab ID available for communication");
+            return false;
+        }
+        return true;
+    }
+    
+    // Helper function to send message with connection validation
+    function sendMessageToTab(message, callback) {
+        if (!validateTabConnection()) {
+            if (callback) callback({ error: "No valid tab connection" });
+            return;
+        }
+        
+        chrome.tabs.sendMessage(currentTabId, message, function(response) {
+            if (chrome.runtime.lastError) {
+                console.warn("Error communicating with tab:", chrome.runtime.lastError.message);
+                if (callback) callback({ error: chrome.runtime.lastError.message });
+            } else if (callback) {
+                callback(response);
+            }
+        });
+    }
+    
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
             if (!tabs[0] || !tabs[0].id || tabs[0].url?.startsWith('chrome://') || tabs[0].url?.startsWith('about:')) {
                 console.error("Invalid tab or page.");
                 return;
             }
 
-            const tabId = tabs[0].id;
+            currentTabId = tabs[0].id; // Store the tab ID
             let responded = false;
 
-            chrome.tabs.sendMessage(tabId, { method: "ping" }, function(response) {
-                if (chrome.runtime.lastError) {
-                    console.warn("Content script not responding:", chrome.runtime.lastError.message);
-                } else if (response && response.status === "pong") {
+            sendMessageToTab({ method: "ping" }, function(response) {
+                if (response && response.status === "pong") {
                     responded = true;
                     initializePopup();
+                } else if (response && response.error) {
+                    console.warn("Content script not responding:", response.error);
                 }
             });
 
@@ -24,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <button id="reloadButton">Reactivate Now</button>
                     `;
                     document.getElementById('reloadButton').addEventListener('click', function() {
-                        chrome.runtime.sendMessage({ method: "reloadTab", tabId: tabId });
+                        chrome.runtime.sendMessage({ method: "reloadTab", tabId: currentTabId });
                         window.close();
                     });
                 }
@@ -32,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     
     function initializePopup() {
-            console.log("Popup initialized - content script is active.");
+            console.log("Popup initialized - content script is active on tab:", currentTabId);
         
         let isSelectionModeActive = false;
 
@@ -112,6 +140,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 frictionCustomisationArrow.style.display = frictionToggle.checked ? "block" : "none";
             });
             
+            // Save wait time and text immediately when changed
+            var waitTimeBox = document.getElementById("waitTime");
+            var waitTextBox = document.getElementById("waitText");
+            
+            waitTimeBox.addEventListener('change', function() {
+                let waitValue = parseInt(waitTimeBox.value) || 10;
+                browser.storage.sync.set({ "waitTime": waitValue });
+            });
+            
+            waitTextBox.addEventListener('change', function() {
+                browser.storage.sync.set({ "waitText": waitTextBox.value });
+            });
+            
             var frictionCustomisationArrowRight = document.getElementById("frictionCustomisationArrowRight");
             var frictionCustomisationArrowDown = document.getElementById("frictionCustomisationArrowDown");
             var frictionCustomisationOptions = document.querySelector(".toggle-group.friction-customisation");
@@ -147,9 +188,9 @@ document.addEventListener('DOMContentLoaded', function() {
               if (e.key === 'Escape' && isSelectionModeActive) {
                 e.preventDefault();
                 // stop selecting in the page
-                chrome.tabs.query({active: true, currentWindow: true}, tabs => {
-                  chrome.tabs.sendMessage(tabs[0].id, { method: "stopSelecting", cancelled: true });
-                });
+                if (currentTabId) {
+                  chrome.tabs.sendMessage(currentTabId, { method: "stopSelecting", cancelled: true });
+                }
                 // reset the popup UI
                 const addButtonId = currentPlatform
                   ? `${currentPlatform}AddElementButton`
@@ -165,39 +206,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         setupFrictionDelay();
 
+        // Optimized function to read settings directly from storage instead of querying content script
         function setCheckboxState(element_to_check, id_of_toggle) {
             var currentToggle = document.getElementById(id_of_toggle);
             if (!currentToggle) return;
 
-            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                if (!tabs[0] || !tabs[0].id || tabs[0].url?.startsWith('chrome://') || tabs[0].url?.startsWith('about:')) {
-                    currentToggle.disabled = true;
-                     browser.storage.sync.get(element_to_check + "Status", function(result) {
-                        currentToggle.checked = result[element_to_check + "Status"] || false;
-                     });
-                    return;
-                }
-
-                chrome.tabs.sendMessage(tabs[0].id, { method: "check", element: element_to_check }, function(response) {
-                     if (chrome.runtime.lastError) {
-                        console.warn("Error sending message:", chrome.runtime.lastError.message);
-                         browser.storage.sync.get(element_to_check + "Status", function(result) {
-                            currentToggle.checked = result[element_to_check + "Status"] || false;
-                        });
-                        currentToggle.disabled = true;
-                        return;
-                     }
-
-                    if (response && response.text === "hidden") {
-                        currentToggle.checked = true;
-                    } else if (response && response.text === "visible") {
-                        currentToggle.checked = false;
-                    } else {
-                        browser.storage.sync.get(element_to_check + "Status", function(result) {
-                            currentToggle.checked = result[element_to_check + "Status"] || false;
-                        });
-                    }
-                });
+            // Read directly from storage instead of querying content script
+            browser.storage.sync.get(element_to_check + "Status", function(result) {
+                currentToggle.checked = result[element_to_check + "Status"] || false;
             });
         }
 
@@ -206,56 +222,23 @@ document.addEventListener('DOMContentLoaded', function() {
              if (!currentCheckbox) return;
 
             currentCheckbox.addEventListener('click', function() {
-                chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                    if (tabs[0]?.id) {
-                        chrome.tabs.sendMessage(tabs[0].id, { method: "change", element: element_to_change }, err => {
-                             if (chrome.runtime.lastError) console.warn("Error sending 'change' message:", chrome.runtime.lastError.message);
-                        });
-                    }
-                });
+                // Save setting immediately when toggle is changed
+                const isChecked = currentCheckbox.checked;
+                browser.storage.sync.set({ [element_to_change + "Status"]: isChecked });
+                
+                // Send message to content script to apply the change
+                sendMessageToTab({ method: "change", element: element_to_change });
             }, false);
         }
 
+         // Optimized function to read settings directly from storage instead of querying content script
          function setButtonStateFour(element_to_check, id_of_toggle) {
             var currentButton = document.getElementById(id_of_toggle);
             if (!currentButton) return;
 
-            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                 if (!tabs[0] || !tabs[0].id || tabs[0].url?.startsWith('chrome://') || tabs[0].url?.startsWith('about:')) {
-                     currentButton.disabled = true;
-                     browser.storage.sync.get(element_to_check + "Status", function(result) {
-                         currentButton.setAttribute("data-state", result[element_to_check + "Status"] || "On");
-                     });
-                     return;
-                 }
-
-                chrome.tabs.sendMessage(tabs[0].id, { method: "check", element: element_to_check }, function(response) {
-                     if (chrome.runtime.lastError) {
-                         console.warn("Error sending 'check' message for multi-state:", chrome.runtime.lastError.message);
-                         browser.storage.sync.get(element_to_check + "Status", function(result) {
-                             currentButton.setAttribute("data-state", result[element_to_check + "Status"] || "On");
-                         });
-                         currentButton.disabled = true;
-                         return;
-                     }
-
-                    let state = "On";
-                    if (response && response.text === "hidden") {
-                        state = "Off";
-                    } else if (response && response.text === "visible") {
-                        state = "On";
-                    } else if (response && response.text === "blur") {
-                        state = "Blur";
-                    } else if (response && response.text === "black") {
-                        state = "Black";
-                    } else {
-                        browser.storage.sync.get(element_to_check + "Status", function(result) {
-                            currentButton.setAttribute("data-state", result[element_to_check + "Status"] || "On");
-                        });
-                        return;
-                    }
-                    currentButton.setAttribute("data-state", state);
-                });
+            // Read directly from storage instead of querying content script
+            browser.storage.sync.get(element_to_check + "Status", function(result) {
+                currentButton.setAttribute("data-state", result[element_to_check + "Status"] || "On");
             });
         }
 
@@ -278,13 +261,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 currentButton.setAttribute("data-state", nextState);
 
-                chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                    if (tabs[0]?.id) {
-                        chrome.tabs.sendMessage(tabs[0].id, { method: "changeMultiToggle", element: element_to_change, action: nextState }, err => {
-                            if (chrome.runtime.lastError) console.warn("Error sending 'changeMultiToggle' message:", chrome.runtime.lastError.message);
-                        });
-                    }
-                });
+                // Save setting immediately when toggle is changed
+                browser.storage.sync.set({ [element_to_change + "Status"]: nextState });
+
+                // Send message to content script to apply the change
+                if (currentTabId) {
+                    chrome.tabs.sendMessage(currentTabId, { method: "changeMultiToggle", element: element_to_change, action: nextState }, err => {
+                        if (chrome.runtime.lastError) console.warn("Error sending 'changeMultiToggle' message:", chrome.runtime.lastError.message);
+                    });
+                }
             }, false);
         }
 
@@ -329,15 +314,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 const platformIsEnabled = currentSwitch.checked;
                 var platformToggles = document.querySelectorAll(`.dropdown.${platform} .a-toggle input, .dropdown.${platform} .a-toggle button`);
 
+                // Save platform setting immediately
+                var storageKey = platform + "Status";
+                browser.storage.sync.set({ [storageKey]: platformIsEnabled });
+
                 if (!platformIsEnabled) {
                     elementsThatCanBeHidden.filter(elem => elem.startsWith(platform)).forEach(function(some_element) {
-                        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                            if (tabs[0]?.id) {
-                                 chrome.tabs.sendMessage(tabs[0].id, { method: "showAll", element: some_element }, err => {
-                                     if (chrome.runtime.lastError) console.warn("Error sending 'showAll' message:", chrome.runtime.lastError.message);
-                                 });
-                            }
-                        });
+                        if (currentTabId) {
+                             chrome.tabs.sendMessage(currentTabId, { method: "showAll", element: some_element }, err => {
+                                 if (chrome.runtime.lastError) console.warn("Error sending 'showAll' message:", chrome.runtime.lastError.message);
+                             });
+                        }
                         var toggle = document.getElementById(some_element + "Toggle");
                         if (toggle) {
                             if (toggle.type === 'checkbox') {
@@ -377,25 +364,21 @@ document.addEventListener('DOMContentLoaded', function() {
                              }
 
                              if (shouldBeHidden) {
-                                 chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                                     if (tabs[0]?.id) {
-                                          if (toggle.tagName === 'BUTTON') {
-                                               chrome.tabs.sendMessage(tabs[0].id, { method: "changeMultiToggle", element: some_element, action: toggle.getAttribute('data-state') }, err => {
-                                                    if (chrome.runtime.lastError) console.warn("Error sending 'changeMultiToggle' on enable:", chrome.runtime.lastError.message);
-                                               });
-                                          } else {
-                                               chrome.tabs.sendMessage(tabs[0].id, { method: "change", element: some_element }, err => {
-                                                   if (chrome.runtime.lastError) console.warn("Error sending 'change' on enable:", chrome.runtime.lastError.message);
-                                               });
-                                          }
-                                     }
-                                 });
+                                 if (currentTabId) {
+                                      if (toggle.tagName === 'BUTTON') {
+                                           chrome.tabs.sendMessage(currentTabId, { method: "changeMultiToggle", element: some_element, action: toggle.getAttribute('data-state') }, err => {
+                                                if (chrome.runtime.lastError) console.warn("Error sending 'changeMultiToggle' on enable:", chrome.runtime.lastError.message);
+                                           });
+                                      } else {
+                                           chrome.tabs.sendMessage(currentTabId, { method: "change", element: some_element }, err => {
+                                               if (chrome.runtime.lastError) console.warn("Error sending 'change' message:", chrome.runtime.lastError.message);
+                                           });
+                                      }
+                                 }
                              }
                          });
                     });
                 }
-                var storageKey = platform + "Status";
-                browser.storage.sync.set({ [storageKey]: platformIsEnabled });
             });
         }
 
@@ -428,33 +411,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 peekButton.title = 'Toggle visibility';
                 peekButton.setAttribute('data-visible', 'false');
 
-                chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                    if (tabs[0]?.id) {
-                        chrome.tabs.sendMessage(tabs[0].id, { method: "checkCustom", selector: selector }, function(response) {
-                            if (chrome.runtime.lastError) {
-                                console.warn("Error checking custom selector state:", chrome.runtime.lastError.message);
-                                peekButton.setAttribute('data-visible', 'false');
-                                peekButton.innerHTML = `
-                                    <svg width="14px" height="14px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                                        <line x1="1" y1="1" x2="23" y2="23"></line>
-                                    </svg>`;
-                            } else if (response && response.visible) {
-                                peekButton.setAttribute('data-visible', 'true');
-                                peekButton.innerHTML = `
-                                    <svg width="14px" height="14px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                    </svg>`;
-                            } else {
-                                peekButton.setAttribute('data-visible', 'false');
-                                peekButton.innerHTML = `
-                                    <svg width="14px" height="14px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                                        <line x1="1" y1="1" x2="23" y2="23"></line>
-                                    </svg>`;
-                            }
-                        });
+                // Read custom element state directly from storage instead of querying content script
+                const customStorageKey = `${siteIdentifier}CustomHiddenElements`;
+                browser.storage.sync.get(customStorageKey, function(result) {
+                    let customSelectors = result[customStorageKey] || [];
+                    if (!Array.isArray(customSelectors)) customSelectors = [];
+                    const isVisible = !customSelectors.includes(selector);
+                    
+                    peekButton.setAttribute('data-visible', isVisible.toString());
+                    if (isVisible) {
+                        peekButton.innerHTML = `
+                            <svg width="14px" height="14px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>`;
+                    } else {
+                        peekButton.innerHTML = `
+                            <svg width="14px" height="14px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                <line x1="1" y1="1" x2="23" y2="23"></line>
+                            </svg>`;
                     }
                 });
 
@@ -470,13 +446,11 @@ document.addEventListener('DOMContentLoaded', function() {
                             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                             <circle cx="12" cy="12" r="3"></circle>
                         </svg>`;
-                    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                        if (tabs[0]?.id) {
-                            chrome.tabs.sendMessage(tabs[0].id, { method: "toggleCustomVisibility", selector: selector, visible: !isVisible }, err => {
-                                if (chrome.runtime.lastError) console.warn("Error sending 'toggleCustomVisibility' message:", chrome.runtime.lastError.message);
-                            });
-                        }
-                    });
+                    if (currentTabId) {
+                        chrome.tabs.sendMessage(currentTabId, { method: "toggleCustomVisibility", selector: selector, visible: !isVisible }, err => {
+                            if (chrome.runtime.lastError) console.warn("Error sending 'toggleCustomVisibility' message:", chrome.runtime.lastError.message);
+                        });
+                    }
                 });
 
                 const span = document.createElement('span');
@@ -498,13 +472,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         currentSelectors = currentSelectors.filter(s => s !== selector);
                         browser.storage.sync.set({ [storageKey]: currentSelectors }, function() {
                             updateCustomElementsList(siteIdentifier, currentSelectors);
-                            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                                 if (tabs[0]?.id) {
-                                     chrome.tabs.sendMessage(tabs[0].id, { method: "removeCustomElement", selector: selector }, err => {
-                                          if (chrome.runtime.lastError) console.warn("Error sending 'removeCustomElement' message:", chrome.runtime.lastError.message);
-                                     });
-                                 }
-                            });
+                            if (currentTabId) {
+                                 chrome.tabs.sendMessage(currentTabId, { method: "removeCustomElement", selector: selector }, err => {
+                                      if (chrome.runtime.lastError) console.warn("Error sending 'removeCustomElement' message:", chrome.runtime.lastError.message);
+                                 });
+                            }
                         });
                     });
                 });
@@ -529,128 +501,130 @@ document.addEventListener('DOMContentLoaded', function() {
                          isSelectionModeActive = false;
                          addButton.classList.remove('active');
                          addButton.textContent = 'Hide custom element';
-                         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                             if (tabs[0]?.id) {
-                                 chrome.tabs.sendMessage(tabs[0].id, { method: "stopSelecting", cancelled: false }, err => {
-                                     if (chrome.runtime.lastError) console.warn("Error sending 'stopSelecting' message:", chrome.runtime.lastError.message);
-                                 });
-                             }
-                         });
+                         if (currentTabId) {
+                             chrome.tabs.sendMessage(currentTabId, { method: "stopSelecting", cancelled: false }, err => {
+                                 if (chrome.runtime.lastError) console.warn("Error sending 'stopSelecting' message:", chrome.runtime.lastError.message);
+                             });
+                         }
                      } else {
                          isSelectionModeActive = true;
                          addButton.classList.add('active');
                          addButton.textContent = 'Click/Tap element to hide';
-                         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                             if (tabs[0]?.id) {
-                                 chrome.tabs.sendMessage(tabs[0].id, { method: "startSelecting" }, err => {
-                                     if (chrome.runtime.lastError) {
-                                         console.warn("Error sending 'startSelecting' message:", chrome.runtime.lastError.message);
-                                         isSelectionModeActive = false;
-                                         addButton.classList.remove('active');
-                                         addButton.textContent = 'Hide custom element';
-                                     }
-                                 });
-                             } else {
-                                 isSelectionModeActive = false;
-                                 addButton.classList.remove('active');
-                                 addButton.textContent = 'Hide custom element';
-                             }
-                         });
+                         if (currentTabId) {
+                             chrome.tabs.sendMessage(currentTabId, { method: "startSelecting" }, err => {
+                                 if (chrome.runtime.lastError) {
+                                     console.warn("Error sending 'startSelecting' message:", chrome.runtime.lastError.message);
+                                     isSelectionModeActive = false;
+                                     addButton.classList.remove('active');
+                                     addButton.textContent = 'Hide custom element';
+                                 }
+                             });
+                         } else {
+                             isSelectionModeActive = false;
+                             addButton.classList.remove('active');
+                             addButton.textContent = 'Hide custom element';
+                         }
                      }
                  });
              } else { console.error("Add button not found:", addButtonId); }
          }
 
-        chrome.tabs.query({active: true, currentWindow: true}, function(tab) {
-            if (chrome.runtime.lastError || !tab || tab.length === 0 || !tab[0].url) {
-                 console.error("Could not get active tab information.");
-                 document.getElementById('popup-content').innerHTML = "<p class='error-message'>Could not get tab information. Try reloading the page.</p>";
-                 document.getElementById('popup-content').style.display = 'block';
-                 document.getElementById('delay-content').style.display = 'none';
-                return;
-            }
-
-            let currentURL;
-            try {
-                currentURL = new URL(tab[0].url);
-            } catch (e) {
-                console.warn("Invalid URL:", tab[0].url);
-                 document.getElementById('popup-content').innerHTML = `<p class='error-message'>Cannot run on this page (${tab[0].url.split('/')[0]}...).</p>`;
-                  document.getElementById('popup-content').style.display = 'block';
-                  document.getElementById('delay-content').style.display = 'none';
-                return;
-            }
-
-            const currentHost = currentURL.hostname;
-            document.getElementById('currentSiteName').textContent = currentHost;
-
-            // Precisely identify the platform using the shared platformHostnames map
-            for (const platform in platformHostnames) {
-                if (platformHostnames[platform].includes(currentHost)) {
-                    currentPlatform = platform;
-                    break; // Found it
+        // Get tab information once and store it
+        if (currentTabId) {
+            // We already have the tab ID, so we can proceed with initialization
+            // For the URL and platform detection, we need to get the tab info
+            chrome.tabs.get(currentTabId, function(tab) {
+                if (chrome.runtime.lastError || !tab || !tab.url) {
+                     console.error("Could not get tab information for tab ID:", currentTabId);
+                     document.getElementById('popup-content').innerHTML = "<p class='error-message'>Could not get tab information. Try reloading the page.</p>";
+                     document.getElementById('popup-content').style.display = 'block';
+                     document.getElementById('delay-content').style.display = 'none';
+                    return;
                 }
-            }
 
-            // If a platform was matched, use its name as the identifier.
-            if (currentPlatform) {
-                currentSiteIdentifier = currentPlatform;
-            }
+                let currentURL;
+                try {
+                    currentURL = new URL(tab.url);
+                } catch (e) {
+                    console.warn("Invalid URL:", tab.url);
+                     document.getElementById('popup-content').innerHTML = `<p class='error-message'>Cannot run on this page (${tab.url.split('/')[0]}...).</p>`;
+                      document.getElementById('popup-content').style.display = 'block';
+                      document.getElementById('delay-content').style.display = 'none';
+                    return;
+                }
 
-            if (currentPlatform) {
-                document.querySelector('.dropdown.' + currentPlatform).classList.add('shown');
-                document.querySelector('#website-toggles #toggle-' + currentPlatform).classList.add('shown-inline');
-                document.getElementById('website-toggles').style.display = 'block';
-                document.getElementById('generic-site-options').style.display = 'none';
-                document.getElementById('currentSiteInfo').style.display = 'none';
+                const currentHost = currentURL.hostname;
+                document.getElementById('currentSiteName').textContent = currentHost;
 
-                setSwitch(currentPlatform, currentPlatform + "Switch");
-                setupPlatformSwitchListener(currentPlatform);
+                // Precisely identify the platform using the shared platformHostnames map
+                for (const platform in platformHostnames) {
+                    if (platformHostnames[platform].includes(currentHost)) {
+                        currentPlatform = platform;
+                        break; // Found it
+                    }
+                }
 
-                setupCustomElementControls(currentPlatform);
-                const storageKey = `${currentPlatform}CustomHiddenElements`;
-                browser.storage.sync.get(storageKey, function(result) {
-                    updateCustomElementsList(currentPlatform, result[storageKey] || []);
-                });
+                // If a platform was matched, use its name as the identifier.
+                if (currentPlatform) {
+                    currentSiteIdentifier = currentPlatform;
+                }
 
-            } else if (currentHost && !currentURL.protocol.startsWith('chrome') && !currentURL.protocol.startsWith('about')) {
-                currentSiteIdentifier = currentHost;
-                document.getElementById('website-toggles').style.display = 'none';
-                document.getElementById('generic-site-options').style.display = 'block';
-                document.getElementById('currentSiteInfo').style.display = 'block';
+                if (currentPlatform) {
+                    document.querySelector('.dropdown.' + currentPlatform).classList.add('shown');
+                    document.querySelector('#website-toggles #toggle-' + currentPlatform).classList.add('shown-inline');
+                    document.getElementById('website-toggles').style.display = 'block';
+                    document.getElementById('generic-site-options').style.display = 'none';
+                    document.getElementById('currentSiteInfo').style.display = 'none';
 
-                setupCustomElementControls(currentSiteIdentifier);
-                const storageKey = `${currentSiteIdentifier}CustomHiddenElements`;
-                browser.storage.sync.get(storageKey, function(result) {
-                     updateCustomElementsList(currentSiteIdentifier, result[storageKey] || []);
-                });
+                    setSwitch(currentPlatform, currentPlatform + "Switch");
+                    setupPlatformSwitchListener(currentPlatform);
 
-                 platformsWeTarget.forEach(p => {
-                     const dropdown = document.querySelector(`.dropdown.${p}`);
-                     if (dropdown) dropdown.classList.remove('shown');
-                 });
+                    setupCustomElementControls(currentPlatform);
+                    const storageKey = `${currentPlatform}CustomHiddenElements`;
+                    browser.storage.sync.get(storageKey, function(result) {
+                        updateCustomElementsList(currentPlatform, result[storageKey] || []);
+                    });
 
-            } else {
-                document.getElementById('popup-content').innerHTML = `<p class='error-message'>Extension cannot modify this page (${currentURL.protocol}//...).</p>`;
-                document.getElementById('popup-content').style.display = 'block';
-                document.getElementById('delay-content').style.display = 'none';
-                 document.getElementById('website-toggles').style.display = 'none';
-                 document.getElementById('generic-site-options').style.display = 'none';
-                 document.getElementById('currentSiteInfo').style.display = 'none';
-                 document.querySelector('footer').style.display = 'none';
-            }
+                } else if (currentHost && !currentURL.protocol.startsWith('chrome') && !currentURL.protocol.startsWith('about')) {
+                    currentSiteIdentifier = currentHost;
+                    document.getElementById('website-toggles').style.display = 'none';
+                    document.getElementById('generic-site-options').style.display = 'block';
+                    document.getElementById('currentSiteInfo').style.display = 'block';
 
-             if(currentPlatform) {
-                 elementsThatCanBeHidden.filter(e => e.startsWith(currentPlatform)).forEach(item => {
-                      if (item === "youtubeThumbnails" || item === "youtubeNotifications") {
-                          setButtonStateFour(item, item + "Toggle");
-                      } else {
-                          setCheckboxState(item, item + "Toggle");
-                      }
-                 });
-             }
+                    setupCustomElementControls(currentSiteIdentifier);
+                    const storageKey = `${currentSiteIdentifier}CustomHiddenElements`;
+                    browser.storage.sync.get(storageKey, function(result) {
+                         updateCustomElementsList(currentSiteIdentifier, result[storageKey] || []);
+                    });
 
-        });
+                     platformsWeTarget.forEach(p => {
+                         const dropdown = document.querySelector(`.dropdown.${p}`);
+                         if (dropdown) dropdown.classList.remove('shown');
+                     });
+
+                } else {
+                    document.getElementById('popup-content').innerHTML = `<p class='error-message'>Extension cannot modify this page (${currentURL.protocol}//...).</p>`;
+                    document.getElementById('popup-content').style.display = 'block';
+                    document.getElementById('delay-content').style.display = 'none';
+                     document.getElementById('website-toggles').style.display = 'none';
+                     document.getElementById('generic-site-options').style.display = 'none';
+                     document.getElementById('currentSiteInfo').style.display = 'none';
+                     document.querySelector('footer').style.display = 'none';
+                }
+
+                 if(currentPlatform) {
+                     elementsThatCanBeHidden.filter(e => e.startsWith(currentPlatform)).forEach(item => {
+                          if (item === "youtubeThumbnails" || item === "youtubeNotifications") {
+                              setButtonStateFour(item, item + "Toggle");
+                          } else {
+                              setCheckboxState(item, item + "Toggle");
+                          }
+                     });
+                 }
+            });
+        } else {
+            console.error("No valid tab ID available for initialization");
+        }
 
         chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
             if (!currentSiteIdentifier) return;
@@ -665,15 +639,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     addButton.textContent = 'Hide custom element';
                 }
                 // Send stopSelecting message to content script
-                chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                    if (tabs[0]?.id) {
-                        chrome.tabs.sendMessage(tabs[0].id, { method: "stopSelecting", cancelled: true }, err => {
-                            if (chrome.runtime.lastError) {
-                                console.warn("Error sending 'stopSelecting' message:", chrome.runtime.lastError.message);
-                            }
-                        });
-                    }
-                });
+                if (currentTabId) {
+                    chrome.tabs.sendMessage(currentTabId, { method: "stopSelecting", cancelled: true }, err => {
+                        if (chrome.runtime.lastError) {
+                            console.warn("Error sending 'stopSelecting' message:", chrome.runtime.lastError.message);
+                        }
+                    });
+                }
             }
 
             if ((message.method === "elementSelected" || message.method === "selectionCanceled" || message.method === "selectionFailed")) {
@@ -713,40 +685,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }
             }
-        });
-
-        function delay(time) {
-            return new Promise(resolve => setTimeout(resolve, time));
-        }
-
-        var saveButton = document.querySelector('#saveButton');
-        saveButton.addEventListener('click', (e) => {
-            if (currentPlatform) {
-                elementsThatCanBeHidden
-                    .filter(element => element.startsWith(currentPlatform))
-                    .forEach(function(element) {
-                        var key = element + "Status";
-                        var elementToggle = document.getElementById(element + "Toggle");
-                         if (!elementToggle) return;
-
-                        var value = (elementToggle.getAttribute("data-state") != null) ?
-                                    elementToggle.getAttribute("data-state") :
-                                    elementToggle.checked;
-                        browser.storage.sync.set({ [key]: value });
-                    });
-                 var platformSwitch = document.getElementById(currentPlatform + "Switch");
-                 if (platformSwitch) {
-                     browser.storage.sync.set({ [currentPlatform + "Status"]: platformSwitch.checked });
-                 }
-            }
-
-            let waitValue = parseInt(document.getElementById("waitTime").value) || 10;
-            browser.storage.sync.set({ "waitTime": waitValue });
-            browser.storage.sync.set({ "waitText": document.getElementById("waitText").value });
-
-            e.target.setAttribute("value", "......");
-            delay(250).then(() => e.target.setAttribute("value", "Saved!"));
-            delay(1500).then(() => e.target.setAttribute("value", "Save settings"));
         });
 
         function setupAccordion(triggerId, contentId, arrowRightId, arrowDownId) {
@@ -802,6 +740,43 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }
+
+        // Set up periodic connection validation
+        let connectionCheckInterval;
+        function startConnectionValidation() {
+            connectionCheckInterval = setInterval(() => {
+                if (currentTabId) {
+                    // Check if tab still exists and is accessible
+                    chrome.tabs.get(currentTabId, (tab) => {
+                        if (chrome.runtime.lastError || !tab) {
+                            console.warn("Tab connection lost, attempting to reconnect...");
+                            clearInterval(connectionCheckInterval);
+                            // Try to re-establish connection
+                            chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
+                                if (tabs[0] && tabs[0].id && tabs[0].id !== currentTabId) {
+                                    currentTabId = tabs[0].id;
+                                    console.log("Reconnected to new tab:", currentTabId);
+                                    startConnectionValidation();
+                                }
+                            });
+                        }
+                    });
+                }
+            }, 5000); // Check every 5 seconds
+        }
+
+        function stopConnectionValidation() {
+            if (connectionCheckInterval) {
+                clearInterval(connectionCheckInterval);
+                connectionCheckInterval = null;
+            }
+        }
+
+        // Start connection validation when popup is initialized
+        startConnectionValidation();
+
+        // Clean up when popup is about to close
+        window.addEventListener('beforeunload', stopConnectionValidation);
 
             // Setup all interactive elements at the end
             setupHelpAndFAQ();
