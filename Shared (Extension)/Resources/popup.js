@@ -1,12 +1,8 @@
-if (typeof browser === "undefined") {
-    var browser = chrome;
-}
-
 document.addEventListener('DOMContentLoaded', function () {
     initializePopup();
 
     function initializePopup() {
-        console.log("Popup initialized - working independently.");
+        console.log("Popup initialized.");
 
         let isSelectionModeActive = false;
         let currentPlatform = null;
@@ -27,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         function setupFrictionDelay() {
-            browser.storage.sync.get(["addFriction", "waitText", "waitTime"]).then((result) => {
+            chrome.storage.sync.get(["addFriction", "waitText", "waitTime"]).then((result) => {
                 var frictionToggle = document.getElementById("frictionToggle");
                 var frictionCustomisationArrow = document.getElementById("frictionCustomisationArrow");
                 var popupContainer = document.getElementById("popup-content");
@@ -81,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var frictionToggle = document.getElementById("frictionToggle");
             var frictionCustomisationArrow = document.getElementById("frictionCustomisationArrow");
             frictionToggle.addEventListener('change', function () {
-                browser.storage.sync.set({ "addFriction": frictionToggle.checked });
+                chrome.storage.sync.set({ "addFriction": frictionToggle.checked });
                 frictionCustomisationArrow.style.display = frictionToggle.checked ? "block" : "none";
             });
 
@@ -121,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     e.preventDefault();
                     // stop selecting by updating storage
                     if (currentSiteIdentifier) {
-                        browser.storage.sync.set({ [`${currentSiteIdentifier}SelectionActive`]: false });
+                        chrome.storage.sync.set({ [`${currentSiteIdentifier}SelectionActive`]: false });
                     }
                     // reset the popup UI
                     const addButtonId = currentPlatform
@@ -142,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var currentToggle = document.getElementById(id_of_toggle);
             if (!currentToggle) return;
 
-            browser.storage.sync.get(element_to_check + "Status", function (result) {
+            chrome.storage.sync.get(element_to_check + "Status", function (result) {
                 currentToggle.checked = result[element_to_check + "Status"] || false;
             });
         }
@@ -153,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             currentCheckbox.addEventListener('click', function () {
                 const newValue = currentCheckbox.checked;
-                browser.storage.sync.set({ [element_to_change + "Status"]: newValue });
+                chrome.storage.sync.set({ [element_to_change + "Status"]: newValue });
             }, false);
         }
 
@@ -161,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var currentButton = document.getElementById(id_of_toggle);
             if (!currentButton) return;
 
-            browser.storage.sync.get(element_to_check + "Status", function (result) {
+            chrome.storage.sync.get(element_to_check + "Status", function (result) {
                 let state = result[element_to_check + "Status"] || "On";
                 currentButton.setAttribute("data-state", state);
             });
@@ -186,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 currentButton.setAttribute("data-state", nextState);
 
-                browser.storage.sync.set({ [element_to_change + "Status"]: nextState });
+                chrome.storage.sync.set({ [element_to_change + "Status"]: nextState });
             }, false);
         }
 
@@ -209,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!currentSwitch) return;
 
             var key = platform_to_check + "Status";
-            browser.storage.sync.get(key, function (result) {
+            chrome.storage.sync.get(key, function (result) {
                 let platformIsEnabled = result[key] !== false;
                 currentSwitch.checked = platformIsEnabled;
 
@@ -236,10 +232,10 @@ document.addEventListener('DOMContentLoaded', function () {
                         if (toggle) {
                             if (toggle.type === 'checkbox') {
                                 toggle.checked = false;
-                                browser.storage.sync.set({ [some_element + "Status"]: false });
+                                chrome.storage.sync.set({ [some_element + "Status"]: false });
                             } else if (toggle.tagName === 'BUTTON') {
                                 toggle.setAttribute('data-state', 'On');
-                                browser.storage.sync.set({ [some_element + "Status"]: "On" });
+                                chrome.storage.sync.set({ [some_element + "Status"]: "On" });
                             }
                         }
                     });
@@ -259,21 +255,21 @@ document.addEventListener('DOMContentLoaded', function () {
                         if (!toggle) return;
 
                         var key = some_element + "Status";
-                        browser.storage.sync.get(key, function (result) {
+                        chrome.storage.sync.get(key, function (result) {
                             let storedValue = result[key];
                             if (toggle.type === 'checkbox') {
                                 toggle.checked = storedValue || false;
-                                browser.storage.sync.set({ [key]: storedValue || false });
+                                chrome.storage.sync.set({ [key]: storedValue || false });
                             } else if (toggle.tagName === 'BUTTON') {
                                 let state = storedValue || "On";
                                 toggle.setAttribute('data-state', state);
-                                browser.storage.sync.set({ [key]: state });
+                                chrome.storage.sync.set({ [key]: state });
                             }
                         });
                     });
                 }
                 var storageKey = platform + "Status";
-                browser.storage.sync.set({ [storageKey]: platformIsEnabled });
+                chrome.storage.sync.set({ [storageKey]: platformIsEnabled });
             });
         }
 
@@ -310,10 +306,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 button.title = 'Remove';
                 button.addEventListener('click', function () {
                     const storageKey = `${siteIdentifier}CustomHiddenElements`;
-                    browser.storage.sync.get(storageKey, function (result) {
+                    chrome.storage.sync.get(storageKey, function (result) {
                         let currentSelectors = result[storageKey] || [];
                         currentSelectors = currentSelectors.filter(s => s !== selector);
-                        browser.storage.sync.set({ [storageKey]: currentSelectors }, function () {
+                        chrome.storage.sync.set({ [storageKey]: currentSelectors }, function () {
                             updateCustomElementsList(siteIdentifier, currentSelectors);
                         });
                     });
@@ -338,12 +334,12 @@ document.addEventListener('DOMContentLoaded', function () {
                         isSelectionModeActive = false;
                         addButton.classList.remove('active');
                         addButton.textContent = 'Hide custom element';
-                        browser.storage.sync.set({ [`${siteIdentifier}SelectionActive`]: false });
+                        chrome.storage.sync.set({ [`${siteIdentifier}SelectionActive`]: false });
                     } else {
                         isSelectionModeActive = true;
                         addButton.classList.add('active');
                         addButton.textContent = 'Click/Tap element to hide';
-                        browser.storage.sync.set({ [`${siteIdentifier}SelectionActive`]: true });
+                        chrome.storage.sync.set({ [`${siteIdentifier}SelectionActive`]: true });
                     }
                 });
             } else { console.error("Add button not found:", addButtonId); }
@@ -397,7 +393,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 setupCustomElementControls(currentPlatform);
                 const storageKey = `${currentPlatform}CustomHiddenElements`;
-                browser.storage.sync.get(storageKey, function (result) {
+                chrome.storage.sync.get(storageKey, function (result) {
                     updateCustomElementsList(currentPlatform, result[storageKey] || []);
                 });
 
@@ -409,7 +405,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 setupCustomElementControls(currentSiteIdentifier);
                 const storageKey = `${currentSiteIdentifier}CustomHiddenElements`;
-                browser.storage.sync.get(storageKey, function (result) {
+                chrome.storage.sync.get(storageKey, function (result) {
                     updateCustomElementsList(currentSiteIdentifier, result[storageKey] || []);
                 });
 
@@ -457,17 +453,17 @@ document.addEventListener('DOMContentLoaded', function () {
                         var value = (elementToggle.getAttribute("data-state") != null) ?
                             elementToggle.getAttribute("data-state") :
                             elementToggle.checked;
-                        browser.storage.sync.set({ [key]: value });
+                        chrome.storage.sync.set({ [key]: value });
                     });
                 var platformSwitch = document.getElementById(currentPlatform + "Switch");
                 if (platformSwitch) {
-                    browser.storage.sync.set({ [currentPlatform + "Status"]: platformSwitch.checked });
+                    chrome.storage.sync.set({ [currentPlatform + "Status"]: platformSwitch.checked });
                 }
             }
 
             let waitValue = parseInt(document.getElementById("waitTime").value) || 10;
-            browser.storage.sync.set({ "waitTime": waitValue });
-            browser.storage.sync.set({ "waitText": document.getElementById("waitText").value });
+            chrome.storage.sync.set({ "waitTime": waitValue });
+            chrome.storage.sync.set({ "waitText": document.getElementById("waitText").value });
 
             // Show success message
             e.target.setAttribute("value", "Saved!");
@@ -535,7 +531,7 @@ document.addEventListener('DOMContentLoaded', function () {
         setupAccordion('#what-sites', '#sites-available', '#sites-arrow-right', '#sites-arrow-down');
         
         // Listen for storage changes to update UI automatically
-        browser.storage.onChanged.addListener(function(changes, namespace) {
+        chrome.storage.onChanged.addListener(function(changes, namespace) {
             if (namespace === 'sync' && currentSiteIdentifier) {
                 // Check for custom element changes
                 const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;

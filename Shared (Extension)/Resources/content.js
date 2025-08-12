@@ -1,7 +1,3 @@
-if (typeof browser === "undefined") {
-    var browser = chrome;
-}
-
 (function () {
 
     // --- All helper functions are defined first, making them available to the entire script ---
@@ -246,14 +242,14 @@ if (typeof browser === "undefined") {
     function handleUndo() {
         if (sessionHiddenSelectors.length === 0 || !currentSiteIdentifier) return;
         const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;
-        browser.storage.sync.get(customStorageKey, function (result) {
+        chrome.storage.sync.get(customStorageKey, function (result) {
             let customSelectors = result[customStorageKey] || [];
             if (!Array.isArray(customSelectors)) customSelectors = [];
             const selectorToRemove = sessionHiddenSelectors.pop();
             customSelectors = customSelectors.filter(s => s !== selectorToRemove);
-            browser.storage.sync.set({ [customStorageKey]: customSelectors }, function () {
-                if (browser.runtime.lastError) {
-                    console.error("Error removing custom selector from storage:", browser.runtime.lastError);
+            chrome.storage.sync.set({ [customStorageKey]: customSelectors }, function () {
+                if (chrome.runtime.lastError) {
+                    console.error("Error removing custom selector from storage:", chrome.runtime.lastError);
                 } else {
                     applyCustomElementStyles(currentSiteIdentifier, customSelectors);
                     if (sessionHiddenSelectors.length > 0) {
@@ -280,7 +276,7 @@ if (typeof browser === "undefined") {
         
         // Update storage to reflect that selection has started
         if (currentSiteIdentifier) {
-            browser.storage.sync.set({ [`${currentSiteIdentifier}SelectionActive`]: true });
+            chrome.storage.sync.set({ [`${currentSiteIdentifier}SelectionActive`]: true });
         }
     }
 
@@ -302,7 +298,7 @@ if (typeof browser === "undefined") {
         
         // Update storage to reflect that selection has stopped
         if (currentSiteIdentifier) {
-            browser.storage.sync.set({ [`${currentSiteIdentifier}SelectionActive`]: false });
+            chrome.storage.sync.set({ [`${currentSiteIdentifier}SelectionActive`]: false });
         }
     }
 
@@ -371,26 +367,26 @@ if (typeof browser === "undefined") {
             return;
         }
         const storageKey = `${currentSiteIdentifier}CustomHiddenElements`;
-        browser.storage.sync.get(storageKey, function (result) {
+        chrome.storage.sync.get(storageKey, function (result) {
             let customSelectors = result[storageKey] || [];
             if (!Array.isArray(customSelectors)) customSelectors = [];
             if (!customSelectors.includes(selector)) {
                 customSelectors.push(selector);
                 sessionHiddenSelectors.push(selector);
-                browser.storage.sync.set({ [storageKey]: customSelectors }, function () {
-                    if (browser.runtime.lastError) {
-                        console.error("Error saving custom selectors:", browser.runtime.lastError);
+                chrome.storage.sync.set({ [storageKey]: customSelectors }, function () {
+                    if (chrome.runtime.lastError) {
+                        console.error("Error saving custom selectors:", chrome.runtime.lastError);
                     } else {
                         // The storage change listener will automatically apply the styles
                         // Also stop selecting mode
-                        browser.storage.sync.set({ [`${currentSiteIdentifier}SelectionActive`]: false });
+                        chrome.storage.sync.set({ [`${currentSiteIdentifier}SelectionActive`]: false });
                         updateFeedbackMessage('Element hidden', true);
                     }
                 });
             } else {
                 updateFeedbackMessage('Element already hidden');
                 // Still stop selecting mode
-                browser.storage.sync.set({ [`${currentSiteIdentifier}SelectionActive`]: false });
+                chrome.storage.sync.set({ [`${currentSiteIdentifier}SelectionActive`]: false });
             }
         });
     }
@@ -420,7 +416,7 @@ if (typeof browser === "undefined") {
     function applySettingsFromStorage() {
         if (currentPlatform) {
             const platformStatusKey = `${currentPlatform}Status`;
-            browser.storage.sync.get(platformStatusKey, function (platformResult) {
+            chrome.storage.sync.get(platformStatusKey, function (platformResult) {
                 let platformIsOn = platformResult[platformStatusKey] !== false;
                 
                 elementsThatCanBeHidden
@@ -440,7 +436,7 @@ if (typeof browser === "undefined") {
                                 lastAppliedSettings[item] = "platformDisabled";
                             } else {
                                 // Platform is enabled, check individual element status
-                                browser.storage.sync.get(itemStatusKey, function (itemResult) {
+                                chrome.storage.sync.get(itemStatusKey, function (itemResult) {
                                     let statusValue = itemResult[itemStatusKey];
                                     let cssToApply;
                                     
@@ -463,7 +459,7 @@ if (typeof browser === "undefined") {
         // Also check for custom element changes
         if (currentSiteIdentifier) {
             const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;
-            browser.storage.sync.get(customStorageKey, function (result) {
+            chrome.storage.sync.get(customStorageKey, function (result) {
                 let customSelectors = result[customStorageKey] || [];
                 if (!Array.isArray(customSelectors)) customSelectors = [];
                 
@@ -477,7 +473,7 @@ if (typeof browser === "undefined") {
             
             // Check for selection state changes
             const selectionKey = `${currentSiteIdentifier}SelectionActive`;
-            browser.storage.sync.get(selectionKey, function (result) {
+            chrome.storage.sync.get(selectionKey, function (result) {
                 const shouldBeSelecting = result[selectionKey] === true;
                 if (shouldBeSelecting && !isSelecting) {
                     startSelecting();
@@ -489,7 +485,7 @@ if (typeof browser === "undefined") {
     }
     
     // Listen for storage changes to be responsive
-    browser.storage.onChanged.addListener(function(changes, namespace) {
+    chrome.storage.onChanged.addListener(function(changes, namespace) {
         if (namespace === 'sync') {
             let hasRelevantChanges = false;
             
@@ -535,7 +531,7 @@ if (typeof browser === "undefined") {
     // Initial application of settings (polling will handle subsequent changes)
     if (currentPlatform) {
         const platformStatusKey = `${currentPlatform}Status`;
-        browser.storage.sync.get(platformStatusKey, function (platformResult) {
+        chrome.storage.sync.get(platformStatusKey, function (platformResult) {
             let platformIsOn = platformResult[platformStatusKey] !== false;
             elementsThatCanBeHidden
                 .filter(element => element.startsWith(currentPlatform))
@@ -546,7 +542,7 @@ if (typeof browser === "undefined") {
                         createStyleElement(styleName, cssSelectors[item + "CssOn"]);
                         lastAppliedSettings[item] = "platformDisabled";
                     } else {
-                        browser.storage.sync.get(itemStatusKey, function (itemResult) {
+                        chrome.storage.sync.get(itemStatusKey, function (itemResult) {
                             let statusValue = itemResult[itemStatusKey];
                             let cssToApply;
                             if (item === "youtubeThumbnails" || item === "youtubeNotifications") {
@@ -566,7 +562,7 @@ if (typeof browser === "undefined") {
 
     if (currentSiteIdentifier) {
         const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;
-        browser.storage.sync.get(customStorageKey, function (result) {
+        chrome.storage.sync.get(customStorageKey, function (result) {
             if (chrome.runtime.lastError) {
                 console.error(`Storage error for ${customStorageKey}:`, chrome.runtime.lastError);
                 return;
