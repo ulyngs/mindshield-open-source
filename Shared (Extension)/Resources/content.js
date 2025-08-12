@@ -514,6 +514,9 @@
             }
         }
     });
+    
+    // Also poll every 0.5 seconds as a safety net
+    setInterval(applySettingsFromStorage, 500);
 
     // --- Perform one-time initial setup, protected by the flag ---
     if (window.hasRun) {
