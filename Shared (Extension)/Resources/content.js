@@ -400,6 +400,56 @@
     }
     const currentSiteIdentifier = currentPlatform || currentHostname;
 
+    // --- Function to apply settings from storage ---
+    function applySettingsFromStorage() {
+        if (!currentPlatform) return;
+
+        const platformStatusKey = `${currentPlatform}Status`;
+        browser.storage.sync.get(platformStatusKey, function(platformResult) {
+            let platformIsOn = platformResult[platformStatusKey] !== false;
+            elementsThatCanBeHidden
+                .filter(element => element.startsWith(currentPlatform))
+                .forEach(function(item) {
+                    const styleName = item + "Style";
+                    const itemStatusKey = item + "Status";
+                    if (!platformIsOn) {
+                        createStyleElement(styleName, cssSelectors[item + "CssOn"]);
+                    } else {
+                        browser.storage.sync.get(itemStatusKey, function(itemResult) {
+                            let statusValue = itemResult[itemStatusKey];
+                            let cssToApply;
+                            if (item === "youtubeThumbnails" || item === "youtubeNotifications") {
+                                let state = statusValue || "On";
+                                cssToApply = cssSelectors[item + "Css" + state];
+                            } else {
+                                cssToApply = (statusValue === true) ? cssSelectors[item + "CssOff"] : cssSelectors[item + "CssOn"];
+                            }
+                            createStyleElement(styleName, cssToApply);
+                        });
+                    }
+                });
+        });
+    }
+
+    // --- Function to apply custom element styles from storage ---
+    function applyCustomElementsFromStorage() {
+        if (!currentSiteIdentifier) return;
+        
+        const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;
+        browser.storage.sync.get(customStorageKey, function(result) {
+            if (chrome.runtime.lastError) {
+                console.error(`Storage error for ${customStorageKey}:`, chrome.runtime.lastError);
+                return;
+            }
+            let customSelectors = result[customStorageKey] || [];
+            if (!Array.isArray(customSelectors)) customSelectors = [];
+            applyCustomElementStyles(currentSiteIdentifier, customSelectors);
+            if (customSelectors.length > 0) {
+                 console.log(`Applied ${customSelectors.length} custom rules for ${currentSiteIdentifier}`);
+            }
+        });
+    }
+
     // --- Register the message listener (this will now happen on every execution) ---
     chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
         if (message.method === "ping") {
@@ -526,50 +576,14 @@
 
     console.log(`MindShield running on: ${currentSiteIdentifier}. (Detected Platform: ${currentPlatform || 'None'})`);
 
-    if (currentPlatform) {
-        const platformStatusKey = `${currentPlatform}Status`;
-        browser.storage.sync.get(platformStatusKey, function(platformResult) {
-            let platformIsOn = platformResult[platformStatusKey] !== false;
-            elementsThatCanBeHidden
-                .filter(element => element.startsWith(currentPlatform))
-                .forEach(function(item) {
-                    const styleName = item + "Style";
-                    const itemStatusKey = item + "Status";
-                    if (!platformIsOn) {
-                        createStyleElement(styleName, cssSelectors[item + "CssOn"]);
-                    } else {
-                        browser.storage.sync.get(itemStatusKey, function(itemResult) {
-                            let statusValue = itemResult[itemStatusKey];
-                            let cssToApply;
-                            if (item === "youtubeThumbnails" || item === "youtubeNotifications") {
-                                let state = statusValue || "On";
-                                cssToApply = cssSelectors[item + "Css" + state];
-                            } else {
-                                cssToApply = (statusValue === true) ? cssSelectors[item + "CssOff"] : cssSelectors[item + "CssOn"];
-                            }
-                            createStyleElement(styleName, cssToApply);
-                        });
-                    }
-                });
-        });
-    }
+    // --- Initial application of settings ---
+    applySettingsFromStorage();
+    applyCustomElementsFromStorage();
 
-    if (currentSiteIdentifier) {
-        console.log('Before custom storage get, window.hasRun:', window.hasRun);
-        const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;
-        browser.storage.sync.get(customStorageKey, function(result) {
-            if (chrome.runtime.lastError) {
-                console.error(`Storage error for ${customStorageKey}:`, chrome.runtime.lastError);
-                return;
-            }
-            console.log('Custom storage get succeeded for:', customStorageKey);
-            let customSelectors = result[customStorageKey] || [];
-            if (!Array.isArray(customSelectors)) customSelectors = [];
-            applyCustomElementStyles(currentSiteIdentifier, customSelectors);
-            if (customSelectors.length > 0) {
-                 console.log(`Applied ${customSelectors.length} custom rules for ${currentSiteIdentifier}`);
-            }
-        });
-    }
+    // --- Set up interval to check for changed settings every 1 second ---
+    setInterval(function() {
+        applySettingsFromStorage();
+        applyCustomElementsFromStorage();
+    }, 1000);
 
 })();

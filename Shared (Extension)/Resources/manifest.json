@@ -1,5 +1,5 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "default_locale": "en",
 
     "name": "MindShield",
@@ -22,7 +22,7 @@
         "all_frames": false
     }],
 
-    "browser_action": {
+    "action": {
         "default_popup": "popup.html",
         "default_icon": {
             "16": "images/popup-16.png",
@@ -37,5 +37,13 @@
         "tabs",
         "activeTab",
         "scripting"
-      ]
+      ],
+
+    "browser_specific_settings": {
+      "gecko": {
+        "id": "@mindshield",
+        "strict_min_version": "58.0"
+      }
+    }
+
 }
