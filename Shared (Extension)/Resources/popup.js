@@ -1,31 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     let currentTabId = null; // Store tab ID once at initialization
     
-    // Helper function to validate tab connection
-    function validateTabConnection() {
-        if (!currentTabId) {
-            console.error("No tab ID available for communication");
-            return false;
-        }
-        return true;
-    }
-    
-    // Helper function to send message with connection validation
-    function sendMessageToTab(message, callback) {
-        if (!validateTabConnection()) {
-            if (callback) callback({ error: "No valid tab connection" });
-            return;
-        }
-        
-        chrome.tabs.sendMessage(currentTabId, message, function(response) {
-            if (chrome.runtime.lastError) {
-                console.warn("Error communicating with tab:", chrome.runtime.lastError.message);
-                if (callback) callback({ error: chrome.runtime.lastError.message });
-            } else if (callback) {
-                callback(response);
-            }
-        });
-    }
+
     
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
             if (!tabs[0] || !tabs[0].id || tabs[0].url?.startsWith('chrome://') || tabs[0].url?.startsWith('about:')) {
@@ -34,33 +10,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             currentTabId = tabs[0].id; // Store the tab ID
-            let responded = false;
-
-            sendMessageToTab({ method: "ping" }, function(response) {
-                if (response && response.status === "pong") {
-                    responded = true;
-                    initializePopup();
-                } else if (response && response.error) {
-                    console.warn("Content script not responding:", response.error);
-                }
-            });
-
-            setTimeout(() => {
-                if (!responded) {
-                    document.getElementById('popup-content').innerHTML = `
-                        <p>Extension needs to reactivate.</p>
-                        <button id="reloadButton">Reactivate Now</button>
-                    `;
-                    document.getElementById('reloadButton').addEventListener('click', function() {
-                        chrome.runtime.sendMessage({ method: "reloadTab", tabId: currentTabId });
-                        window.close();
-                    });
-                }
-            }, 500);
+            
+            // Initialize popup immediately - no need to wait for content script
+            // We only communicate when settings actually change
+            initializePopup();
         });
     
     function initializePopup() {
-            console.log("Popup initialized - content script is active on tab:", currentTabId);
+            console.log("Popup initialized for tab:", currentTabId);
         
         let isSelectionModeActive = false;
 
@@ -85,10 +42,10 @@ document.addEventListener('DOMContentLoaded', function() {
             browser.storage.sync.get(["addFriction", "waitText", "waitTime"]).then((result) => {
                 var frictionToggle = document.getElementById("frictionToggle");
                 var frictionCustomisationArrow = document.getElementById("frictionCustomisationArrow");
-                var popupContainer = document.getElementById("popup-content");
-                var messageContainer = document.getElementById("delay-content");
-                var errorContainer = document.getElementById("error-prompt");
-                var messageBox = document.getElementById("delay-message");
+                var popupContainer = document.getElementById('popup-content');
+                var messageContainer = document.getElementById('delay-content');
+                var errorContainer = document.getElementById('error-prompt');
+                var messageBox = document.getElementById('delay-message');
                 var waitTextBox = document.getElementById("waitText");
                 var waitTimeBox = document.getElementById("waitTime");
                 var countdownBox = document.getElementById("delay-time");
@@ -741,42 +698,9 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Set up periodic connection validation
-        let connectionCheckInterval;
-        function startConnectionValidation() {
-            connectionCheckInterval = setInterval(() => {
-                if (currentTabId) {
-                    // Check if tab still exists and is accessible
-                    chrome.tabs.get(currentTabId, (tab) => {
-                        if (chrome.runtime.lastError || !tab) {
-                            console.warn("Tab connection lost, attempting to reconnect...");
-                            clearInterval(connectionCheckInterval);
-                            // Try to re-establish connection
-                            chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
-                                if (tabs[0] && tabs[0].id && tabs[0].id !== currentTabId) {
-                                    currentTabId = tabs[0].id;
-                                    console.log("Reconnected to new tab:", currentTabId);
-                                    startConnectionValidation();
-                                }
-                            });
-                        }
-                    });
-                }
-            }, 5000); // Check every 5 seconds
-        }
 
-        function stopConnectionValidation() {
-            if (connectionCheckInterval) {
-                clearInterval(connectionCheckInterval);
-                connectionCheckInterval = null;
-            }
-        }
 
-        // Start connection validation when popup is initialized
-        startConnectionValidation();
 
-        // Clean up when popup is about to close
-        window.addEventListener('beforeunload', stopConnectionValidation);
 
             // Setup all interactive elements at the end
             setupHelpAndFAQ();
