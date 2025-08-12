@@ -3,14 +3,12 @@ if (typeof browser === "undefined") {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Remove ping/pong logic and initialize popup directly
     initializePopup();
 
     function initializePopup() {
         console.log("Popup initialized - working independently.");
 
         let isSelectionModeActive = false;
-
         let currentPlatform = null;
         let currentSiteIdentifier = null;
 
@@ -144,7 +142,6 @@ document.addEventListener('DOMContentLoaded', function () {
             var currentToggle = document.getElementById(id_of_toggle);
             if (!currentToggle) return;
 
-            // Read state directly from storage instead of asking content script
             browser.storage.sync.get(element_to_check + "Status", function (result) {
                 currentToggle.checked = result[element_to_check + "Status"] || false;
             });
@@ -155,7 +152,6 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!currentCheckbox) return;
 
             currentCheckbox.addEventListener('click', function () {
-                // Save setting immediately when toggled
                 const newValue = currentCheckbox.checked;
                 browser.storage.sync.set({ [element_to_change + "Status"]: newValue });
             }, false);
@@ -165,7 +161,6 @@ document.addEventListener('DOMContentLoaded', function () {
             var currentButton = document.getElementById(id_of_toggle);
             if (!currentButton) return;
 
-            // Read state directly from storage instead of asking content script
             browser.storage.sync.get(element_to_check + "Status", function (result) {
                 let state = result[element_to_check + "Status"] || "On";
                 currentButton.setAttribute("data-state", state);
@@ -191,7 +186,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 currentButton.setAttribute("data-state", nextState);
 
-                // Save setting immediately when toggled
                 browser.storage.sync.set({ [element_to_change + "Status"]: nextState });
             }, false);
         }
@@ -242,11 +236,9 @@ document.addEventListener('DOMContentLoaded', function () {
                         if (toggle) {
                             if (toggle.type === 'checkbox') {
                                 toggle.checked = false;
-                                // Save setting immediately
                                 browser.storage.sync.set({ [some_element + "Status"]: false });
                             } else if (toggle.tagName === 'BUTTON') {
                                 toggle.setAttribute('data-state', 'On');
-                                // Save setting immediately
                                 browser.storage.sync.set({ [some_element + "Status"]: "On" });
                             }
                         }
@@ -271,12 +263,10 @@ document.addEventListener('DOMContentLoaded', function () {
                             let storedValue = result[key];
                             if (toggle.type === 'checkbox') {
                                 toggle.checked = storedValue || false;
-                                // Save setting immediately
                                 browser.storage.sync.set({ [key]: storedValue || false });
                             } else if (toggle.tagName === 'BUTTON') {
                                 let state = storedValue || "On";
                                 toggle.setAttribute('data-state', state);
-                                // Save setting immediately
                                 browser.storage.sync.set({ [key]: state });
                             }
                         });
@@ -306,76 +296,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 const div = document.createElement('div');
                 div.className = 'custom-element';
 
-                const peekButton = document.createElement('button');
-                peekButton.className = 'icon-btn peek-symbol';
-                peekButton.innerHTML = `
-                    <svg width="14px" height="14px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                        <circle cx="12" cy="12" r="3"></circle>
-                    </svg>`;
-                peekButton.title = 'Toggle visibility';
-                peekButton.setAttribute('data-visible', 'false');
-
-                // Check visibility by reading from storage instead of asking content script
-                const storageKey = `${siteIdentifier}CustomHiddenElements`;
-                browser.storage.sync.get(storageKey, function (result) {
-                    let customSelectors = result[storageKey] || [];
-                    if (!Array.isArray(customSelectors)) customSelectors = [];
-                    const isVisible = !customSelectors.includes(selector);
-                    
-                    if (isVisible) {
-                        peekButton.setAttribute('data-visible', 'true');
-                        peekButton.innerHTML = `
-                            <svg width="14px" height="14px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                <circle cx="12" cy="12" r="3"></circle>
-                            </svg>`;
-                    } else {
-                        peekButton.setAttribute('data-visible', 'false');
-                        peekButton.innerHTML = `
-                            <svg width="14px" height="14px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                                <line x1="1" y1="1" x2="23" y2="23"></line>
-                            </svg>`;
-                    }
-                });
-
-                peekButton.addEventListener('click', function () {
-                    const isVisible = peekButton.getAttribute('data-visible') === 'true';
-                    const newVisible = !isVisible;
-                    
-                    // Update storage directly - content script will pick it up automatically
-                    const storageKey = `${siteIdentifier}CustomHiddenElements`;
-                    browser.storage.sync.get(storageKey, function (result) {
-                        let customSelectors = result[storageKey] || [];
-                        if (!Array.isArray(customSelectors)) customSelectors = [];
-                        
-                        if (newVisible) {
-                            // Remove selector to show element
-                            customSelectors = customSelectors.filter(s => s !== selector);
-                        } else {
-                            // Add selector to hide element
-                            if (!customSelectors.includes(selector)) {
-                                customSelectors.push(selector);
-                            }
-                        }
-                        
-                        browser.storage.sync.set({ [storageKey]: customSelectors }, function () {
-                            // Update UI immediately
-                            peekButton.setAttribute('data-visible', newVisible ? 'false' : 'true');
-                            peekButton.innerHTML = newVisible ? `
-                                <svg width="14px" height="14px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                                    <line x1="1" y1="1" x2="23" y2="23"></line>
-                                </svg>` : `
-                                <svg width="14px" height="14px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                    <circle cx="12" cy="12" r="3"></circle>
-                                </svg>`;
-                        });
-                    });
-                });
-
                 const span = document.createElement('span');
                 span.textContent = selector;
                 span.title = selector;
@@ -395,11 +315,9 @@ document.addEventListener('DOMContentLoaded', function () {
                         currentSelectors = currentSelectors.filter(s => s !== selector);
                         browser.storage.sync.set({ [storageKey]: currentSelectors }, function () {
                             updateCustomElementsList(siteIdentifier, currentSelectors);
-                            // Content script will automatically pick up the change through storage listener
                         });
                     });
                 });
-                div.appendChild(peekButton);
                 div.appendChild(button);
                 div.appendChild(span);
 
@@ -420,13 +338,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         isSelectionModeActive = false;
                         addButton.classList.remove('active');
                         addButton.textContent = 'Hide custom element';
-                        // Stop selecting by updating storage - content script will pick it up
                         browser.storage.sync.set({ [`${siteIdentifier}SelectionActive`]: false });
                     } else {
                         isSelectionModeActive = true;
                         addButton.classList.add('active');
                         addButton.textContent = 'Click/Tap element to hide';
-                        // Start selecting by updating storage - content script will pick it up
                         browser.storage.sync.set({ [`${siteIdentifier}SelectionActive`]: true });
                     }
                 });
@@ -624,7 +540,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Check for custom element changes
                 const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;
                 if (changes[customStorageKey]) {
-                    // Update custom elements list when it changes
                     const newSelectors = changes[customStorageKey].newValue || [];
                     updateCustomElementsList(currentSiteIdentifier, newSelectors);
                 }

@@ -20,8 +20,6 @@ if (typeof browser === "undefined") {
             if (shadowHost && shadowHost.shadowRoot) {
                 domRoot = shadowHost.shadowRoot;
             } else {
-                // This warning is fine, as it might just mean the element isn't on the page yet.
-                // console.warn(`Shadow host '${shadowHostSelector}' for '${elementToHide}' not found or shadow root not accessible. Style may not be applied yet.`);
                 return;
             }
         }
@@ -415,18 +413,6 @@ if (typeof browser === "undefined") {
     }
     const currentSiteIdentifier = currentPlatform || currentHostname;
 
-    // --- Register the message listener (this will now happen on every execution) ---
-    // No longer needed - everything is handled through storage changes
-    // chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-    //     // Only handle custom element selection UI methods
-    //     if (message.method === "startSelecting") {
-    //         startSelecting();
-    //     } else if (message.method === "stopSelecting") {
-    //         stopSelecting(message.cancelled);
-    //     }
-    //     return false;
-    // });
-
     // --- Listen for storage changes to apply settings immediately ---
     let lastAppliedSettings = {};
     let lastAppliedCustomElements = {};
@@ -579,14 +565,12 @@ if (typeof browser === "undefined") {
     }
 
     if (currentSiteIdentifier) {
-        console.log('Before custom storage get, window.hasRun:', window.hasRun);
         const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;
         browser.storage.sync.get(customStorageKey, function (result) {
             if (chrome.runtime.lastError) {
                 console.error(`Storage error for ${customStorageKey}:`, chrome.runtime.lastError);
                 return;
             }
-            console.log('Custom storage get succeeded for:', customStorageKey);
             let customSelectors = result[customStorageKey] || [];
             if (!Array.isArray(customSelectors)) customSelectors = [];
             applyCustomElementStyles(currentSiteIdentifier, customSelectors);
