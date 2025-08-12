@@ -402,54 +402,7 @@
 
     // --- Register the message listener (this will now happen on every execution) ---
     chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-        if (message.method === "ping") {
-            sendResponse({ status: "pong" });
-            return true; // Keep message channel open for async response
-        }
-
-        if (message.element && currentPlatform && !message.element.startsWith(currentPlatform)) {
-            return;
-        }
-
-        var styleName = message.element ? message.element + "Style" : null;
-        let domRoot = document.head;
-
-        if (message.element && message.element in shadowSelectors) {
-            const shadowHost = document.querySelector(shadowSelectors[message.element]);
-            if (shadowHost && shadowHost.shadowRoot) {
-                domRoot = shadowHost.shadowRoot;
-            } else {
-                if (message.method === "check") sendResponse({ text: "unknown (shadow root)" });
-                return true;
-            }
-        }
-
-        var currentStyleElement = styleName ? domRoot.querySelector("#" + styleName) : null;
-
-        if (message.method === "check" && message.element) {
-            if (!currentStyleElement) {
-                browser.storage.sync.get(message.element + "Status", function (result) {
-                    let storedValue = result[message.element + "Status"];
-                    if (message.element === "youtubeThumbnails" || message.element === "youtubeNotifications") {
-                        sendResponse({ text: (storedValue || "On").toLowerCase() });
-                    } else {
-                        sendResponse({ text: storedValue === true ? "hidden" : "visible" });
-                    }
-                });
-                return true;
-            }
-            const currentCss = currentStyleElement.textContent;
-            let responseText = "unknown";
-            if (currentCss === cssSelectors[message.element + 'CssOn']) responseText = "visible";
-            else if (currentCss === cssSelectors[message.element + 'CssOff']) responseText = "hidden";
-            else if ((message.element === "youtubeThumbnails" || message.element === "youtubeNotifications")) {
-                if (currentCss === cssSelectors[message.element + 'CssBlur']) responseText = "blur";
-                else if (currentCss === cssSelectors[message.element + 'CssBlack']) responseText = (message.element === "youtubeNotifications" && cssSelectors.youtubeNotificationsCssBlack === cssSelectors.youtubeNotificationsCssOff) ? "hidden" : "black";
-            }
-            sendResponse({ text: responseText });
-            return false;
-        }
-
+        // Only handle custom element selection methods
         if (message.method === "checkCustom" && message.selector) {
             const customStyleId = `customHidden_${currentSiteIdentifier.replace(/\./g, '_')}Style`;
             const styleElement = document.head.querySelector(`#${customStyleId}`);
@@ -476,22 +429,7 @@
             return false;
         }
 
-        if (message.method === "change" && message.element) {
-            const cssOn = cssSelectors[message.element + 'CssOn'];
-            const cssOff = cssSelectors[message.element + 'CssOff'];
-            if (currentStyleElement) {
-                currentStyleElement.textContent = (currentStyleElement.textContent === cssOn) ? cssOff : cssOn;
-            } else {
-                createStyleElement(styleName, cssOff);
-            }
-        } else if (message.method === "changeMultiToggle" && message.element && message.action) {
-            const cssToApply = cssSelectors[message.element + 'Css' + message.action];
-            createStyleElement(styleName, cssToApply);
-        } else if (message.method === "showAll" && message.element) {
-            createStyleElement(styleName, cssSelectors[message.element + 'CssOn']);
-        } else if (message.method === "hideAll" && message.element) {
-            createStyleElement(styleName, cssSelectors[message.element + 'CssOff']);
-        } else if (message.method === "startSelecting") {
+        if (message.method === "startSelecting") {
             startSelecting();
         } else if (message.method === "stopSelecting") {
             stopSelecting(message.cancelled);
@@ -506,15 +444,75 @@
                     else applyCustomElementStyles(currentSiteIdentifier, customSelectors);
                 });
             });
-        } else if (message.method === "refreshCustomElements" && currentSiteIdentifier) {
-            const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;
-            browser.storage.sync.get(customStorageKey, function (result) {
-                let customSelectors = result[customStorageKey] || [];
-                if (!Array.isArray(customSelectors)) customSelectors = [];
-                applyCustomElementStyles(currentSiteIdentifier, customSelectors);
-            });
         }
         return false;
+    });
+
+    // --- Listen for storage changes to apply settings immediately ---
+    let lastAppliedSettings = {};
+    
+    function applySettingsFromStorage() {
+        if (currentPlatform) {
+            const platformStatusKey = `${currentPlatform}Status`;
+            browser.storage.sync.get(platformStatusKey, function (platformResult) {
+                let platformIsOn = platformResult[platformStatusKey] !== false;
+                
+                elementsThatCanBeHidden
+                    .filter(element => element.startsWith(currentPlatform))
+                    .forEach(function (item) {
+                        const styleName = item + "Style";
+                        const itemStatusKey = item + "Status";
+                        
+                        // Check if we need to update this element
+                        let currentSetting = platformIsOn ? (lastAppliedSettings[item] || "default") : "platformDisabled";
+                        let newSetting = platformIsOn ? (platformResult[itemStatusKey] || "On") : "platformDisabled";
+                        
+                        if (currentSetting !== newSetting) {
+                            if (!platformIsOn) {
+                                // Platform is disabled, show all elements
+                                createStyleElement(styleName, cssSelectors[item + "CssOn"]);
+                                lastAppliedSettings[item] = "platformDisabled";
+                            } else {
+                                // Platform is enabled, check individual element status
+                                browser.storage.sync.get(itemStatusKey, function (itemResult) {
+                                    let statusValue = itemResult[itemStatusKey];
+                                    let cssToApply;
+                                    
+                                    if (item === "youtubeThumbnails" || item === "youtubeNotifications") {
+                                        let state = statusValue || "On";
+                                        cssToApply = cssSelectors[item + "Css" + state];
+                                        lastAppliedSettings[item] = state;
+                                    } else {
+                                        cssToApply = (statusValue === true) ? cssSelectors[item + "CssOff"] : cssSelectors[item + "CssOn"];
+                                        lastAppliedSettings[item] = statusValue === true ? "hidden" : "visible";
+                                    }
+                                    createStyleElement(styleName, cssToApply);
+                                });
+                            }
+                        }
+                    });
+            });
+        }
+    }
+    
+    // Listen for storage changes to be responsive
+    browser.storage.onChanged.addListener(function(changes, namespace) {
+        if (namespace === 'sync' && currentPlatform) {
+            // Check if any of our platform's settings changed
+            let hasRelevantChanges = false;
+            for (let key in changes) {
+                if (key === `${currentPlatform}Status` || 
+                    (key.endsWith('Status') && elementsThatCanBeHidden.some(elem => elem.startsWith(currentPlatform) && elem + 'Status' === key))) {
+                    hasRelevantChanges = true;
+                    break;
+                }
+            }
+            
+            if (hasRelevantChanges) {
+                // Apply changes immediately
+                setTimeout(applySettingsFromStorage, 100);
+            }
+        }
     });
 
     // --- Perform one-time initial setup, protected by the flag ---
@@ -526,6 +524,7 @@
 
     console.log(`MindShield running on: ${currentSiteIdentifier}. (Detected Platform: ${currentPlatform || 'None'})`);
 
+    // Initial application of settings (polling will handle subsequent changes)
     if (currentPlatform) {
         const platformStatusKey = `${currentPlatform}Status`;
         browser.storage.sync.get(platformStatusKey, function (platformResult) {
@@ -537,6 +536,7 @@
                     const itemStatusKey = item + "Status";
                     if (!platformIsOn) {
                         createStyleElement(styleName, cssSelectors[item + "CssOn"]);
+                        lastAppliedSettings[item] = "platformDisabled";
                     } else {
                         browser.storage.sync.get(itemStatusKey, function (itemResult) {
                             let statusValue = itemResult[itemStatusKey];
@@ -544,8 +544,10 @@
                             if (item === "youtubeThumbnails" || item === "youtubeNotifications") {
                                 let state = statusValue || "On";
                                 cssToApply = cssSelectors[item + "Css" + state];
+                                lastAppliedSettings[item] = state;
                             } else {
                                 cssToApply = (statusValue === true) ? cssSelectors[item + "CssOff"] : cssSelectors[item + "CssOn"];
+                                lastAppliedSettings[item] = statusValue === true ? "hidden" : "visible";
                             }
                             createStyleElement(styleName, cssToApply);
                         });

@@ -1,38 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-        if (!tabs[0] || !tabs[0].id || tabs[0].url?.startsWith('chrome://') || tabs[0].url?.startsWith('about:')) {
-            console.error("Invalid tab or page.");
-            return;
-        }
-
-        const tabId = tabs[0].id;
-        let responded = false;
-
-        chrome.tabs.sendMessage(tabId, { method: "ping" }, function (response) {
-            if (chrome.runtime.lastError) {
-                console.warn("Content script not responding:", chrome.runtime.lastError.message);
-            } else if (response && response.status === "pong") {
-                responded = true;
-                initializePopup();
-            }
-        });
-
-        setTimeout(() => {
-            if (!responded) {
-                document.getElementById('popup-content').innerHTML = `
-                        <p>Extension needs to reactivate.</p>
-                        <button id="reloadButton">Reactivate Now</button>
-                    `;
-                document.getElementById('reloadButton').addEventListener('click', function () {
-                    chrome.runtime.sendMessage({ method: "reloadTab", tabId: tabId });
-                    window.close();
-                });
-            }
-        }, 500);
-    });
+    // Remove ping/pong logic and initialize popup directly
+    initializePopup();
 
     function initializePopup() {
-        console.log("Popup initialized - content script is active.");
+        console.log("Popup initialized - working independently.");
 
         let isSelectionModeActive = false;
 
@@ -169,35 +140,9 @@ document.addEventListener('DOMContentLoaded', function () {
             var currentToggle = document.getElementById(id_of_toggle);
             if (!currentToggle) return;
 
-            chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                if (!tabs[0] || !tabs[0].id || tabs[0].url?.startsWith('chrome://') || tabs[0].url?.startsWith('about:')) {
-                    currentToggle.disabled = true;
-                    browser.storage.sync.get(element_to_check + "Status", function (result) {
-                        currentToggle.checked = result[element_to_check + "Status"] || false;
-                    });
-                    return;
-                }
-
-                chrome.tabs.sendMessage(tabs[0].id, { method: "check", element: element_to_check }, function (response) {
-                    if (chrome.runtime.lastError) {
-                        console.warn("Error sending message:", chrome.runtime.lastError.message);
-                        browser.storage.sync.get(element_to_check + "Status", function (result) {
-                            currentToggle.checked = result[element_to_check + "Status"] || false;
-                        });
-                        currentToggle.disabled = true;
-                        return;
-                    }
-
-                    if (response && response.text === "hidden") {
-                        currentToggle.checked = true;
-                    } else if (response && response.text === "visible") {
-                        currentToggle.checked = false;
-                    } else {
-                        browser.storage.sync.get(element_to_check + "Status", function (result) {
-                            currentToggle.checked = result[element_to_check + "Status"] || false;
-                        });
-                    }
-                });
+            // Read state directly from storage instead of asking content script
+            browser.storage.sync.get(element_to_check + "Status", function (result) {
+                currentToggle.checked = result[element_to_check + "Status"] || false;
             });
         }
 
@@ -206,13 +151,9 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!currentCheckbox) return;
 
             currentCheckbox.addEventListener('click', function () {
-                chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                    if (tabs[0]?.id) {
-                        chrome.tabs.sendMessage(tabs[0].id, { method: "change", element: element_to_change }, err => {
-                            if (chrome.runtime.lastError) console.warn("Error sending 'change' message:", chrome.runtime.lastError.message);
-                        });
-                    }
-                });
+                // Save setting immediately when toggled
+                const newValue = currentCheckbox.checked;
+                browser.storage.sync.set({ [element_to_change + "Status"]: newValue });
             }, false);
         }
 
@@ -220,42 +161,10 @@ document.addEventListener('DOMContentLoaded', function () {
             var currentButton = document.getElementById(id_of_toggle);
             if (!currentButton) return;
 
-            chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                if (!tabs[0] || !tabs[0].id || tabs[0].url?.startsWith('chrome://') || tabs[0].url?.startsWith('about:')) {
-                    currentButton.disabled = true;
-                    browser.storage.sync.get(element_to_check + "Status", function (result) {
-                        currentButton.setAttribute("data-state", result[element_to_check + "Status"] || "On");
-                    });
-                    return;
-                }
-
-                chrome.tabs.sendMessage(tabs[0].id, { method: "check", element: element_to_check }, function (response) {
-                    if (chrome.runtime.lastError) {
-                        console.warn("Error sending 'check' message for multi-state:", chrome.runtime.lastError.message);
-                        browser.storage.sync.get(element_to_check + "Status", function (result) {
-                            currentButton.setAttribute("data-state", result[element_to_check + "Status"] || "On");
-                        });
-                        currentButton.disabled = true;
-                        return;
-                    }
-
-                    let state = "On";
-                    if (response && response.text === "hidden") {
-                        state = "Off";
-                    } else if (response && response.text === "visible") {
-                        state = "On";
-                    } else if (response && response.text === "blur") {
-                        state = "Blur";
-                    } else if (response && response.text === "black") {
-                        state = "Black";
-                    } else {
-                        browser.storage.sync.get(element_to_check + "Status", function (result) {
-                            currentButton.setAttribute("data-state", result[element_to_check + "Status"] || "On");
-                        });
-                        return;
-                    }
-                    currentButton.setAttribute("data-state", state);
-                });
+            // Read state directly from storage instead of asking content script
+            browser.storage.sync.get(element_to_check + "Status", function (result) {
+                let state = result[element_to_check + "Status"] || "On";
+                currentButton.setAttribute("data-state", state);
             });
         }
 
@@ -278,13 +187,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 currentButton.setAttribute("data-state", nextState);
 
-                chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                    if (tabs[0]?.id) {
-                        chrome.tabs.sendMessage(tabs[0].id, { method: "changeMultiToggle", element: element_to_change, action: nextState }, err => {
-                            if (chrome.runtime.lastError) console.warn("Error sending 'changeMultiToggle' message:", chrome.runtime.lastError.message);
-                        });
-                    }
-                });
+                // Save setting immediately when toggled
+                browser.storage.sync.set({ [element_to_change + "Status"]: nextState });
             }, false);
         }
 
@@ -330,19 +234,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 if (!platformIsEnabled) {
                     elementsThatCanBeHidden.filter(elem => elem.startsWith(platform)).forEach(function (some_element) {
-                        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                            if (tabs[0]?.id) {
-                                chrome.tabs.sendMessage(tabs[0].id, { method: "showAll", element: some_element }, err => {
-                                    if (chrome.runtime.lastError) console.warn("Error sending 'showAll' message:", chrome.runtime.lastError.message);
-                                });
-                            }
-                        });
                         var toggle = document.getElementById(some_element + "Toggle");
                         if (toggle) {
                             if (toggle.type === 'checkbox') {
                                 toggle.checked = false;
+                                // Save setting immediately
+                                browser.storage.sync.set({ [some_element + "Status"]: false });
                             } else if (toggle.tagName === 'BUTTON') {
                                 toggle.setAttribute('data-state', 'On');
+                                // Save setting immediately
+                                browser.storage.sync.set({ [some_element + "Status"]: "On" });
                             }
                         }
                     });
@@ -364,31 +265,15 @@ document.addEventListener('DOMContentLoaded', function () {
                         var key = some_element + "Status";
                         browser.storage.sync.get(key, function (result) {
                             let storedValue = result[key];
-                            let shouldBeHidden = false;
-
                             if (toggle.type === 'checkbox') {
                                 toggle.checked = storedValue || false;
-                                shouldBeHidden = toggle.checked;
+                                // Save setting immediately
+                                browser.storage.sync.set({ [key]: storedValue || false });
                             } else if (toggle.tagName === 'BUTTON') {
                                 let state = storedValue || "On";
                                 toggle.setAttribute('data-state', state);
-                                shouldBeHidden = (state === "Off" || state === "Blur" || state === "Black");
-                            }
-
-                            if (shouldBeHidden) {
-                                chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                                    if (tabs[0]?.id) {
-                                        if (toggle.tagName === 'BUTTON') {
-                                            chrome.tabs.sendMessage(tabs[0].id, { method: "changeMultiToggle", element: some_element, action: toggle.getAttribute('data-state') }, err => {
-                                                if (chrome.runtime.lastError) console.warn("Error sending 'changeMultiToggle' on enable:", chrome.runtime.lastError.message);
-                                            });
-                                        } else {
-                                            chrome.tabs.sendMessage(tabs[0].id, { method: "change", element: some_element }, err => {
-                                                if (chrome.runtime.lastError) console.warn("Error sending 'change' on enable:", chrome.runtime.lastError.message);
-                                            });
-                                        }
-                                    }
-                                });
+                                // Save setting immediately
+                                browser.storage.sync.set({ [key]: state });
                             }
                         });
                     });
@@ -427,6 +312,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 peekButton.title = 'Toggle visibility';
                 peekButton.setAttribute('data-visible', 'false');
 
+                // Check visibility by asking content script (this is the only communication we keep)
                 chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
                     if (tabs[0]?.id) {
                         chrome.tabs.sendMessage(tabs[0].id, { method: "checkCustom", selector: selector }, function (response) {
@@ -743,8 +629,8 @@ document.addEventListener('DOMContentLoaded', function () {
             browser.storage.sync.set({ "waitTime": waitValue });
             browser.storage.sync.set({ "waitText": document.getElementById("waitText").value });
 
-            e.target.setAttribute("value", "......");
-            delay(250).then(() => e.target.setAttribute("value", "Saved!"));
+            // Show success message
+            e.target.setAttribute("value", "Saved!");
             delay(1500).then(() => e.target.setAttribute("value", "Save settings"));
         });
 
@@ -789,7 +675,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     trigger.addEventListener('click', () => {
                         const isOpen = item.dataset.state === 'open';
                         item.dataset.state = isOpen ? 'closed' : 'open';
-                    });
+                        });
                 }
             });
 
