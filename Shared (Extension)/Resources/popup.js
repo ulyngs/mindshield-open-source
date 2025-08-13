@@ -27,9 +27,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         function setupFrictionDelay() {
+            var frictionToggle = document.getElementById("frictionToggle");
+            var frictionCustomisationOptions = document.querySelector('.toggle-group.center-align.friction-customisation');
+            
             browser.storage.sync.get(["addFriction", "waitText", "waitTime"]).then((result) => {
-                var frictionToggle = document.getElementById("frictionToggle");
-                var frictionCustomisationArrow = document.getElementById("frictionCustomisationArrow");
                 var popupContainer = document.getElementById("popup-content");
                 var messageContainer = document.getElementById("delay-content");
                 var errorContainer = document.getElementById("error-prompt");
@@ -42,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const defaultWaitText = "What's your intention?";
 
                 frictionToggle.checked = result.addFriction || false;
-                frictionCustomisationArrow.style.display = frictionToggle.checked ? "block" : "none";
+                frictionCustomisationOptions.style.display = frictionToggle.checked ? "block" : "none";
 
                 let effectiveWaitText = result.waitText || defaultWaitText;
                 waitTextBox.value = effectiveWaitText;
@@ -79,21 +80,22 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             var frictionToggle = document.getElementById("frictionToggle");
-            var frictionCustomisationArrow = document.getElementById("frictionCustomisationArrow");
             frictionToggle.addEventListener('change', function () {
                 browser.storage.sync.set({ "addFriction": frictionToggle.checked });
-                frictionCustomisationArrow.style.display = frictionToggle.checked ? "block" : "none";
+                frictionCustomisationOptions.style.display = frictionToggle.checked ? "block" : "none";
             });
 
-            var frictionCustomisationArrowRight = document.getElementById("frictionCustomisationArrowRight");
-            var frictionCustomisationArrowDown = document.getElementById("frictionCustomisationArrowDown");
-            var frictionCustomisationOptions = document.querySelector(".toggle-group.friction-customisation");
-            frictionCustomisationArrow.addEventListener('click', function () {
-                const isHidden = frictionCustomisationArrowRight.style.display !== "none";
-                frictionCustomisationArrowRight.style.display = isHidden ? "none" : "inline";
-                frictionCustomisationArrowDown.style.display = isHidden ? "inline" : "none";
-                frictionCustomisationOptions.style.display = isHidden ? "block" : "none";
+            
+            // Auto-save wait time
+            document.getElementById("waitTime").addEventListener('input', function () {
+                let waitValue = parseInt(this.value) || 10;
+                browser.storage.sync.set({ "waitTime": waitValue });
             });
+
+            // Auto-save wait text
+            document.getElementById("waitText").addEventListener('input', function () {
+                browser.storage.sync.set({ "waitText": this.value });
+            })
 
             var savedTextTime = document.getElementById("savedTextTime");
             let hideTimeOut;
@@ -425,7 +427,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('website-toggles').style.display = 'none';
                 document.getElementById('generic-site-options').style.display = 'none';
                 document.getElementById('currentSiteInfo').style.display = 'none';
-                document.querySelector('footer').style.display = 'none';
             }
 
             if (currentPlatform) {
@@ -443,36 +444,6 @@ document.addEventListener('DOMContentLoaded', function () {
         function delay(time) {
             return new Promise(resolve => setTimeout(resolve, time));
         }
-
-        var saveButton = document.querySelector('#saveButton');
-        saveButton.addEventListener('click', (e) => {
-            if (currentPlatform) {
-                elementsThatCanBeHidden
-                    .filter(element => element.startsWith(currentPlatform))
-                    .forEach(function (element) {
-                        var key = element + "Status";
-                        var elementToggle = document.getElementById(element + "Toggle");
-                        if (!elementToggle) return;
-
-                        var value = (elementToggle.getAttribute("data-state") != null) ?
-                            elementToggle.getAttribute("data-state") :
-                            elementToggle.checked;
-                        browser.storage.sync.set({ [key]: value });
-                    });
-                var platformSwitch = document.getElementById(currentPlatform + "Switch");
-                if (platformSwitch) {
-                    browser.storage.sync.set({ [currentPlatform + "Status"]: platformSwitch.checked });
-                }
-            }
-
-            let waitValue = parseInt(document.getElementById("waitTime").value) || 10;
-            browser.storage.sync.set({ "waitTime": waitValue });
-            browser.storage.sync.set({ "waitText": document.getElementById("waitText").value });
-
-            // Show success message
-            e.target.setAttribute("value", "Saved!");
-            delay(1500).then(() => e.target.setAttribute("value", "Save settings"));
-        });
 
         function setupAccordion(triggerId, contentId, arrowRightId, arrowDownId) {
             const trigger = document.querySelector(triggerId);
@@ -503,10 +474,11 @@ document.addEventListener('DOMContentLoaded', function () {
             helpBtn.addEventListener('click', (event) => {
                 event.stopPropagation();
                 const isVisible = faqDropdown.style.display === 'block';
-                // Set display for both dropdown and overlay
                 faqDropdown.style.display = isVisible ? 'none' : 'block';
                 faqOverlay.style.display = isVisible ? 'none' : 'block';
             });
+
+
 
             // Handle accordion items (no change here)
             faqItems.forEach(item => {
@@ -523,7 +495,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.addEventListener('click', (event) => {
                 if (!faqDropdown.contains(event.target) && !helpBtn.contains(event.target)) {
                     faqDropdown.style.display = 'none';
-                    faqOverlay.style.display = 'none'; // Also hide the overlay
+                    faqOverlay.style.display = 'none';
                 }
             });
         }
@@ -532,7 +504,6 @@ document.addEventListener('DOMContentLoaded', function () {
         setupHelpAndFAQ();
         setupAccordion('#hide-previews', '#how-to-description', '#how-to-arrow-right', '#how-to-arrow-down');
         setupAccordion('#hide-previews-not-mobile', '#how-to-description-not-mobile', '#how-to-arrow-right-not-mobile', '#how-to-arrow-down-not-mobile');
-        setupAccordion('#what-sites', '#sites-available', '#sites-arrow-right', '#sites-arrow-down');
         
         // Listen for storage changes to update UI automatically
         browser.storage.onChanged.addListener(function(changes, namespace) {

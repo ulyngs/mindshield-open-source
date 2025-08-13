@@ -3,7 +3,7 @@
 }
 
 body {
-    width: 200px;
+    width: 205px;
     padding: 5px 10px 100px 10px;
     font-family: system-ui;
     text-align: center;
@@ -999,42 +999,71 @@ footer .friction-customisation {
 }
 
 #help-container {
-    position: absolute;
+    position: fixed;   /* was absolute */
     top: 8px;
     right: 8px;
     z-index: 100;
 }
 
+
 #help-icon-btn {
     padding: 4px;
+    background-color: #1a1a1a;
+    border-color: #1a1a1a;
 }
 
 #help-icon-btn svg {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
+    stroke: #ffffff;
 }
-
-#faq-dropdown {
-    position: absolute;
-    top: calc(100% + 4px);
-    right: 0;
-    width: 200px;
-    background-color: #ffffff;
-    border: 1px solid #e4e4e7;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 10px 8px 0px 8px;
-    text-align: left;
-    color: #18181b;
-}
+#help-icon-btn:hover { background-color: #2d2d2d; border-color: #2d2d2d; }
 
 #faq-dropdown h3 {
-    margin: 0;
+    margin: 1.5em 0 0 0;
     font-size: 0.9em;
     font-weight: 600;
     color: #71717a;
     padding-left: 4px;
 }
+
+/* Make the FAQ dropdown behave like a modal */
+#faq-dropdown {
+    text-align: left;
+    color: #18181b;
+    background-color: #ffffff;
+    border: 1px solid #e4e4e7;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 10px 8px 0px 18px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 92%;
+    max-width: 100vh;
+    max-height: 90vh;
+    overflow: auto;
+    z-index: 1000;
+}
+
+/* Optional: tighter spacing for the settings rows inside modal */
+#modal-settings .a-toggle,
+#modal-settings .toggle-group.friction-customisation {
+    margin: 8px 4px;
+}
+/* Bigger checkbox and label inside the modal settings row */
+#modal-settings .friction-toggle input[type="checkbox"] {
+    transform: scale(1.25);
+    transform-origin: left center;
+    margin-right: 6px;
+}
+
+#modal-settings .friction-toggle label {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
 
 .faq-item {
     border-bottom: 1px solid #e4e4e7;
