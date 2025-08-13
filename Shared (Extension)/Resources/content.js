@@ -377,16 +377,11 @@
                     if (chrome.runtime.lastError) {
                         console.error("Error saving custom selectors:", chrome.runtime.lastError);
                     } else {
-                        // The storage change listener will automatically apply the styles
-                        // Also stop selecting mode
-                        chrome.storage.sync.set({ [`${currentSiteIdentifier}SelectionActive`]: false });
                         updateFeedbackMessage('Element hidden', true);
                     }
                 });
             } else {
                 updateFeedbackMessage('Element already hidden');
-                // Still stop selecting mode
-                chrome.storage.sync.set({ [`${currentSiteIdentifier}SelectionActive`]: false });
             }
         });
     }
