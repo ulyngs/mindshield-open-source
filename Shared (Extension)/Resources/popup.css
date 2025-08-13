@@ -480,16 +480,24 @@ footer {
     bottom: 0;
     left: 0;
     text-align: center;
-    padding: 4px 8px;
-    font-size: 0.9em;
+    font-style: italic;
+    padding: 10px 0;
+    font-size: 0.8em;
     border-top: 1px solid rgb(207, 206, 206);
+    width: 100%;
     background-color: #F5F5F5;
+    color: #9b9fa7;
 }
 
 footer a,
 footer a:visited {
     color: #9b9fa7;
+    text-decoration: underline;
+}
+footer a:hover,
+footer a:visited:hover {
     text-decoration: none;
+    color: #babdc3;
 }
 
 .footer-settings {
