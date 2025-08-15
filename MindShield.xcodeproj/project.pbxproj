@@ -58,8 +58,6 @@
 		D76E9F05294E487F0067C09D /* iPad_turn_on_two_annotated.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D76E9F03294E487F0067C09D /* iPad_turn_on_two_annotated.jpeg */; };
 		D76E9F06294E487F0067C09D /* iPad_turn_on_one_annotated.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = D76E9F04294E487F0067C09D /* iPad_turn_on_one_annotated.jpeg */; };
 		F307B9F62CBA68F40073345A /* insta_home_screen_small.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F307B9F52CBA68F40073345A /* insta_home_screen_small.mp4 */; };
-		F32DDEA92C4BF95B00CA441C /* icon-square.svg in Resources */ = {isa = PBXBuildFile; fileRef = F32DDEA82C4BF95B00CA441C /* icon-square.svg */; };
-		F32DDEAA2C4BF95B00CA441C /* icon-square.svg in Resources */ = {isa = PBXBuildFile; fileRef = F32DDEA82C4BF95B00CA441C /* icon-square.svg */; };
 		F3B35BA22C4D41C40066A0BD /* icon-1024.png in Resources */ = {isa = PBXBuildFile; fileRef = F3B35BA12C4D41C40066A0BD /* icon-1024.png */; };
 		F3B35BA32C4D41C40066A0BD /* icon-1024.png in Resources */ = {isa = PBXBuildFile; fileRef = F3B35BA12C4D41C40066A0BD /* icon-1024.png */; };
 /* End PBXBuildFile section */
@@ -145,7 +143,6 @@
 		D78C7777294DC1A2003A6A0A /* MindShield.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = MindShield.entitlements; sourceTree = "<group>"; };
 		D78C7778294DC1B6003A6A0A /* MindShield.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MindShield.entitlements; sourceTree = "<group>"; };
 		F307B9F52CBA68F40073345A /* insta_home_screen_small.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = insta_home_screen_small.mp4; sourceTree = "<group>"; };
-		F32DDEA82C4BF95B00CA441C /* icon-square.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "icon-square.svg"; sourceTree = "<group>"; };
 		F3B35BA12C4D41C40066A0BD /* icon-1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-1024.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -209,7 +206,6 @@
 			isa = PBXGroup;
 			children = (
 				F3B35BA12C4D41C40066A0BD /* icon-1024.png */,
-				F32DDEA82C4BF95B00CA441C /* icon-square.svg */,
 				D769219D2756452C00EB4CEA /* Main.html */,
 				D76921A02756452C00EB4CEA /* Style.css */,
 				D76921A12756452C00EB4CEA /* Script.js */,
@@ -302,9 +298,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D76921B22756452E00EB4CEA /* MindShield (iOS) */ = {
+		D76921B22756452E00EB4CEA /* App (iOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D76922062756452E00EB4CEA /* Build configuration list for PBXNativeTarget "MindShield (iOS)" */;
+			buildConfigurationList = D76922062756452E00EB4CEA /* Build configuration list for PBXNativeTarget "App (iOS)" */;
 			buildPhases = (
 				D76921AF2756452E00EB4CEA /* Sources */,
 				D76921B02756452E00EB4CEA /* Frameworks */,
@@ -316,14 +312,14 @@
 			dependencies = (
 				D76921D42756452E00EB4CEA /* PBXTargetDependency */,
 			);
-			name = "MindShield (iOS)";
+			name = "App (iOS)";
 			productName = "Hide distractions on YouTube (iOS)";
 			productReference = D76921B32756452E00EB4CEA /* MindShield.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D76921C42756452E00EB4CEA /* MindShield (macOS) */ = {
+		D76921C42756452E00EB4CEA /* App (macOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D769220D2756452E00EB4CEA /* Build configuration list for PBXNativeTarget "MindShield (macOS)" */;
+			buildConfigurationList = D769220D2756452E00EB4CEA /* Build configuration list for PBXNativeTarget "App (macOS)" */;
 			buildPhases = (
 				D76921C12756452E00EB4CEA /* Sources */,
 				D76921C22756452E00EB4CEA /* Frameworks */,
@@ -335,14 +331,14 @@
 			dependencies = (
 				D76921DE2756452E00EB4CEA /* PBXTargetDependency */,
 			);
-			name = "MindShield (macOS)";
+			name = "App (macOS)";
 			productName = "Hide distractions on YouTube (macOS)";
 			productReference = D76921C52756452E00EB4CEA /* MindShield.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D76921D02756452E00EB4CEA /* MindShield Extension (iOS) */ = {
+		D76921D02756452E00EB4CEA /* Extension (iOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D76922022756452E00EB4CEA /* Build configuration list for PBXNativeTarget "MindShield Extension (iOS)" */;
+			buildConfigurationList = D76922022756452E00EB4CEA /* Build configuration list for PBXNativeTarget "Extension (iOS)" */;
 			buildPhases = (
 				D76921CD2756452E00EB4CEA /* Sources */,
 				D76921CE2756452E00EB4CEA /* Frameworks */,
@@ -352,14 +348,14 @@
 			);
 			dependencies = (
 			);
-			name = "MindShield Extension (iOS)";
+			name = "Extension (iOS)";
 			productName = "Hide distractions on YouTube Extension (iOS)";
 			productReference = D76921D12756452E00EB4CEA /* MindShield Extension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		D76921DA2756452E00EB4CEA /* MindShield Extension (macOS) */ = {
+		D76921DA2756452E00EB4CEA /* Extension (macOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D76922092756452E00EB4CEA /* Build configuration list for PBXNativeTarget "MindShield Extension (macOS)" */;
+			buildConfigurationList = D76922092756452E00EB4CEA /* Build configuration list for PBXNativeTarget "Extension (macOS)" */;
 			buildPhases = (
 				D76921D72756452E00EB4CEA /* Sources */,
 				D76921D82756452E00EB4CEA /* Frameworks */,
@@ -369,7 +365,7 @@
 			);
 			dependencies = (
 			);
-			name = "MindShield Extension (macOS)";
+			name = "Extension (macOS)";
 			productName = "Hide distractions on YouTube Extension (macOS)";
 			productReference = D76921DB2756452E00EB4CEA /* MindShield Extension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -411,10 +407,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D76921B22756452E00EB4CEA /* MindShield (iOS) */,
-				D76921C42756452E00EB4CEA /* MindShield (macOS) */,
-				D76921D02756452E00EB4CEA /* MindShield Extension (iOS) */,
-				D76921DA2756452E00EB4CEA /* MindShield Extension (macOS) */,
+				D76921B22756452E00EB4CEA /* App (iOS) */,
+				D76921C42756452E00EB4CEA /* App (macOS) */,
+				D76921D02756452E00EB4CEA /* Extension (iOS) */,
+				D76921DA2756452E00EB4CEA /* Extension (macOS) */,
 			);
 		};
 /* End PBXProject section */
@@ -425,7 +421,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D76E9F06294E487F0067C09D /* iPad_turn_on_one_annotated.jpeg in Resources */,
-				F32DDEA92C4BF95B00CA441C /* icon-square.svg in Resources */,
 				D76921BC2756452E00EB4CEA /* LaunchScreen.storyboard in Resources */,
 				D76921E22756452E00EB4CEA /* Main.html in Resources */,
 				D76921E82756452E00EB4CEA /* Script.js in Resources */,
@@ -448,7 +443,6 @@
 				D76921E72756452E00EB4CEA /* Style.css in Resources */,
 				D76921E92756452E00EB4CEA /* Script.js in Resources */,
 				D7607A1D276792B100FB0E82 /* Main.storyboard in Resources */,
-				F32DDEAA2C4BF95B00CA441C /* icon-square.svg in Resources */,
 				D76921ED2756452E00EB4CEA /* Assets.xcassets in Resources */,
 				D76921E32756452E00EB4CEA /* Main.html in Resources */,
 			);
@@ -537,12 +531,12 @@
 /* Begin PBXTargetDependency section */
 		D76921D42756452E00EB4CEA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D76921D02756452E00EB4CEA /* MindShield Extension (iOS) */;
+			target = D76921D02756452E00EB4CEA /* Extension (iOS) */;
 			targetProxy = D76921D32756452E00EB4CEA /* PBXContainerItemProxy */;
 		};
 		D76921DE2756452E00EB4CEA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D76921DA2756452E00EB4CEA /* MindShield Extension (macOS) */;
+			target = D76921DA2756452E00EB4CEA /* Extension (macOS) */;
 			targetProxy = D76921DD2756452E00EB4CEA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -704,7 +698,7 @@
 				DEVELOPMENT_TEAM = 7YEYWQKK25;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = MindShield;
+				INFOPLIST_KEY_CFBundleDisplayName = "Viking Focus";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -735,7 +729,7 @@
 				DEVELOPMENT_TEAM = 7YEYWQKK25;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = MindShield;
+				INFOPLIST_KEY_CFBundleDisplayName = "Viking Focus";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -770,7 +764,7 @@
 				DEVELOPMENT_TEAM = 7YEYWQKK25;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (App)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = MindShield;
+				INFOPLIST_KEY_CFBundleDisplayName = "Viking Focus";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -809,7 +803,7 @@
 				DEVELOPMENT_TEAM = 7YEYWQKK25;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (App)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = MindShield;
+				INFOPLIST_KEY_CFBundleDisplayName = "Viking Focus";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -851,7 +845,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = MindShield;
+				INFOPLIST_KEY_CFBundleDisplayName = "Viking Focus";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -886,7 +880,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = MindShield;
+				INFOPLIST_KEY_CFBundleDisplayName = "Viking Focus";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -923,7 +917,7 @@
 				DEVELOPMENT_TEAM = 7YEYWQKK25;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = MindShield;
+				INFOPLIST_KEY_CFBundleDisplayName = "Viking Focus";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -962,7 +956,7 @@
 				DEVELOPMENT_TEAM = 7YEYWQKK25;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = MindShield;
+				INFOPLIST_KEY_CFBundleDisplayName = "Viking Focus";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -998,7 +992,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D76922022756452E00EB4CEA /* Build configuration list for PBXNativeTarget "MindShield Extension (iOS)" */ = {
+		D76922022756452E00EB4CEA /* Build configuration list for PBXNativeTarget "Extension (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D76922032756452E00EB4CEA /* Debug */,
@@ -1007,7 +1001,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D76922062756452E00EB4CEA /* Build configuration list for PBXNativeTarget "MindShield (iOS)" */ = {
+		D76922062756452E00EB4CEA /* Build configuration list for PBXNativeTarget "App (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D76922072756452E00EB4CEA /* Debug */,
@@ -1016,7 +1010,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D76922092756452E00EB4CEA /* Build configuration list for PBXNativeTarget "MindShield Extension (macOS)" */ = {
+		D76922092756452E00EB4CEA /* Build configuration list for PBXNativeTarget "Extension (macOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D769220A2756452E00EB4CEA /* Debug */,
@@ -1025,7 +1019,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D769220D2756452E00EB4CEA /* Build configuration list for PBXNativeTarget "MindShield (macOS)" */ = {
+		D769220D2756452E00EB4CEA /* Build configuration list for PBXNativeTarget "App (macOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D769220E2756452E00EB4CEA /* Debug */,

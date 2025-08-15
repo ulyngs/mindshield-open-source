@@ -17,7 +17,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D76921B22756452E00EB4CEA"
                BuildableName = "MindShield.app"
-               BlueprintName = "MindShield (iOS)"
+               BlueprintName = "App (iOS)"
                ReferencedContainer = "container:MindShield.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,7 +46,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D76921B22756452E00EB4CEA"
             BuildableName = "MindShield.app"
-            BlueprintName = "MindShield (iOS)"
+            BlueprintName = "App (iOS)"
             ReferencedContainer = "container:MindShield.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -63,7 +63,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D76921B22756452E00EB4CEA"
             BuildableName = "MindShield.app"
-            BlueprintName = "MindShield (iOS)"
+            BlueprintName = "App (iOS)"
             ReferencedContainer = "container:MindShield.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

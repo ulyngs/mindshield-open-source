@@ -1,12 +1,14 @@
-# MindShield
+# Viking Focus
 
-<img src="https://github.com/ulyngs/mindshield-open-source/blob/main/Shared%20(App)/Assets.xcassets/AppIcon.appiconset/icon-1024.png?raw=true" alt="MindShield Icon" width="120" />
+**Plain sailing in the distracting digital world**
 
-Source code for the Safari, Chrome, and Firefox extension **MindShield**, available for Mac, iOS, and other devices.
+<img src="https://github.com/ulyngs/mindshield-open-source/blob/main/Shared%20(App)/Assets.xcassets/AppIcon.appiconset/icon-1024.png?raw=true" alt="Viking Focus Icon" width="120" />
+
+Source code for the Safari, Chrome, and Firefox extension **Viking Focus**, available for Mac, iOS, and other devices.
 
 **Hide distractions on any website** (e.g., YouTube, Instagram, LinkedIn, Google Search, etc.). Works on any website in any browser, with pre-configured options for popular platforms.
 
-MindShield is **open source** and developed by the [ReDD team](https://github.com/ulyngs/mindshield-open-source), and is [backed by research](https://arxiv.org/pdf/2001.04180.pdf).
+Viking Focus is **open source** and developed by the [ReDD team](https://github.com/ulyngs/mindshield-open-source), and is [backed by research](https://arxiv.org/pdf/2001.04180.pdf).
 
 ## Features
 

@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "default_locale": "en",
-  "name": "MindShield",
-  "description": "Hide distractions on the web (YouTube, Instagram, ... or any other site!)",
+  "name": "Viking Focus",
+  "description": "Plain sailing in the distracting digital world. Hide distractions on the web (YouTube, Instagram, ... or any other site!)",
   "version": "3.0",
   "icons": {
     "48": "images/icon-48.png",

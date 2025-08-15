@@ -1,6 +1,6 @@
 //
 //  selectors.js
-//  MindShield
+//  Viking Focus
 //
 //  Created by Ulrik Lyngs on 09/06/2025.
 //

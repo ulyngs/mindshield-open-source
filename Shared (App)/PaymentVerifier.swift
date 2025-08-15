@@ -2,7 +2,7 @@
 //  PaymentVerifier.swift
 //  Shared (App)
 //
-//  Created for MindShield payment verification
+//  Created for Viking Focus payment verification
 //
 
 import Foundation

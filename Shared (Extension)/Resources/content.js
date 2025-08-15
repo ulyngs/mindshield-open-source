@@ -516,12 +516,12 @@
 
     // --- Perform one-time initial setup, protected by the flag ---
     if (window.hasRun) {
-        console.log(`MindShield listener re-established for: ${currentSiteIdentifier}. Page already initialized.`);
+        console.log(`Viking Focus listener re-established for: ${currentSiteIdentifier}. Page already initialized.`);
         return;
     }
     window.hasRun = true;
 
-    console.log(`MindShield running on: ${currentSiteIdentifier}. (Detected Platform: ${currentPlatform || 'None'})`);
+    console.log(`Viking Focus running on: ${currentSiteIdentifier}. (Detected Platform: ${currentPlatform || 'None'})`);
 
     // Initial application of settings (polling will handle subsequent changes)
     if (currentPlatform) {
