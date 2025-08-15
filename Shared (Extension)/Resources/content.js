@@ -409,6 +409,9 @@
     let lastAppliedCustomElements = {};
     
     function applySettingsFromStorage() {
+        if (!chrome.runtime?.id) // don't run if disconnected
+            return;
+
         if (currentPlatform) {
             const platformStatusKey = `${currentPlatform}Status`;
             chrome.storage.sync.get(platformStatusKey, function (platformResult) {
@@ -526,8 +529,8 @@
         }
     });
     
-    // Also poll every 0.5 seconds as a safety net
-    setInterval(applySettingsFromStorage, 500);
+    // Also poll every 1 second as a safety net
+    setInterval(applySettingsFromStorage, 1000);
 
     // --- Perform one-time initial setup, protected by the flag ---
     if (window.hasRun) {

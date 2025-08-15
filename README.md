@@ -2,7 +2,9 @@
 
 **Plain sailing in the distracting digital world**
 
-<img src="https://github.com/ulyngs/mindshield-open-source/blob/main/Shared%20(App)/Assets.xcassets/AppIcon.appiconset/icon-1024.png?raw=true" alt="Viking Focus Icon" width="120" />
+<p align="center">
+  <img src="https://github.com/ulyngs/mindshield-open-source/blob/main/Shared%20(Extension)/Resources/images/icon-512.png?raw=true" alt="Viking Focus Icon" width="120" />
+</p>
 
 Source code for the Safari, Chrome, and Firefox extension **Viking Focus**, available for Mac, iOS, and other devices.
 
