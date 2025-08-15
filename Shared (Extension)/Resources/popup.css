@@ -3,12 +3,16 @@
 }
 
 body {
-    width: 205px;
-    padding: 5px 10px 100px 10px;
+    width: 90vw;
+    max-width: 400px;
+    min-width: 300px;
+    padding: 0.5rem 1rem 6rem 1rem;
     font-family: system-ui;
     text-align: center;
     background-color: #F5F5F5;
     color: #333333;
+    overflow-x: hidden;
+    box-sizing: border-box;
 }
 
 .website-toggle {
@@ -99,9 +103,12 @@ a {
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
     padding: 12px 10px 5px 14px;
-    width: 140px;
+    width: 100%;
+    max-width: 200px;
+    min-width: 140px;
     font-size: 0.95em;
     border-radius: 3px;
+    box-sizing: border-box;
 }
 
 .dropdown-content .a-toggle:hover {
@@ -933,7 +940,9 @@ footer .footer-bottom-row {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 5px;
     z-index: 10;
-    width: 180px;
+    width: 100%;
+    max-width: 200px;
+    min-width: 150px;
     /* Adjust width */
 }
 
