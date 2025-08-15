@@ -85,12 +85,12 @@ document.addEventListener('DOMContentLoaded', function () {
             // Auto-save wait time
             document.getElementById("waitTime").addEventListener('input', function () {
                 let waitValue = parseInt(this.value) || 10;
-                browser.storage.sync.set({ "waitTime": waitValue });
+                chrome.storage.sync.set({ "waitTime": waitValue });
             });
 
             // Auto-save wait text
             document.getElementById("waitText").addEventListener('input', function () {
-                browser.storage.sync.set({ "waitText": this.value });
+                chrome.storage.sync.set({ "waitText": this.value });
             })
 
             var savedTextTime = document.getElementById("savedTextTime");
