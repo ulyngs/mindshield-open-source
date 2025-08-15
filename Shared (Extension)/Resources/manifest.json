@@ -11,6 +11,10 @@
     "256": "images/icon-256.png",
     "512": "images/icon-512.png"
   },
+  "background": {
+    "service_worker": "background.js",
+    "scripts": ["background.js"]
+  },
   "content_scripts": [
     {
       "run_at": "document_start",
@@ -40,7 +44,8 @@
   "permissions": [
     "storage",
     "tabs",
-    "activeTab"
+    "activeTab",
+    "nativeMessaging"
   ],
   "browser_specific_settings": {
     "gecko": {

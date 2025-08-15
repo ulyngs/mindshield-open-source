@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		71CCE4CB2E4F258A002FE508 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = 71CCE4CA2E4F2585002FE508 /* background.js */; };
+		71CCE4CC2E4F258A002FE508 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = 71CCE4CA2E4F2585002FE508 /* background.js */; };
+		71CCE4CE2E4F27FB002FE508 /* PaymentVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CCE4CD2E4F27FB002FE508 /* PaymentVerifier.swift */; };
+		71CCE4CF2E4F27FB002FE508 /* PaymentVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CCE4CD2E4F27FB002FE508 /* PaymentVerifier.swift */; };
+		71CCE4D02E4F29B3002FE508 /* PaymentVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CCE4CD2E4F27FB002FE508 /* PaymentVerifier.swift */; };
+		71CCE4D12E4F29B3002FE508 /* PaymentVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CCE4CD2E4F27FB002FE508 /* PaymentVerifier.swift */; };
 		D714AB822DF7403500854882 /* selectors.js in Resources */ = {isa = PBXBuildFile; fileRef = D714AB812DF7403100854882 /* selectors.js */; };
 		D714AB832DF7403500854882 /* selectors.js in Resources */ = {isa = PBXBuildFile; fileRef = D714AB812DF7403100854882 /* selectors.js */; };
 		D72FA3D72DF826AF0021A2E3 /* shared_data.js in Resources */ = {isa = PBXBuildFile; fileRef = D72FA3D62DF826AB0021A2E3 /* shared_data.js */; };
@@ -101,6 +107,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		71CCE4CA2E4F2585002FE508 /* background.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = background.js; sourceTree = "<group>"; };
+		71CCE4CD2E4F27FB002FE508 /* PaymentVerifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentVerifier.swift; sourceTree = "<group>"; };
 		D714AB812DF7403100854882 /* selectors.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = selectors.js; sourceTree = "<group>"; };
 		D72FA3D62DF826AB0021A2E3 /* shared_data.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = shared_data.js; sourceTree = "<group>"; };
 		D76674DE294E282900F4863B /* iPhone_turn_on_two_anon.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iPhone_turn_on_two_anon.jpeg; sourceTree = "<group>"; };
@@ -189,6 +197,7 @@
 		D769219B2756452C00EB4CEA /* Shared (App) */ = {
 			isa = PBXGroup;
 			children = (
+				71CCE4CD2E4F27FB002FE508 /* PaymentVerifier.swift */,
 				D76921A22756452C00EB4CEA /* ViewController.swift */,
 				D76921A32756452E00EB4CEA /* Assets.xcassets */,
 				D769219C2756452C00EB4CEA /* Resources */,
@@ -220,6 +229,7 @@
 		D76921A62756452E00EB4CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				71CCE4CA2E4F2585002FE508 /* background.js */,
 				D72FA3D62DF826AB0021A2E3 /* shared_data.js */,
 				D714AB812DF7403100854882 /* selectors.js */,
 				D76921A72756452E00EB4CEA /* _locales */,
@@ -454,6 +464,7 @@
 				D76921F22756452E00EB4CEA /* images in Resources */,
 				D76921F42756452E00EB4CEA /* manifest.json in Resources */,
 				D769221727564D8F00EB4CEA /* style.css in Resources */,
+				71CCE4CC2E4F258A002FE508 /* background.js in Resources */,
 				D76921F02756452E00EB4CEA /* _locales in Resources */,
 				D76921F82756452E00EB4CEA /* content.js in Resources */,
 				D76921FE2756452E00EB4CEA /* popup.js in Resources */,
@@ -471,6 +482,7 @@
 				D76921F32756452E00EB4CEA /* images in Resources */,
 				D76921F52756452E00EB4CEA /* manifest.json in Resources */,
 				D769221827564D8F00EB4CEA /* style.css in Resources */,
+				71CCE4CB2E4F258A002FE508 /* background.js in Resources */,
 				D76921F12756452E00EB4CEA /* _locales in Resources */,
 				D76921F92756452E00EB4CEA /* content.js in Resources */,
 				D76921FF2756452E00EB4CEA /* popup.js in Resources */,
@@ -487,6 +499,7 @@
 			files = (
 				D76921EA2756452E00EB4CEA /* ViewController.swift in Sources */,
 				D76921B72756452E00EB4CEA /* AppDelegate.swift in Sources */,
+				71CCE4CF2E4F27FB002FE508 /* PaymentVerifier.swift in Sources */,
 				D76921B92756452E00EB4CEA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -495,6 +508,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71CCE4CE2E4F27FB002FE508 /* PaymentVerifier.swift in Sources */,
 				D76921EB2756452E00EB4CEA /* ViewController.swift in Sources */,
 				D76921C82756452E00EB4CEA /* AppDelegate.swift in Sources */,
 			);
@@ -504,6 +518,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71CCE4D02E4F29B3002FE508 /* PaymentVerifier.swift in Sources */,
 				D76921EE2756452E00EB4CEA /* SafariWebExtensionHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -512,6 +527,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71CCE4D12E4F29B3002FE508 /* PaymentVerifier.swift in Sources */,
 				D76921EF2756452E00EB4CEA /* SafariWebExtensionHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -4,6 +4,33 @@ document.addEventListener('DOMContentLoaded', function () {
     function initializePopup() {
         console.log("Popup initialized.");
 
+        // hide payment field for now
+        const paymentField = document.getElementById('payment-status');
+        paymentField.style.display = 'none';
+
+        /*// Check payment status when popup opens"
+        checkPaymentStatus();
+
+        function checkPaymentStatus() {
+            const paymentText = document.getElementById('payment-text');
+
+            // Send message to check payment status
+            chrome.runtime.sendMessage({ type: "checkPurchase" })
+                .then(result => {
+                    if (result === null) {
+                        paymentText.textContent = 'Not available on this browser';
+                    } else if (result && result.paid !== undefined) {
+                        paymentText.textContent = result.paid ? 'Paid' : 'Not Paid';
+                    } else {
+                        paymentText.textContent = 'Error';
+                    }
+                })
+                .catch(err => {
+                    console.error("Error checking purchase:", err);
+                    paymentText.textContent = 'Error';
+                });
+        }*/
+
         let isSelectionModeActive = false;
         let currentPlatform = null;
         let currentSiteIdentifier = null;

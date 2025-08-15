@@ -17,9 +17,22 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
         os_log(.default, "Received message from browser.runtime.sendNativeMessage: %@", message as! CVarArg)
 
         let response = NSExtensionItem()
-        response.userInfo = [ SFExtensionMessageKey: [ "Response to": message ] ]
+        
+        // Handle different message types
+        if let messageDict = message as? [String: Any],
+           let action = messageDict["action"] as? String {
+            
+            switch action {
+            case "checkPurchase":
+                let paymentStatus = PaymentVerifier.shared.checkPaymentStatus()
+                response.userInfo = [SFExtensionMessageKey: paymentStatus]
+            default:
+                response.userInfo = [SFExtensionMessageKey: ["error": "Unknown action"]]
+            }
+        } else {
+            response.userInfo = [SFExtensionMessageKey: ["error": "Invalid message format"]]
+        }
 
         context.completeRequest(returningItems: [response], completionHandler: nil)
     }
-
 }
