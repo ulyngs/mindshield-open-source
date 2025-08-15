@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "default_locale": "en",
-  "name": "MindShield - hide distractions online",
+  "name": "MindShield",
   "description": "Hide distractions on the web (YouTube, Instagram, ... or any other site!)",
   "version": "3.0",
   "icons": {
