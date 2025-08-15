@@ -14,4 +14,9 @@ function openPreferences() {
     webkit.messageHandlers.controller.postMessage("open-preferences");
 }
 
+function openSafari() {
+    webkit.messageHandlers.controller.postMessage("open-safari");
+}
+
 document.querySelector("button.open-preferences").addEventListener("click", openPreferences);
+document.querySelector("button.open-safari").addEventListener("click", openSafari);

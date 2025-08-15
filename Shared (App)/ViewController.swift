@@ -56,8 +56,10 @@ class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMess
     }
 
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        let messageBody = message.body as! String
+        
 #if os(macOS)
-        if (message.body as! String != "open-preferences") {
+        if (messageBody != "open-preferences") {
             return;
         }
 
@@ -70,6 +72,15 @@ class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMess
             DispatchQueue.main.async {
                 NSApplication.shared.terminate(nil)
             }
+        }
+#elseif os(iOS)
+        if (messageBody != "open-safari") {
+            return;
+        }
+        
+        // Open Safari on iOS by opening a simple URL
+        if let safariURL = URL(string: "https://www.youtube.com/watch?&v=SsW5laIOJIw") {
+            UIApplication.shared.open(safariURL, options: [:], completionHandler: nil)
         }
 #endif
     }
