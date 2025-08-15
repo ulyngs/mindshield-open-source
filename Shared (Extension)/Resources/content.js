@@ -422,29 +422,44 @@
                         
                         // Check if we need to update this element
                         let currentSetting = platformIsOn ? (lastAppliedSettings[item] || "default") : "platformDisabled";
-                        let newSetting = platformIsOn ? (platformResult[itemStatusKey] || "On") : "platformDisabled";
                         
-                        if (currentSetting !== newSetting) {
-                            if (!platformIsOn) {
-                                // Platform is disabled, show all elements
-                                createStyleElement(styleName, cssSelectors[item + "CssOn"]);
-                                lastAppliedSettings[item] = "platformDisabled";
-                            } else {
-                                // Platform is enabled, check individual element status
-                                chrome.storage.sync.get(itemStatusKey, function (itemResult) {
-                                    let statusValue = itemResult[itemStatusKey];
-                                    let cssToApply;
-                                    
-                                    if (item === "youtubeThumbnails" || item === "youtubeNotifications") {
-                                        let state = statusValue || "On";
-                                        cssToApply = cssSelectors[item + "Css" + state];
-                                        lastAppliedSettings[item] = state;
-                                    } else {
-                                        cssToApply = (statusValue === true) ? cssSelectors[item + "CssOff"] : cssSelectors[item + "CssOn"];
-                                        lastAppliedSettings[item] = statusValue === true ? "hidden" : "visible";
-                                    }
+                        // For multi-state elements, we need to get the actual stored value
+                        if (platformIsOn && (item === "youtubeThumbnails" || item === "youtubeNotifications")) {
+                            chrome.storage.sync.get(itemStatusKey, function (itemResult) {
+                                let statusValue = itemResult[itemStatusKey];
+                                let newSetting = statusValue || "On";
+                                
+                                if (currentSetting !== newSetting) {
+                                    let cssToApply = cssSelectors[item + "Css" + newSetting];
+                                    lastAppliedSettings[item] = newSetting;
                                     createStyleElement(styleName, cssToApply);
-                                });
+                                }
+                            });
+                        } else {
+                            let newSetting = platformIsOn ? (platformResult[itemStatusKey] || "On") : "platformDisabled";
+                            
+                            if (currentSetting !== newSetting) {
+                                if (!platformIsOn) {
+                                    // Platform is disabled, show all elements
+                                    createStyleElement(styleName, cssSelectors[item + "CssOn"]);
+                                    lastAppliedSettings[item] = "platformDisabled";
+                                } else {
+                                    // Platform is enabled, check individual element status
+                                    chrome.storage.sync.get(itemStatusKey, function (itemResult) {
+                                        let statusValue = itemResult[itemStatusKey];
+                                        let cssToApply;
+                                        
+                                        if (item === "youtubeThumbnails" || item === "youtubeNotifications") {
+                                            let state = statusValue || "On";
+                                            cssToApply = cssSelectors[item + "Css" + state];
+                                            lastAppliedSettings[item] = state;
+                                        } else {
+                                            cssToApply = (statusValue === true) ? cssSelectors[item + "CssOff"] : cssSelectors[item + "CssOn"];
+                                            lastAppliedSettings[item] = statusValue === true ? "hidden" : "visible";
+                                        }
+                                        createStyleElement(styleName, cssToApply);
+                                    });
+                                }
                             }
                         }
                     });
