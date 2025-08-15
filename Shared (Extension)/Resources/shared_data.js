@@ -1,5 +1,4 @@
 // shared_data.js
-// Viking Focus
 //
 // Created by Ulrik Lyngs on 10/06/2025.
 
