@@ -50,7 +50,7 @@ const cssSelectors = {
 
     // Facebook
     facebookFeedCssOn: '#ssrb_feed_start + div, div.x1hc1fzr.x1unhpq9.x6o7n8i { visibility: visible !important; } #screen-root div > div[data-mcomponent="MContainer"] > div.m.displayed:nth-child(n+6) { display: block !important; }',
-    facebookFeedCssOff: '#ssrb_feed_start + div, div.x1hc1fzr.x1unhpq9.x6o7n8i { visibility: hidden !important; } #screen-root div:not([data-adjust-on-keyboard-shown="true"]) > div[data-mcomponent="MContainer"] > div.m.displayed:nth-child(n+7) { display: none !important; }',
+    facebookFeedCssOff: '#ssrb_feed_start + div, div.x1hc1fzr.x1unhpq9.x6o7n8i { visibility: hidden !important; } #screen-root div:not([data-adjust-on-keyboard-shown="true"]) > div[data-mcomponent="MContainer"] > div.m.displayed:nth-child(n+7), #screen-root div[data-mcomponent="MContainer"] div[data-mcomponent="MContainer"]:has(div[data-testid^="post-profile"]) { display: none !important; }',
     facebookWatchCssOn: '',
     facebookWatchCssOff: 'a[href$="/watch/"], a[aria-label="Video"], div[aria-label*="video" i] { display: none !important; } /* mobile */ div[role="button"]:has(div[data-hidden-ref-key="videos.jewel.hidden"]) {display: none !important;} div.m.displayed:has(div[data-hidden-ref-key="videos.jewel.hidden"]) {background-color: white !important;} ',
     facebookNotificationsCssOn: '',
