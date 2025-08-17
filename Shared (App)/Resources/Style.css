@@ -93,7 +93,7 @@ button {
     height: 150px;
     margin: 0 0 8px 0;
     padding: 0;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .app-icon.platform-mac {
