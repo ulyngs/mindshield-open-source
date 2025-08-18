@@ -3,7 +3,7 @@
   "default_locale": "en",
   "name": "Viking Focus",
   "description": "Plain sailing in the digital world. Hide distractions on the web (YouTube, Instagram, ... or any other site!)",
-  "version": "3.2",
+  "version": "3.3",
   "icons": {
     "48": "images/icon-48.png",
     "96": "images/icon-96.png",
