@@ -114,7 +114,7 @@ const cssSelectors = {
     googleBackgroundCssOn: '#tads, #atvcap .ptJHdc.yY236b.c3mZkd, #tads .CnP9N.U3A9Ac.irmCpc,.commercial-unit-mobile-top,.commercial-unit-mobile-top .v7hl4d,.commercial-unit-mobile-bottom .v7hl4d {background-color: transparent !important;}',
     googleBackgroundCssOff: '#tads, #atvcap .ptJHdc.yY236b.c3mZkd, #tads .CnP9N.U3A9Ac.irmCpc,.commercial-unit-mobile-top,.commercial-unit-mobile-top .v7hl4d,.commercial-unit-mobile-bottom .v7hl4d {background-color: #F2E6C3 !important;}',
     googleAIOverviewCssOn: '',
-    googleAIOverviewCssOff: '.bzXtMb.M8OgIe.dRpWwb { display: none !important; }',
+    googleAIOverviewCssOff: '#eKIzJc { display: none !important; }',
 
     // Reddit
     redditFeedCssOn: 'shreddit-feed { display: block !important; }',
