@@ -42,7 +42,7 @@ const elementsThatCanBeHidden = [
     // WhatsApp
     "whatsappPreview", "whatsappNotificationPrompt",
     // Google
-    "googleAds", "googleBackground",
+    "googleAds", "googleBackground", "googleAIOverview",
     // Reddit
     "redditFeed", "redditPopular", "redditAll", "redditRecent", "redditCommunities", "redditNotification", "redditChat", "redditTrending", "redditPopularCommunities"
 ];
