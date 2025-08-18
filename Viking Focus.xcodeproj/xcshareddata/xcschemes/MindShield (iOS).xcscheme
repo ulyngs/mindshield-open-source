@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D76921B22756452E00EB4CEA"
-               BuildableName = "MindShield.app"
+               BuildableName = "Viking Focus.app"
                BlueprintName = "App (iOS)"
-               ReferencedContainer = "container:MindShield.xcodeproj">
+               ReferencedContainer = "container:Viking Focus.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D76921B22756452E00EB4CEA"
-            BuildableName = "MindShield.app"
+            BuildableName = "Viking Focus.app"
             BlueprintName = "App (iOS)"
-            ReferencedContainer = "container:MindShield.xcodeproj">
+            ReferencedContainer = "container:Viking Focus.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D76921B22756452E00EB4CEA"
-            BuildableName = "MindShield.app"
+            BuildableName = "Viking Focus.app"
             BlueprintName = "App (iOS)"
-            ReferencedContainer = "container:MindShield.xcodeproj">
+            ReferencedContainer = "container:Viking Focus.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
