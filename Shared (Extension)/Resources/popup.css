@@ -231,6 +231,21 @@ input:checked+.slider:before {
     background-color: black;
 }
 
+/* Add this to popup.css to apply the loading animation to multi-state buttons */
+.multi-state-checkbox.loading::after {
+    content: '\21BB'; /* Unicode for clockwise arrow circle (loading spinner) */
+    font-size: 12px;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: loading 0.8s linear;
+    opacity: 1;
+    transform: scale(1) rotate(0);
+}
+
 .slider.round {
     border-radius: 34px;
 }
@@ -318,9 +333,22 @@ button[id$="AddElementButton"]:hover {
     font-size: 12px;
     color: #CB22ED;
     line-height: 0;
-    -webkit-transition: all .1s;
-    transition: all .1s;
+    -webkit-transition: all .9s;
+    transition: all .9s;
 }
+
+.hide-checkboxes [type="checkbox"].loading+label:before {
+    content: '\21BB'; /* Unicode for clockwise arrow circle (loading spinner) */
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: loading 0.8s linear infinite;
+    border: none;
+    background: none;
+    box-shadow: none;
+}
+
 
 .hide-checkboxes [type="checkbox"]:not(:checked)+label:after {
     opacity: 0;
@@ -1242,3 +1270,11 @@ footer .friction-customisation {
         background-color: #27272a;
     }
 }
+
+
+/* Add this to popup.css to define the loading animation */
+@keyframes loading {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+

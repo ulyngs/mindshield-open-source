@@ -177,8 +177,13 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!currentCheckbox) return;
 
             currentCheckbox.addEventListener('click', function () {
-                const newValue = currentCheckbox.checked;
-                chrome.storage.sync.set({ [element_to_change + "Status"]: newValue });
+                const newValue = currentCheckbox.checked; // Get new checked state immediately
+                chrome.storage.sync.set({ [element_to_change + "Status"]: newValue }); // Update storage immediately
+                currentCheckbox.classList.add('loading'); // Add loading class for animation
+
+                setTimeout(() => {
+                    currentCheckbox.classList.remove('loading'); // Remove loading class after animation
+                }, 800); // 0.8-second animation duration
             }, false);
         }
 
@@ -210,8 +215,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     nextState = "On";
                 }
                 currentButton.setAttribute("data-state", nextState);
+                chrome.storage.sync.set({ [element_to_change + "Status"]: nextState }); // Update storage immediately
+                currentButton.classList.add('loading'); // Add loading class for animation
 
-                chrome.storage.sync.set({ [element_to_change + "Status"]: nextState });
+                setTimeout(() => {
+                    currentButton.classList.remove('loading'); // Remove loading class after animation
+                }, 800); // 0.8-second animation duration
             }, false);
         }
 
