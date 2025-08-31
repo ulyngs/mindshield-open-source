@@ -6,6 +6,7 @@ body {
     width: 90vw;
     max-width: 400px;
     min-width: 300px;
+    min-height: 250px;
     padding: 0.5rem 1rem 6rem 1rem;
     font-family: system-ui;
     text-align: center;
