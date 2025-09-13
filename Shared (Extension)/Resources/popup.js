@@ -59,11 +59,17 @@ document.addEventListener('DOMContentLoaded', function () {
             if (reviewPrompt) reviewPrompt.style.display = 'none';
         });
 
-        function setupFrictionDelay() {
+        function setupFrictionDelay(siteIdentifier) {
             var frictionToggle = document.getElementById("frictionToggle");
             var frictionCustomisationOptions = document.querySelector('.toggle-group.center-align.friction-customisation');
             
-            chrome.storage.sync.get(["addFriction", "waitText", "waitTime"]).then((result) => {
+            if (!siteIdentifier) return;
+
+            const addFrictionKey = `${siteIdentifier}AddFriction`;
+            const waitTextKey = `${siteIdentifier}WaitText`;
+            const waitTimeKey = `${siteIdentifier}WaitTime`;
+
+            chrome.storage.sync.get([addFrictionKey, waitTextKey, waitTimeKey, "addFriction", "waitText", "waitTime"]).then((result) => {
                 var popupContainer = document.getElementById("popup-content");
                 var messageContainer = document.getElementById("delay-content");
                 var errorContainer = document.getElementById("error-prompt");
@@ -76,14 +82,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 const defaultWaitTime = 10;
                 const defaultWaitText = "What's your intention?";
 
-                frictionToggle.checked = result.addFriction || false;
+                const storedAddFriction = (result[addFrictionKey] !== undefined) ? result[addFrictionKey] : result.addFriction;
+                frictionToggle.checked = storedAddFriction || false;
                 frictionCustomisationOptions.style.display = frictionToggle.checked ? "block" : "none";
 
-                let effectiveWaitText = result.waitText || defaultWaitText;
+                let effectiveWaitText = (result[waitTextKey] !== undefined ? result[waitTextKey] : result.waitText) || defaultWaitText;
                 waitTextBox.value = effectiveWaitText;
                 messageBox.innerText = effectiveWaitText;
 
-                let effectiveWaitTime = result.waitTime || defaultWaitTime;
+                let effectiveWaitTime = (result[waitTimeKey] !== undefined ? result[waitTimeKey] : result.waitTime) || defaultWaitTime;
                 waitTimeBox.value = effectiveWaitTime;
                 countdownBox.innerText = effectiveWaitTime;
 
@@ -118,7 +125,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             var frictionToggle = document.getElementById("frictionToggle");
             frictionToggle.addEventListener('change', function () {
-                chrome.storage.sync.set({ "addFriction": frictionToggle.checked });
+                const addFrictionKey = `${siteIdentifier}AddFriction`;
+                let obj = {}; obj[addFrictionKey] = frictionToggle.checked;
+                chrome.storage.sync.set(obj);
                 frictionCustomisationOptions.style.display = frictionToggle.checked ? "block" : "none";
             });
 
@@ -126,12 +135,16 @@ document.addEventListener('DOMContentLoaded', function () {
             // Auto-save wait time
             document.getElementById("waitTime").addEventListener('input', function () {
                 let waitValue = parseInt(this.value) || 10;
-                chrome.storage.sync.set({ "waitTime": waitValue });
+                const waitTimeKey = `${siteIdentifier}WaitTime`;
+                let obj = {}; obj[waitTimeKey] = waitValue;
+                chrome.storage.sync.set(obj);
             });
 
             // Auto-save wait text
             document.getElementById("waitText").addEventListener('input', function () {
-                chrome.storage.sync.set({ "waitText": this.value });
+                const waitTextKey = `${siteIdentifier}WaitText`;
+                let obj = {}; obj[waitTextKey] = this.value;
+                chrome.storage.sync.set(obj);
             })
 
             var savedTextTime = document.getElementById("savedTextTime");
@@ -175,7 +188,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         }
-        setupFrictionDelay();
 
         function isRememberEnabled() {
             return rememberSettingsEnabled === true;
@@ -441,6 +453,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         setCheckboxState(item, item + "Toggle");
                     }
                 });
+            }
+
+            // Now that we know the site identifier, set up friction delay per-site
+            if (currentSiteIdentifier) {
+                setupFrictionDelay(currentSiteIdentifier);
             }
 
             // Setup Remember settings UI now that we know the site identifier
