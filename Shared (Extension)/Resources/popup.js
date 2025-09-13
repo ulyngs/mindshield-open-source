@@ -273,62 +273,9 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        function setSwitch(platform_to_check, id_of_switch) {
-            var currentSwitch = document.getElementById(id_of_switch);
-            if (!currentSwitch) return;
+        function setSwitch() { /* platform-level switch removed */ }
 
-            var key = platform_to_check + "Status";
-            chrome.storage.sync.get(key, function (result) {
-                let platformIsEnabled = result[key] !== false;
-                currentSwitch.checked = platformIsEnabled;
-
-                var platformToggles = document.querySelectorAll(`.dropdown.${platform_to_check} .a-toggle input, .dropdown.${platform_to_check} .a-toggle button`);
-                platformToggles.forEach(toggle => {
-                    if (!toggle.id.includes('AddElementButton')) {
-                        toggle.disabled = !platformIsEnabled;
-                    }
-                });
-            });
-        }
-
-        function setupPlatformSwitchListener(platform) {
-            var currentSwitch = document.querySelector('#website-toggles #toggle-' + platform + ' input');
-            if (!currentSwitch) return;
-
-            currentSwitch.addEventListener("change", function () {
-                const platformIsEnabled = currentSwitch.checked;
-                var platformToggles = document.querySelectorAll(`.dropdown.${platform} .a-toggle input, .dropdown.${platform} .a-toggle button`);
-
-                if (!platformIsEnabled) {
-                    // Disable all toggles in UI
-                    platformToggles.forEach(toggle => {
-                        if (!toggle.id.includes('AddElementButton')) {
-                            toggle.disabled = true;
-                        }
-                    });
-                } else {
-                    platformToggles.forEach(toggle => {
-                        if (!toggle.id.includes('AddElementButton')) {
-                            toggle.disabled = false;
-                        }
-                    });
-                }
-
-                // Apply either persistent or session-only platform status
-                const platformStatusKey = platform + "Status";
-                if (isRememberEnabled()) {
-                    let obj = {};
-                    obj[platformStatusKey] = platformIsEnabled;
-                    chrome.storage.sync.set(obj);
-                } else {
-                    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-                        if (tabs && tabs[0]) {
-                            chrome.tabs.sendMessage(tabs[0].id, { type: 'sessionOverride', key: platformStatusKey, value: platformIsEnabled });
-                        }
-                    });
-                }
-            });
-        }
+        function setupPlatformSwitchListener() { /* removed */ }
 
         function updateCustomElementsList(siteIdentifier, selectors) {
             console.log('updateCustomElementsList called for', siteIdentifier, 'with selectors:', selectors);
@@ -423,7 +370,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             const currentHost = currentURL.hostname;
-            document.getElementById('currentSiteName').textContent = currentHost;
+            const displayHost = currentHost.replace(/^www\./, '');
+            document.getElementById('currentSiteName').textContent = displayHost;
 
             // Precisely identify the platform using the shared platformHostnames map
             for (const platform in platformHostnames) {
@@ -440,10 +388,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (currentPlatform) {
                 document.querySelector('.dropdown.' + currentPlatform).classList.add('shown');
-                document.querySelector('#website-toggles #toggle-' + currentPlatform).classList.add('shown-inline');
-                document.getElementById('website-toggles').style.display = 'block';
+                const websiteToggles = document.getElementById('website-toggles');
+                if (websiteToggles) websiteToggles.style.display = 'none';
                 document.getElementById('generic-site-options').style.display = 'none';
-                document.getElementById('currentSiteInfo').style.display = 'none';
+                document.getElementById('currentSiteInfo').style.display = 'block';
 
                 setSwitch(currentPlatform, currentPlatform + "Switch");
                 setupPlatformSwitchListener(currentPlatform);
@@ -456,7 +404,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             } else if (currentHost && !currentURL.protocol.startsWith('chrome') && !currentURL.protocol.startsWith('about')) {
                 currentSiteIdentifier = currentHost;
-                document.getElementById('website-toggles').style.display = 'none';
+                const websiteToggles = document.getElementById('website-toggles');
+                if (websiteToggles) websiteToggles.style.display = 'none';
                 document.getElementById('generic-site-options').style.display = 'block';
                 document.getElementById('currentSiteInfo').style.display = 'block';
 
@@ -475,9 +424,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('popup-content').innerHTML = `<p class='error-message'>Extension cannot modify this page (${currentURL.protocol}//...).</p>`;
                 document.getElementById('popup-content').style.display = 'block';
                 document.getElementById('delay-content').style.display = 'none';
-                document.getElementById('website-toggles').style.display = 'none';
+                const websiteToggles2 = document.getElementById('website-toggles');
+                if (websiteToggles2) websiteToggles2.style.display = 'none';
                 document.getElementById('generic-site-options').style.display = 'none';
-                document.getElementById('currentSiteInfo').style.display = 'none';
+                document.getElementById('currentSiteInfo').style.display = 'block';
             }
 
             if (currentPlatform) {
