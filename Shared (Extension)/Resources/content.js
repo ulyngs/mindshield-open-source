@@ -456,6 +456,10 @@
                                             let state = statusValue || "On";
                                             cssToApply = cssSelectors[item + "Css" + state];
                                             lastAppliedSettings[item] = state;
+                                        } else if (item === "linkedinFeed") {
+                                            let isFeedPage = window.location.pathname === '/feed/';
+                                            cssToApply = (statusValue === true && isFeedPage) ? cssSelectors[item + "CssOff"] : cssSelectors[item + "CssOn"];
+                                            lastAppliedSettings[item] = statusValue === true && isFeedPage ? "hidden" : "visible";
                                         } else {
                                             cssToApply = (statusValue === true) ? cssSelectors[item + "CssOff"] : cssSelectors[item + "CssOn"];
                                             lastAppliedSettings[item] = statusValue === true ? "hidden" : "visible";
@@ -562,6 +566,10 @@
                                 let state = statusValue || "On";
                                 cssToApply = cssSelectors[item + "Css" + state];
                                 lastAppliedSettings[item] = state;
+                            } else if (item === "linkedinFeed") {
+                                let isFeedPage = window.location.pathname === '/feed/';
+                                cssToApply = (statusValue === true && isFeedPage) ? cssSelectors[item + "CssOff"] : cssSelectors[item + "CssOn"];
+                                lastAppliedSettings[item] = statusValue === true && isFeedPage ? "hidden" : "visible";
                             } else {
                                 cssToApply = (statusValue === true) ? cssSelectors[item + "CssOff"] : cssSelectors[item + "CssOn"];
                                 lastAppliedSettings[item] = statusValue === true ? "hidden" : "visible";
