@@ -93,8 +93,8 @@ const cssSelectors = {
     instagramCommentsCssOff: 'div.x9f619.xjbqb8w.x78zum5.x168nmei.x13lgxp2.x5pf9jr.xo71vjh.x1xmf6yo:has(a[href*="/comments/"]) {display: none !important;}',
 
     // LinkedIn
-    linkedinFeedCssOn: '/* needs to be explicitly shown, otherwise not loaded */ main[aria-label="Main Feed"] div.scaffold-finite-scroll.scaffold-finite-scroll--infinite, #feed-container {display: block !important;}',
-    linkedinFeedCssOff: 'main[aria-label="Main Feed"] div.scaffold-finite-scroll.scaffold-finite-scroll--infinite, div.scaffold-finite-scroll.scaffold-finite-scroll--finite, #feed-container, .feed-container {display: none !important;}',
+    linkedinFeedCssOn: '/* needs to be explicitly shown, otherwise not loaded */ div.scaffold-finite-scroll.scaffold-finite-scroll--infinite, div.scaffold-finite-scroll.scaffold-finite-scroll--finite, #feed-container, .feed-container {display: block !important;}',
+    linkedinFeedCssOff: 'div.scaffold-finite-scroll.scaffold-finite-scroll--infinite, div.scaffold-finite-scroll.scaffold-finite-scroll--finite, #feed-container, .feed-container {display: none !important;}',
     linkedinNotificationsCssOn: '',
     linkedinNotificationsCssOff: 'span.notification-badge--show, #nav-notifications-small-badge, #nav-people-small-badge, span[data-badge-source="notificationsCount"] { display: none !important; }',
     linkedinNewsCssOn: '#feed-news-module, .feed-follows-module { display: block !important; }',
