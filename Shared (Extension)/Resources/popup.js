@@ -36,6 +36,15 @@ document.addEventListener('DOMContentLoaded', function () {
         let currentSiteIdentifier = null;
         let rememberSettingsEnabled = true; // default
 
+        function updateSaveFooterVisibility() {
+            const saveFooterEl = document.getElementById('save-controls');
+            if (!saveFooterEl) return;
+            const delayEl = document.getElementById('delay-content');
+            const isDelayVisible = !!delayEl && delayEl.style.display !== 'none';
+            const shouldShow = (rememberSettingsEnabled === false) && !isDelayVisible;
+            saveFooterEl.style.display = shouldShow ? 'block' : 'none';
+        }
+
         let opensCount = localStorage.getItem('opensCount');
         opensCount = opensCount ? parseInt(opensCount, 10) + 1 : 1;
         localStorage.setItem('opensCount', opensCount);
@@ -62,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 var waitTextBox = document.getElementById("waitText");
                 var waitTimeBox = document.getElementById("waitTime");
                 var countdownBox = document.getElementById("delay-time");
+                var saveFooter = document.getElementById("save-controls");
 
                 const defaultWaitTime = 10;
                 const defaultWaitText = "What's your intention?";
@@ -81,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     popupContainer.style.display = "none";
                     messageContainer.style.display = "block";
                     errorContainer.style.display = "none";
+                    if (saveFooter) saveFooter.style.display = "none"; // Hide save button during delay countdown
                     setTimeout(() => messageContainer.classList.add("show"), 100);
 
                     let countdown = effectiveWaitTime;
@@ -92,6 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             messageContainer.style.display = "none";
                             popupContainer.style.display = "block";
                             errorContainer.style.display = "none";
+                            updateSaveFooterVisibility();
                             clearInterval(timerId);
                         }
                     }, 1000);
@@ -100,6 +112,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     messageContainer.classList.remove("show");
                     popupContainer.style.display = "block";
                     errorContainer.style.display = "none";
+                    updateSaveFooterVisibility();
                 }
             });
 
@@ -487,7 +500,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 chrome.storage.sync.get(rememberKey, function (result) {
                     rememberSettingsEnabled = result[rememberKey] !== false; // default true
                     rememberToggle.checked = rememberSettingsEnabled;
-                    saveFooter.style.display = rememberSettingsEnabled ? 'none' : 'block';
+                    updateSaveFooterVisibility();
                     if (!rememberSettingsEnabled) {
                         // If not remembering, sync UI with current session overrides
                         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -502,7 +515,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
                 rememberToggle.addEventListener('change', function () {
                     rememberSettingsEnabled = rememberToggle.checked;
-                    saveFooter.style.display = rememberSettingsEnabled ? 'none' : 'block';
+                    updateSaveFooterVisibility();
                     let obj = {};
                     obj[`${currentSiteIdentifier}RememberSettings`] = rememberSettingsEnabled;
                     chrome.storage.sync.set(obj);
@@ -526,7 +539,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         // Ask content script for current session overrides and persist them
                         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
                             if (!tabs || !tabs[0]) {
-                                saveBtn.textContent = originalLabel;
+                                saveBtn.textContent = 'Save settings';
                                 saveBtn.disabled = false;
                                 return;
                             }
@@ -626,17 +639,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 const isVisible = faqDropdown.style.display === 'block';
                 faqDropdown.style.display = isVisible ? 'none' : 'block';
                 faqOverlay.style.display = isVisible ? 'none' : 'block';
-                
-                if (!isVisible) {
-                    // Calculate and set expanded height
-                    const contentHeight = document.getElementById('popup-content').offsetHeight;
-                    const dropdownHeight = faqDropdown.offsetHeight;
-                    const requiredHeight = Math.max(contentHeight, dropdownHeight) + 100; // + footer/padding
-                    document.body.style.minHeight = `${requiredHeight}px`;
-                } else {
-                    // Reset to original
-                    document.body.style.minHeight = '250px';
-                }
             });
 
 
@@ -659,7 +661,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     event.stopPropagation();
                     faqDropdown.style.display = 'none';
                     faqOverlay.style.display = 'none';
-                    document.body.style.minHeight = '250px';
                 });
             }
 
@@ -668,7 +669,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (!faqDropdown.contains(event.target) && !helpBtn.contains(event.target)) {
                     faqDropdown.style.display = 'none';
                     faqOverlay.style.display = 'none';
-                    document.body.style.minHeight = '250px';
                 }
             });
         }

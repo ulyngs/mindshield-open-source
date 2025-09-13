@@ -424,6 +424,49 @@ button[id$="AddElementButton"]:hover {
     margin-bottom: 5px;
 }
 
+/* shadcn-like input styling */
+.shadcn-input {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #ffffff;
+    color: #18181b;
+    border: 1px solid #e4e4e7; /* hsl(240 5.9% 90%) */
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 0.95rem;
+    line-height: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.shadcn-input::placeholder {
+    color: #a1a1aa; /* zinc-400 */
+}
+
+.shadcn-input:hover {
+    border-color: #d4d4d8; /* zinc-300 */
+}
+
+.shadcn-input:focus {
+    border-color: #3b82f6; /* blue-500 */
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.35);
+}
+
+@media (prefers-color-scheme: dark) {
+    .shadcn-input {
+        background-color: #18181b;
+        color: #fafafa;
+        border-color: #3f3f46; /* zinc-700 */
+    }
+    .shadcn-input:hover {
+        border-color: #52525b; /* zinc-600 */
+    }
+    .shadcn-input:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.45);
+    }
+}
+
 .a-toggle.friction-toggle {
     margin-bottom: 10px;
     margin-top: 1em;
@@ -470,8 +513,8 @@ button[id$="AddElementButton"]:hover {
 }
 
 #delay-content img {
-    width: 85%;
-    margin-bottom: 30px;
+    width: 40%;
+    margin: 60px 40px;
 }
 
 #delay-content {
@@ -694,12 +737,16 @@ p.how-to-description {
 
     #delay-content {
         margin: auto;
-        width: 50%;
+        width: 80%;
     }
 
     #delay-content img {
-        width: 60% !important;
-        margin-bottom: 10px !important;
+        margin: 20px 20px 30px 20px;
+        width: 25% !important;
+    }
+    
+    .delay-time-wrapper {
+        margin-top: 10px;
     }
 
     #how-to-image {
