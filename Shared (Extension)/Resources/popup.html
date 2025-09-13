@@ -54,10 +54,16 @@
                         <line x1="6" y1="6" x2="18" y2="18"></line>
                     </svg>
                 </button>
+                <h3>ACCOUNTABILITY</h3>
                 <div id="modal-settings">
                   <div class="a-toggle friction-toggle">
+                    <input type="checkbox" id="rememberSettingsToggle" name="rememberSettingsToggle" checked>
+                    <label for="rememberSettingsToggle">Remember settings</label>
+                  </div>
+
+                  <div class="a-toggle friction-toggle">
                     <input type="checkbox" id="frictionToggle" name="frictionToggle">
-                    <label for="frictionToggle">Delay to change settings</label>
+                    <label for="frictionToggle">Delay to open Viking Focus</label>
                   </div>
 
                   <div class="toggle-group center-align friction-customisation" style="display: none;">
@@ -72,7 +78,7 @@
                     </div>
                   </div>
                 </div>
-                <h3>FAQ</h3>
+                <h3 style="margin-top: 30px;">FAQ</h3>
                 <div class="faq-item">
                   <button class="faq-trigger">
                     <span>What sites does it work on?</span>
@@ -583,6 +589,10 @@
         </div>
     </div>
     <footer>
+      <div id="save-controls" style="display: none; margin: 0 12px 12px 12px; text-align: center;">
+        <button id="saveButton">Save settings</button>
+        <span id="saveStatus" class="colored-font" style="margin-left: 8px;"></span>
+      </div>
       Made with ❤️ by <a href="https://redd-project.org" target="_blank">redd-project.org</a>
     </footer>
 

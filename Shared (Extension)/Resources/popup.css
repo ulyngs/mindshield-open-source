@@ -760,6 +760,16 @@ button[id$="AddElementButton"],
     /* Lighter blackish on hover */
 }
 
+/* Success state for save button */
+#saveButton.is-success {
+    background-color: #16a34a; /* green-600 */
+    color: #ffffff;
+}
+
+#saveButton.is-success:hover {
+    background-color: #15803d; /* green-700 */
+}
+
 button[id$="AddElementButton"] {
     background-color: rgb(228, 228, 231);
     color: rgb(24, 24, 27);
@@ -1097,6 +1107,22 @@ footer .friction-customisation {
 #modal-settings .friction-toggle label {
     font-size: 1rem;
     font-weight: 600;
+}
+
+/* Make 'Delay' and 'Remember settings' checkboxes/labels consistent */
+#modal-settings #frictionToggle,
+#modal-settings #rememberSettingsToggle {
+    transform: scale(1.25);
+    transform-origin: left center;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+#modal-settings label[for="frictionToggle"],
+#modal-settings label[for="rememberSettingsToggle"] {
+    font-size: 1rem;
+    font-weight: 600;
+    vertical-align: middle;
 }
 
 

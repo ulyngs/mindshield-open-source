@@ -97,6 +97,8 @@
     let currentHighlightedElement = null;
     let lastTapTime = 0;
     let sessionHiddenSelectors = [];
+    // Expose session-only selectors so other parts can read/merge
+    window.__vfSessionCustomSelectors = sessionHiddenSelectors;
     const highlightStyleId = 'mindshield-highlight-style';
 
     function createHighlightOverlay() {
@@ -242,23 +244,31 @@
     function handleUndo() {
         if (sessionHiddenSelectors.length === 0 || !currentSiteIdentifier) return;
         const customStorageKey = `${currentSiteIdentifier}CustomHiddenElements`;
-        chrome.storage.sync.get(customStorageKey, function (result) {
+        const rememberKey = `${currentSiteIdentifier}RememberSettings`;
+        chrome.storage.sync.get([customStorageKey, rememberKey], function (result) {
             let customSelectors = result[customStorageKey] || [];
             if (!Array.isArray(customSelectors)) customSelectors = [];
             const selectorToRemove = sessionHiddenSelectors.pop();
-            customSelectors = customSelectors.filter(s => s !== selectorToRemove);
-            chrome.storage.sync.set({ [customStorageKey]: customSelectors }, function () {
-                if (chrome.runtime.lastError) {
-                    console.error("Error removing custom selector from storage:", chrome.runtime.lastError);
-                } else {
-                    applyCustomElementStyles(currentSiteIdentifier, customSelectors);
-                    if (sessionHiddenSelectors.length > 0) {
-                        updateFeedbackMessage('Element hidden', true);
-                    } else {
-                        updateFeedbackMessage('Click element to hide it');
+            const rememberEnabled = result[rememberKey] !== false; // default true
+
+            if (rememberEnabled) {
+                // Remove from persistent storage if present
+                customSelectors = customSelectors.filter(s => s !== selectorToRemove);
+                chrome.storage.sync.set({ [customStorageKey]: customSelectors }, function () {
+                    if (chrome.runtime.lastError) {
+                        console.error("Error removing custom selector from storage:", chrome.runtime.lastError);
                     }
-                }
-            });
+                    // Reapply merged (persistent + remaining session)
+                    const merged = Array.from(new Set([...customSelectors, ...sessionHiddenSelectors]));
+                    applyCustomElementStyles(currentSiteIdentifier, merged);
+                    updateFeedbackMessage(sessionHiddenSelectors.length > 0 ? 'Element hidden' : 'Click element to hide it', sessionHiddenSelectors.length > 0);
+                });
+            } else {
+                // Session-only: just reapply merged without touching storage
+                const merged = Array.from(new Set([...customSelectors, ...sessionHiddenSelectors]));
+                applyCustomElementStyles(currentSiteIdentifier, merged);
+                updateFeedbackMessage(sessionHiddenSelectors.length > 0 ? 'Element hidden (session only)' : 'Click element to hide it', sessionHiddenSelectors.length > 0);
+            }
         });
     }
 
@@ -294,7 +304,7 @@
         const tempStyle = document.getElementById(highlightStyleId);
         if (tempStyle) tempStyle.remove();
         feedbackContainer = highlightOverlay = selectorDisplay = currentHighlightedElement = null;
-        sessionHiddenSelectors = [];
+        // Keep sessionHiddenSelectors so session rules persist until refresh
         
         // Update storage to reflect that selection has stopped
         if (currentSiteIdentifier) {
@@ -367,21 +377,34 @@
             return;
         }
         const storageKey = `${currentSiteIdentifier}CustomHiddenElements`;
-        chrome.storage.sync.get(storageKey, function (result) {
+        const rememberKey = `${currentSiteIdentifier}RememberSettings`;
+        chrome.storage.sync.get([storageKey, rememberKey], function (result) {
             let customSelectors = result[storageKey] || [];
             if (!Array.isArray(customSelectors)) customSelectors = [];
-            if (!customSelectors.includes(selector)) {
-                customSelectors.push(selector);
-                sessionHiddenSelectors.push(selector);
-                chrome.storage.sync.set({ [storageKey]: customSelectors }, function () {
+            const rememberEnabled = result[rememberKey] !== false; // default true
+            const alreadyHas = customSelectors.includes(selector) || sessionHiddenSelectors.includes(selector);
+            if (alreadyHas) {
+                updateFeedbackMessage('Element already hidden');
+                return;
+            }
+            sessionHiddenSelectors.push(selector);
+            if (rememberEnabled) {
+                // Persist
+                const toSave = Array.from(new Set([...customSelectors, selector]));
+                chrome.storage.sync.set({ [storageKey]: toSave }, function () {
                     if (chrome.runtime.lastError) {
                         console.error("Error saving custom selectors:", chrome.runtime.lastError);
-                    } else {
-                        updateFeedbackMessage('Element hidden', true);
                     }
+                    // Apply merged to ensure immediate effect
+                    const merged = Array.from(new Set([...toSave, ...sessionHiddenSelectors]));
+                    applyCustomElementStyles(currentSiteIdentifier, merged);
+                    updateFeedbackMessage('Element hidden', true);
                 });
             } else {
-                updateFeedbackMessage('Element already hidden');
+                // Session only — apply without saving
+                const merged = Array.from(new Set([...customSelectors, ...sessionHiddenSelectors]));
+                applyCustomElementStyles(currentSiteIdentifier, merged);
+                updateFeedbackMessage('Element hidden (session only)', true);
             }
         });
     }
@@ -404,6 +427,9 @@
     }
     const currentSiteIdentifier = currentPlatform || currentHostname;
 
+    // Session-only overrides for this page lifetime
+    let sessionOverrides = {};
+
     // --- Listen for storage changes to apply settings immediately ---
     let lastAppliedSettings = {};
     let lastAppliedCustomElements = {};
@@ -416,6 +442,9 @@
             const platformStatusKey = `${currentPlatform}Status`;
             chrome.storage.sync.get(platformStatusKey, function (platformResult) {
                 let platformIsOn = platformResult[platformStatusKey] !== false;
+                if (Object.prototype.hasOwnProperty.call(sessionOverrides, platformStatusKey)) {
+                    platformIsOn = sessionOverrides[platformStatusKey] !== false;
+                }
                 
                 elementsThatCanBeHidden
                     .filter(element => element.startsWith(currentPlatform))
@@ -430,6 +459,9 @@
                         if (platformIsOn && (item === "youtubeThumbnails" || item === "youtubeNotifications")) {
                             chrome.storage.sync.get(itemStatusKey, function (itemResult) {
                                 let statusValue = itemResult[itemStatusKey];
+                                if (Object.prototype.hasOwnProperty.call(sessionOverrides, itemStatusKey)) {
+                                    statusValue = sessionOverrides[itemStatusKey];
+                                }
                                 let newSetting = statusValue || "On";
                                 
                                 if (currentSetting !== newSetting) {
@@ -439,7 +471,11 @@
                                 }
                             });
                         } else {
-                            let newSetting = platformIsOn ? (platformResult[itemStatusKey] || "On") : "platformDisabled";
+                            let storedDefault = platformResult[itemStatusKey];
+                            if (Object.prototype.hasOwnProperty.call(sessionOverrides, itemStatusKey)) {
+                                storedDefault = sessionOverrides[itemStatusKey];
+                            }
+                            let newSetting = platformIsOn ? (storedDefault || "On") : "platformDisabled";
                             
                             if (currentSetting !== newSetting) {
                                 if (!platformIsOn) {
@@ -450,6 +486,9 @@
                                     // Platform is enabled, check individual element status
                                     chrome.storage.sync.get(itemStatusKey, function (itemResult) {
                                         let statusValue = itemResult[itemStatusKey];
+                                        if (Object.prototype.hasOwnProperty.call(sessionOverrides, itemStatusKey)) {
+                                            statusValue = sessionOverrides[itemStatusKey];
+                                        }
                                         let cssToApply;
                                         
                                         if (item === "youtubeThumbnails" || item === "youtubeNotifications") {
@@ -479,12 +518,13 @@
             chrome.storage.sync.get(customStorageKey, function (result) {
                 let customSelectors = result[customStorageKey] || [];
                 if (!Array.isArray(customSelectors)) customSelectors = [];
-                
+                // Merge session-only selectors for this page
+                const merged = Array.from(new Set([...customSelectors, ...sessionHiddenSelectors]));
                 // Check if custom elements have changed
                 const currentCustomElements = lastAppliedCustomElements[currentSiteIdentifier] || [];
-                if (JSON.stringify(customSelectors) !== JSON.stringify(currentCustomElements)) {
-                    applyCustomElementStyles(currentSiteIdentifier, customSelectors);
-                    lastAppliedCustomElements[currentSiteIdentifier] = [...customSelectors];
+                if (JSON.stringify(merged) !== JSON.stringify(currentCustomElements)) {
+                    applyCustomElementStyles(currentSiteIdentifier, merged);
+                    lastAppliedCustomElements[currentSiteIdentifier] = [...merged];
                 }
             });
             
@@ -535,6 +575,24 @@
     
     // Also poll every 1 second as a safety net
     setInterval(applySettingsFromStorage, 1000);
+
+    // --- Handle session override messages and export for Save ---
+    chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+        if (!message || !message.type) return;
+        if (message.type === 'sessionOverride') {
+            sessionOverrides[message.key] = message.value;
+            setTimeout(applySettingsFromStorage, 50);
+        } else if (message.type === 'getSessionOverrides') {
+            const customKey = `${currentSiteIdentifier}CustomHiddenElements`;
+            chrome.storage.sync.get(customKey, function (result) {
+                let baseSelectors = result[customKey] || [];
+                if (!Array.isArray(baseSelectors)) baseSelectors = [];
+                const mergedSelectors = Array.from(new Set([...baseSelectors, ...sessionHiddenSelectors]));
+                sendResponse({ overrides: sessionOverrides, customSelectors: mergedSelectors });
+            });
+            return true; // async response
+        }
+    });
 
     // --- Perform one-time initial setup, protected by the flag ---
     if (window.hasRun) {
@@ -590,9 +648,10 @@
             }
             let customSelectors = result[customStorageKey] || [];
             if (!Array.isArray(customSelectors)) customSelectors = [];
-            applyCustomElementStyles(currentSiteIdentifier, customSelectors);
-            if (customSelectors.length > 0) {
-                console.log(`Applied ${customSelectors.length} custom rules for ${currentSiteIdentifier}`);
+            const merged = Array.from(new Set([...customSelectors, ...sessionHiddenSelectors]));
+            applyCustomElementStyles(currentSiteIdentifier, merged);
+            if (merged.length > 0) {
+                console.log(`Applied ${merged.length} custom rules for ${currentSiteIdentifier}`);
             }
         });
     }

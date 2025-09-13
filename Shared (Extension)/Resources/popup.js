@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let isSelectionModeActive = false;
         let currentPlatform = null;
         let currentSiteIdentifier = null;
+        let rememberSettingsEnabled = true; // default
 
         let opensCount = localStorage.getItem('opensCount');
         opensCount = opensCount ? parseInt(opensCount, 10) + 1 : 1;
@@ -163,6 +164,27 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         setupFrictionDelay();
 
+        function isRememberEnabled() {
+            return rememberSettingsEnabled === true;
+        }
+
+        function applySettingChange(elementKey, value) {
+            // elementKey examples: youtubeShorts, youtubeThumbnails, etc. Persist if remembering, else send session override
+            const storageKey = elementKey + "Status";
+            if (isRememberEnabled()) {
+                let obj = {};
+                obj[storageKey] = value;
+                chrome.storage.sync.set(obj);
+            } else {
+                // session-only override for the active tab
+                chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+                    if (tabs && tabs[0]) {
+                        chrome.tabs.sendMessage(tabs[0].id, { type: 'sessionOverride', key: storageKey, value: value });
+                    }
+                });
+            }
+        }
+
         function setCheckboxState(element_to_check, id_of_toggle) {
             var currentToggle = document.getElementById(id_of_toggle);
             if (!currentToggle) return;
@@ -177,8 +199,8 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!currentCheckbox) return;
 
             currentCheckbox.addEventListener('click', function () {
-                const newValue = currentCheckbox.checked; // Get new checked state immediately
-                chrome.storage.sync.set({ [element_to_change + "Status"]: newValue }); // Update storage immediately
+                const newValue = currentCheckbox.checked;
+                applySettingChange(element_to_change, newValue);
                 currentCheckbox.classList.add('loading'); // Add loading class for animation
 
                 setTimeout(() => {
@@ -215,7 +237,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     nextState = "On";
                 }
                 currentButton.setAttribute("data-state", nextState);
-                chrome.storage.sync.set({ [element_to_change + "Status"]: nextState }); // Update storage immediately
+                applySettingChange(element_to_change, nextState);
                 currentButton.classList.add('loading'); // Add loading class for animation
 
                 setTimeout(() => {
@@ -265,18 +287,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 var platformToggles = document.querySelectorAll(`.dropdown.${platform} .a-toggle input, .dropdown.${platform} .a-toggle button`);
 
                 if (!platformIsEnabled) {
-                    elementsThatCanBeHidden.filter(elem => elem.startsWith(platform)).forEach(function (some_element) {
-                        var toggle = document.getElementById(some_element + "Toggle");
-                        if (toggle) {
-                            if (toggle.type === 'checkbox') {
-                                toggle.checked = false;
-                                chrome.storage.sync.set({ [some_element + "Status"]: false });
-                            } else if (toggle.tagName === 'BUTTON') {
-                                toggle.setAttribute('data-state', 'On');
-                                chrome.storage.sync.set({ [some_element + "Status"]: "On" });
-                            }
-                        }
-                    });
+                    // Disable all toggles in UI
                     platformToggles.forEach(toggle => {
                         if (!toggle.id.includes('AddElementButton')) {
                             toggle.disabled = true;
@@ -288,26 +299,21 @@ document.addEventListener('DOMContentLoaded', function () {
                             toggle.disabled = false;
                         }
                     });
-                    elementsThatCanBeHidden.filter(elem => elem.startsWith(platform)).forEach(function (some_element) {
-                        var toggle = document.getElementById(some_element + "Toggle");
-                        if (!toggle) return;
+                }
 
-                        var key = some_element + "Status";
-                        chrome.storage.sync.get(key, function (result) {
-                            let storedValue = result[key];
-                            if (toggle.type === 'checkbox') {
-                                toggle.checked = storedValue || false;
-                                chrome.storage.sync.set({ [key]: storedValue || false });
-                            } else if (toggle.tagName === 'BUTTON') {
-                                let state = storedValue || "On";
-                                toggle.setAttribute('data-state', state);
-                                chrome.storage.sync.set({ [key]: state });
-                            }
-                        });
+                // Apply either persistent or session-only platform status
+                const platformStatusKey = platform + "Status";
+                if (isRememberEnabled()) {
+                    let obj = {};
+                    obj[platformStatusKey] = platformIsEnabled;
+                    chrome.storage.sync.set(obj);
+                } else {
+                    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+                        if (tabs && tabs[0]) {
+                            chrome.tabs.sendMessage(tabs[0].id, { type: 'sessionOverride', key: platformStatusKey, value: platformIsEnabled });
+                        }
                     });
                 }
-                var storageKey = platform + "Status";
-                chrome.storage.sync.set({ [storageKey]: platformIsEnabled });
             });
         }
 
@@ -471,7 +477,119 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             }
 
+            // Setup Remember settings UI now that we know the site identifier
+            const rememberToggle = document.getElementById('rememberSettingsToggle');
+            const saveFooter = document.getElementById('save-controls');
+            const saveBtn = document.getElementById('saveButton');
+            const saveStatus = document.getElementById('saveStatus');
+            if (rememberToggle && saveFooter) {
+                const rememberKey = `${currentSiteIdentifier}RememberSettings`;
+                chrome.storage.sync.get(rememberKey, function (result) {
+                    rememberSettingsEnabled = result[rememberKey] !== false; // default true
+                    rememberToggle.checked = rememberSettingsEnabled;
+                    saveFooter.style.display = rememberSettingsEnabled ? 'none' : 'block';
+                    if (!rememberSettingsEnabled) {
+                        // If not remembering, sync UI with current session overrides
+                        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+                            if (!tabs || !tabs[0]) return;
+                            chrome.tabs.sendMessage(tabs[0].id, { type: 'getSessionOverrides' }, function (response) {
+                                if (response && response.overrides) {
+                                    applyOverridesToUI(response.overrides);
+                                }
+                            });
+                        });
+                    }
+                });
+                rememberToggle.addEventListener('change', function () {
+                    rememberSettingsEnabled = rememberToggle.checked;
+                    saveFooter.style.display = rememberSettingsEnabled ? 'none' : 'block';
+                    let obj = {};
+                    obj[`${currentSiteIdentifier}RememberSettings`] = rememberSettingsEnabled;
+                    chrome.storage.sync.set(obj);
+                    if (!rememberSettingsEnabled) {
+                        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+                            if (!tabs || !tabs[0]) return;
+                            chrome.tabs.sendMessage(tabs[0].id, { type: 'getSessionOverrides' }, function (response) {
+                                if (response && response.overrides) {
+                                    applyOverridesToUI(response.overrides);
+                                }
+                            });
+                        });
+                    }
+                });
+                if (saveBtn) {
+                    saveBtn.addEventListener('click', function () {
+                        const originalLabel = saveBtn.textContent;
+                        saveBtn.textContent = 'Saving...';
+                        saveBtn.disabled = true;
+
+                        // Ask content script for current session overrides and persist them
+                        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+                            if (!tabs || !tabs[0]) {
+                                saveBtn.textContent = originalLabel;
+                                saveBtn.disabled = false;
+                                return;
+                            }
+                            chrome.tabs.sendMessage(tabs[0].id, { type: 'getSessionOverrides' }, function (response) {
+                                if (!response) {
+                                    saveBtn.textContent = originalLabel;
+                                    saveBtn.disabled = false;
+                                    return;
+                                }
+                                const toSet = {};
+                                if (response.overrides) {
+                                    Object.keys(response.overrides).forEach(k => { toSet[k] = response.overrides[k]; });
+                                }
+                                const writes = [];
+                                if (Object.keys(toSet).length > 0) { writes.push(chrome.storage.sync.set(toSet)); }
+                                if (response.customSelectors && Array.isArray(response.customSelectors)) {
+                                    const customKey = `${currentSiteIdentifier}CustomHiddenElements`;
+                                    const obj = {}; obj[customKey] = response.customSelectors; writes.push(chrome.storage.sync.set(obj));
+                                }
+                                Promise.all(writes).then(() => {
+                                    saveBtn.textContent = 'Saved!';
+                                    saveBtn.classList.add('is-success');
+                                    setTimeout(() => {
+                                        saveBtn.textContent = originalLabel;
+                                        saveBtn.classList.remove('is-success');
+                                        saveBtn.disabled = false;
+                                    }, 1000);
+                                }).catch(() => {
+                                    saveBtn.textContent = originalLabel;
+                                    saveBtn.disabled = false;
+                                });
+                            });
+                        });
+                    });
+                }
+            }
         });
+
+        function applyOverridesToUI(overrides) {
+            if (!overrides) return;
+            // Apply platform status override
+            if (currentPlatform) {
+                const platformKey = `${currentPlatform}Status`;
+                if (Object.prototype.hasOwnProperty.call(overrides, platformKey)) {
+                    const platformSwitch = document.querySelector('#website-toggles #toggle-' + currentPlatform + ' input');
+                    if (platformSwitch) platformSwitch.checked = overrides[platformKey] !== false;
+                }
+                // Apply element overrides
+                elementsThatCanBeHidden.filter(e => e.startsWith(currentPlatform)).forEach(item => {
+                    const statusKey = item + 'Status';
+                    if (!Object.prototype.hasOwnProperty.call(overrides, statusKey)) return;
+                    const toggleEl = document.getElementById(item + 'Toggle');
+                    if (!toggleEl) return;
+                    if (toggleEl.tagName === 'BUTTON') {
+                        let state = overrides[statusKey] || 'On';
+                        toggleEl.setAttribute('data-state', state);
+                    } else if (toggleEl.type === 'checkbox') {
+                        // Booleans use true => hidden (checked)
+                        toggleEl.checked = !!overrides[statusKey];
+                    }
+                });
+            }
+        }
 
         function delay(time) {
             return new Promise(resolve => setTimeout(resolve, time));
@@ -508,6 +626,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 const isVisible = faqDropdown.style.display === 'block';
                 faqDropdown.style.display = isVisible ? 'none' : 'block';
                 faqOverlay.style.display = isVisible ? 'none' : 'block';
+                
+                if (!isVisible) {
+                    // Calculate and set expanded height
+                    const contentHeight = document.getElementById('popup-content').offsetHeight;
+                    const dropdownHeight = faqDropdown.offsetHeight;
+                    const requiredHeight = Math.max(contentHeight, dropdownHeight) + 100; // + footer/padding
+                    document.body.style.minHeight = `${requiredHeight}px`;
+                } else {
+                    // Reset to original
+                    document.body.style.minHeight = '250px';
+                }
             });
 
 
@@ -530,6 +659,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     event.stopPropagation();
                     faqDropdown.style.display = 'none';
                     faqOverlay.style.display = 'none';
+                    document.body.style.minHeight = '250px';
                 });
             }
 
@@ -538,6 +668,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (!faqDropdown.contains(event.target) && !helpBtn.contains(event.target)) {
                     faqDropdown.style.display = 'none';
                     faqOverlay.style.display = 'none';
+                    document.body.style.minHeight = '250px';
                 }
             });
         }
