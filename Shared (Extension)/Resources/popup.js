@@ -371,7 +371,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const currentHost = currentURL.hostname;
             const displayHost = currentHost.replace(/^www\./, '');
-            document.getElementById('currentSiteName').textContent = displayHost;
+            const currentSiteNameEl = document.getElementById('currentSiteName');
+            if (currentSiteNameEl) currentSiteNameEl.textContent = displayHost;
+            const currentSiteNameModalEl = document.getElementById('currentSiteNameModal');
+            if (currentSiteNameModalEl) currentSiteNameModalEl.textContent = displayHost;
 
             // Precisely identify the platform using the shared platformHostnames map
             for (const platform in platformHostnames) {
