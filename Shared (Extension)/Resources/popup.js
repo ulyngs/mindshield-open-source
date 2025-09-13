@@ -522,6 +522,16 @@ document.addEventListener('DOMContentLoaded', function () {
                         });
                 }
             });
+            
+            // handle the close button
+            const closeBtn = document.getElementById('faq-close-btn');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    faqDropdown.style.display = 'none';
+                    faqOverlay.style.display = 'none';
+                });
+            }
 
             // Close dropdown and overlay if clicking outside
             document.addEventListener('click', (event) => {

@@ -48,6 +48,12 @@
             </button>
 
             <div id="faq-dropdown" style="display: none;">
+                <button id="faq-close-btn" style="position: absolute; top: 8px; right: 7px; background: none; border: none; cursor: pointer;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
                 <div id="modal-settings">
                   <div class="a-toggle friction-toggle">
                     <input type="checkbox" id="frictionToggle" name="frictionToggle">
@@ -57,12 +63,12 @@
                   <div class="toggle-group center-align friction-customisation" style="display: none;">
                     <div class="a-toggle">
                       <input type="number" id="waitTime" name="waitTime" value="10" min="1" max="600">
-                      <label for="waitTime"> Wait time (seconds)</label>
+                      <label for="waitTime">Wait time (seconds)</label>
                       <p id="savedTextTime" style="display: none; color: red;"></p>
                     </div>
                     <div class="a-toggle">
                       <input type="text" id="waitText" name="waitText" value="What's your intention?">
-                      <label for="waitText"> Text</label>
+                      <label for="waitText">Text</label>
                     </div>
                   </div>
                 </div>
