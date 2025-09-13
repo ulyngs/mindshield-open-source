@@ -79,7 +79,7 @@ class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMess
         }
         
         // Open Safari on iOS by opening a simple URL
-        if let safariURL = URL(string: "https://www.youtube.com/watch?&v=SsW5laIOJIw") {
+        if let safariURL = URL(string: "https://www.youtube.com/") {
             UIApplication.shared.open(safariURL, options: [:], completionHandler: nil)
         }
 #endif
