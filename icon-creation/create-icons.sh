@@ -6,22 +6,35 @@ if ! command -v inkscape &> /dev/null; then
     exit 1
 fi
 
-# Input files
-INPUT_FILE_BG="icon-cursor-sail-background.svg"
-INPUT_FILE_POPUP="icon-cursor-sail.svg"
+# Check command-line arguments
+if [ $# -ne 2 ] && [ $# -ne 3 ]; then
+    echo "Usage: $0 [<background_svg> <popup_svg>] <output_dir>"
+    echo "  - With two SVGs: $0 bg.svg popup.svg icons"
+    echo "  - With one SVG (used for both): $0 single.svg icons"
+    exit 1
+fi
+
+if [ $# -eq 2 ]; then
+    INPUT_FILE_BG="$1"
+    INPUT_FILE_POPUP="$1"
+    OUTPUT_DIR="$2"
+else
+    INPUT_FILE_BG="$1"
+    INPUT_FILE_POPUP="$2"
+    OUTPUT_DIR="$3"
+fi
 
 # Check if input files exist
 if [ ! -f "$INPUT_FILE_BG" ]; then
-    echo "Error: Input file $INPUT_FILE_BG not found in the current directory."
+    echo "Error: Input file $INPUT_FILE_BG not found."
     exit 1
 fi
-if [ ! -f "$INPUT_FILE_POPUP" ]; then
-    echo "Error: Input file $INPUT_FILE_POPUP not found in the current directory."
+if [ "$INPUT_FILE_BG" != "$INPUT_FILE_POPUP" ] && [ ! -f "$INPUT_FILE_POPUP" ]; then
+    echo "Error: Input file $INPUT_FILE_POPUP not found."
     exit 1
 fi
 
 # Create output directory
-OUTPUT_DIR="icons"
 mkdir -p "$OUTPUT_DIR"
 
 # Define icon sizes for macOS and iOS
