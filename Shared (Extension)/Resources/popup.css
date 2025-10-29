@@ -1167,7 +1167,7 @@ footer .friction-customisation {
 
 #modal-settings label[for="frictionToggle"],
 #modal-settings label[for="rememberSettingsToggle"] {
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 600;
     vertical-align: middle;
 }
@@ -1352,5 +1352,10 @@ footer .friction-customisation {
 @keyframes loading {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* Make friction toggle labels slightly smaller */
+.friction-toggle label {
+    font-size: 0.85em;
 }
 
