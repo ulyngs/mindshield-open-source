@@ -2,7 +2,7 @@
 //  PaymentVerifier.swift
 //  Shared (App)
 //
-//  Created for Viking Focus payment verification
+//  Created for ReDD Focus payment verification
 //
 
 import Foundation

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1640"
+   LastUpgradeVersion = "2600"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D76921B22756452E00EB4CEA"
-               BuildableName = "Viking Focus.app"
+               BuildableName = "ReDD Focus.app"
                BlueprintName = "App (iOS)"
-               ReferencedContainer = "container:Viking Focus.xcodeproj">
+               ReferencedContainer = "container:ReDD Focus.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D76921B22756452E00EB4CEA"
-            BuildableName = "Viking Focus.app"
+            BuildableName = "ReDD Focus.app"
             BlueprintName = "App (iOS)"
-            ReferencedContainer = "container:Viking Focus.xcodeproj">
+            ReferencedContainer = "container:ReDD Focus.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D76921B22756452E00EB4CEA"
-            BuildableName = "Viking Focus.app"
+            BuildableName = "ReDD Focus.app"
             BlueprintName = "App (iOS)"
-            ReferencedContainer = "container:Viking Focus.xcodeproj">
+            ReferencedContainer = "container:ReDD Focus.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

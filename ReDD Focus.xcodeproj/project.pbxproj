@@ -27,8 +27,8 @@
 		D76921BC2756452E00EB4CEA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D76921BA2756452E00EB4CEA /* LaunchScreen.storyboard */; };
 		D76921BF2756452E00EB4CEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D76921BD2756452E00EB4CEA /* Main.storyboard */; };
 		D76921C82756452E00EB4CEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76921C72756452E00EB4CEA /* AppDelegate.swift */; };
-		D76921D22756452E00EB4CEA /* Viking Focus Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D76921D12756452E00EB4CEA /* Viking Focus Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		D76921DC2756452E00EB4CEA /* Viking Focus Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D76921DB2756452E00EB4CEA /* Viking Focus Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D76921D22756452E00EB4CEA /* ReDD Focus Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D76921D12756452E00EB4CEA /* ReDD Focus Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D76921DC2756452E00EB4CEA /* ReDD Focus Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D76921DB2756452E00EB4CEA /* ReDD Focus Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D76921E22756452E00EB4CEA /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = D769219D2756452C00EB4CEA /* Main.html */; };
 		D76921E32756452E00EB4CEA /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = D769219D2756452C00EB4CEA /* Main.html */; };
 		D76921E62756452E00EB4CEA /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = D76921A02756452C00EB4CEA /* Style.css */; };
@@ -86,7 +86,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				D76921D22756452E00EB4CEA /* Viking Focus Extension.appex in Embed Foundation Extensions */,
+				D76921D22756452E00EB4CEA /* ReDD Focus Extension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -97,7 +97,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				D76921DC2756452E00EB4CEA /* Viking Focus Extension.appex in Embed Foundation Extensions */,
+				D76921DC2756452E00EB4CEA /* ReDD Focus Extension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -125,18 +125,18 @@
 		D76921AC2756452E00EB4CEA /* popup.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = popup.html; sourceTree = "<group>"; };
 		D76921AD2756452E00EB4CEA /* popup.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = popup.css; sourceTree = "<group>"; };
 		D76921AE2756452E00EB4CEA /* popup.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = popup.js; sourceTree = "<group>"; };
-		D76921B32756452E00EB4CEA /* Viking Focus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Viking Focus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D76921B32756452E00EB4CEA /* ReDD Focus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ReDD Focus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D76921B62756452E00EB4CEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D76921B82756452E00EB4CEA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D76921BB2756452E00EB4CEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D76921BE2756452E00EB4CEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D76921C02756452E00EB4CEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D76921C52756452E00EB4CEA /* Viking Focus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Viking Focus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D76921C52756452E00EB4CEA /* ReDD Focus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ReDD Focus.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D76921C72756452E00EB4CEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D76921CA2756452E00EB4CEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D76921D12756452E00EB4CEA /* Viking Focus Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Viking Focus Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D76921D12756452E00EB4CEA /* ReDD Focus Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "ReDD Focus Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D76921D62756452E00EB4CEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D76921DB2756452E00EB4CEA /* Viking Focus Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Viking Focus Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D76921DB2756452E00EB4CEA /* ReDD Focus Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "ReDD Focus Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D76921E02756452E00EB4CEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D769221627564D8F00EB4CEA /* style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
 		D76E9F03294E487F0067C09D /* iPad_turn_on_two_annotated.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iPad_turn_on_two_annotated.jpeg; sourceTree = "<group>"; };
@@ -243,10 +243,10 @@
 		D76921B42756452E00EB4CEA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D76921B32756452E00EB4CEA /* Viking Focus.app */,
-				D76921C52756452E00EB4CEA /* Viking Focus.app */,
-				D76921D12756452E00EB4CEA /* Viking Focus Extension.appex */,
-				D76921DB2756452E00EB4CEA /* Viking Focus Extension.appex */,
+				D76921B32756452E00EB4CEA /* ReDD Focus.app */,
+				D76921C52756452E00EB4CEA /* ReDD Focus.app */,
+				D76921D12756452E00EB4CEA /* ReDD Focus Extension.appex */,
+				D76921DB2756452E00EB4CEA /* ReDD Focus Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -314,7 +314,7 @@
 			);
 			name = "App (iOS)";
 			productName = "Hide distractions on YouTube (iOS)";
-			productReference = D76921B32756452E00EB4CEA /* Viking Focus.app */;
+			productReference = D76921B32756452E00EB4CEA /* ReDD Focus.app */;
 			productType = "com.apple.product-type.application";
 		};
 		D76921C42756452E00EB4CEA /* App (macOS) */ = {
@@ -333,7 +333,7 @@
 			);
 			name = "App (macOS)";
 			productName = "Hide distractions on YouTube (macOS)";
-			productReference = D76921C52756452E00EB4CEA /* Viking Focus.app */;
+			productReference = D76921C52756452E00EB4CEA /* ReDD Focus.app */;
 			productType = "com.apple.product-type.application";
 		};
 		D76921D02756452E00EB4CEA /* Extension (iOS) */ = {
@@ -350,7 +350,7 @@
 			);
 			name = "Extension (iOS)";
 			productName = "Hide distractions on YouTube Extension (iOS)";
-			productReference = D76921D12756452E00EB4CEA /* Viking Focus Extension.appex */;
+			productReference = D76921D12756452E00EB4CEA /* ReDD Focus Extension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		D76921DA2756452E00EB4CEA /* Extension (macOS) */ = {
@@ -367,7 +367,7 @@
 			);
 			name = "Extension (macOS)";
 			productName = "Hide distractions on YouTube Extension (macOS)";
-			productReference = D76921DB2756452E00EB4CEA /* Viking Focus Extension.appex */;
+			productReference = D76921DB2756452E00EB4CEA /* ReDD Focus Extension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -378,7 +378,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1310;
-				LastUpgradeCheck = 1400;
+				LastUpgradeCheck = 2600;
 				TargetAttributes = {
 					D76921B22756452E00EB4CEA = {
 						CreatedOnToolsVersion = 13.1;
@@ -394,7 +394,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D769219A2756452C00EB4CEA /* Build configuration list for PBXProject "Viking Focus" */;
+			buildConfigurationList = D769219A2756452C00EB4CEA /* Build configuration list for PBXProject "ReDD Focus" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -613,8 +613,10 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 7YEYWQKK25;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -632,6 +634,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -673,8 +676,10 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 7YEYWQKK25;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -685,6 +690,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
@@ -694,11 +700,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 65;
-				DEVELOPMENT_TEAM = 7YEYWQKK25;
+				CURRENT_PROJECT_VERSION = 66;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Viking Focus";
+				INFOPLIST_KEY_CFBundleDisplayName = "ReDD Focus";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -706,13 +711,13 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 4.0;
+				MARKETING_VERSION = 5.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.mind-shield.mind-shield";
-				PRODUCT_NAME = "Viking Focus Extension";
+				PRODUCT_NAME = "ReDD Focus Extension";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -725,11 +730,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 65;
-				DEVELOPMENT_TEAM = 7YEYWQKK25;
+				CURRENT_PROJECT_VERSION = 66;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Viking Focus";
+				INFOPLIST_KEY_CFBundleDisplayName = "ReDD Focus";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -737,13 +741,13 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 4.0;
+				MARKETING_VERSION = 5.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.mind-shield.mind-shield";
-				PRODUCT_NAME = "Viking Focus Extension";
+				PRODUCT_NAME = "ReDD Focus Extension";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -756,15 +760,13 @@
 		D76922072756452E00EB4CEA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 65;
-				DEVELOPMENT_TEAM = 7YEYWQKK25;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (App)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Viking Focus";
+				INFOPLIST_KEY_CFBundleDisplayName = "ReDD Focus";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -776,7 +778,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.0;
+				MARKETING_VERSION = 5.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -784,7 +786,7 @@
 					WebKit,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.mind-shield";
-				PRODUCT_NAME = "Viking Focus";
+				PRODUCT_NAME = "ReDD Focus";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -795,15 +797,13 @@
 		D76922082756452E00EB4CEA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 65;
-				DEVELOPMENT_TEAM = 7YEYWQKK25;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (App)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Viking Focus";
+				INFOPLIST_KEY_CFBundleDisplayName = "ReDD Focus";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -815,7 +815,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 4.0;
+				MARKETING_VERSION = 5.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -823,7 +823,7 @@
 					WebKit,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.mind-shield";
-				PRODUCT_NAME = "Viking Focus";
+				PRODUCT_NAME = "ReDD Focus";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -839,27 +839,28 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 65;
+				CURRENT_PROJECT_VERSION = 67;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 7YEYWQKK25;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Viking Focus";
+				INFOPLIST_KEY_CFBundleDisplayName = "ReDD Focus";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 4.0;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 5.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.mind-shield.mind-shield";
-				PRODUCT_NAME = "Viking Focus Extension";
+				PRODUCT_NAME = "ReDD Focus Extension";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -874,27 +875,28 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 65;
+				CURRENT_PROJECT_VERSION = 67;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 7YEYWQKK25;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Viking Focus";
+				INFOPLIST_KEY_CFBundleDisplayName = "ReDD Focus";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 4.0;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 5.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.mind-shield.mind-shield";
-				PRODUCT_NAME = "Viking Focus Extension";
+				PRODUCT_NAME = "ReDD Focus Extension";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -905,19 +907,20 @@
 		D769220E2756452E00EB4CEA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "macOS (App)/MindShield.entitlements";
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 65;
+				CURRENT_PROJECT_VERSION = 67;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 7YEYWQKK25;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Viking Focus";
+				INFOPLIST_KEY_CFBundleDisplayName = "ReDD Focus";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -925,8 +928,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 4.0;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 5.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -934,7 +937,7 @@
 					WebKit,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.mind-shield";
-				PRODUCT_NAME = "Viking Focus";
+				PRODUCT_NAME = "ReDD Focus";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -944,19 +947,20 @@
 		D769220F2756452E00EB4CEA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "macOS (App)/MindShield.entitlements";
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 65;
+				CURRENT_PROJECT_VERSION = 67;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 7YEYWQKK25;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Viking Focus";
+				INFOPLIST_KEY_CFBundleDisplayName = "ReDD Focus";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -964,8 +968,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
-				MARKETING_VERSION = 4.0;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MARKETING_VERSION = 5.0;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -973,7 +977,7 @@
 					WebKit,
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ulriklyngs.mind-shield";
-				PRODUCT_NAME = "Viking Focus";
+				PRODUCT_NAME = "ReDD Focus";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -983,7 +987,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D769219A2756452C00EB4CEA /* Build configuration list for PBXProject "Viking Focus" */ = {
+		D769219A2756452C00EB4CEA /* Build configuration list for PBXProject "ReDD Focus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D76922002756452E00EB4CEA /* Debug */,
