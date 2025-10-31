@@ -1,5 +1,5 @@
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.type === "checkPurchase") {
+  /*if (message.type === "checkPurchase") {
     try {
       // Try native messaging
       chrome.runtime.sendNativeMessage(
@@ -23,5 +23,5 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     }
     
     return true; // Keep sendResponse async
-  }
+  }*/
 });

@@ -44,8 +44,7 @@
   "permissions": [
     "storage",
     "tabs",
-    "activeTab",
-    "nativeMessaging"
+    "activeTab"
   ],
   "browser_specific_settings": {
     "gecko": {
