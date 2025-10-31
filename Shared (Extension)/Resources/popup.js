@@ -509,7 +509,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         // Ask content script for current session overrides and persist them
                         chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
                             if (!tabs || !tabs[0]) {
-                                saveBtn.textContent = 'Save settings';
+                                saveBtn.textContent = 'Save as default';
                                 saveBtn.disabled = false;
                                 return;
                             }
