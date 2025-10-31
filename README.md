@@ -1,4 +1,4 @@
-# Viking Focus
+# ReDD Focus
 
 **Plain sailing in the distracting digital world**
 
@@ -6,11 +6,11 @@
   <img src="https://github.com/ulyngs/mindshield-open-source/blob/main/Shared%20(Extension)/Resources/images/icon-512.png?raw=true" alt="Viking Focus Icon" width="120" />
 </p>
 
-Source code for the Safari, Chrome, and Firefox extension **Viking Focus**, available for Mac, iOS, and other devices.
+Source code for the Safari, Chrome, and Firefox extension **ReDD Focus**, available for Mac, iOS, and other devices.
 
 **Hide distractions on any website** (e.g., YouTube, Instagram, LinkedIn, Google Search, etc.). Works on any website in any browser, with pre-configured options for popular platforms.
 
-Viking Focus is **open source** and developed by the [ReDD team](https://github.com/ulyngs/mindshield-open-source), and is [backed by research](https://arxiv.org/pdf/2001.04180.pdf).
+ReDD Focus is **open source**, developed by the [ReDD team](https://redd-project.org), and [backed by research](https://arxiv.org/pdf/2001.04180.pdf).
 
 ## Features
 
@@ -26,7 +26,7 @@ Viking Focus is **open source** and developed by the [ReDD team](https://github.
 ## Installation
 
 - **[Chrome Web Store](https://chromewebstore.google.com/detail/mindshield/hhblkhfdjijdinijakbmcpkmdfhoadcd?hl=en-GB)**  
-- **[Firefox Add-ons](https://addons.mozilla.org/en-GB/firefox/addon/mindshield/)**  
+- **[Firefox Add-ons](https://addons.mozilla.org/en-GB/firefox/addon/reddfocus/)**  
 - **[Apple App Store](https://apps.apple.com/gb/app/mindshield/id1660218371)**  
 
 ## iOS Usage Tip
